@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+   <bean id="stockController" class="cn.itui.webdevelop.controller.StockController">
+   		<property name="stockService" ref="stockService"></property>
+   </bean>
+   
+    <!-- Stock business object -->
+   <bean id="stockService" class="cn.itui.webdevelop.service.impl.StockServiceImpl" >
+   		<property name="stockDao" ref="stockDao" />
+   </bean>
+ 
+   <!-- Stock Data Access Object -->
+   <bean id="stockDao" class="cn.itui.webdevelop.dao.impl.StockDaoImpl" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+ 
+</beans>
