@@ -31,6 +31,17 @@
      <property name="mappingResources">
 	<list>
            <value>/hibernate/Stock.hbm.xml</value>
+           <value>/hibernate/Area.hbm.xml</value>
+           <value>/hibernate/Category.hbm.xml</value>
+           <value>/hibernate/City.hbm.xml</value>
+           <value>/hibernate/College.hbm.xml</value>
+           <value>/hibernate/Comment.hbm.xml</value>
+           <value>/hibernate/Follow.hbm.xml</value>
+           <value>/hibernate/MajorInfo.hbm.xml</value>
+           <value>/hibernate/Score.hbm.xml</value>
+           <value>/hibernate/Subject.hbm.xml</value>
+           <value>/hibernate/User.hbm.xml</value>
+           <value>/hibernate/UserInfo.hbm.xml</value>
 	</list>
       </property>	
  
