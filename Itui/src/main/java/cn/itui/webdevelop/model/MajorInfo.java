@@ -90,6 +90,43 @@ public class MajorInfo implements java.io.Serializable {
 	}
 
 	// Property accessors
+	
+	public String translateMajorRank() {
+		if(majorRank == null)
+			return null;
+		if(majorRank < 1000)
+			return majorRank + "";
+		else 
+			return (majorRank-1000) + "";
+	}
+	
+	public static String translateDegree(String degree) {
+		if(degree.equals("A"))
+			return "高";
+		else if(degree.equals("B") || degree.equals("C"))
+			return "中";
+		else
+			return "低";
+	}
+	
+	public double translateRate() {
+		if(rate == 0) 
+			return -1;
+		else
+			return 1/rate;
+	}
+	
+	public String getApplyDescription() {
+		if(applyNum > 100)
+			return "较多";
+		return "一般";
+	}
+	
+	public String getAdmitDescription() {
+		if(admitNum > 50)
+			return "较多";
+		return "一般";
+	}
 
 	public Integer getId() {
 		return this.id;
