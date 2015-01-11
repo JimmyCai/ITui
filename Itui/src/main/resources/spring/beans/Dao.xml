@@ -3,19 +3,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="majorDao" class="cn.itui.webdevelop.dao.impl.MajorDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="majorInfoDao" class="cn.itui.webdevelop.dao.impl.MajorInfoDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="scoreDao" class="cn.itui.webdevelop.dao.impl.ScoreDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="collegeDao" class="cn.itui.webdevelop.dao.impl.CollegeDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
 
 </beans>

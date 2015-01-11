@@ -27,7 +27,7 @@
 	<import resource="../database/MyBatis.xml"/>
  
 	<!-- Beans Declaration -->
-	<!-- <import resource="../beans/Dao.xml"/> -->
+	<import resource="../beans/Dao.xml"/>
 	<import resource="../beans/MajorInfoService.xml"/>
 	
  

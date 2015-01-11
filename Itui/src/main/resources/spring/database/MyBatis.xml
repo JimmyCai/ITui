@@ -17,6 +17,10 @@
 		<property name="configLocation" value="WEB-INF/classes/mybatis/MyBatis-Configuration.xml"></property>
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
 		
 	<!-- spring与mybatis整合配置，扫描所有dao -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"

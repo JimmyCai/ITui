@@ -1,6 +1,5 @@
 package cn.itui.webdevelop.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +12,9 @@ import cn.itui.webdevelop.dao.ScoreDao;
 import cn.itui.webdevelop.model.Major;
 import cn.itui.webdevelop.model.MajorInfo;
 import cn.itui.webdevelop.service.MajorInfoService;
+import cn.itui.webdevelop.utils.recommend.MajorRecommendFilter;
+import cn.itui.webdevelop.utils.recommend.MajorRecommendResult;
+import cn.itui.webdevelop.utils.recommend.SimilarMajorRecommendFilter;
 
 public class MajorInfoServiceImpl implements MajorInfoService{
 	private static final int N = 4;
@@ -20,29 +22,40 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	private MajorDao majorDao;
 	private MajorInfoDao majorInfoDao;
 	private ScoreDao scoreDao;
-	
-	public MajorInfo test(int id) {
-		return majorInfoDao.getMajorInfoById(id);
-	}
+	private MajorRecommendFilter recommendFilter;
 
 	public String getMajorInfo(int id) {
 		//get major main info
 		MajorInfo majorMainInfo = majorInfoDao.getMajorInfoById(id);
 		//get college logo and rank info
-		Object[] collegeLogoAndRank = collegeDao.findLogoAndRankByMajorId(id);
+		HashMap<String, Object> collegeLogoAndRank = collegeDao.findLogoAndRankByMajorId(id);
 		//get year-score infos
-		List<Object[]> yearScores = scoreDao.getLastNYearsScoreByMajorId(id, N);
-		
+		List<HashMap<String, Object>> yearScores = scoreDao.getLastNYearsScoreByMajorId(id, N);
+		//get major base info
+		Major majorBaseInfo = majorDao.findMajorById(id);
+		List<HashMap<String, Object>> candidateMajors = majorDao.findCodeLikeMajorByCollegeId(majorBaseInfo.getCode(), majorBaseInfo.getCollegeId());
+		MajorRecommendResult recommendMajors = recommendFilter.recommendMajorFilter(candidateMajors, majorBaseInfo.getCode(), id);
+		System.out.println(recommendMajors.getMajors().size()+"mmmm");
+		if(recommendMajors.getMajors().size() < SimilarMajorRecommendFilter.MAJORCOUNT) {
+			recommendMajors = processTransdisciplinary(recommendMajors, candidateMajors, majorBaseInfo.getCollegeId(), id, majorBaseInfo.getCode());
+		}
 		//build json string
-		String jsonResult = buildJson(majorMainInfo, collegeLogoAndRank, yearScores);
+		String jsonResult = buildJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors);
 		return jsonResult;
 	}
 	
-	private String buildJson(MajorInfo majorMainInfo, Object[] logoAndRank, List<Object[]> yearScores) {
+	private MajorRecommendResult processTransdisciplinary(MajorRecommendResult recommendMajors, List<HashMap<String, Object>> candidateMajors, int collegeId, int majorId, String code) {
+		recommendMajors.setTransdisciplinaryCount(SimilarMajorRecommendFilter.MAJORCOUNT - recommendMajors.getMajors().size());
+		List<HashMap<String, Object>> allMajors = majorDao.findMajorByCollegeIdAndNotInMajorIds(collegeId, candidateMajors);
+		recommendMajors = recommendFilter.recommendMajorFilter(recommendMajors, allMajors, collegeId, majorId, code);
+		return recommendMajors;
+	}
+	
+	private String buildJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, MajorRecommendResult recommendMajors) {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		//base info
 		HashMap<String, Object> baseInfoMap = new HashMap<String, Object>();
-		baseInfoMap.put("collegeIndexPage", logoAndRank[0]);
+		baseInfoMap.put("collegeIndexPage", logoAndRank.get("logo"));
 		//grade info
 		HashMap<String, String> gradeInfoMap = new HashMap<String, String>();
 		gradeInfoMap.put("grade", majorMainInfo.getGrade());
@@ -53,18 +66,11 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		//rank info
 		HashMap<String, String> rankInfoMap = new HashMap<String, String>();
 		rankInfoMap.put("majorRank", majorMainInfo.translateMajorRank());
-		rankInfoMap.put("collegeRank", translaterank(logoAndRank[1].toString()));
-		rankInfoMap.put("collegeLocalRank", translaterank(logoAndRank[2].toString()));
+		rankInfoMap.put("collegeRank", translaterank(logoAndRank.get("rank")));
+		rankInfoMap.put("collegeLocalRank", translaterank(logoAndRank.get("localRank")));
 		//score info
 		HashMap<String, Object> scoreInfoMap = new HashMap<String, Object>();
-		ArrayList<HashMap<Object, Object>> yearScoreMap = new ArrayList<HashMap<Object,Object>>();
-		for(Object[] curObjects : yearScores) {
-			HashMap<Object, Object> curYearScoreMap = new HashMap<Object, Object>();
-			curYearScoreMap.put("year", curObjects[0]);
-			curYearScoreMap.put("score", curObjects[1]);
-			yearScoreMap.add(curYearScoreMap);
-		}
-		scoreInfoMap.put("yearScoreInfo", yearScoreMap);
+		scoreInfoMap.put("yearScoreInfo", yearScores);
 		scoreInfoMap.put("scoreAvg", majorMainInfo.getScoreAvg());
 		scoreInfoMap.put("scoreLowYear", majorMainInfo.getScoreLowYear());
 		scoreInfoMap.put("scoreLow", majorMainInfo.getScoreLow());
@@ -79,12 +85,19 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		competitionInfoMap.put("degreeDescription", majorMainInfo.getDegreeDescription());
 		//applyAdmit info
 		HashMap<String, Object> applyAdmitInfoMap = new HashMap<String, Object>();
-		applyAdmitInfoMap.put("rate", majorMainInfo.translateRate());
+		applyAdmitInfoMap.put("rate", MajorInfo.translateRate(majorMainInfo.getRate()));
 		applyAdmitInfoMap.put("applyDescription", majorMainInfo.getApplyDescription());
 		applyAdmitInfoMap.put("admitDescription", majorMainInfo.getAdmitDescription());
 		applyAdmitInfoMap.put("applyCount", majorMainInfo.getApplyNum()+"");
 		applyAdmitInfoMap.put("admitCount", majorMainInfo.getAdmitNum()+"");
 		applyAdmitInfoMap.put("exemptionCount", majorMainInfo.getExemption()+"");
+		//major recommend info
+		HashMap<String, Object> majorRecommendMap = new HashMap<String, Object>();
+		majorRecommendMap.put("mainInfo", recommendMajors.getMajors());
+		majorRecommendMap.put("similarCount", recommendMajors.getSimiliarCount());
+		majorRecommendMap.put("nearCount", recommendMajors.getNearCount());
+		majorRecommendMap.put("correlateCount", recommendMajors.getCorrelateCount());
+		majorRecommendMap.put("transdisciplinaryCount", recommendMajors.getTransdisciplinaryCount());
 		
 		jsonMap.put("baseInfo", baseInfoMap);
 		jsonMap.put("gradeInfo", gradeInfoMap);
@@ -92,6 +105,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		jsonMap.put("scoreInfo", scoreInfoMap);
 		jsonMap.put("competitionInfo", competitionInfoMap);
 		jsonMap.put("applyAdmitInfo", applyAdmitInfoMap);
+		jsonMap.put("majorRecommendInfo", majorRecommendMap);
 		
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(jsonMap);
@@ -143,6 +157,14 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 
 	public void setScoreDao(ScoreDao scoreDao) {
 		this.scoreDao = scoreDao;
+	}
+
+	public MajorRecommendFilter getRecommendFilter() {
+		return recommendFilter;
+	}
+
+	public void setRecommendFilter(MajorRecommendFilter recommendFilter) {
+		this.recommendFilter = recommendFilter;
 	}
 
 }

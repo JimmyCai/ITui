@@ -97,7 +97,7 @@ public class MajorInfo implements java.io.Serializable {
 		if(majorRank < 1000)
 			return majorRank + "";
 		else 
-			return (majorRank-1000) + "";
+			return (majorRank-1000) + "+";
 	}
 	
 	public static String translateDegree(String degree) {
@@ -109,11 +109,14 @@ public class MajorInfo implements java.io.Serializable {
 			return "低";
 	}
 	
-	public double translateRate() {
+	public static String translateRate(double rate) {
 		if(rate == 0) 
-			return -1;
-		else
-			return 1/rate;
+			return "-1";
+		else {
+			double tmp = 1/rate;
+			long round = Math.round(tmp*1000);
+			return round/10.0 + "%";
+		}
 	}
 	
 	public String getApplyDescription() {
