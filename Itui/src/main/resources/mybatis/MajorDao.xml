@@ -35,4 +35,23 @@
 		FROM major, major_info
 		WHERE major.id=major_info.major_id AND major.college_id=#{collegeId} AND major.id NOT IN (#{notInStr})
 	</select>
+	
+	<select id="findAreaSameCodeMajorByCollegeIdAndMajorCode" parameterType="map" resultType="java.util.HashMap">
+		SELECT major.name as name, major.school as school, college.name as college, major_info.rate as applyAdmitRate
+		FROM major,major_info,college
+		WHERE major.id = major_info.major_id
+		      AND major.college_id = college.id
+		      AND college.city_id in (
+				select id as cityId
+				from city
+				where area_id in (
+					select city.area_id
+					from city, college
+					where college.city_id = city.id and college.id=#{collegeId}
+				)
+		     AND major.code = #{majorCode}
+		     AND college.id NOT In (#{collegeId})
+		)
+		ORDER BY applyAdmitRate
+	</select>
 </mapper>

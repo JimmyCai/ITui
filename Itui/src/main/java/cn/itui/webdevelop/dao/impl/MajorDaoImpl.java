@@ -40,6 +40,15 @@ public class MajorDaoImpl implements MajorDao{
 		return resultList;
 	}
 
+	public List<HashMap<String, Object>> findAreaSameCodeMajorByCollegeIdAndMajorCode(
+			int collegeId, String majorCode) {
+		HashMap<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("collegeId", collegeId);
+		parameter.put("majorCode", majorCode);
+		List<HashMap<String, Object>> resultList = sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode", parameter);
+		return resultList;
+	}
+
 	public SqlSession getSqlSession() {
 		return sqlSession;
 	}
@@ -47,5 +56,4 @@ public class MajorDaoImpl implements MajorDao{
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-
 }

@@ -12,7 +12,8 @@ import cn.itui.webdevelop.model.MajorInfo;
 
 public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	private static final Logger logger = Logger.getLogger(SimilarMajorRecommendFilter.class);
-	public static final int MAJORCOUNT = 8;
+	public static final int SAMECOLLEGE_MAJORCOUNT = 8;
+	public static final int SAMEMAJOR_MAJORCOUNT = 4;
 
 	public MajorRecommendResult recommendMajorFilter(List<HashMap<String, Object>> candidates, String code, int majorId) {
 		int simiCount = 0;
@@ -39,7 +40,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 			simiCount = retMajors.size();
 			codeDataMaps.remove(code);
 		}
-		if(retMajors.size() < MAJORCOUNT) {
+		if(retMajors.size() < SAMECOLLEGE_MAJORCOUNT) {
 			HashMap<String, ArrayList<HashMap<String, Object>>> tmpCodeDataMaps = (HashMap<String, ArrayList<HashMap<String, Object>>>) codeDataMaps.clone();
 			Set<Entry<String, ArrayList<HashMap<String, Object>>>> codeDataSets = tmpCodeDataMaps.entrySet();
 			for(Entry<String, ArrayList<HashMap<String, Object>>> curEntry : codeDataSets) {
@@ -47,12 +48,12 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 					addArrays(retMajors, curEntry.getValue(),1);
 					codeDataMaps.remove(curEntry.getKey());
 				}
-				if(retMajors.size() >= MAJORCOUNT) {
-					nearCount = MAJORCOUNT - simiCount;
+				if(retMajors.size() >= SAMECOLLEGE_MAJORCOUNT) {
+					nearCount = SAMECOLLEGE_MAJORCOUNT - simiCount;
 					return new MajorRecommendResult(retMajors, simiCount, nearCount, corrCount, tranCount);
 				}
 			}
-			if(retMajors.size() < MAJORCOUNT) {
+			if(retMajors.size() < SAMECOLLEGE_MAJORCOUNT) {
 				nearCount = retMajors.size() - simiCount;
 				tmpCodeDataMaps = (HashMap<String, ArrayList<HashMap<String, Object>>>) codeDataMaps.clone();
 				codeDataSets = tmpCodeDataMaps.entrySet();
@@ -61,8 +62,8 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 						addArrays(retMajors, curEntry.getValue(),2);
 						codeDataMaps.remove(curEntry.getKey());
 					}
-					if(retMajors.size() >= MAJORCOUNT) {
-						corrCount = MAJORCOUNT - simiCount - nearCount;
+					if(retMajors.size() >= SAMECOLLEGE_MAJORCOUNT) {
+						corrCount = SAMECOLLEGE_MAJORCOUNT - simiCount - nearCount;
 						return new MajorRecommendResult(retMajors, simiCount, nearCount, corrCount, tranCount);
 					}
 				}
@@ -73,7 +74,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	
 	private void addArrays(ArrayList<HashMap<String, Object>> retMajors, ArrayList<HashMap<String, Object>> toAdd, int color) {
 		for(HashMap<String, Object> curMap : toAdd) {
-			if(retMajors.size() >= MAJORCOUNT)
+			if(retMajors.size() >= SAMECOLLEGE_MAJORCOUNT)
 				return;
 			addOneElement(retMajors, curMap, color);
 		}
@@ -97,7 +98,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		try{
 			int preCode = Integer.parseInt(code.substring(0, 2));
 			int I = 2;
-			while(recommendMajors.getMajors().size() <= MAJORCOUNT) {
+			while(recommendMajors.getMajors().size() <= SAMECOLLEGE_MAJORCOUNT) {
 				for(HashMap<String, Object> curMap : candidateMajors) {
 					if((Integer)curMap.get("id") != majorId) {
 						try{
@@ -106,7 +107,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 							if(Math.abs(curPreCode - preCode) < I) {
 								addOneElement(recommendMajors.getMajors(), curMap, 3);
 							}
-							if(recommendMajors.getMajors().size() >= MAJORCOUNT)
+							if(recommendMajors.getMajors().size() >= SAMECOLLEGE_MAJORCOUNT)
 								return recommendMajors;
 						}catch(Exception e) {
 							continue;
@@ -119,6 +120,48 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 			logger.error("pre-code not interger.");
 		}
 		return recommendMajors;
+	}
+
+	public List<HashMap<String, Object>> recommendMajorFilter(
+			List<HashMap<String, Object>> candidates, double rate) throws Exception{
+		List<HashMap<String, Object>> resultMaps = new ArrayList<HashMap<String,Object>>();
+		double curRate = 0;
+		double lastRate = 0;
+		if(candidates.size() == 0)
+			return new ArrayList<HashMap<String,Object>>();
+		curRate = (Double)candidates.get(0).get("applyAdmitRate");
+		int index = 0;
+		for(int i = 1; i < candidates.size(); i++) {
+			lastRate = curRate;
+			curRate = (Double)candidates.get(i).get("applyAdmitRate");
+			if(rate < curRate && rate > lastRate) {
+				index = i;
+			}
+		}
+		HashMap<String, Object> tmpMap = candidates.get(index);
+		double curAARate = (Double)tmpMap.get("applyAdmitRate");				
+		tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
+		resultMaps.add(tmpMap);
+		for(int length = 1; resultMaps.size() < candidates.size(); length++) {
+			if(index - length >= 0) {
+				tmpMap = candidates.get(index - length);
+				curAARate = (Double)tmpMap.get("applyAdmitRate");				
+				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
+				resultMaps.add(tmpMap);
+				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
+					return resultMaps;
+			}
+			if(index + length < candidates.size()) {
+				tmpMap = candidates.get(index + length);
+				curAARate = (Double)tmpMap.get("applyAdmitRate");				
+				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
+				resultMaps.add(tmpMap);
+				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
+					return resultMaps;
+			}
+		}
+		
+		return resultMaps;
 	}
 
 }

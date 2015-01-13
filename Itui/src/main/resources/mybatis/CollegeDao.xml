@@ -3,11 +3,32 @@
 <mapper namespace="cn.itui.webdevelop.dao.CollegeDao">
 	<select id="findLogoAndRankByMajorId" resultType="java.util.HashMap">
 		SELECT
+			college.id as id,
 			college.logo as logo,
 			college.rank as rank,
 			college.local_rank as localRank
 		FROM college,major 
 		WHERE 
 			major.id=#{majorId} AND college.id=major.college_id
+	</select>
+	
+	<select id="findCollegeInRank" resultType="cn.itui.webdevelop.model.College">
+		SELECT 
+			id as id,
+			name as name,
+			code as code,
+			logo as logo,
+			is_211 as is211,
+			is_985 as is985,
+			is_34 as is34,
+			city_id as cityId,
+			rank as rank,
+			local_rank as localRank,
+			follow_num as followNum
+		FROM
+			college
+		WHERE
+			rank IN (#{curRank}-4, #{curRank}-3, #{curRank}-2, #{curRank}-1, #{curRank}, #{curRank}+1, #{curRank}+2, #{curRank}+3, #{curRank}+4) AND id NOT IN (#{collegeId})
+		ORDER BY rank
 	</select>
 </mapper>

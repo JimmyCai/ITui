@@ -2,14 +2,17 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
-	<bean id="recommendFilter" class="cn.itui.webdevelop.utils.SimilarMajorRecommendFilter">
+	<bean id="majorRecommendFilter" class="cn.itui.webdevelop.utils.recommend.SimilarMajorRecommendFilter">
+	</bean>
+	<bean id="collegeRecommendFilter" class="cn.itui.webdevelop.utils.recommend.RankCollegeRecommendFilter">
 	</bean>
 	<bean id="majorInfoService" class="cn.itui.webdevelop.service.impl.MajorInfoServiceImpl">
 		<property name="collegeDao" ref="collegeDao"></property>
 		<property name="majorDao" ref="majorDao"></property>
 		<property name="majorInfoDao" ref="majorInfoDao"></property>
 		<property name="scoreDao" ref="scoreDao"></property>
-		<property name="recommendFilter" ref="recommendFilter"></property>
+		<property name="majorRecommendFilter" ref="majorRecommendFilter"></property>
+		<property name="collegeRecommendFilter" ref="collegeRecommendFilter"></property>
 	</bean>
 	
 	<bean id = "majorInfoController" class="cn.itui.webdevelop.controller.MajorInfoController">

@@ -9,9 +9,11 @@ import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.dao.MajorInfoDao;
 import cn.itui.webdevelop.dao.ScoreDao;
+import cn.itui.webdevelop.model.College;
 import cn.itui.webdevelop.model.Major;
 import cn.itui.webdevelop.model.MajorInfo;
 import cn.itui.webdevelop.service.MajorInfoService;
+import cn.itui.webdevelop.utils.recommend.CollegeRecommendFilter;
 import cn.itui.webdevelop.utils.recommend.MajorRecommendFilter;
 import cn.itui.webdevelop.utils.recommend.MajorRecommendResult;
 import cn.itui.webdevelop.utils.recommend.SimilarMajorRecommendFilter;
@@ -22,9 +24,10 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	private MajorDao majorDao;
 	private MajorInfoDao majorInfoDao;
 	private ScoreDao scoreDao;
-	private MajorRecommendFilter recommendFilter;
+	private MajorRecommendFilter majorRecommendFilter;
+	private CollegeRecommendFilter collegeRecommendFilter;
 
-	public String getMajorInfo(int id) {
+	public String getMajorInfo(int id) throws Exception {
 		//get major main info
 		MajorInfo majorMainInfo = majorInfoDao.getMajorInfoById(id);
 		//get college logo and rank info
@@ -34,24 +37,32 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		//get major base info
 		Major majorBaseInfo = majorDao.findMajorById(id);
 		List<HashMap<String, Object>> candidateMajors = majorDao.findCodeLikeMajorByCollegeId(majorBaseInfo.getCode(), majorBaseInfo.getCollegeId());
-		MajorRecommendResult recommendMajors = recommendFilter.recommendMajorFilter(candidateMajors, majorBaseInfo.getCode(), id);
-		System.out.println(recommendMajors.getMajors().size()+"mmmm");
-		if(recommendMajors.getMajors().size() < SimilarMajorRecommendFilter.MAJORCOUNT) {
+		MajorRecommendResult recommendMajors = majorRecommendFilter.recommendMajorFilter(candidateMajors, majorBaseInfo.getCode(), id);
+		if(recommendMajors.getMajors().size() < SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT) {
 			recommendMajors = processTransdisciplinary(recommendMajors, candidateMajors, majorBaseInfo.getCollegeId(), id, majorBaseInfo.getCode());
 		}
+		//different college major recommend
+		List<HashMap<String, Object>> candidateDiffCollMajors = majorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode(majorBaseInfo.getCollegeId(), majorBaseInfo.getCode());
+		List<HashMap<String, Object>> diffCollRecommendMajors = majorRecommendFilter.recommendMajorFilter(candidateDiffCollMajors, majorMainInfo.getRate());
+		//recommend college
+		int collegeRank = (Integer)collegeLogoAndRank.get("rank");
+		int collegeId = (Integer)collegeLogoAndRank.get("id");
+		List<College> candidateColleges = collegeDao.findCollegeInRank(collegeRank, collegeId);
+		List<HashMap<String, Object>> recommendColleges = collegeRecommendFilter.recommendCollege(candidateColleges, collegeRank);
 		//build json string
-		String jsonResult = buildJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors);
+		String jsonResult = buildJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors);
 		return jsonResult;
 	}
 	
 	private MajorRecommendResult processTransdisciplinary(MajorRecommendResult recommendMajors, List<HashMap<String, Object>> candidateMajors, int collegeId, int majorId, String code) {
-		recommendMajors.setTransdisciplinaryCount(SimilarMajorRecommendFilter.MAJORCOUNT - recommendMajors.getMajors().size());
+		recommendMajors.setTransdisciplinaryCount(SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT - recommendMajors.getMajors().size());
 		List<HashMap<String, Object>> allMajors = majorDao.findMajorByCollegeIdAndNotInMajorIds(collegeId, candidateMajors);
-		recommendMajors = recommendFilter.recommendMajorFilter(recommendMajors, allMajors, collegeId, majorId, code);
+		recommendMajors = majorRecommendFilter.recommendMajorFilter(recommendMajors, allMajors, collegeId, majorId, code);
 		return recommendMajors;
 	}
 	
-	private String buildJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, MajorRecommendResult recommendMajors) {
+	private String buildJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, 
+			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors) {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		//base info
 		HashMap<String, Object> baseInfoMap = new HashMap<String, Object>();
@@ -99,6 +110,14 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		majorRecommendMap.put("correlateCount", recommendMajors.getCorrelateCount());
 		majorRecommendMap.put("transdisciplinaryCount", recommendMajors.getTransdisciplinaryCount());
 		
+		//college recommend info
+		HashMap<String, Object> collegeRecommendMap = new HashMap<String, Object>();
+		collegeRecommendMap.put("mainInfo", recommendColleges);
+		
+		//different college same major recommend info
+		HashMap<String, Object> diffCollMajorRecommendMap = new HashMap<String, Object>();
+		diffCollMajorRecommendMap.put("mainInfo", diffCollRecommendMajors);
+		
 		jsonMap.put("baseInfo", baseInfoMap);
 		jsonMap.put("gradeInfo", gradeInfoMap);
 		jsonMap.put("rankInfo", rankInfoMap);
@@ -106,6 +125,8 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		jsonMap.put("competitionInfo", competitionInfoMap);
 		jsonMap.put("applyAdmitInfo", applyAdmitInfoMap);
 		jsonMap.put("majorRecommendInfo", majorRecommendMap);
+		jsonMap.put("interestedCollegeInfo", collegeRecommendMap);
+		jsonMap.put("interestedMajorInfo", diffCollMajorRecommendMap);
 		
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(jsonMap);
@@ -159,12 +180,21 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		this.scoreDao = scoreDao;
 	}
 
-	public MajorRecommendFilter getRecommendFilter() {
-		return recommendFilter;
+	public MajorRecommendFilter getMajorRecommendFilter() {
+		return majorRecommendFilter;
 	}
 
-	public void setRecommendFilter(MajorRecommendFilter recommendFilter) {
-		this.recommendFilter = recommendFilter;
+	public void setMajorRecommendFilter(MajorRecommendFilter majorRecommendFilter) {
+		this.majorRecommendFilter = majorRecommendFilter;
+	}
+
+	public CollegeRecommendFilter getCollegeRecommendFilter() {
+		return collegeRecommendFilter;
+	}
+
+	public void setCollegeRecommendFilter(
+			CollegeRecommendFilter collegeRecommendFilter) {
+		this.collegeRecommendFilter = collegeRecommendFilter;
 	}
 
 }

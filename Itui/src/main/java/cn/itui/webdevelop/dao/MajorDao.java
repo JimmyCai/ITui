@@ -9,4 +9,5 @@ public interface MajorDao {
 	public Major findMajorById(int id);
 	public List<HashMap<String, Object>> findCodeLikeMajorByCollegeId(String code, int collegeId);
 	public List<HashMap<String, Object>> findMajorByCollegeIdAndNotInMajorIds(int collegeId, List<HashMap<String, Object>> candidateMajors);
+	public List<HashMap<String, Object>> findAreaSameCodeMajorByCollegeIdAndMajorCode(int collegeId, String majorCode);
 }
