@@ -1,6 +1,8 @@
 package cn.itui.webdevelop.dao.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,15 +30,22 @@ public class MajorDaoImpl implements MajorDao{
 
 	public List<HashMap<String, Object>> findMajorByCollegeIdAndNotInMajorIds(
 			int collegeId, List<HashMap<String, Object>> candidateMajors) {
-		StringBuilder notInStringBuilder = new StringBuilder();
+		HashSet<Integer> candidateSet = new HashSet<Integer>();
 		for(HashMap<String, Object> curMap : candidateMajors) {
-			notInStringBuilder.append(curMap.get("id") + ",");
+			if(curMap.containsKey("id"))
+				candidateSet.add((Integer)curMap.get("id"));
 		}
-		notInStringBuilder.setLength(notInStringBuilder.length() - 1);
 		HashMap<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("collegeId", collegeId);
-		parameter.put("notInStr", notInStringBuilder.toString());
-		List<HashMap<String, Object>> resultList = sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.findMajorByCollegeIdAndNotInMajorIds", parameter);
+		List<HashMap<String, Object>> queryList = sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.findMajorByCollegeIdAndNotInMajorIds", parameter);
+		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
+		for(HashMap<String, Object> curMap : queryList) {
+			if(curMap.containsKey("id")) {
+				if(!candidateSet.contains((Integer)curMap.get("id"))){
+					resultList.add(curMap);
+				}
+			}
+		}
 		return resultList;
 	}
 

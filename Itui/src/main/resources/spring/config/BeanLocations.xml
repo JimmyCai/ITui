@@ -20,7 +20,7 @@
  	<mvc:annotation-driven />
     <mvc:default-servlet-handler />
     <!-- 启动Spring的组件自动扫描机制 -->
-    <context:component-scan base-package="cn.itui.webdevelop.controller"></context:component-scan>
+    <!-- <context:component-scan base-package="cn.itui.webdevelop.controller"></context:component-scan> -->
     
 	<!-- Database Configuration -->
 	<import resource="../database/DataSource.xml"/>

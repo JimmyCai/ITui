@@ -40,6 +40,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 			simiCount = retMajors.size();
 			codeDataMaps.remove(code);
 		}
+		
 		if(retMajors.size() < SAMECOLLEGE_MAJORCOUNT) {
 			HashMap<String, ArrayList<HashMap<String, Object>>> tmpCodeDataMaps = (HashMap<String, ArrayList<HashMap<String, Object>>>) codeDataMaps.clone();
 			Set<Entry<String, ArrayList<HashMap<String, Object>>>> codeDataSets = tmpCodeDataMaps.entrySet();
@@ -69,6 +70,8 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 				}
 			}
 		}
+		if(retMajors.size() < SAMECOLLEGE_MAJORCOUNT)
+			corrCount = retMajors.size() - simiCount - nearCount;
 		return new MajorRecommendResult(retMajors, simiCount, nearCount, corrCount, tranCount);
 	}
 	
@@ -87,7 +90,6 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		majorCurInfo.put("color", color);
 		double rate = (Double) toAdd.get("rate");
 		majorCurInfo.put("value", MajorInfo.translateRate(rate));
-		System.out.println("code:" + toAdd.get("code"));
 		retMajors.add(majorCurInfo);
 	}
 
@@ -96,6 +98,10 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 			List<HashMap<String, Object>> candidateMajors, int collegeId, int majorId,
 			String code) {
 		try{
+			if(candidateMajors.size() <= (SAMECOLLEGE_MAJORCOUNT - recommendMajors.getMajors().size())){
+				addArrays((ArrayList<HashMap<String,Object>>)recommendMajors.getMajors(), (ArrayList<HashMap<String,Object>>)candidateMajors, 3);
+				return recommendMajors;
+			}
 			int preCode = Integer.parseInt(code.substring(0, 2));
 			int I = 2;
 			while(recommendMajors.getMajors().size() <= SAMECOLLEGE_MAJORCOUNT) {

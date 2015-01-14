@@ -45,6 +45,9 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		List<HashMap<String, Object>> candidateDiffCollMajors = majorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode(majorBaseInfo.getCollegeId(), majorBaseInfo.getCode());
 		List<HashMap<String, Object>> diffCollRecommendMajors = majorRecommendFilter.recommendMajorFilter(candidateDiffCollMajors, majorMainInfo.getRate());
 		//recommend college
+		System.out.println("college logo:" + collegeLogoAndRank.get("logo"));
+		System.out.println("college rank:" + collegeLogoAndRank.get("rank"));
+		System.out.println("college local_rank:" + collegeLogoAndRank.get("localRank"));
 		int collegeRank = (Integer)collegeLogoAndRank.get("rank");
 		int collegeId = (Integer)collegeLogoAndRank.get("id");
 		List<College> candidateColleges = collegeDao.findCollegeInRank(collegeRank, collegeId);
@@ -55,8 +58,10 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	}
 	
 	private MajorRecommendResult processTransdisciplinary(MajorRecommendResult recommendMajors, List<HashMap<String, Object>> candidateMajors, int collegeId, int majorId, String code) {
-		recommendMajors.setTransdisciplinaryCount(SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT - recommendMajors.getMajors().size());
+		int needCount = SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT - recommendMajors.getMajors().size();
 		List<HashMap<String, Object>> allMajors = majorDao.findMajorByCollegeIdAndNotInMajorIds(collegeId, candidateMajors);
+		if(allMajors.size() >= needCount)
+			recommendMajors.setTransdisciplinaryCount(needCount);
 		recommendMajors = majorRecommendFilter.recommendMajorFilter(recommendMajors, allMajors, collegeId, majorId, code);
 		return recommendMajors;
 	}

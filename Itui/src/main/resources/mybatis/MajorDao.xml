@@ -33,7 +33,7 @@
 			major.code as code, 
 			major_info.rate as rate
 		FROM major, major_info
-		WHERE major.id=major_info.major_id AND major.college_id=#{collegeId} AND major.id NOT IN (#{notInStr})
+		WHERE major.id=major_info.major_id AND major.college_id=#{collegeId}
 	</select>
 	
 	<select id="findAreaSameCodeMajorByCollegeIdAndMajorCode" parameterType="map" resultType="java.util.HashMap">
