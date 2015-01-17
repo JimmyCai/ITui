@@ -23,6 +23,8 @@ public class College implements java.io.Serializable {
 	private Integer rank;
 	private Integer localRank;
 	private Integer followNum;
+	
+	public static final String COLLEGE_URL = "http://www.itui.cn/college?id=";
 
 	// Constructors
 

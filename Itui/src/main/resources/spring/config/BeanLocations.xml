@@ -17,12 +17,36 @@
        http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
  
  	<mvc:resources mapping="/image/**" location="/images/" />
+ 	<mvc:annotation-driven />
+    <mvc:default-servlet-handler />
+    <!-- 启动Spring的组件自动扫描机制 -->
+    <!-- <context:component-scan base-package="cn.itui.webdevelop.controller"></context:component-scan> -->
+    
 	<!-- Database Configuration -->
 	<import resource="../database/DataSource.xml"/>
-	<import resource="../database/Hibernate.xml"/>
+	<import resource="../database/MyBatis.xml"/>
  
 	<!-- Beans Declaration -->
-	<import resource="../beans/Stock.xml"/>
+	<import resource="../beans/Dao.xml"/>
+	<import resource="../beans/MajorInfoService.xml"/>
 	
- 
+ 	<bean id="requestResponseAdvice" class="cn.itui.webdevelop.controller.RequestResponseAdvice"></bean>
+ 	
+ 	<bean id="rrAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+ 		<property name="mappedName" value="getMajorInfo"></property>
+ 		<property name="advice" ref="requestResponseAdvice"></property>
+ 	</bean>
+ 	
+ 	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+ 		<property name="beanNames">
+ 			<list>
+ 				<value>majorInfoController</value>
+ 			</list>
+ 		</property>
+ 		<property name="interceptorNames">
+ 			<list>
+ 				<value>rrAdvisor</value>
+ 			</list>
+ 		</property>
+ 	</bean>
 </beans>

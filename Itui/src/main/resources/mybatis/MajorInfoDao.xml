@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="cn.itui.webdevelop.dao.MajorInfoDao">
+	<select id="getMajorInfoById" parameterType="int" resultType="cn.itui.webdevelop.model.MajorInfo">
+		SELECT
+			id as id,
+			major_id as majorId,
+			grade as grade,
+			rate_grade as rateGrade,
+			score_grade as scoreGrade,
+			college_grade as collegeGrade,
+			city_grade as cityGrade,
+			major_rank as majorRank,
+			rate_degree as rateDegree,
+			score_degree as scoreDegree,
+			college_degree as collegeDegree,
+			city_degree as cityDegree,
+			degree as degree,
+			degree_description as degreeDescription,
+			rate as rate,
+			score_low as scoreLow,
+			score_avg as scoreAvg,
+			score_high as scoreHigh,
+			score_low_year as scoreLowYear,
+			trend as trend,
+			apply_num as applyNum,
+			admit_num as admitNum,
+			exemption as exemption,
+			follow_num as followNum,
+			rate_description as rateDescription,
+			language as language,
+			math as math
+		FROM major_info 
+		WHERE id=#{majorId}
+	</select>
+</mapper>

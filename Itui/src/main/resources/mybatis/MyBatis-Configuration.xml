@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+        <setting name="logImpl" value="LOG4J"/>
+	</settings>
+    <mappers>
+        <mapper resource="./mybatis/MajorDao.xml"/>
+        <mapper resource="./mybatis/MajorInfoDao.xml"/>
+        <mapper resource="./mybatis/CollegeDao.xml"/>
+        <mapper resource="./mybatis/ScoreDao.xml"/>
+    </mappers>
+</configuration>
