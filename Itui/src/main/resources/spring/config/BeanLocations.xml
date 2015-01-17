@@ -30,5 +30,23 @@
 	<import resource="../beans/Dao.xml"/>
 	<import resource="../beans/MajorInfoService.xml"/>
 	
- 
+ 	<bean id="requestResponseAdvice" class="cn.itui.webdevelop.controller.RequestResponseAdvice"></bean>
+ 	
+ 	<bean id="rrAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+ 		<property name="mappedName" value="getMajorInfo"></property>
+ 		<property name="advice" ref="requestResponseAdvice"></property>
+ 	</bean>
+ 	
+ 	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+ 		<property name="beanNames">
+ 			<list>
+ 				<value>majorInfoController</value>
+ 			</list>
+ 		</property>
+ 		<property name="interceptorNames">
+ 			<list>
+ 				<value>rrAdvisor</value>
+ 			</list>
+ 		</property>
+ 	</bean>
 </beans>

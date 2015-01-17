@@ -1,9 +1,11 @@
 package cn.itui.webdevelop.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.MajorDao;
@@ -45,9 +47,6 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		List<HashMap<String, Object>> candidateDiffCollMajors = majorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode(majorBaseInfo.getCollegeId(), majorBaseInfo.getCode());
 		List<HashMap<String, Object>> diffCollRecommendMajors = majorRecommendFilter.recommendMajorFilter(candidateDiffCollMajors, majorMainInfo.getRate());
 		//recommend college
-		System.out.println("college logo:" + collegeLogoAndRank.get("logo"));
-		System.out.println("college rank:" + collegeLogoAndRank.get("rank"));
-		System.out.println("college local_rank:" + collegeLogoAndRank.get("localRank"));
 		int collegeRank = (Integer)collegeLogoAndRank.get("rank");
 		int collegeId = (Integer)collegeLogoAndRank.get("id");
 		List<College> candidateColleges = collegeDao.findCollegeInRank(collegeRank, collegeId);
@@ -67,11 +66,11 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	}
 	
 	private String buildJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, 
-			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors) {
+			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors) throws UnsupportedEncodingException {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		//base info
 		HashMap<String, Object> baseInfoMap = new HashMap<String, Object>();
-		baseInfoMap.put("collegeIndexPage", logoAndRank.get("logo"));
+		baseInfoMap.put("collegeIndexPage", College.COLLEGE_URL + logoAndRank.get("id"));
 		//grade info
 		HashMap<String, String> gradeInfoMap = new HashMap<String, String>();
 		gradeInfoMap.put("grade", majorMainInfo.getGrade());
@@ -133,23 +132,25 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		jsonMap.put("interestedCollegeInfo", collegeRecommendMap);
 		jsonMap.put("interestedMajorInfo", diffCollMajorRecommendMap);
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String jsonStr = gson.toJson(jsonMap);
 		return jsonStr;
 	}
 	
 	private String translaterank(Object rank) {
 		if(rank == null) {
-			return null;
+			return "null";
 		}
 		try {
-			int rankI = Integer.parseInt((String)rank);
+			int rankI = (Integer)rank;
 			if(rankI > 1000)
 				return (rankI - 1000) + "";
+			else if(rankI == -1)
+				return "null";
 			else
 				return rankI + "";
 		} catch (Exception e) {
-			return null;
+			return "null";
 		}
 	}
 

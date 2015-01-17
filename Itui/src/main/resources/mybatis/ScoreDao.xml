@@ -5,7 +5,7 @@
 		SELECT year, score 
 		FROM score
 		WHERE major_id=#{0} 
-		ORDER BY year DESC 
+		ORDER BY year 
 		LIMIT 0,#{1}
 	</select>
 </mapper>
