@@ -28,8 +28,8 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	private MajorDao majorDao;
 	private MajorInfoDao majorInfoDao;
 	private ScoreDao scoreDao;
-	private MajorRecommendFilter majorRecommendFilter;
-	private CollegeRecommendFilter collegeRecommendFilter;
+	private MajorRecommendFilter majorRecommendFilter;//对数据库查询得到的major数据进行过滤
+	private CollegeRecommendFilter collegeRecommendFilter;//对数据库查询得到的college数据进行过滤
 
 	public String getMajorInfo(int id, int random) throws Exception {
 		//get major main info

@@ -2,6 +2,11 @@ package cn.itui.webdevelop.utils;
 
 import java.util.Random;
 
+/**
+ * 加密解密类
+ * @author jimmycai
+ *
+ */
 public class EnDeCode {
 	private static final int RANDOM_RANGE = 30;
 	public static final String SESSION_STRING = "AHAHA";//放在session里的一个随机数
