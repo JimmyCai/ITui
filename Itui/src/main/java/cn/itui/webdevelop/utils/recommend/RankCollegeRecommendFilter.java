@@ -55,7 +55,7 @@ public class RankCollegeRecommendFilter implements CollegeRecommendFilter{
 				type = typeBuilder.toString();
 		}
 		else
-			type="";
+			type="null";
 		tmpMap.put("level", type);
 		resultMaps.add(tmpMap);
 	}

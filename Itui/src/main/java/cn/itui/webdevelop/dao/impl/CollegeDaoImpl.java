@@ -15,6 +15,10 @@ public class CollegeDaoImpl implements CollegeDao{
 		return sqlSession.selectOne("cn.itui.webdevelop.dao.CollegeDao.findLogoAndRankByMajorId", id);
 	}
 
+	/**
+	 * 查找排名在某个范围内的College
+	 * rank 为排名，取rank-4 ~ rank+4之间的
+	 */
 	public List<College> findCollegeInRank(int rank, int collegeId) {
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("curRank", rank);
