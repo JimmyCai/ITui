@@ -72,6 +72,10 @@ public class MajorDaoImpl implements MajorDao{
 		List<HashMap<String, Object>> resultList = sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode", parameter);
 		return resultList;
 	}
+	
+	public List<HashMap<String, Object>> findAllMajors() {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.findAllMajors");
+	}
 
 	public SqlSession getSqlSession() {
 		return sqlSession;

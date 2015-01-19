@@ -29,14 +29,16 @@
 	<!-- Beans Declaration -->
 	<import resource="../beans/Dao.xml"/>
 	<import resource="../beans/MajorInfoService.xml"/>
+	<import resource="../beans/CollegeService.xml"/>
 	
  	<bean id="requestResponseAdvice" class="cn.itui.webdevelop.controller.RequestResponseAdvice"></bean>
- 	
+ 	<!--  value="getMajorInfo"-->
  	<bean id="rrAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
  		<property name="mappedNames">
  			<list>
  				<value>getMajorInfo</value>
  				<value>getRetestInfo</value>
+ 				<value>search</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>
@@ -46,6 +48,7 @@
  		<property name="beanNames">
  			<list>
  				<value>majorInfoController</value>
+ 				<value>searchController</value>
  			</list>
  		</property>
  		<property name="interceptorNames">

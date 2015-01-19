@@ -38,4 +38,8 @@ public class CollegeDaoImpl implements CollegeDao{
 		this.sqlSession = sqlSession;
 	}
 
+	public List<HashMap<String, Object>> searchCollegesByName(String condition) {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.searchCollegesByName", condition);
+	}
+
 }
