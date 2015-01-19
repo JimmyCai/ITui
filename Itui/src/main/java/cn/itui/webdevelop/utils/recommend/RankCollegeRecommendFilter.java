@@ -6,6 +6,11 @@ import java.util.List;
 
 import cn.itui.webdevelop.model.College;
 
+/**
+ * 根据college的rank进行刷选
+ * @author jimmycai
+ *
+ */
 public class RankCollegeRecommendFilter implements CollegeRecommendFilter{
 	private static final int RECOMMENDCOUNT = 4;
 

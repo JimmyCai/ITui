@@ -11,10 +11,12 @@ import com.google.gson.GsonBuilder;
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.dao.MajorInfoDao;
+import cn.itui.webdevelop.dao.RetestDao;
 import cn.itui.webdevelop.dao.ScoreDao;
 import cn.itui.webdevelop.model.College;
 import cn.itui.webdevelop.model.Major;
 import cn.itui.webdevelop.model.MajorInfo;
+import cn.itui.webdevelop.model.Retest;
 import cn.itui.webdevelop.service.MajorInfoService;
 import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.recommend.CollegeRecommendFilter;
@@ -28,22 +30,23 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	private MajorDao majorDao;
 	private MajorInfoDao majorInfoDao;
 	private ScoreDao scoreDao;
-	private MajorRecommendFilter majorRecommendFilter;
-	private CollegeRecommendFilter collegeRecommendFilter;
+	private RetestDao retestDao;
+	private MajorRecommendFilter majorRecommendFilter;//对数据库查询得到的major数据进行过滤
+	private CollegeRecommendFilter collegeRecommendFilter;//对数据库查询得到的college数据进行过滤
 
-	public String getMajorInfo(int id, int random) throws Exception {
+	public String getMajorInfo(int majorId, int random) throws Exception {
 		//get major main info
-		MajorInfo majorMainInfo = majorInfoDao.getMajorInfoById(id);
+		MajorInfo majorMainInfo = majorInfoDao.getMajorInfoById(majorId);
 		//get college logo and rank info
-		HashMap<String, Object> collegeLogoAndRank = collegeDao.findLogoAndRankByMajorId(id);
+		HashMap<String, Object> collegeLogoAndRank = collegeDao.findLogoAndRankByMajorId(majorId);
 		//get year-score infos
-		List<HashMap<String, Object>> yearScores = scoreDao.getLastNYearsScoreByMajorId(id, N);
+		List<HashMap<String, Object>> yearScores = scoreDao.getLastNYearsScoreByMajorId(majorId, N);
 		//get major base info
-		Major majorBaseInfo = majorDao.findMajorById(id);
+		Major majorBaseInfo = majorDao.findMajorById(majorId);
 		List<HashMap<String, Object>> candidateMajors = majorDao.findCodeLikeMajorByCollegeId(majorBaseInfo.getCode(), majorBaseInfo.getCollegeId());
-		MajorRecommendResult recommendMajors = majorRecommendFilter.recommendMajorFilter(candidateMajors, majorBaseInfo.getCode(), id);
+		MajorRecommendResult recommendMajors = majorRecommendFilter.recommendMajorFilter(candidateMajors, majorBaseInfo.getCode(), majorId);
 		if(recommendMajors.getMajors().size() < SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT) {
-			recommendMajors = processTransdisciplinary(recommendMajors, candidateMajors, majorBaseInfo.getCollegeId(), id, majorBaseInfo.getCode());
+			recommendMajors = processTransdisciplinary(recommendMajors, candidateMajors, majorBaseInfo.getCollegeId(), majorId, majorBaseInfo.getCode());
 		}
 		//different college major recommend
 		List<HashMap<String, Object>> candidateDiffCollMajors = majorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode(majorBaseInfo.getCollegeId(), majorBaseInfo.getCode());
@@ -54,7 +57,15 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		List<College> candidateColleges = collegeDao.findCollegeInRank(collegeRank, collegeId);
 		List<HashMap<String, Object>> recommendColleges = collegeRecommendFilter.recommendCollege(candidateColleges, collegeRank);
 		//build json string
-		String jsonResult = buildJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors, random);
+		String jsonResult = buildMajorInfoJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors, random);
+		return jsonResult;
+	}
+	
+	public String getRetestInfo(int majorId) throws Exception {
+		Retest retest = retestDao.findRetestById(majorId);
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		
+		String jsonResult = gson.toJson(retest, Retest.class);
 		return jsonResult;
 	}
 	
@@ -67,7 +78,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		return recommendMajors;
 	}
 	
-	private String buildJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, 
+	private String buildMajorInfoJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, 
 			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors, int random) throws UnsupportedEncodingException {
 		LinkedHashMap<String, Object> jsonMap = new LinkedHashMap<String, Object>();
 		//base info
@@ -208,6 +219,14 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	public void setCollegeRecommendFilter(
 			CollegeRecommendFilter collegeRecommendFilter) {
 		this.collegeRecommendFilter = collegeRecommendFilter;
+	}
+
+	public RetestDao getRetestDao() {
+		return retestDao;
+	}
+
+	public void setRetestDao(RetestDao retestDao) {
+		this.retestDao = retestDao;
 	}
 
 }

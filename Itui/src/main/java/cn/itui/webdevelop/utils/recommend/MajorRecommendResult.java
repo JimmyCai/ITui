@@ -3,6 +3,11 @@ package cn.itui.webdevelop.utils.recommend;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * mdjor推荐时过滤后的结果类
+ * @author jimmycai
+ *
+ */
 public class MajorRecommendResult {
 	private List<HashMap<String, Object>> majors;
 	private int similiarCount;

@@ -11,6 +11,10 @@ import cn.itui.webdevelop.model.College;
 public class CollegeDaoImpl implements CollegeDao{
 	private SqlSession sqlSession;
 
+	/**
+	 * 通过major的id获取College的logo,rank and local rank
+	 * 返回一个hashmap,键为id,logo,rank,localRank
+	 */
 	public HashMap<String, Object> findLogoAndRankByMajorId(int id) {
 		return sqlSession.selectOne("cn.itui.webdevelop.dao.CollegeDao.findLogoAndRankByMajorId", id);
 	}
