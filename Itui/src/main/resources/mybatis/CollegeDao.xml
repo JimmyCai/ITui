@@ -31,4 +31,25 @@
 			rank IN (#{curRank}-4, #{curRank}-3, #{curRank}-2, #{curRank}-1, #{curRank}, #{curRank}+1, #{curRank}+2, #{curRank}+3, #{curRank}+4) AND id NOT IN (#{collegeId})
 		ORDER BY rank
 	</select>
+	
+	<select id="searchCollegesByName" parameterType = "map" resultType="java.util.HashMap">
+		SELECT 
+			college.id as id,
+			college.name as name,
+			logo as logo,
+			is_211 as is211,
+			is_985 as is985,
+			is_34 as is34,
+			rank as rank,
+			local_rank as localRank,
+			city.name as city
+		FROM
+			college 
+		JOIN
+			city
+		ON
+			college.city_id = city.id
+		WHERE
+			college.name like #{condition}
+	</select>
 </mapper>
