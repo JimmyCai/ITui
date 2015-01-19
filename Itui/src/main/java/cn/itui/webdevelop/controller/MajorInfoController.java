@@ -35,6 +35,16 @@ public class MajorInfoController {
 		return retJson;
 	}
 	
+	@RequestMapping(value=URLConstants.GETRETESTINFO)
+	public String getRetestInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		int random = getDecodeRandomNumber(request);
+		int majorId = decodeId(request, random);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
+		rRLogger.info(requestStr);
+		String retJson = majorInfoService.getRetestInfo(majorId);
+		return retJson;
+	}
+	
 	/**
 	 * 从httprequest中获取当前session的random number
 	 * @param request

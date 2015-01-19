@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="cn.itui.webdevelop.dao.RetestDao">
+	<select id="findRetestByMajorId" parameterType="int" resultType="cn.itui.webdevelop.model.Retest">
+		SELECT
+			id as id,
+			major_id as majorId,
+			direction as direction,
+			proportion as proportion,
+			major_total as majorTotal,
+			English_total as englishTotal,
+			subjective_question as subjectiveQuestion,
+			objective_question as objectiveQuestion,
+			question_num as questionNum,
+			time_restrict as timeRestrict,
+			listening as listening,
+			reading as reading,
+			writing as writing,
+			English_other as englishOther,
+			team_discussion as teamDiscussion,
+			question_answer as questionAnswer,
+			translation as translation,
+			oral_other as oralOther,
+			paper as paper,
+			college_from as collegeFrom,
+			edu_background as eduBackground
+		FROM retest 
+		WHERE majorId=#{majorId}
+	</select>
+</mapper>

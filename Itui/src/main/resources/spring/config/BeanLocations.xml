@@ -33,7 +33,12 @@
  	<bean id="requestResponseAdvice" class="cn.itui.webdevelop.controller.RequestResponseAdvice"></bean>
  	
  	<bean id="rrAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
- 		<property name="mappedName" value="getMajorInfo"></property>
+ 		<property name="mappedNames">
+ 			<list>
+ 				<value>getMajorInfo</value>
+ 				<value>getRetestInfo</value>
+ 			</list>
+ 		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>
  	</bean>
  	
