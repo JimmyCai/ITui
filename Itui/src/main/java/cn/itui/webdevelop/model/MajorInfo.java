@@ -1,5 +1,7 @@
 package cn.itui.webdevelop.model;
 
+import java.text.DecimalFormat;
+
 /**
  * MajorInfo entity. @author MyEclipse Persistence Tools
  */
@@ -107,6 +109,11 @@ public class MajorInfo implements java.io.Serializable {
 			return "中";
 		else
 			return "低";
+	}
+	
+	public String formatDegree() {
+		DecimalFormat dFormat = new DecimalFormat("#0.00");
+		return dFormat.format(degree);
 	}
 	
 	public static String translateRate(double rate) {

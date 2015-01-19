@@ -9,9 +9,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.itui.webdevelop.utils.ResponseUtil;
-import cn.itui.webdevelop.utils.UserLoginInfo;
 import cn.itui.webdevelop.utils.exception.MyNumberFormatException;
 
+/**
+ * AOP类
+ * @author jimmycai
+ *
+ */
 public class RequestResponseAdvice implements MethodInterceptor{
 	private static Log rRLogger = LogFactory.getLog("requestResponse");
 
@@ -23,7 +27,7 @@ public class RequestResponseAdvice implements MethodInterceptor{
 //		UserLoginInfo userLoginInfo = UserLoginInfo.extractUserLoginInfoFromSession(request);
 		//log request url and user login info
 //		rRLogger.info(userLoginInfo.toLoggerString() + request.getRequestURI());
-		rRLogger.info(request.getRequestURI());
+		rRLogger.info(request.getRequestURI() + "?" + request.getQueryString());
 		
 		try {
 			String result = (String) methodInvocation.proceed();

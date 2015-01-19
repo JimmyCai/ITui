@@ -2,6 +2,7 @@ package cn.itui.webdevelop.service.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -15,6 +16,7 @@ import cn.itui.webdevelop.model.College;
 import cn.itui.webdevelop.model.Major;
 import cn.itui.webdevelop.model.MajorInfo;
 import cn.itui.webdevelop.service.MajorInfoService;
+import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.recommend.CollegeRecommendFilter;
 import cn.itui.webdevelop.utils.recommend.MajorRecommendFilter;
 import cn.itui.webdevelop.utils.recommend.MajorRecommendResult;
@@ -29,7 +31,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	private MajorRecommendFilter majorRecommendFilter;
 	private CollegeRecommendFilter collegeRecommendFilter;
 
-	public String getMajorInfo(int id) throws Exception {
+	public String getMajorInfo(int id, int random) throws Exception {
 		//get major main info
 		MajorInfo majorMainInfo = majorInfoDao.getMajorInfoById(id);
 		//get college logo and rank info
@@ -52,7 +54,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		List<College> candidateColleges = collegeDao.findCollegeInRank(collegeRank, collegeId);
 		List<HashMap<String, Object>> recommendColleges = collegeRecommendFilter.recommendCollege(candidateColleges, collegeRank);
 		//build json string
-		String jsonResult = buildJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors);
+		String jsonResult = buildJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors, random);
 		return jsonResult;
 	}
 	
@@ -66,40 +68,41 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	}
 	
 	private String buildJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, 
-			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors) throws UnsupportedEncodingException {
-		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
+			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors, int random) throws UnsupportedEncodingException {
+		LinkedHashMap<String, Object> jsonMap = new LinkedHashMap<String, Object>();
 		//base info
-		HashMap<String, Object> baseInfoMap = new HashMap<String, Object>();
-		baseInfoMap.put("collegeIndexPage", College.COLLEGE_URL + logoAndRank.get("id"));
+		LinkedHashMap<String, Object> baseInfoMap = new LinkedHashMap<String, Object>();
+		baseInfoMap.put("collegeIndexPage", College.COLLEGE_URL + EnDeCode.encodeId((Integer)logoAndRank.get("id"), random));
 		//grade info
-		HashMap<String, String> gradeInfoMap = new HashMap<String, String>();
+		LinkedHashMap<String, String> gradeInfoMap = new LinkedHashMap<String, String>();
 		gradeInfoMap.put("grade", majorMainInfo.getGrade());
 		gradeInfoMap.put("rateGrade", majorMainInfo.getRateGrade());
 		gradeInfoMap.put("scoreGrade", majorMainInfo.getScoreGrade());
 		gradeInfoMap.put("collegeGrade", majorMainInfo.getCollegeGrade());
 		gradeInfoMap.put("cityGrade", majorMainInfo.getCityGrade());
 		//rank info
-		HashMap<String, String> rankInfoMap = new HashMap<String, String>();
+		LinkedHashMap<String, String> rankInfoMap = new LinkedHashMap<String, String>();
 		rankInfoMap.put("majorRank", majorMainInfo.translateMajorRank());
 		rankInfoMap.put("collegeRank", translaterank(logoAndRank.get("rank")));
 		rankInfoMap.put("collegeLocalRank", translaterank(logoAndRank.get("localRank")));
 		//score info
-		HashMap<String, Object> scoreInfoMap = new HashMap<String, Object>();
+		LinkedHashMap<String, Object> scoreInfoMap = new LinkedHashMap<String, Object>();
 		scoreInfoMap.put("yearScoreInfo", yearScores);
 		scoreInfoMap.put("scoreAvg", majorMainInfo.getScoreAvg());
 		scoreInfoMap.put("scoreLowYear", majorMainInfo.getScoreLowYear());
 		scoreInfoMap.put("scoreLow", majorMainInfo.getScoreLow());
+		scoreInfoMap.put("scoreHigh", majorMainInfo.getScoreHigh());
 		scoreInfoMap.put("trend", majorMainInfo.getTrend());
 		//competition info
-		HashMap<String, String> competitionInfoMap = new HashMap<String, String>();
-		competitionInfoMap.put("degree", majorMainInfo.getDegree().toString());
+		LinkedHashMap<String, String> competitionInfoMap = new LinkedHashMap<String, String>();
+		competitionInfoMap.put("degree", majorMainInfo.formatDegree());
 		competitionInfoMap.put("rateDegree", MajorInfo.translateDegree(majorMainInfo.getRateDegree()));
 		competitionInfoMap.put("scoreDegree", MajorInfo.translateDegree(majorMainInfo.getScoreDegree()));
 		competitionInfoMap.put("collegeDegree", MajorInfo.translateDegree(majorMainInfo.getCollegeDegree()));
 		competitionInfoMap.put("cityDegree", MajorInfo.translateDegree(majorMainInfo.getCityDegree()));
 		competitionInfoMap.put("degreeDescription", majorMainInfo.getDegreeDescription());
 		//applyAdmit info
-		HashMap<String, Object> applyAdmitInfoMap = new HashMap<String, Object>();
+		LinkedHashMap<String, Object> applyAdmitInfoMap = new LinkedHashMap<String, Object>();
 		applyAdmitInfoMap.put("rate", MajorInfo.translateRate(majorMainInfo.getRate()));
 		applyAdmitInfoMap.put("applyDescription", majorMainInfo.getApplyDescription());
 		applyAdmitInfoMap.put("admitDescription", majorMainInfo.getAdmitDescription());
@@ -107,7 +110,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		applyAdmitInfoMap.put("admitCount", majorMainInfo.getAdmitNum()+"");
 		applyAdmitInfoMap.put("exemptionCount", majorMainInfo.getExemption()+"");
 		//major recommend info
-		HashMap<String, Object> majorRecommendMap = new HashMap<String, Object>();
+		LinkedHashMap<String, Object> majorRecommendMap = new LinkedHashMap<String, Object>();
 		majorRecommendMap.put("mainInfo", recommendMajors.getMajors());
 		majorRecommendMap.put("similarCount", recommendMajors.getSimiliarCount());
 		majorRecommendMap.put("nearCount", recommendMajors.getNearCount());
@@ -115,11 +118,11 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		majorRecommendMap.put("transdisciplinaryCount", recommendMajors.getTransdisciplinaryCount());
 		
 		//college recommend info
-		HashMap<String, Object> collegeRecommendMap = new HashMap<String, Object>();
+		LinkedHashMap<String, Object> collegeRecommendMap = new LinkedHashMap<String, Object>();
 		collegeRecommendMap.put("mainInfo", recommendColleges);
 		
 		//different college same major recommend info
-		HashMap<String, Object> diffCollMajorRecommendMap = new HashMap<String, Object>();
+		LinkedHashMap<String, Object> diffCollMajorRecommendMap = new LinkedHashMap<String, Object>();
 		diffCollMajorRecommendMap.put("mainInfo", diffCollRecommendMajors);
 		
 		jsonMap.put("baseInfo", baseInfoMap);
@@ -129,11 +132,15 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		jsonMap.put("competitionInfo", competitionInfoMap);
 		jsonMap.put("applyAdmitInfo", applyAdmitInfoMap);
 		jsonMap.put("majorRecommendInfo", majorRecommendMap);
-		jsonMap.put("interestedCollegeInfo", collegeRecommendMap);
 		jsonMap.put("interestedMajorInfo", diffCollMajorRecommendMap);
+		jsonMap.put("interestedCollegeInfo", collegeRecommendMap);
+		
+		LinkedHashMap<String, Object> retJsonMap = new LinkedHashMap<String, Object>();
+		retJsonMap.put("status", 0);
+		retJsonMap.put("normalReturn", jsonMap);
 		
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		String jsonStr = gson.toJson(jsonMap);
+		String jsonStr = gson.toJson(retJsonMap);
 		return jsonStr;
 	}
 	
