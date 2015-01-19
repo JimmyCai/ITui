@@ -54,4 +54,17 @@
 		)
 		ORDER BY applyAdmitRate
 	</select>
+	<select id="findAllMajors" parameterType="map" resultType="java.util.HashMap">
+		SELECT 
+			major.id as id,
+			major.name as name,
+			major.school as school,
+			college.name as college,
+			college.logo as logo,
+			college.is_985 as is985,
+			college.is_211 as is211,
+			college.is_34 as is34
+		FROM
+			major left join college on major.college_id = college.id			
+	</select>
 </mapper>
