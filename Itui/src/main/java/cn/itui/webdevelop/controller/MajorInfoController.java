@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.itui.webdevelop.service.MajorInfoService;
 import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.RequestUtil;
-import cn.itui.webdevelop.utils.exception.ParameterAbsenceException;
+import cn.itui.webdevelop.utils.exception.ParameterErrorException;
 import cn.itui.webdevelop.utils.exception.SessionExceedException;
 
 /**
@@ -65,13 +65,19 @@ public class MajorInfoController {
 	 * @param request
 	 * @param random
 	 * @return
-	 * @throws ParameterAbsenceException 
+	 * @throws ParameterErrorException 
 	 */
-	private int decodeId(HttpServletRequest request, int random) throws ParameterAbsenceException {
+	private int decodeId(HttpServletRequest request, int random) throws ParameterErrorException {
 		String code = request.getParameter(MAJORID);
 		if(code == null) 
-			throw new ParameterAbsenceException();
-		return EnDeCode.decodeId(code, random);
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		int decodeId = 0;
+		try {
+			decodeId = EnDeCode.decodeId(code, random);
+		} catch (NumberFormatException e) {
+			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
+		}
+		return decodeId;
 	}
 
 	public MajorInfoService getMajorInfoService() {

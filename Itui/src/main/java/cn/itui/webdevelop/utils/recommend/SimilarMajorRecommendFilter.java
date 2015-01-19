@@ -9,6 +9,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import cn.itui.webdevelop.model.MajorInfo;
+import cn.itui.webdevelop.utils.exception.DatabaseException;
 
 /**
  * 根据major的code进行刷选
@@ -16,14 +17,17 @@ import cn.itui.webdevelop.model.MajorInfo;
  *
  */
 public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
-	private static final Logger logger = Logger.getLogger(SimilarMajorRecommendFilter.class);
 	public static final int SAMECOLLEGE_MAJORCOUNT = 8;
 	public static final int SAMEMAJOR_MAJORCOUNT = 4;
+	private static final String APPLYADMITRATE = "applyAdmitRate";
 
 	/**
 	 * 对candidates根据code进行刷选
+	 * @throws DatabaseException 
 	 */
-	public MajorRecommendResult recommendMajorFilter(List<HashMap<String, Object>> candidates, String code, int majorId) {
+	public MajorRecommendResult recommendMajorFilter(List<HashMap<String, Object>> candidates, String code, int majorId) throws Exception {
+		if(candidates == null || code == null)
+			throw DatabaseException.getInstance();
 		int simiCount = 0;
 		int nearCount = 0;
 		int corrCount = 0;
@@ -88,6 +92,8 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	}
 	
 	private void addArrays(ArrayList<HashMap<String, Object>> retMajors, ArrayList<HashMap<String, Object>> toAdd, int color) {
+		if(retMajors == null || toAdd == null)
+			return;
 		for(HashMap<String, Object> curMap : toAdd) {
 			if(retMajors.size() >= SAMECOLLEGE_MAJORCOUNT)
 				return;
@@ -96,6 +102,8 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	}
 	
 	private void addOneElement(List<HashMap<String, Object>> retMajors, HashMap<String, Object> toAdd, int color) {
+		if(retMajors == null || toAdd == null)
+			return;
 		HashMap<String, Object> majorCurInfo = new HashMap<String, Object>();
 		majorCurInfo.put("majorName", toAdd.get("name"));
 		majorCurInfo.put("schoolName", toAdd.get("school"));
@@ -108,38 +116,37 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	/**
 	 * 在前两位一样的所有major都不够的时候增加该学校的别的major
 	 * 先找code前两位相差小的，如果不够就依次增加code相差的大小
+	 * @throws DatabaseException 
 	 */
 	public MajorRecommendResult recommendMajorFilter(
 			MajorRecommendResult recommendMajors,
 			List<HashMap<String, Object>> candidateMajors, int collegeId, int majorId,
-			String code) {
-		try{
-			if(candidateMajors.size() <= (SAMECOLLEGE_MAJORCOUNT - recommendMajors.getMajors().size())){
-				addArrays((ArrayList<HashMap<String,Object>>)recommendMajors.getMajors(), (ArrayList<HashMap<String,Object>>)candidateMajors, 3);
-				return recommendMajors;
-			}
-			int preCode = Integer.parseInt(code.substring(0, 2));
-			int I = 2;
-			while(recommendMajors.getMajors().size() <= SAMECOLLEGE_MAJORCOUNT) {
-				for(HashMap<String, Object> curMap : candidateMajors) {
-					if((Integer)curMap.get("id") != majorId) {
-						try{
-							String curCode = (String)curMap.get("code");
-							int curPreCode = Integer.parseInt(curCode.substring(0, 2));
-							if(Math.abs(curPreCode - preCode) < I) {
-								addOneElement(recommendMajors.getMajors(), curMap, 3);
-							}
-							if(recommendMajors.getMajors().size() >= SAMECOLLEGE_MAJORCOUNT)
-								return recommendMajors;
-						}catch(Exception e) {
-							continue;
+			String code) throws Exception {
+		if(recommendMajors == null || candidateMajors == null || code == null)
+			throw DatabaseException.getInstance();
+		if(candidateMajors.size() <= (SAMECOLLEGE_MAJORCOUNT - recommendMajors.getMajors().size())){
+			addArrays((ArrayList<HashMap<String,Object>>)recommendMajors.getMajors(), (ArrayList<HashMap<String,Object>>)candidateMajors, 3);
+			return recommendMajors;
+		}
+		int preCode = Integer.parseInt(code.substring(0, 2));
+		int I = 2;
+		while(recommendMajors.getMajors().size() <= SAMECOLLEGE_MAJORCOUNT) {
+			for(HashMap<String, Object> curMap : candidateMajors) {
+				if((Integer)curMap.get("id") != majorId) {
+					try{
+						String curCode = (String)curMap.get("code");
+						int curPreCode = Integer.parseInt(curCode.substring(0, 2));
+						if(Math.abs(curPreCode - preCode) < I) {
+							addOneElement(recommendMajors.getMajors(), curMap, 3);
 						}
+						if(recommendMajors.getMajors().size() >= SAMECOLLEGE_MAJORCOUNT)
+							return recommendMajors;
+					}catch(Exception e) {
+						continue;
 					}
 				}
-			I++;
 			}
-		}catch(Exception e) {
-			logger.error("pre-code not interger.");
+		I++;
 		}
 		return recommendMajors;
 	}
@@ -149,28 +156,30 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	 */
 	public List<HashMap<String, Object>> recommendMajorFilter(
 			List<HashMap<String, Object>> candidates, double rate) throws Exception{
+		if(candidates == null)
+			throw DatabaseException.getInstance();
 		List<HashMap<String, Object>> resultMaps = new ArrayList<HashMap<String,Object>>();
 		double curRate = 0;
 		double lastRate = 0;
 		if(candidates.size() == 0)
 			return new ArrayList<HashMap<String,Object>>();
-		curRate = (Double)candidates.get(0).get("applyAdmitRate");
+		curRate = (Double)candidates.get(0).get(APPLYADMITRATE);
 		int index = 0;
 		for(int i = 1; i < candidates.size(); i++) {
 			lastRate = curRate;
-			curRate = (Double)candidates.get(i).get("applyAdmitRate");
+			curRate = (Double)candidates.get(i).get(APPLYADMITRATE);
 			if(rate < curRate && rate > lastRate) {
 				index = i;
 			}
 		}
 		HashMap<String, Object> tmpMap = candidates.get(index);
-		double curAARate = (Double)tmpMap.get("applyAdmitRate");				
+		double curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
 		tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
 		resultMaps.add(tmpMap);
 		for(int length = 1; resultMaps.size() < candidates.size(); length++) {
 			if(index - length >= 0) {
 				tmpMap = candidates.get(index - length);
-				curAARate = (Double)tmpMap.get("applyAdmitRate");				
+				curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
 				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
@@ -178,7 +187,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 			}
 			if(index + length < candidates.size()) {
 				tmpMap = candidates.get(index + length);
-				curAARate = (Double)tmpMap.get("applyAdmitRate");				
+				curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
 				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
