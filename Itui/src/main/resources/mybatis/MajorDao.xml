@@ -67,4 +67,58 @@
 		FROM
 			major left join college on major.college_id = college.id			
 	</select>
+	<select id = "searchMajors" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			major.id as id,
+			major.name as name,
+			school,
+			s.name as college,
+			s.logo as logo,
+			s.is_985 as is985,
+			s.is_34 as is34,
+			s.is_211 as is211,
+			major_rank as rank,
+			degree as degree
+		FROM
+			(major join 
+				(select 
+					id,name,logo,is_985, is_34, is_211 
+				from 
+					college 
+				where 
+					city_id in
+						(select 
+							id 
+						from 
+							city 
+						where 
+							area_id in 
+								(select 
+									id 
+								from 
+									area 
+								where 
+									name like #{area})) 
+					and is_985 like #{is985} 
+					and is_34 like #{is34} 
+					and is_211 like #{is211}) 
+			as s on s.id = college_id) join major_info on major_info.major_id = major.id
+		WHERE 
+			subject_id in 
+				(select 
+					id 
+				from 
+					subject 
+				where
+					name like #{subject} and category_id in 
+						(select 
+							id 
+						from 
+							category 
+						where 
+							name like #{category})) 
+			and type like #{type}
+			and major.name like #{condition}
+		LIMIT #{limit}
+	</select>
 </mapper>

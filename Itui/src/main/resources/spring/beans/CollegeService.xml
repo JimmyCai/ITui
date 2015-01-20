@@ -8,6 +8,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	</bean>
 	<bean id="majorService" class="cn.itui.webdevelop.service.impl.MajorServiceImpl">
 		<property name="majorDao" ref="majorDao"></property>
+		<property name="limit" value="300"></property>
 	</bean>
 	
 	<bean id="searchController" class = "cn.itui.webdevelop.controller.SearchController">
