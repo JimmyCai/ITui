@@ -34,39 +34,19 @@ public class SearchController{
 		int type=Integer.parseInt(request.getParameter("t"));
 		String condition = request.getParameter("c");
 		
-		System.out.println(condition);
-		
-//		Map<String, String[]> postMap = request.getParameterMap();
-//		String category = postMap.get("cg")[0];
-//		String subject = postMap.get("sj")[0];
-//		String college_type = postMap.get("ct")[0];
-//		String major_type = postMap.get("mt")[0];
-//		String area = postMap.get("a")[0];
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
-		String json = "";
-		if (br != null){
-			json = br.readLine();
-		}
-		
-//		Gson gson = new Gson();
-//		Map<String, Object> map = gson.fromJson(json, new TypeToken<Map<String, Object>>(){}.getType());
-//		System.out.println(map.get("sj"));
-		String category = request.getParameter("c");
-		System.out.println(category);
-		String subject = request.getParameter("sj");
-		System.out.println(subject);
-		String area = request.getParameter("a");
-		String college_type = request.getParameter("ct");
-		String major_type = request.getParameter("mt");
-
-//		System.out.println(postMap.get("a"));
-		
+//		System.out.println(condition);		
 		String result;
 		if (type==1){
+			String category = request.getParameter("cg");
+//			System.out.println(category);
+			String subject = request.getParameter("sj");
+//			System.out.println(subject);
+			String area = request.getParameter("a");
+			String college_type = request.getParameter("ct");
+			String major_type = request.getParameter("mt");
 			result = majorService.searchMajorsList(condition, category, subject, major_type, college_type, area);
 		}else if (type==2){
-			System.out.println("college");
+//			System.out.println("college");
 			result = collegeService.searchCollegeList(condition);
 		}else {
 			//error

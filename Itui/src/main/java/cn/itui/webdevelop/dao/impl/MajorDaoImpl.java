@@ -84,6 +84,6 @@ public class MajorDaoImpl implements MajorDao{
 		parameter.put("is211", is211);
 		parameter.put("area", area);
 		parameter.put("limit", limit);
-		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.search",parameter);
+		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.searchMajors",parameter);
 	}
 }
