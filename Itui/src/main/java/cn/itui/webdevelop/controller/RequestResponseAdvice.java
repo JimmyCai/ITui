@@ -8,8 +8,8 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.itui.webdevelop.utils.RequestUtil;
 import cn.itui.webdevelop.utils.ResponseUtil;
-import cn.itui.webdevelop.utils.exception.MyNumberFormatException;
 
 /**
  * AOP类
@@ -22,26 +22,14 @@ public class RequestResponseAdvice implements MethodInterceptor{
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		//get request and response
 		HttpServletRequest request = (HttpServletRequest) methodInvocation.getArguments()[0];
-		HttpServletResponse response = (HttpServletResponse) methodInvocation.getArguments()[1];
-		//get user login info
-//		UserLoginInfo userLoginInfo = UserLoginInfo.extractUserLoginInfoFromSession(request);
-		//log request url and user login info
-//		rRLogger.info(userLoginInfo.toLoggerString() + request.getRequestURI());
-		rRLogger.info(request.getRequestURI() + "?" + request.getQueryString());
-		
+		HttpServletResponse response = (HttpServletResponse) methodInvocation.getArguments()[1];	
 		try {
 			String result = (String) methodInvocation.proceed();
 			ResponseUtil.httpResponse(response, result);
-//			rRLogger.info(userLoginInfo.toLoggerString() + result);
-			rRLogger.info(result);
-		}catch(MyNumberFormatException e) {
+			rRLogger.info(RequestUtil.getUserBaseInfo(request) + "\n" + "RESULT:\n" + result + "\n");
+		}catch(Exception e) {
 			ResponseUtil.httpResponseException(response, e);
-			rRLogger.error(e.getMessage());
-//			rRLogger.info(userLoginInfo.toLoggerString() + e.getMessage());
-		}catch (Exception e) {
-			ResponseUtil.httpResponseException(response, e);
-			rRLogger.error(e.getMessage());
-//			rRLogger.info(userLoginInfo.toLoggerString() + e.getMessage());
+			rRLogger.error(RequestUtil.getUserBaseInfo(request) + "\n" + "RESULT:\n" + e.getMessage() + "\n");
 		}
 		return null;
 	}

@@ -10,11 +10,19 @@ import org.apache.log4j.Logger;
 
 import cn.itui.webdevelop.model.MajorInfo;
 
+/**
+ * 根据major的code进行刷选
+ * @author jimmycai
+ *
+ */
 public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	private static final Logger logger = Logger.getLogger(SimilarMajorRecommendFilter.class);
 	public static final int SAMECOLLEGE_MAJORCOUNT = 8;
 	public static final int SAMEMAJOR_MAJORCOUNT = 4;
 
+	/**
+	 * 对candidates根据code进行刷选
+	 */
 	public MajorRecommendResult recommendMajorFilter(List<HashMap<String, Object>> candidates, String code, int majorId) {
 		int simiCount = 0;
 		int nearCount = 0;
@@ -35,6 +43,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 			}
 		}
 		ArrayList<HashMap<String, Object>> retMajors = new ArrayList<HashMap<String,Object>>();
+		//增加code一样的major
 		if(codeDataMaps.containsKey(code)) {
 			addArrays(retMajors, codeDataMaps.get(code),0);
 			simiCount = retMajors.size();
@@ -42,6 +51,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		}
 		
 		if(retMajors.size() < SAMECOLLEGE_MAJORCOUNT) {
+			//增加code前4位一样的
 			HashMap<String, ArrayList<HashMap<String, Object>>> tmpCodeDataMaps = (HashMap<String, ArrayList<HashMap<String, Object>>>) codeDataMaps.clone();
 			Set<Entry<String, ArrayList<HashMap<String, Object>>>> codeDataSets = tmpCodeDataMaps.entrySet();
 			for(Entry<String, ArrayList<HashMap<String, Object>>> curEntry : codeDataSets) {
@@ -54,6 +64,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 					return new MajorRecommendResult(retMajors, simiCount, nearCount, corrCount, tranCount);
 				}
 			}
+			//增加code前两位一样的
 			if(retMajors.size() < SAMECOLLEGE_MAJORCOUNT) {
 				nearCount = retMajors.size() - simiCount;
 				tmpCodeDataMaps = (HashMap<String, ArrayList<HashMap<String, Object>>>) codeDataMaps.clone();
@@ -70,6 +81,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 				}
 			}
 		}
+		//如果还不够
 		if(retMajors.size() < SAMECOLLEGE_MAJORCOUNT)
 			corrCount = retMajors.size() - simiCount - nearCount;
 		return new MajorRecommendResult(retMajors, simiCount, nearCount, corrCount, tranCount);
@@ -93,6 +105,10 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		retMajors.add(majorCurInfo);
 	}
 
+	/**
+	 * 在前两位一样的所有major都不够的时候增加该学校的别的major
+	 * 先找code前两位相差小的，如果不够就依次增加code相差的大小
+	 */
 	public MajorRecommendResult recommendMajorFilter(
 			MajorRecommendResult recommendMajors,
 			List<HashMap<String, Object>> candidateMajors, int collegeId, int majorId,
@@ -128,6 +144,9 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		return recommendMajors;
 	}
 
+	/**
+	 * 根据rate进行major的刷选
+	 */
 	public List<HashMap<String, Object>> recommendMajorFilter(
 			List<HashMap<String, Object>> candidates, double rate) throws Exception{
 		List<HashMap<String, Object>> resultMaps = new ArrayList<HashMap<String,Object>>();

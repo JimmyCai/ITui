@@ -10,5 +10,6 @@
         <mapper resource="./mybatis/MajorInfoDao.xml"/>
         <mapper resource="./mybatis/CollegeDao.xml"/>
         <mapper resource="./mybatis/ScoreDao.xml"/>
+        <mapper resource="./mybatis/RetestDao.xml"/>
     </mappers>
 </configuration>
