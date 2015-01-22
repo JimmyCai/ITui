@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cn.itui.webdevelop.model.College;
+import cn.itui.webdevelop.utils.exception.DatabaseException;
 
 /**
  * 根据college的rank进行刷选
@@ -15,7 +16,10 @@ public class RankCollegeRecommendFilter implements CollegeRecommendFilter{
 	private static final int RECOMMENDCOUNT = 4;
 
 	public List<HashMap<String, Object>> recommendCollege(
-			List<College> candidates, int rank) {
+			List<College> candidates, int rank) throws DatabaseException {
+		if(candidates == null) {
+			throw DatabaseException.getInstance();
+		}
 		boolean beginAdd = false;
 		int beginLoc = 0;
 		List<HashMap<String, Object>> resultMaps = new ArrayList<HashMap<String,Object>>();
@@ -42,6 +46,8 @@ public class RankCollegeRecommendFilter implements CollegeRecommendFilter{
 	}
 	
 	private void addOne(List<HashMap<String, Object>> resultMaps, College curCollege) {
+		if(resultMaps == null || curCollege == null)
+			return;
 		HashMap<String, Object> tmpMap = new HashMap<String, Object>();
 		tmpMap.put("name", curCollege.getName());
 		tmpMap.put("rank", curCollege.getRank());
