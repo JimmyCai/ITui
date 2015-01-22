@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-
 import cn.itui.webdevelop.model.MajorInfo;
 import cn.itui.webdevelop.utils.exception.DatabaseException;
 
