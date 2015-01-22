@@ -49,8 +49,8 @@ public class SearchController{
 			int limit = 0;
 			try{
 				limit = Integer.parseInt(request.getParameter("l"));
-			}catch (MyNumberFormatException ex){
-				throw ex;
+			}catch (Exception e){
+				throw MyNumberFormatException.getInstance();
 			}
 			
 			result = majorService.searchMajorsList(condition, category, subject, major_type, college_type, area, limit);
