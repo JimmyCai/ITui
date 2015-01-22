@@ -27,6 +27,7 @@ public class CollegeServiceImpl implements CollegeService {
 		System.out.println(condition);
 		/***** 分词结束 *****/
 		List<HashMap<String, Object>> searchResult = collegeDao.searchCollegesByName(condition);
+		System.out.println(searchResult.size());
 		String json = buildJson(searchResult);
 		return json;
 	}
@@ -55,6 +56,7 @@ public class CollegeServiceImpl implements CollegeService {
 			list.add(itemMap);
 		}
 		jsonMap.put("list", list);
+		jsonMap.put("num", list.size());
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(jsonMap);
 		return json;

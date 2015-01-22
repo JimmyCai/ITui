@@ -13,6 +13,15 @@ import cn.itui.webdevelop.model.Major;
 public class MajorDaoImpl implements MajorDao{
 	private SqlSession sqlSession;
 
+	public SqlSession getSqlSession() {
+		return sqlSession;
+	}
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
+
 	/**
 	 * 根据major的id返回major对象
 	 */
@@ -77,11 +86,19 @@ public class MajorDaoImpl implements MajorDao{
 		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.findAllMajors");
 	}
 
-	public SqlSession getSqlSession() {
-		return sqlSession;
-	}
-
-	public void setSqlSession(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
+	public List<HashMap<String, Object>> searchMajors(String condition,
+			String category, String subject, String is985, String is211,
+			String is34, String type, String area, int limit) {
+		HashMap<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("condition", condition);
+		parameter.put("type", type);
+		parameter.put("category", category);
+		parameter.put("subject", subject);
+		parameter.put("is985", is985);
+		parameter.put("is34", is34);
+		parameter.put("is211", is211);
+		parameter.put("area", area);
+		parameter.put("limit", limit);
+		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.searchMajors",parameter);
 	}
 }
