@@ -10,5 +10,4 @@ public class ParameterAbsenceException extends Exception{
 	public ParameterAbsenceException() {
 		super(MESSAGE);
 	}
-
 }

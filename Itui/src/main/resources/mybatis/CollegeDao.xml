@@ -52,4 +52,21 @@
 		WHERE
 			college.name like #{condition}
 	</select>
+	<select id="findSchoolsByCollegeId" resultType="java.lang.String">
+		SELECT
+			distinct school
+		FROM
+			college join major on major.college_id = college.id
+		WHERE
+			college.id = #{id}
+	</select>
+	<select id="findMajorsBySchool" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			major.id as id,
+			major.name as name
+		FROM
+			college join major on major.college_id = college.id
+		WHERE
+			college.id=#{collegeId} and school =#{school}
+	</select>
 </mapper>

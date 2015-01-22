@@ -86,9 +86,13 @@ public class MajorDaoImpl implements MajorDao{
 		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.findAllMajors");
 	}
 
+	/**
+	 * 根据condition和分类条件来查询符合条件的专业
+	 * hashmap的key有id, name, school, college, logo, is985, is34, is211, rank, degree
+	 */
 	public List<HashMap<String, Object>> searchMajors(String condition,
 			String category, String subject, String is985, String is211,
-			String is34, String type, String area, int limit) {
+			String is34, String type, String area, int from, int limit) {
 		HashMap<String, Object> parameter = new HashMap<String, Object>();
 		parameter.put("condition", condition);
 		parameter.put("type", type);
@@ -98,6 +102,7 @@ public class MajorDaoImpl implements MajorDao{
 		parameter.put("is34", is34);
 		parameter.put("is211", is211);
 		parameter.put("area", area);
+		parameter.put("from", from);
 		parameter.put("limit", limit);
 		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.searchMajors",parameter);
 	}

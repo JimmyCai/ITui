@@ -38,8 +38,32 @@ public class CollegeDaoImpl implements CollegeDao{
 		this.sqlSession = sqlSession;
 	}
 
+	/**
+	 * 根据condition搜索学校
+	 * hashmap的key有id, name, logo, is211, is985, is34, rank, loaclRank, city
+	 */
 	public List<HashMap<String, Object>> searchCollegesByName(String condition) {
 		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.searchCollegesByName", condition);
+	}
+
+	/**
+	 * 根据college的id搜索对应的school
+	 * 返回结果为所有school名称
+	 */
+	public List<String> findSchoolsByCollegeId(int id) {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.findSchoolsByCollegeId", id);
+	}
+
+	/**
+	 * 根据学校id和school来搜索该school下的所有专业
+	 * 返回结果key包括id, name
+	 */
+	public List<HashMap<String, Object>> findMajorsBySchool(int collegeId,
+			String school) {
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("collegeId", collegeId);
+		parameterMap.put("school", school);
+		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.findMajorsBySchool", parameterMap);
 	}
 
 }

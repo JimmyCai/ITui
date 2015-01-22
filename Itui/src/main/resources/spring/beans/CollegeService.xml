@@ -16,4 +16,8 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		<property name="collegeService" ref="collegeService"></property>
 	</bean>
 	
+	<bean id="collegeController" class="cn.itui.webdevelop.controller.CollegeController">
+		<property name="collegeService" ref="collegeService"></property>
+	</bean>
+	
 </beans>
