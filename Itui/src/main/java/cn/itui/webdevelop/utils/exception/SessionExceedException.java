@@ -5,7 +5,7 @@ public class SessionExceedException extends Exception{
 	 * 
 	 */
 	private static final long serialVersionUID = -6150326441972158104L;
-	private static String message = "回话过期";
+	private static String message = "会话过期";
 	private static SessionExceedException instance;
 	
 	public synchronized static SessionExceedException getInstance() {

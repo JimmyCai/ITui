@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import javax.servlet.http.HttpServletRequest;
 
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.MajorDao;
@@ -18,6 +17,7 @@ import cn.itui.webdevelop.model.MajorInfo;
 import cn.itui.webdevelop.model.Retest;
 import cn.itui.webdevelop.service.MajorInfoService;
 import cn.itui.webdevelop.utils.EnDeCode;
+import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.exception.DatabaseException;
 import cn.itui.webdevelop.utils.recommend.CollegeRecommendFilter;
 import cn.itui.webdevelop.utils.recommend.MajorRecommendFilter;
@@ -34,7 +34,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	private MajorRecommendFilter majorRecommendFilter;//对数据库查询得到的major数据进行过滤
 	private CollegeRecommendFilter collegeRecommendFilter;//对数据库查询得到的college数据进行过滤
 
-	public String getMajorInfo(int majorId, int random) throws Exception {
+	public String getMajorInfo(HttpServletRequest request, int majorId) throws Exception {
 		//get major main info
 		MajorInfo majorMainInfo = majorInfoDao.getMajorInfoById(majorId);
 		if(majorMainInfo == null) {
@@ -67,18 +67,17 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		List<College> candidateColleges = collegeDao.findCollegeInRank(collegeRank, collegeId);
 		List<HashMap<String, Object>> recommendColleges = collegeRecommendFilter.recommendCollege(candidateColleges, collegeRank);
 		//build json string
-		String jsonResult = buildMajorInfoJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors, random);
+		String jsonResult = buildMajorInfoJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors, request);
 		return jsonResult;
 	}
 	
 	public String getRetestInfo(int majorId) throws Exception {
 		try{
-			Retest retest = retestDao.findRetestById(majorId);
-			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-			
-			String jsonResult = gson.toJson(retest, Retest.class);
+			Retest retest = retestDao.findRetestByMajorId(majorId);
+			String jsonResult = ResponseUtil.wrapNormalReturn(retest);
 			return jsonResult;
 		}catch(Exception e) {
+			e.printStackTrace();
 			throw DatabaseException.getInstance();
 		}
 	}
@@ -93,11 +92,11 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	}
 	
 	private String buildMajorInfoJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, 
-			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors, int random) throws Exception {
+			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors, HttpServletRequest request) throws Exception {
 		LinkedHashMap<String, Object> jsonMap = new LinkedHashMap<String, Object>();
 		//base info
 		LinkedHashMap<String, Object> baseInfoMap = new LinkedHashMap<String, Object>();
-		baseInfoMap.put("collegeIndexPage", College.COLLEGE_URL + EnDeCode.encodeId((Integer)logoAndRank.get("id"), random));
+		baseInfoMap.put("collegeIndexPage", College.COLLEGE_URL + EnDeCode.encodePara(request, (Integer)logoAndRank.get("id"),false));
 		//grade info
 		LinkedHashMap<String, String> gradeInfoMap = new LinkedHashMap<String, String>();
 		gradeInfoMap.put("grade", majorMainInfo.getGrade());
@@ -159,13 +158,8 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		jsonMap.put("majorRecommendInfo", majorRecommendMap);
 		jsonMap.put("interestedMajorInfo", diffCollMajorRecommendMap);
 		jsonMap.put("interestedCollegeInfo", collegeRecommendMap);
-		
-		LinkedHashMap<String, Object> retJsonMap = new LinkedHashMap<String, Object>();
-		retJsonMap.put("status", 0);
-		retJsonMap.put("normalReturn", jsonMap);
-		
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		String jsonStr = gson.toJson(retJsonMap);
+
+		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);;
 		return jsonStr;
 	}
 	
