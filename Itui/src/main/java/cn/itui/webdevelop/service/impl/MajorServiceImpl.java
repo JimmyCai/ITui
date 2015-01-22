@@ -3,11 +3,9 @@ package cn.itui.webdevelop.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.service.MajorService;
+import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.WordParticiple;
 
 public class MajorServiceImpl implements MajorService {
@@ -79,8 +77,7 @@ public class MajorServiceImpl implements MajorService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("num", majorList.size());
 		map.put("list", majorList);
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		return gson.toJson(map);
+		return ResponseUtil.wrapNormalReturn(map);
 	}
 
 	public MajorDao getMajorDao() {

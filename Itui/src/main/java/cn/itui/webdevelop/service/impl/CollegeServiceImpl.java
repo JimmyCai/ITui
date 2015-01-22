@@ -6,11 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.service.CollegeService;
+import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.WordParticiple;
 
 /**
@@ -68,9 +66,7 @@ public class CollegeServiceImpl implements CollegeService {
 		}
 		jsonMap.put("list", list);
 		jsonMap.put("num", list.size());
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		String json = gson.toJson(jsonMap);
-		return json;
+		return ResponseUtil.wrapNormalReturn(jsonMap);
 	}
 
 	public CollegeDao getCollegeDao() {
@@ -92,9 +88,7 @@ public class CollegeServiceImpl implements CollegeService {
 		List<String> schools = collegeDao.findSchoolsByCollegeId(collegeId);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("school", schools);
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		String json = gson.toJson(map);
-		return json;
+		return ResponseUtil.wrapNormalReturn(map);
 	}
 
 	/**
@@ -108,9 +102,7 @@ public class CollegeServiceImpl implements CollegeService {
 		List<HashMap<String, Object>> majors = collegeDao.findMajorsBySchool(collegeId,school);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("major", majors);
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		String json = gson.toJson(map);
-		return json;
+		return ResponseUtil.wrapNormalReturn(map);
 	}
 
 }

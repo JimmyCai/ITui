@@ -23,7 +23,7 @@ public class SearchController{
 	
 	@RequestMapping(value=URLConstants.SEARCH, method=RequestMethod.POST)
 	public String search(HttpServletRequest request, HttpServletResponse response) throws Exception{
-
+		
 		String tString= request.getParameter("t");
 		if (tString==null) {
 			throw ParameterErrorException.getInstance("缺少参数");
