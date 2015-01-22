@@ -2,9 +2,12 @@ package cn.itui.webdevelop.utils;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletResponse;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * 返回json给前端
@@ -48,6 +51,36 @@ public class ResponseUtil {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 对normal return map进行封装
+	 * @param normalRetMap
+	 * @return
+	 */
+	public static String wrapNormalReturn(HashMap<String, Object> normalRetMap) {
+		LinkedHashMap<String, Object> responseJsonMap = new LinkedHashMap<String, Object>();
+		responseJsonMap.put("status", 0);
+		responseJsonMap.put("normalReturn", normalRetMap);
+		
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		String jsonString = gson.toJson(responseJsonMap);
+		return jsonString;
+	}
+	
+	/**
+	 * 对normal return map进行封装
+	 * @param normalRetMap
+	 * @return
+	 */
+	public static String wrapNormalReturn(Object normalRetObj) {
+		LinkedHashMap<String, Object> responseJsonMap = new LinkedHashMap<String, Object>();
+		responseJsonMap.put("status", 0);
+		responseJsonMap.put("normalReturn", normalRetObj);
+		
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		String jsonString = gson.toJson(responseJsonMap);
+		return jsonString;
 	}
 
 }

@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.itui.webdevelop.service.MajorInfoService;
 import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.RequestUtil;
-import cn.itui.webdevelop.utils.exception.ParameterErrorException;
-import cn.itui.webdevelop.utils.exception.SessionExceedException;
 
 /**
  * 管理major info的控制器
@@ -27,57 +25,20 @@ public class MajorInfoController {
 	
 	@RequestMapping(value=URLConstants.GETMAJORINFO)
 	public String getMajorInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int random = getDecodeRandomNumber(request);
-		int majorId = decodeId(request, random);
+		int majorId = EnDeCode.decodePara(request, MAJORID);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
-		String retJson = majorInfoService.getMajorInfo(majorId, random);
+		String retJson = majorInfoService.getMajorInfo(request, majorId);
 		return retJson;
 	}
 	
 	@RequestMapping(value=URLConstants.GETRETESTINFO)
 	public String getRetestInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int random = getDecodeRandomNumber(request);
-		int majorId = decodeId(request, random);
+		int majorId = EnDeCode.decodePara(request, MAJORID);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
 		String retJson = majorInfoService.getRetestInfo(majorId);
 		return retJson;
-	}
-	
-	/**
-	 * 从httprequest中获取当前session的random number
-	 * @param request
-	 * @return
-	 * @throws SessionExceedException
-	 */
-	private int getDecodeRandomNumber(HttpServletRequest request) throws SessionExceedException {
-		if(request.getSession().getAttribute(EnDeCode.SESSION_STRING) == null) {
-			request.getSession().setAttribute(EnDeCode.SESSION_STRING, 0);
-//			throw new SessionExceedException();
-		}
-		int random = (Integer) request.getSession().getAttribute(EnDeCode.SESSION_STRING);
-		return random;
-	}
-	
-	/**
-	 * 对id进行解密
-	 * @param request
-	 * @param random
-	 * @return
-	 * @throws ParameterErrorException 
-	 */
-	private int decodeId(HttpServletRequest request, int random) throws ParameterErrorException {
-		String code = request.getParameter(MAJORID);
-		if(code == null) 
-			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		int decodeId = 0;
-		try {
-			decodeId = EnDeCode.decodeId(code, random);
-		} catch (NumberFormatException e) {
-			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		}
-		return decodeId;
 	}
 
 	public MajorInfoService getMajorInfoService() {
