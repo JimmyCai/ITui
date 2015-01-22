@@ -25,6 +25,6 @@
 			college_from as collegeFrom,
 			edu_background as eduBackground
 		FROM retest 
-		WHERE majorId=#{majorId}
+		WHERE major_id=#{majorId}
 	</select>
 </mapper>
