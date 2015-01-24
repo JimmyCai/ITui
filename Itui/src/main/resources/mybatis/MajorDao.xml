@@ -119,6 +119,6 @@
 							name like #{category})) 
 			and type like #{type}
 			and major.name like #{condition}
-		LIMIT #{limit}
+		LIMIT #{from},#{limit}
 	</select>
 </mapper>

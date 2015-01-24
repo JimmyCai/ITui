@@ -19,5 +19,22 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id = "majorInfoController" class="cn.itui.webdevelop.controller.MajorInfoController">
 		<property name="majorInfoService" ref="majorInfoService"></property>
 	</bean>
+	
+		<bean id="collegeService" class="cn.itui.webdevelop.service.impl.CollegeServiceImpl">
+		<property name="collegeDao" ref="collegeDao"></property>
+	</bean>
+	<bean id="majorService" class="cn.itui.webdevelop.service.impl.MajorServiceImpl">
+		<property name="majorDao" ref="majorDao"></property>
+		<property name="limit" value="300"></property>
+	</bean>
+	
+	<bean id="searchController" class = "cn.itui.webdevelop.controller.SearchController">
+		<property name="majorService" ref="majorService"></property>
+		<property name="collegeService" ref="collegeService"></property>
+	</bean>
+	
+	<bean id="collegeController" class="cn.itui.webdevelop.controller.CollegeController">
+		<property name="collegeService" ref="collegeService"></property>
+	</bean>
 
 </beans>
