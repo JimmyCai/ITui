@@ -93,13 +93,21 @@ public class MajorInfo implements java.io.Serializable {
 
 	// Property accessors
 	
-	public String translateMajorRank() {
-		if(majorRank == null)
-			return null;
-		if(majorRank < 1000)
-			return majorRank + "";
-		else 
-			return (majorRank-1000) + "+";
+	public static String translateRank(Object rank) {
+		if(rank == null) {
+			return "null";
+		}
+		try {
+			int rankI = (Integer)rank;
+			if(rankI > 1000)
+				return (rankI - 1000) + "";
+			else if(rankI == -1)
+				return "null";
+			else
+				return rankI + "";
+		} catch (Exception e) {
+			return "null";
+		}
 	}
 	
 	public static String translateDegree(String degree) {
@@ -111,7 +119,7 @@ public class MajorInfo implements java.io.Serializable {
 			return "低";
 	}
 	
-	public String formatDegree() {
+	public static String formatDegree(double degree) {
 		DecimalFormat dFormat = new DecimalFormat("#0.00");
 		return dFormat.format(degree);
 	}

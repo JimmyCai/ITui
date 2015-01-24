@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 
 import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.service.MajorService;
+import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.WordParticiple;
 
 public class MajorServiceImpl implements MajorService {
@@ -65,6 +66,7 @@ public class MajorServiceImpl implements MajorService {
 			int rank = (Integer)map.get("rank");
 			if (rank > 1000) 
 				map.put("rank", rank%1000+"+");
+			map.put("id", EnDeCode.encodePara((Integer)map.get("id")));
 		}
 		String json = buildJson(majorList);
 		return json;

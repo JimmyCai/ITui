@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder;
 
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.service.CollegeService;
+import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.WordParticiple;
 
 /**
@@ -32,6 +33,9 @@ public class CollegeServiceImpl implements CollegeService {
 		System.out.println(condition);
 		/***** 分词结束 *****/
 		List<HashMap<String, Object>> searchResult = collegeDao.searchCollegesByName(condition);
+		for(HashMap<String, Object> curList : searchResult) {
+			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
+		}
 		System.out.println(searchResult.size());
 		String json = buildJson(searchResult);
 		return json;
@@ -106,6 +110,9 @@ public class CollegeServiceImpl implements CollegeService {
 	 */
 	public String findMajorsBySchool(int collegeId, String school) {
 		List<HashMap<String, Object>> majors = collegeDao.findMajorsBySchool(collegeId,school);
+		for(HashMap<String, Object> curList : majors) {
+			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
+		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("major", majors);
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();

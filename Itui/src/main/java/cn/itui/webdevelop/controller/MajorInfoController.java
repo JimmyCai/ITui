@@ -25,7 +25,8 @@ public class MajorInfoController {
 	
 	@RequestMapping(value=URLConstants.GETMAJORINFO)
 	public String getMajorInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int majorId = EnDeCode.decodePara(request, MAJORID);
+		String majorIdStr = request.getParameter(MAJORID);
+		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
 		String retJson = majorInfoService.getMajorInfo(request, majorId);
@@ -34,7 +35,8 @@ public class MajorInfoController {
 	
 	@RequestMapping(value=URLConstants.GETRETESTINFO)
 	public String getRetestInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int majorId = EnDeCode.decodePara(request, MAJORID);
+		String majorIdStr = request.getParameter(MAJORID);
+		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
 		String retJson = majorInfoService.getRetestInfo(majorId);
