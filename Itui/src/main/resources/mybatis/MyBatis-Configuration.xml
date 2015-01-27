@@ -11,5 +11,7 @@
         <mapper resource="./mybatis/CollegeDao.xml"/>
         <mapper resource="./mybatis/ScoreDao.xml"/>
         <mapper resource="./mybatis/RetestDao.xml"/>
+        <mapper resource="./mybatis/FollowCollegeDao.xml"/>
+        <mapper resource="./mybatis/FollowMajorDao.xml"/>
     </mappers>
 </configuration>

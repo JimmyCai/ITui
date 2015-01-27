@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="cn.itui.webdevelop.dao.FollowMajorDao">
+	<select id="findFollowMajorByUserPassword" parameterType="String" resultType="java.util.HashMap">
+		SELECT
+			follow_major.id as id,
+			major.id as majorId,
+			major.name as majorName
+		FROM follow_major,major,user
+		WHERE 
+			follow_major.user_id=user.id AND follow_major.major_id=major.id AND user.password=#{password}
+	</select>
+	
+	<select id="insertFollowMajor" parameterType="map" resultType="int">
+		INSERT INTO follow_major(user_id, major_id)
+		VALUES((SELECT id FROM user WHERE password=#{userPassword}),#{majorId})
+	</select>
+	
+	<select id="deleteFollowMajorById" parameterType="int" resultType="int">
+		DELETE FROM follow_major WHERE id=#{id}
+	</select>
+	
+	<select id="deleteFollowMajorByCollegeIdAndPassword" parameterType="map" resultType="int">
+		DELETE FROM follow_major
+		WHERE user_id IN (SELECT id FROM user WHERE password=#{userPassword})
+			AND major_id IN (SELECT id FROM major WHERE college_id=#{collegeId})
+	</select>
+</mapper>

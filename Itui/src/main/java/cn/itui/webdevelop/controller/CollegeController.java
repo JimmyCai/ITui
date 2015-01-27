@@ -3,14 +3,22 @@ package cn.itui.webdevelop.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.itui.webdevelop.service.CollegeService;
+import cn.itui.webdevelop.service.FollowService;
+import cn.itui.webdevelop.utils.RequestUtil;
 
 @Controller
 public class CollegeController {
+	private static Log rRLogger = LogFactory.getLog("requestResponse");
+	public static final String USERPASSWORD = "userPassword";
+	public static final String COLLEGEID = "collegeId";
 	private CollegeService collegeService;
+	private FollowService followService;
 
 	@RequestMapping(URLConstants.COLLEGE)
 	public String getCollegeSchools(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -24,6 +32,35 @@ public class CollegeController {
 		String school = request.getParameter("s");
 		return collegeService.findMajorsBySchool(collegeId, school);
 	}
+	
+	@RequestMapping(URLConstants.FOLLOWCOLLEGE)
+	public String followCollege(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String userPassword = request.getParameter(USERPASSWORD);
+		//TODO decode for college id
+		int collegeId = Integer.parseInt(request.getParameter(COLLEGEID));
+		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword + "\t" + COLLEGEID + ":" + collegeId;
+		rRLogger.info(requestStr);
+		return followService.followCollege(userPassword, collegeId);		
+	}
+	
+	@RequestMapping(URLConstants.DISFOLLOWCOLLEGE)
+	public String disFollowCollege(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		int id = Integer.parseInt(request.getParameter("id"));
+		String userPassword = request.getParameter(USERPASSWORD);
+		//TODO decode for college id
+		int collegeId = Integer.parseInt(request.getParameter(COLLEGEID));
+		String requestStr = RequestUtil.getUserBaseInfo(request) + "ID:" + id + "\t" + USERPASSWORD + ":" + userPassword + "\t" + COLLEGEID + ":" + collegeId;
+		rRLogger.info(requestStr);
+		return followService.deleteFollowCollege(id, userPassword, collegeId);
+	}
+	
+	@RequestMapping(URLConstants.GETFOLLOWCOLLEGE)
+	public String getFollowColleges(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String userPassword = request.getParameter(USERPASSWORD);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword;
+		rRLogger.info(requestStr);
+		return followService.getFollowColleges(userPassword);
+	}
 
 	public CollegeService getCollegeService() {
 		return collegeService;
@@ -31,5 +68,13 @@ public class CollegeController {
 
 	public void setCollegeService(CollegeService collegeService) {
 		this.collegeService = collegeService;
+	}
+
+	public FollowService getFollowService() {
+		return followService;
+	}
+
+	public void setFollowService(FollowService followService) {
+		this.followService = followService;
 	}
 }

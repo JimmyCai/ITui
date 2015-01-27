@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="cn.itui.webdevelop.dao.FollowCollegeDao">
+	<select id="findFollowCollegeByUserPassword" parameterType="String" resultType="java.util.HashMap">
+		SELECT
+			follow_college.id as id,
+			college.id as collegeId,
+			college.logo as collegeLogo,
+			college.name as collegeName
+		FROM college,follow_college,user
+		WHERE 
+			college.id=follow_college.college_id AND follow_college.user_id=user.id AND user.password=#{password}
+	</select>
+	
+	<select id="insertFollowCollegeWithCollegeId" parameterType="map" resultType="int">
+		INSERT INTO follow_college(user_id, college_id) 
+		SELECT (SELECT id FROM user WHERE password=#{userPassword}),#{collegeId}
+		FROM dual
+		WHERE NOT EXISTS(SELECT * FROM follow_college WHERE user_id IN (SELECT id FROM user WHERE password=#{userPassword}) AND college_id = #{collegeId})
+	</select>
+	
+	<select id="insertFollowCollegeWithMajorId" parameterType="map" resultType="int">
+		INSERT INTO follow_college(user_id, college_id) 
+		SELECT (SELECT id FROM user WHERE password=#{userPassword}),(SELECT college_id FROM major WHERE id=#{majorId})
+		FROM dual
+		WHERE NOT EXISTS(SELECT * FROM follow_college WHERE user_id IN (SELECT id FROM user WHERE password=#{userPassword}) AND college_id IN (SELECT college_id FROM major WHERE id=#{majorId}))
+	</select>
+	
+	<select id="deleteFollowCollege" parameterType="int" resultType="int">
+		DELETE FROM follow_college WHERE id=#{id}
+	</select>
+</mapper>
