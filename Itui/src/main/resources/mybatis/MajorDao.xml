@@ -54,7 +54,7 @@
 		)
 		ORDER BY applyAdmitRate
 	</select>
-	<select id="findAllMajors" parameterType="map" resultType="java.util.HashMap">
+	<select id="findAllMajors" resultType="java.util.HashMap">
 		SELECT 
 			major.id as id,
 			major.name as name,
@@ -69,6 +69,7 @@
 	</select>
 	<select id = "searchMajors" parameterType="map" resultType="java.util.HashMap">
 		SELECT
+			SQL_CALC_FOUND_ROWS 
 			major.id as id,
 			major.name as name,
 			school,
@@ -120,5 +121,8 @@
 			and type like #{type}
 			and major.name like #{condition}
 		LIMIT #{from},#{limit}
+	</select>
+	<select id="count" resultType="java.lang.Integer">
+		SELECT FOUND_ROWS()
 	</select>
 </mapper>

@@ -41,6 +41,8 @@
  				<value>search</value>
  				<value>getCollegeSchools</value>
  				<value>getSchoolMajors</value>
+ 				<value>login</value>
+ 				<value>register</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>
@@ -52,6 +54,7 @@
  				<value>majorInfoController</value>
  				<value>searchController</value>
  				<value>collegeController</value>
+ 				<value>userController</value>
  			</list>
  		</property>
  		<property name="interceptorNames">

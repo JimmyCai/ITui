@@ -8,5 +8,13 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="collegeDao" class="cn.itui.webdevelop.dao.impl.CollegeDaoImpl">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
+	
+	<bean id="userDao" class="cn.itui.webdevelop.dao.impl.UserDaoImpl">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	
+	<bean id="userInfoDao" class="cn.itui.webdevelop.dao.impl.UserInfoDaoImpl">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
 
 </beans>

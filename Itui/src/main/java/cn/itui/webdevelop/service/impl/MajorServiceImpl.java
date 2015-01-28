@@ -58,7 +58,7 @@ public class MajorServiceImpl implements MajorService {
 		
 		List<HashMap<String, Object>> majorList = majorDao.searchMajors(condition, category, subject, is985, is211, is34, type, area, from, limit);
 		System.out.println(majorList.size());
-		for (int i = 0; i < majorList.size(); i++){
+		for (int i = 0; i < majorList.size()-1; i++){
 			HashMap<String, Object> map = majorList.get(i);
 			int rank = (Integer)map.get("rank");
 			if (rank > 1000) 
@@ -76,6 +76,7 @@ public class MajorServiceImpl implements MajorService {
 	private String buildJson(List<HashMap<String, Object>> majorList) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("num", majorList.size());
+		map.put("type", "major");
 		map.put("list", majorList);
 		return ResponseUtil.wrapNormalReturn(map);
 	}

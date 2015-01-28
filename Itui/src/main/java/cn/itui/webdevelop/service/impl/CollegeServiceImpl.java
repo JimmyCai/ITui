@@ -65,6 +65,7 @@ public class CollegeServiceImpl implements CollegeService {
 			list.add(itemMap);
 		}
 		jsonMap.put("list", list);
+		jsonMap.put("type", "college");
 		jsonMap.put("num", list.size());
 		return ResponseUtil.wrapNormalReturn(jsonMap);
 	}
