@@ -104,6 +104,10 @@ public class MajorDaoImpl implements MajorDao{
 		parameter.put("area", area);
 		parameter.put("from", from);
 		parameter.put("limit", limit);
-		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.searchMajors",parameter);
+		List<HashMap<String, Object>> list = sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.searchMajors",parameter);
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("total", sqlSession.selectOne("cn.itui.webdevelop.dao.MajorDao.count"));
+//		list.add(map);
+		return list;
 	}
 }

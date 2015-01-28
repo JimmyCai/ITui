@@ -40,6 +40,8 @@
  				<value>search</value>
  				<value>getCollegeSchools</value>
  				<value>getSchoolMajors</value>
+ 				<value>login</value>
+ 				<value>register</value>
  				<value>followCollege</value>
  				<value>disFollowCollege</value>
  				<value>getFollowColleges</value>
@@ -57,6 +59,7 @@
  				<value>majorInfoController</value>
  				<value>searchController</value>
  				<value>collegeController</value>
+ 				<value>userController</value>
  			</list>
  		</property>
  		<property name="interceptorNames">
