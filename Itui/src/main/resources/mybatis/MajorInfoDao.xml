@@ -33,4 +33,45 @@
 		FROM major_info 
 		WHERE id=#{majorId}
 	</select>
+	
+	<select id="findMajorAllInfoByMajorId" parameterType="int" resultType="java.util.HashMap">
+		SELECT
+			major_info.major_id as majorId,
+			major_info.grade as grade,
+			major_info.rate_grade as rateGrade,
+			major_info.score_grade as scoreGrade,
+			major_info.college_grade as collegeGrade,
+			major_info.city_grade as cityGrade,
+			major_info.major_rank as majorRank,
+			major_info.rate_degree as rateDegree,
+			major_info.score_degree as scoreDegree,
+			major_info.college_degree as collegeDegree,
+			major_info.city_degree as cityDegree,
+			major_info.degree as degree,
+			major_info.degree_description as degreeDescription,
+			major_info.rate as rate,
+			major_info.score_low as scoreLow,
+			major_info.score_avg as scoreAvg,
+			major_info.score_high as scoreHigh,
+			major_info.score_low_year as scoreLowYear,
+			major_info.trend as trend,
+			major_info.apply_num as applyNum,
+			major_info.admit_num as admitNum,
+			major_info.exemption as exemption,
+			major_info.follow_num as followNum,
+			major_info.rate_description as rateDescription,
+			major_info.language as language,
+			major_info.math as math,
+			college.id as collegeId,
+			college.logo as logo,
+			college.rank as rank,
+			college.local_rank as localRank,
+			major.name as name,
+			major.code as code,
+			major.school as school,
+			major.subject_id as subjectId,
+			major.type as type
+		FROM major_info, major, college
+		WHERE major.id=#{majorId} AND college.id=major.college_id AND major_info.major_id = major.id
+	</select>
 </mapper>

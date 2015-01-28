@@ -28,8 +28,7 @@
  
 	<!-- Beans Declaration -->
 	<import resource="../beans/Dao.xml"/>
-	<import resource="../beans/MajorInfoService.xml"/>
-	<!--  <import resource="../beans/CollegeService.xml"/>-->
+	<import resource="../beans/Service.xml"/>
 	
  	<bean id="requestResponseAdvice" class="cn.itui.webdevelop.controller.RequestResponseAdvice"></bean>
  	<!--  value="getMajorInfo"-->
@@ -43,6 +42,12 @@
  				<value>getSchoolMajors</value>
  				<value>login</value>
  				<value>register</value>
+ 				<value>followCollege</value>
+ 				<value>disFollowCollege</value>
+ 				<value>getFollowColleges</value>
+ 				<value>followMajor</value>
+ 				<value>disFollowMajor</value>
+ 				<value>getFollowMajors</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>

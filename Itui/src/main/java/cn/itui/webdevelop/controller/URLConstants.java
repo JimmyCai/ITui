@@ -13,4 +13,10 @@ public class URLConstants {
 	public static final String SCHOOL="/college/school";
 	public static final String LOGIN="/login";
 	public static final String REGESTER="/register";
+	public static final String FOLLOWMAJOR="/followmajor";
+	public static final String GETFOLLOWMAJOR="/getfollowmajor";
+	public static final String DISFOLLOWMAJOR="/disfollowmajor";
+	public static final String FOLLOWCOLLEGE="/followcollege";
+	public static final String GETFOLLOWCOLLEGE="/getfollowcollege";
+	public static final String DISFOLLOWCOLLEGE="/disfollowcollege";
 }

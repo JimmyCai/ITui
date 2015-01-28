@@ -12,7 +12,6 @@ import cn.itui.webdevelop.dao.MajorInfoDao;
 import cn.itui.webdevelop.dao.RetestDao;
 import cn.itui.webdevelop.dao.ScoreDao;
 import cn.itui.webdevelop.model.College;
-import cn.itui.webdevelop.model.Major;
 import cn.itui.webdevelop.model.MajorInfo;
 import cn.itui.webdevelop.model.Retest;
 import cn.itui.webdevelop.service.MajorInfoService;
@@ -25,6 +24,11 @@ import cn.itui.webdevelop.utils.recommend.MajorRecommendResult;
 import cn.itui.webdevelop.utils.recommend.SimilarMajorRecommendFilter;
 
 public class MajorInfoServiceImpl implements MajorInfoService{
+	public static long majorAllInfoTime = 0;
+	public static long yearScoreInfoTime = 0;
+	public static long majorRecommendTime = 0;
+	public static long majorRecommendDiffCTime = 0;
+	public static long collegeRecommendTime = 0;
 	private static final int N = 4;
 	private CollegeDao collegeDao;
 	private MajorDao majorDao;
@@ -35,39 +39,46 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	private CollegeRecommendFilter collegeRecommendFilter;//对数据库查询得到的college数据进行过滤
 
 	public String getMajorInfo(HttpServletRequest request, int majorId) throws Exception {
-		//get major main info
-		MajorInfo majorMainInfo = majorInfoDao.getMajorInfoById(majorId);
-		if(majorMainInfo == null) {
+		//get major main info, base info, college logo and rank info
+		long ST = System.currentTimeMillis();
+		HashMap<String, Object> majorAllInfos = majorInfoDao.findMajorAllInfoByMajorId(majorId);
+		long ET = System.currentTimeMillis();
+		majorAllInfoTime = ET - ST;
+		if(majorAllInfos == null)
 			throw DatabaseException.getInstance();
-		}
-		//get college logo and rank info
-		HashMap<String, Object> collegeLogoAndRank = collegeDao.findLogoAndRankByMajorId(majorId);
-		if(collegeLogoAndRank == null) {
-			throw DatabaseException.getInstance();
-		}
+		String code = (String)majorAllInfos.get("code");
+		int collegeId = (Integer)majorAllInfos.get("collegeId");
+		
 		//get year-score infos
+		ST = System.currentTimeMillis();
 		List<HashMap<String, Object>> yearScores = scoreDao.getLastNYearsScoreByMajorId(majorId, N);
-		//get major base info
-		Major majorBaseInfo = majorDao.findMajorById(majorId);
-		if(majorBaseInfo == null) {
-			throw DatabaseException.getInstance();
-		}
+		ET = System.currentTimeMillis();
+		yearScoreInfoTime = ET - ST;
+
 		//recommend majors
-		List<HashMap<String, Object>> candidateMajors = majorDao.findCodeLikeMajorByCollegeId(majorBaseInfo.getCode(), majorBaseInfo.getCollegeId());
-		MajorRecommendResult recommendMajors = majorRecommendFilter.recommendMajorFilter(candidateMajors, majorBaseInfo.getCode(), majorId);
+		ST = System.currentTimeMillis();
+		List<HashMap<String, Object>> candidateMajors = majorDao.findCodeLikeMajorByCollegeId(code, collegeId);
+		ET = System.currentTimeMillis();
+		majorRecommendTime = ET - ST;
+		MajorRecommendResult recommendMajors = majorRecommendFilter.recommendMajorFilter(candidateMajors, code, majorId);
 		if(recommendMajors.getMajors().size() < SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT) {
-			recommendMajors = processTransdisciplinary(recommendMajors, candidateMajors, majorBaseInfo.getCollegeId(), majorId, majorBaseInfo.getCode());
+			recommendMajors = processTransdisciplinary(recommendMajors, candidateMajors, collegeId, majorId, code);
 		}
 		//different college major recommend
-		List<HashMap<String, Object>> candidateDiffCollMajors = majorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode(majorBaseInfo.getCollegeId(), majorBaseInfo.getCode());
-		List<HashMap<String, Object>> diffCollRecommendMajors = majorRecommendFilter.recommendMajorFilter(candidateDiffCollMajors, majorMainInfo.getRate());
+		ST = System.currentTimeMillis();
+		List<HashMap<String, Object>> candidateDiffCollMajors = majorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode(collegeId, code);
+		ET = System.currentTimeMillis();
+		majorRecommendDiffCTime = ET - ST;
+		List<HashMap<String, Object>> diffCollRecommendMajors = majorRecommendFilter.recommendMajorFilter(candidateDiffCollMajors, (Double)majorAllInfos.get("rate"));
 		//recommend college
-		int collegeRank = (Integer)collegeLogoAndRank.get("rank");
-		int collegeId = (Integer)collegeLogoAndRank.get("id");
+		int collegeRank = (Integer)majorAllInfos.get("rank");
+		ST = System.currentTimeMillis();
 		List<College> candidateColleges = collegeDao.findCollegeInRank(collegeRank, collegeId);
+		ET = System.currentTimeMillis();
+		collegeRecommendTime = ET - ST;
 		List<HashMap<String, Object>> recommendColleges = collegeRecommendFilter.recommendCollege(candidateColleges, collegeRank);
 		//build json string
-		String jsonResult = buildMajorInfoJson(majorMainInfo, collegeLogoAndRank, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors, request);
+		String jsonResult = buildMajorInfoJson(majorAllInfos, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors, request);
 		return jsonResult;
 	}
 	
@@ -84,55 +95,59 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	
 	private MajorRecommendResult processTransdisciplinary(MajorRecommendResult recommendMajors, List<HashMap<String, Object>> candidateMajors, int collegeId, int majorId, String code) throws Exception{
 		int needCount = SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT - recommendMajors.getMajors().size();
+		long ST = System.currentTimeMillis();
 		List<HashMap<String, Object>> allMajors = majorDao.findMajorByCollegeIdAndNotInMajorIds(collegeId, candidateMajors);
+		long ET = System.currentTimeMillis();
+		majorRecommendTime += ET - ST;
 		if(allMajors.size() >= needCount)
 			recommendMajors.setTransdisciplinaryCount(needCount);
 		recommendMajors = majorRecommendFilter.recommendMajorFilter(recommendMajors, allMajors, collegeId, majorId, code);
+		
 		return recommendMajors;
 	}
 	
-	private String buildMajorInfoJson(MajorInfo majorMainInfo, HashMap<String, Object> logoAndRank, List<HashMap<String, Object>> yearScores, 
+	private String buildMajorInfoJson(HashMap<String, Object> majorAllInfos, List<HashMap<String, Object>> yearScores, 
 			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors, HttpServletRequest request) throws Exception {
 		LinkedHashMap<String, Object> jsonMap = new LinkedHashMap<String, Object>();
 		//base info
 		LinkedHashMap<String, Object> baseInfoMap = new LinkedHashMap<String, Object>();
-		baseInfoMap.put("collegeIndexPage", College.COLLEGE_URL + EnDeCode.encodePara(request, (Integer)logoAndRank.get("id"),false));
+		baseInfoMap.put("collegeIndexPage", College.COLLEGE_URL + EnDeCode.encodePara((Integer)majorAllInfos.get("collegeId")));
 		//grade info
-		LinkedHashMap<String, String> gradeInfoMap = new LinkedHashMap<String, String>();
-		gradeInfoMap.put("grade", majorMainInfo.getGrade());
-		gradeInfoMap.put("rateGrade", majorMainInfo.getRateGrade());
-		gradeInfoMap.put("scoreGrade", majorMainInfo.getScoreGrade());
-		gradeInfoMap.put("collegeGrade", majorMainInfo.getCollegeGrade());
-		gradeInfoMap.put("cityGrade", majorMainInfo.getCityGrade());
+		LinkedHashMap<String, Object> gradeInfoMap = new LinkedHashMap<String, Object>();
+		gradeInfoMap.put("grade", majorAllInfos.get("grade"));
+		gradeInfoMap.put("rateGrade", majorAllInfos.get("rateGrade"));
+		gradeInfoMap.put("scoreGrade", majorAllInfos.get("scoreGrade"));
+		gradeInfoMap.put("collegeGrade", majorAllInfos.get("collegeGrade"));
+		gradeInfoMap.put("cityGrade", majorAllInfos.get("cityGrade"));
 		//rank info
 		LinkedHashMap<String, String> rankInfoMap = new LinkedHashMap<String, String>();
-		rankInfoMap.put("majorRank", majorMainInfo.translateMajorRank());
-		rankInfoMap.put("collegeRank", translaterank(logoAndRank.get("rank")));
-		rankInfoMap.put("collegeLocalRank", translaterank(logoAndRank.get("localRank")));
+		rankInfoMap.put("majorRank", MajorInfo.translateRank(majorAllInfos.get("majorRank")));
+		rankInfoMap.put("collegeRank", MajorInfo.translateRank(majorAllInfos.get("rank")));
+		rankInfoMap.put("collegeLocalRank", MajorInfo.translateRank(majorAllInfos.get("localRank")));
 		//score info
 		LinkedHashMap<String, Object> scoreInfoMap = new LinkedHashMap<String, Object>();
 		scoreInfoMap.put("yearScoreInfo", yearScores);
-		scoreInfoMap.put("scoreAvg", majorMainInfo.getScoreAvg());
-		scoreInfoMap.put("scoreLowYear", majorMainInfo.getScoreLowYear());
-		scoreInfoMap.put("scoreLow", majorMainInfo.getScoreLow());
-		scoreInfoMap.put("scoreHigh", majorMainInfo.getScoreHigh());
-		scoreInfoMap.put("trend", majorMainInfo.getTrend());
+		scoreInfoMap.put("scoreAvg", majorAllInfos.get("scoreAvg"));
+		scoreInfoMap.put("scoreLowYear", majorAllInfos.get("scoreLowYear"));
+		scoreInfoMap.put("scoreLow", majorAllInfos.get("scoreLow"));
+		scoreInfoMap.put("scoreHigh", majorAllInfos.get("scoreHigh"));
+		scoreInfoMap.put("trend", majorAllInfos.get("trend"));
 		//competition info
 		LinkedHashMap<String, String> competitionInfoMap = new LinkedHashMap<String, String>();
-		competitionInfoMap.put("degree", majorMainInfo.formatDegree());
-		competitionInfoMap.put("rateDegree", MajorInfo.translateDegree(majorMainInfo.getRateDegree()));
-		competitionInfoMap.put("scoreDegree", MajorInfo.translateDegree(majorMainInfo.getScoreDegree()));
-		competitionInfoMap.put("collegeDegree", MajorInfo.translateDegree(majorMainInfo.getCollegeDegree()));
-		competitionInfoMap.put("cityDegree", MajorInfo.translateDegree(majorMainInfo.getCityDegree()));
-		competitionInfoMap.put("degreeDescription", majorMainInfo.getDegreeDescription());
+		competitionInfoMap.put("degree", MajorInfo.formatDegree((Double)majorAllInfos.get("degree")));
+		competitionInfoMap.put("rateDegree", MajorInfo.translateDegree((String)majorAllInfos.get("rateDegree")));
+		competitionInfoMap.put("scoreDegree", MajorInfo.translateDegree((String)majorAllInfos.get("scoreDegree")));
+		competitionInfoMap.put("collegeDegree", MajorInfo.translateDegree((String)majorAllInfos.get("collegeDegree")));
+		competitionInfoMap.put("cityDegree", MajorInfo.translateDegree((String)majorAllInfos.get("cityDegree")));
+		competitionInfoMap.put("degreeDescription", (String)majorAllInfos.get("degreeDescription"));
 		//applyAdmit info
 		LinkedHashMap<String, Object> applyAdmitInfoMap = new LinkedHashMap<String, Object>();
-		applyAdmitInfoMap.put("rate", MajorInfo.translateRate(majorMainInfo.getRate()));
-		applyAdmitInfoMap.put("applyDescription", majorMainInfo.getApplyDescription());
-		applyAdmitInfoMap.put("admitDescription", majorMainInfo.getAdmitDescription());
-		applyAdmitInfoMap.put("applyCount", majorMainInfo.getApplyNum()+"");
-		applyAdmitInfoMap.put("admitCount", majorMainInfo.getAdmitNum()+"");
-		applyAdmitInfoMap.put("exemptionCount", majorMainInfo.getExemption()+"");
+		applyAdmitInfoMap.put("rate", MajorInfo.translateRate((Double)majorAllInfos.get("rate")));
+		applyAdmitInfoMap.put("applyDescription", majorAllInfos.get("applyDescription"));
+		applyAdmitInfoMap.put("admitDescription", majorAllInfos.get("admitDescription"));
+		applyAdmitInfoMap.put("applyCount", majorAllInfos.get("applyNum"));
+		applyAdmitInfoMap.put("admitCount", majorAllInfos.get("admitNum"));
+		applyAdmitInfoMap.put("exemptionCount", majorAllInfos.get("exemption"));
 		//major recommend info
 		LinkedHashMap<String, Object> majorRecommendMap = new LinkedHashMap<String, Object>();
 		majorRecommendMap.put("mainInfo", recommendMajors.getMajors());
@@ -161,23 +176,6 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);;
 		return jsonStr;
-	}
-	
-	private String translaterank(Object rank) {
-		if(rank == null) {
-			return "null";
-		}
-		try {
-			int rankI = (Integer)rank;
-			if(rankI > 1000)
-				return (rankI - 1000) + "";
-			else if(rankI == -1)
-				return "null";
-			else
-				return rankI + "";
-		} catch (Exception e) {
-			return "null";
-		}
 	}
 
 	public CollegeDao getCollegeDao() {

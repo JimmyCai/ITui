@@ -4,7 +4,7 @@ package cn.itui.webdevelop.model;
  * Follow entity. @author MyEclipse Persistence Tools
  */
 
-public class Follow implements java.io.Serializable {
+public class FollowMajor implements java.io.Serializable {
 
 	// Fields
 
@@ -19,11 +19,11 @@ public class Follow implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public Follow() {
+	public FollowMajor() {
 	}
 
 	/** full constructor */
-	public Follow(Integer userId, Integer majorId) {
+	public FollowMajor(Integer userId, Integer majorId) {
 		this.userId = userId;
 		this.majorId = majorId;
 	}
