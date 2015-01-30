@@ -41,6 +41,11 @@ public class MajorInfo implements java.io.Serializable {
 	private String rateDescription;
 	private Integer language;
 	private Integer math;
+	
+	private static final int APPLYLARGENUM = 20;
+	private static final int ADMITLARGENUM = 10;
+	private static final String LARGESTR = "较多";
+	private static final String NORMALSTR = "一般";
 
 	// Constructors
 
@@ -124,26 +129,29 @@ public class MajorInfo implements java.io.Serializable {
 		return dFormat.format(degree);
 	}
 	
-	public static String translateRate(double rate) {
+	public static String translateRate(double rate, boolean needPrecent) {
 		if(rate == 0) 
 			return "-1";
 		else {
 			double tmp = 1/rate;
 			long round = Math.round(tmp*1000);
-			return round/10.0 + "%";
+			if(needPrecent)
+				return round/10.0 + "%";
+			else
+				return round/10.0 + "";
 		}
 	}
 	
-	public String getApplyDescription() {
-		if(applyNum > 100)
-			return "较多";
-		return "一般";
+	public static String translateApplyDescription(int applyNum) {
+		if(applyNum >= APPLYLARGENUM)
+			return LARGESTR;
+		return NORMALSTR;
 	}
 	
-	public String getAdmitDescription() {
-		if(admitNum > 50)
-			return "较多";
-		return "一般";
+	public static String translateAdmitDescription(int admitNum) {
+		if(admitNum >= ADMITLARGENUM)
+			return LARGESTR;
+		return NORMALSTR;
 	}
 
 	public Integer getId() {
