@@ -1,0 +1,100 @@
+1. 首页
+	Url:www.itui.cn/index.html
+	html/index.html
+2.搜索
+	Url:www.itui.cn/back/search.html?t=1&c=''
+	post{cg:"", sj:"", a:"", l:0, mt:"", ct:""}
+	
+	html/search.html
+
+	{status:0,normalReturn:{num:300,type:college,list:[{name:北京大学,city:北京,logo:10001.jpg,is985:1,is34:1,is211:1,rank:1,localRank:1,id:1},{}]}}
+	{status:0,normalReturn:{num:300,type:major,list:[{college:北方工业大学,school:经济管理学院,name:应用经济学,degree:4.77，logo:10009.jpg,rank:88+,is34:0,is211:0,is985:0,id:1085},{}]}}
+
+3.学校
+	Url:www.itui.cn/college.html?cid=""
+	hmtl/college.html
+
+	{status:0,normalReturn:{school:[法学院，经济管理学院]}}
+	3.1 专业
+		www.itui.cn/college/school.html?cid={学校id} & s={院系名称}
+		{"status":0,"normalReturn":{"major":[{"name":"法学理论","id":1207},{"name":"☆财税法学","id":1440},{"name":"法律史","id":1481},{"name":"国际法学","id":1493}]}}
+		
+4.专业
+	URL:www.itui.cn/getmajorinfo?mid=""
+	html/detailinfo.html
+        
+        {"status":0,"normalReturn":{"baseInfo":{"collegeIndexPage":"http://www.itui.cn/college?cid=15601569"},"gradeInfo":{"grade":"B+","rateGrade":"C","scoreGrade":"A","collegeGrade":"C","cityGrade":"A"},"rankInfo":{"majorRank":"88","collegeRank":"322","collegeLocalRank":"31"},"scoreInfo":{"yearScoreInfo":[{"score":340,"year":2012},{"score":340,"year":2013},{"score":330,"year":2014}],"scoreAvg":337,"scoreLowYear":2014,"scoreLow":330,"scoreHigh":340,"trend":"波动较小"},"competitionInfo":{"degree":"4.77","rateDegree":"中","scoreDegree":"高","collegeDegree":"中","cityDegree":"高","degreeDescription":"一般"},"applyAdmitInfo":{"rate":"43.7%","applyCount":32,"admitCount":14,"exemptionCount":-1},"majorRecommendInfo":{"mainInfo":[{"color":3,"majorName":"法学","schoolName":"文法学院","value":"37.2%"},{"color":3,"majorName":"马克思主义理论","schoolName":"思想政治理论教研部","value":"83.3%"},{"color":3,"majorName":"（专业硕士）法律（法学）","schoolName":"文法学院","value":"35.4%"},{"color":3,"majorName":"法学","schoolName":"文法学院","value":"37.2%"},{"color":3,"majorName":"马克思主义理论","schoolName":"思想政治理论教研部","value":"83.3%"},{"color":3,"majorName":"（专业硕士）法律（法学）","schoolName":"文法学院","value":"35.4%"},{"color":3,"majorName":"法学","schoolName":"文法学院","value":"37.2%"},{"color":3,"majorName":"马克思主义理论","schoolName":"思想政治理论教研部","value":"83.3%"}],"similarCount":0,"nearCount":0,"correlateCount":0,"transdisciplinaryCount":8},"interestedMajorInfo":{"mainInfo":[{"college":"北京理工大学","school":"人文与社会科学学院","name":"应用经济学","applyAdmitRate":"42.9%"},{"college":"北京航空航天大学","school":"人文社会科学学院","name":"应用经济学","applyAdmitRate":"28.8%"},{"college":"中国石油大学(北京)","school":"工商管理学院","name":"应用经济学","applyAdmitRate":"26.3%"},{"college":"中国石油大学(北京)","school":"中国能源战略研究院","name":"应用经济学","applyAdmitRate":"26.3%"}]},"interestedCollegeInfo":{"mainInfo":[{"level":"null","name":"齐鲁工业大学","rank":320},{"level":"null","name":"西安工程大学","rank":321},{"level":"null","name":"广东财经大学","rank":323},{"level":"null","name":"武汉轻工大学","rank":324}]}}}
+
+5.获取复试信息
+	URL:/getretestinfo.html?mid=“”
+	html/retestinfo.html
+
+
+6.关注学校
+	URL:/followcollege.html
+	post{up:”user password”, cid:”college id”}
+
+取消关注学校：
+	URL:/disfollowcollege.html
+	post{id:””, up:”user password”, cid:”college id”}
+
+获取关注的学校：
+	URL:/getfollowcollege.html
+	post{up:””user password}
+
+{
+:   "status":0,
+:   "normalReturn":
+:   [
+:   :   {
+:   :   :   "collegeLogo":"10003.jpeg",
+:   :   :   "collegeName":"清华大学",
+:   :   :   "collegeId":3,
+:   :   :   "id":1
+:   :   },
+:   :   {
+:   :   :   "collegeLogo":"10003.jpeg",
+:   :   :   "collegeName":"清华大学",
+:   :   :   "collegeId":3,
+:   :   :   "id":2
+:   :   },
+:   :   {
+:   :   :   "collegeLogo":"10378.jpg",
+:   :   :   "collegeName":"安徽财经大学",
+:   :   :   "collegeId":238,
+:   :   :   "id":5
+:   :   }
+:   ]
+}
+
+7.关注专业
+	URL：/followmajor.html
+	post{up:”user password”, mid:”major id”}
+
+取消关注专业
+	URL：/disfollowmajor.html
+	post{id:””}
+获取关注的专业
+	URL：/getfollowmajor.html
+	post{up:”user password”}
+{
+:   "status":0,
+:   "normalReturn":
+:   [
+:   :   {
+:   :   :   "majorId":3,
+:   :   :   "id":1,
+:   :   :   "majorName":"财政学"
+:   :   },
+:   :   {
+:   :   :   "majorId":5,
+:   :   :   "id":8,
+:   :   :   "majorName":"投资经济学"
+:   :   },
+:   :   {
+:   :   :   "majorId":12,
+:   :   :   "id":9,
+:   :   :   "majorName":"教育经济与管理"
+:   :   }
+:   ]
+}
