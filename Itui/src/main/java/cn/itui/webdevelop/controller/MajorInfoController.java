@@ -12,6 +12,7 @@ import cn.itui.webdevelop.service.FollowService;
 import cn.itui.webdevelop.service.MajorInfoService;
 import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.RequestUtil;
+import cn.itui.webdevelop.utils.exception.ParameterErrorException;
 
 /**
  * 管理major info的控制器
@@ -21,8 +22,8 @@ import cn.itui.webdevelop.utils.RequestUtil;
 @Controller
 public class MajorInfoController {
 	private static Log rRLogger = LogFactory.getLog("requestResponse");
-	public static final String USERPASSWORD = "userPassword";
-	private static final String MAJORID = "majorId";
+	public static final String USERPASSWORD = "up";
+	private static final String MAJORID = "mid";
 	private MajorInfoService majorInfoService;
 	private FollowService followService;
 	
@@ -50,6 +51,8 @@ public class MajorInfoController {
 	public String followMajor(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String userPassword = request.getParameter(USERPASSWORD);
 		String majorIdStr = request.getParameter(MAJORID);
+		if(userPassword == null || majorIdStr == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword + "\t" + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
@@ -58,7 +61,10 @@ public class MajorInfoController {
 	
 	@RequestMapping(URLConstants.DISFOLLOWMAJOR)
 	public String disFollowMajor(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int id = Integer.parseInt(request.getParameter("id"));
+		String idStr = request.getParameter("id");
+		if(idStr == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		int id = Integer.parseInt(idStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + "ID:" + id;
 		rRLogger.info(requestStr);
 		return followService.deleteFollowMajor(id);
@@ -67,6 +73,8 @@ public class MajorInfoController {
 	@RequestMapping(URLConstants.GETFOLLOWMAJOR)
 	public String getFollowMajors(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String userPassword = request.getParameter(USERPASSWORD);
+		if(userPassword == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword;
 		rRLogger.info(requestStr);
 		return followService.getFollowMajors(userPassword);

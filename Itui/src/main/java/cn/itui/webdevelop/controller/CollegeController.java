@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.itui.webdevelop.service.CollegeService;
 import cn.itui.webdevelop.utils.exception.MyNumberFormatException;
@@ -45,41 +46,52 @@ public class CollegeController {
 		}
 		int collegeId = 1;
 		try {
-			Integer.parseInt(request.getParameter(COLLEGEID));
+			String collegeIdStr = request.getParameter(COLLEGEID);
+			collegeId = EnDeCode.decodePara(collegeIdStr);
 		} catch (Exception e) {
 			throw MyNumberFormatException.getInstance();
 		}
 		String school = request.getParameter("s");
-		if (school==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId + "\ts:" + school;
+		rRLogger.info(requestStr);
+		if (school==null) 
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		return collegeService.findMajorsBySchool(collegeId, school);
 	}
 	
-	@RequestMapping(URLConstants.FOLLOWCOLLEGE)
+	@RequestMapping(value=URLConstants.FOLLOWCOLLEGE, method=RequestMethod.POST)
 	public String followCollege(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String userPassword = request.getParameter(USERPASSWORD);
 		String collegeIdStr = request.getParameter(COLLEGEID);
+		if(userPassword == null || collegeIdStr == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int collegeId = EnDeCode.decodePara(collegeIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword + "\t" + COLLEGEID + ":" + collegeId;
 		rRLogger.info(requestStr);
 		return followService.followCollege(userPassword, collegeId);		
 	}
 	
-	@RequestMapping(URLConstants.DISFOLLOWCOLLEGE)
+	@RequestMapping(value=URLConstants.DISFOLLOWCOLLEGE, method=RequestMethod.POST)
 	public String disFollowCollege(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int id = Integer.parseInt(request.getParameter("id"));
+		String idStr = request.getParameter("id");
 		String userPassword = request.getParameter(USERPASSWORD);
 		String collegeIdStr = request.getParameter(COLLEGEID);
+		if(idStr == null || userPassword == null || collegeIdStr == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		int id = Integer.parseInt(idStr);
 		int collegeId = EnDeCode.decodePara(collegeIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + "ID:" + id + "\t" + USERPASSWORD + ":" + userPassword + "\t" + COLLEGEID + ":" + collegeId;
 		rRLogger.info(requestStr);
 		return followService.deleteFollowCollege(id, userPassword, collegeId);
 	}
 	
-	@RequestMapping(URLConstants.GETFOLLOWCOLLEGE)
+	@RequestMapping(value=URLConstants.GETFOLLOWCOLLEGE, method=RequestMethod.POST)
 	public String getFollowColleges(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String userPassword = request.getParameter(USERPASSWORD);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword;
 		rRLogger.info(requestStr);
+		if(userPassword == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		return followService.getFollowColleges(userPassword);
 	}
 
