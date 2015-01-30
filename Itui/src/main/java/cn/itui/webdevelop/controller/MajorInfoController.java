@@ -49,8 +49,8 @@ public class MajorInfoController {
 	@RequestMapping(URLConstants.FOLLOWMAJOR)
 	public String followMajor(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String userPassword = request.getParameter(USERPASSWORD);
-		//TODO decode for college id
-		int majorId = Integer.parseInt(request.getParameter(MAJORID));
+		String majorIdStr = request.getParameter(MAJORID);
+		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword + "\t" + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
 		return followService.followMajor(userPassword, majorId);

@@ -107,7 +107,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		majorCurInfo.put("schoolName", toAdd.get("school"));
 		majorCurInfo.put("color", color);
 		double rate = (Double) toAdd.get("rate");
-		majorCurInfo.put("value", MajorInfo.translateRate(rate));
+		majorCurInfo.put("value", MajorInfo.translateRate(rate, true));
 		retMajors.add(majorCurInfo);
 	}
 
@@ -172,13 +172,13 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		}
 		HashMap<String, Object> tmpMap = candidates.get(index);
 		double curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
-		tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
+		tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate, true));
 		resultMaps.add(tmpMap);
 		for(int length = 1; resultMaps.size() < candidates.size(); length++) {
 			if(index - length >= 0) {
 				tmpMap = candidates.get(index - length);
 				curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
-				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
+				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate, true));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
 					return resultMaps;
@@ -186,7 +186,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 			if(index + length < candidates.size()) {
 				tmpMap = candidates.get(index + length);
 				curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
-				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate));
+				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate, true));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
 					return resultMaps;

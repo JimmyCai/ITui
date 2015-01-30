@@ -142,11 +142,13 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		competitionInfoMap.put("degreeDescription", (String)majorAllInfos.get("degreeDescription"));
 		//applyAdmit info
 		LinkedHashMap<String, Object> applyAdmitInfoMap = new LinkedHashMap<String, Object>();
-		applyAdmitInfoMap.put("rate", MajorInfo.translateRate((Double)majorAllInfos.get("rate")));
-		applyAdmitInfoMap.put("applyDescription", majorAllInfos.get("applyDescription"));
-		applyAdmitInfoMap.put("admitDescription", majorAllInfos.get("admitDescription"));
-		applyAdmitInfoMap.put("applyCount", majorAllInfos.get("applyNum"));
-		applyAdmitInfoMap.put("admitCount", majorAllInfos.get("admitNum"));
+		int applyNum = (Integer)majorAllInfos.get("applyNum");
+		int admitNum = (Integer)majorAllInfos.get("admitNum");
+		applyAdmitInfoMap.put("rate", MajorInfo.translateRate((Double)majorAllInfos.get("rate"), false));
+		applyAdmitInfoMap.put("applyDescription", MajorInfo.translateApplyDescription(applyNum));
+		applyAdmitInfoMap.put("admitDescription", MajorInfo.translateAdmitDescription(admitNum));
+		applyAdmitInfoMap.put("applyCount", applyNum);
+		applyAdmitInfoMap.put("admitCount", admitNum);
 		applyAdmitInfoMap.put("exemptionCount", majorAllInfos.get("exemption"));
 		//major recommend info
 		LinkedHashMap<String, Object> majorRecommendMap = new LinkedHashMap<String, Object>();
