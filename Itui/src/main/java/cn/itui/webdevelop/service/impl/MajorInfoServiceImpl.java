@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cn.itui.webdevelop.dao.CollegeDao;
+import cn.itui.webdevelop.dao.FollowMajorDao;
 import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.dao.MajorInfoDao;
 import cn.itui.webdevelop.dao.RetestDao;
@@ -35,10 +34,11 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	private MajorInfoDao majorInfoDao;
 	private ScoreDao scoreDao;
 	private RetestDao retestDao;
+	private FollowMajorDao followMajorDao;
 	private MajorRecommendFilter majorRecommendFilter;//对数据库查询得到的major数据进行过滤
 	private CollegeRecommendFilter collegeRecommendFilter;//对数据库查询得到的college数据进行过滤
 
-	public String getMajorInfo(HttpServletRequest request, int majorId) throws Exception {
+	public String getMajorInfo(String userCode, int majorId) throws Exception {
 		//get major main info, base info, college logo and rank info
 		long ST = System.currentTimeMillis();
 		HashMap<String, Object> majorAllInfos = majorInfoDao.findMajorAllInfoByMajorId(majorId);
@@ -46,6 +46,9 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		majorAllInfoTime = ET - ST;
 		if(majorAllInfos == null)
 			throw DatabaseException.getInstance();
+		
+		int followId = followMajorDao.isUserFollowMajor(userCode, majorId);
+		
 		String code = (String)majorAllInfos.get("code");
 		int collegeId = (Integer)majorAllInfos.get("collegeId");
 		
@@ -69,7 +72,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		List<HashMap<String, Object>> candidateDiffCollMajors = majorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode(collegeId, code);
 		ET = System.currentTimeMillis();
 		majorRecommendDiffCTime = ET - ST;
-		List<HashMap<String, Object>> diffCollRecommendMajors = majorRecommendFilter.recommendMajorFilter(candidateDiffCollMajors, (Double)majorAllInfos.get("rate"));
+		List<HashMap<String, Object>> diffCollRecommendMajors = majorRecommendFilter.recommendMajorFilter(candidateDiffCollMajors, (Double)majorAllInfos.get("degree"));
 		//recommend college
 		int collegeRank = (Integer)majorAllInfos.get("rank");
 		ST = System.currentTimeMillis();
@@ -78,7 +81,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		collegeRecommendTime = ET - ST;
 		List<HashMap<String, Object>> recommendColleges = collegeRecommendFilter.recommendCollege(candidateColleges, collegeRank);
 		//build json string
-		String jsonResult = buildMajorInfoJson(majorAllInfos, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors, request);
+		String jsonResult = buildMajorInfoJson(majorAllInfos, followId, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors);
 		return jsonResult;
 	}
 	
@@ -106,12 +109,19 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		return recommendMajors;
 	}
 	
-	private String buildMajorInfoJson(HashMap<String, Object> majorAllInfos, List<HashMap<String, Object>> yearScores, 
-			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors, HttpServletRequest request) throws Exception {
+	private String buildMajorInfoJson(HashMap<String, Object> majorAllInfos, int followId, List<HashMap<String, Object>> yearScores, 
+			MajorRecommendResult recommendMajors, List<HashMap<String, Object>> recommendColleges, List<HashMap<String, Object>> diffCollRecommendMajors) throws Exception {
 		LinkedHashMap<String, Object> jsonMap = new LinkedHashMap<String, Object>();
 		//base info
 		LinkedHashMap<String, Object> baseInfoMap = new LinkedHashMap<String, Object>();
-		baseInfoMap.put("collegeIndexPage", College.COLLEGE_URL + EnDeCode.encodePara((Integer)majorAllInfos.get("collegeId")));
+		baseInfoMap.put("majorId", EnDeCode.encodePara((Integer)majorAllInfos.get("majorId")));
+		baseInfoMap.put("logo", majorAllInfos.get("logo"));
+		baseInfoMap.put("majorName", majorAllInfos.get("name"));
+		baseInfoMap.put("typeInfo", College.getTypeString((Integer)majorAllInfos.get("is211"), (Integer)majorAllInfos.get("is985"), (Integer)majorAllInfos.get("is34")));
+		baseInfoMap.put("school", majorAllInfos.get("school"));
+		baseInfoMap.put("collegeId", EnDeCode.encodePara((Integer)majorAllInfos.get("collegeId")));
+		baseInfoMap.put("followId", followId);
+		
 		//grade info
 		LinkedHashMap<String, Object> gradeInfoMap = new LinkedHashMap<String, Object>();
 		gradeInfoMap.put("grade", majorAllInfos.get("grade"));
@@ -235,6 +245,14 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 
 	public void setRetestDao(RetestDao retestDao) {
 		this.retestDao = retestDao;
+	}
+
+	public FollowMajorDao getFollowMajorDao() {
+		return followMajorDao;
+	}
+
+	public void setFollowMajorDao(FollowMajorDao followMajorDao) {
+		this.followMajorDao = followMajorDao;
 	}
 
 }

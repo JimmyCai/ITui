@@ -7,11 +7,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.itui.webdevelop.service.FollowService;
 import cn.itui.webdevelop.service.MajorInfoService;
 import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.RequestUtil;
+import cn.itui.webdevelop.utils.exception.NotLoginException;
 import cn.itui.webdevelop.utils.exception.ParameterErrorException;
 
 /**
@@ -22,7 +24,7 @@ import cn.itui.webdevelop.utils.exception.ParameterErrorException;
 @Controller
 public class MajorInfoController {
 	private static Log rRLogger = LogFactory.getLog("requestResponse");
-	public static final String USERPASSWORD = "up";
+	public static final String CODE = "code";
 	private static final String MAJORID = "mid";
 	private MajorInfoService majorInfoService;
 	private FollowService followService;
@@ -30,16 +32,23 @@ public class MajorInfoController {
 	@RequestMapping(value=URLConstants.GETMAJORINFO)
 	public String getMajorInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String majorIdStr = request.getParameter(MAJORID);
+		if(majorIdStr == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
-		String retJson = majorInfoService.getMajorInfo(request, majorId);
+		String code = request.getParameter(CODE);
+		if(code == null)
+			throw NotLoginException.getInstance();
+		String retJson = majorInfoService.getMajorInfo(code, majorId);
 		return retJson;
 	}
 	
 	@RequestMapping(value=URLConstants.GETRETESTINFO)
 	public String getRetestInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String majorIdStr = request.getParameter(MAJORID);
+		if(majorIdStr == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
@@ -47,19 +56,21 @@ public class MajorInfoController {
 		return retJson;
 	}
 	
-	@RequestMapping(URLConstants.FOLLOWMAJOR)
+	@RequestMapping(value=URLConstants.FOLLOWMAJOR, method=RequestMethod.POST)
 	public String followMajor(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String userPassword = request.getParameter(USERPASSWORD);
+		String code = request.getParameter(CODE);
 		String majorIdStr = request.getParameter(MAJORID);
-		if(userPassword == null || majorIdStr == null)
+		if(code == null)
+			throw NotLoginException.getInstance();
+		if(majorIdStr == null)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int majorId = EnDeCode.decodePara(majorIdStr);
-		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword + "\t" + MAJORID + ":" + majorId;
+		String requestStr = RequestUtil.getUserBaseInfo(request) + CODE + ":" + code + "\t" + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
-		return followService.followMajor(userPassword, majorId);
+		return followService.followMajor(code, majorId);
 	}
 	
-	@RequestMapping(URLConstants.DISFOLLOWMAJOR)
+	@RequestMapping(value=URLConstants.DISFOLLOWMAJOR, method=RequestMethod.POST)
 	public String disFollowMajor(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String idStr = request.getParameter("id");
 		if(idStr == null)
@@ -70,14 +81,14 @@ public class MajorInfoController {
 		return followService.deleteFollowMajor(id);
 	}
 	
-	@RequestMapping(URLConstants.GETFOLLOWMAJOR)
+	@RequestMapping(value=URLConstants.GETFOLLOWMAJOR, method=RequestMethod.POST)
 	public String getFollowMajors(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String userPassword = request.getParameter(USERPASSWORD);
-		if(userPassword == null)
-			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		String requestStr = RequestUtil.getUserBaseInfo(request) + USERPASSWORD + ":" + userPassword;
+		String code = request.getParameter(CODE);
+		if(code == null)
+			throw NotLoginException.getInstance();
+		String requestStr = RequestUtil.getUserBaseInfo(request) + CODE + ":" + code;
 		rRLogger.info(requestStr);
-		return followService.getFollowMajors(userPassword);
+		return followService.getFollowMajors(code);
 	}
 
 	public MajorInfoService getMajorInfoService() {

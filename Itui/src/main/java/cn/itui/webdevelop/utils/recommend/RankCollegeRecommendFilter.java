@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cn.itui.webdevelop.model.College;
+import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.exception.DatabaseException;
 
 /**
@@ -49,24 +50,10 @@ public class RankCollegeRecommendFilter implements CollegeRecommendFilter{
 		if(resultMaps == null || curCollege == null)
 			return;
 		HashMap<String, Object> tmpMap = new HashMap<String, Object>();
+		tmpMap.put("collegeId", EnDeCode.encodePara(curCollege.getId()));
 		tmpMap.put("name", curCollege.getName());
 		tmpMap.put("rank", curCollege.getRank());
-		StringBuilder typeBuilder = new StringBuilder();
-		if(curCollege.getIs211() == 1)
-			typeBuilder.append("211/");
-		if(curCollege.getIs985() == 1)
-			typeBuilder.append("985/");
-		if(curCollege.getIs34() == 1)
-			typeBuilder.append("34");
-		String type = null;
-		if(typeBuilder.length() > 0) {
-			if(typeBuilder.charAt(typeBuilder.length() - 1) == '/')
-				type = typeBuilder.substring(0, typeBuilder.length() - 1);
-			else
-				type = typeBuilder.toString();
-		}
-		else
-			type="null";
+		String type = curCollege.getTypeString();
 		tmpMap.put("level", type);
 		resultMaps.add(tmpMap);
 	}

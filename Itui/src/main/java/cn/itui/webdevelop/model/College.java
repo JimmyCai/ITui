@@ -55,6 +55,46 @@ public class College implements java.io.Serializable {
 
 	// Property accessors
 
+	public String getTypeString() {
+		StringBuilder typeBuilder = new StringBuilder();
+		if(is211 == 1)
+			typeBuilder.append("211/");
+		if(is985 == 1)
+			typeBuilder.append("985/");
+		if(is34 == 1)
+			typeBuilder.append("34所");
+		String type = null;
+		if(typeBuilder.length() > 0) {
+			if(typeBuilder.charAt(typeBuilder.length() - 1) == '/')
+				type = typeBuilder.substring(0, typeBuilder.length() - 1);
+			else
+				type = typeBuilder.toString();
+		}
+		else
+			type="null";
+		return type;
+	}
+	
+	public static String getTypeString(int is211, int is985, int is34) {
+		StringBuilder typeBuilder = new StringBuilder();
+		if(is211 == 1)
+			typeBuilder.append("211/");
+		if(is985 == 1)
+			typeBuilder.append("985/");
+		if(is34 == 1)
+			typeBuilder.append("34所");
+		String type = null;
+		if(typeBuilder.length() > 0) {
+			if(typeBuilder.charAt(typeBuilder.length() - 1) == '/')
+				type = typeBuilder.substring(0, typeBuilder.length() - 1);
+			else
+				type = typeBuilder.toString();
+		}
+		else
+			type="null";
+		return type;
+	}
+	
 	public Integer getId() {
 		return this.id;
 	}

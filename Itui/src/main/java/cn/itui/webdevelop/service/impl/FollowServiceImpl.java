@@ -42,14 +42,14 @@ public class FollowServiceImpl implements FollowService{
 	public String getFollowColleges(String userPassword) throws ParameterErrorException {
 		if(userPassword.length() != 32)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		List<HashMap<String, Object>> result = followCollegeDao.findFollowCollegeByUserPassword(userPassword);
+		List<HashMap<String, Object>> result = followCollegeDao.findFollowCollegeByUserCode(userPassword);
 		return ResponseUtil.wrapNormalReturn(result);
 	}
 
 	public String getFollowMajors(String userPassword) throws ParameterErrorException {
 		if(userPassword.length() != 32)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		List<HashMap<String, Object>> result = followMajorDao.findFollowMajorByUserPassword(userPassword);
+		List<HashMap<String, Object>> result = followMajorDao.findFollowMajorByUserCode(userPassword);
 		return ResponseUtil.wrapNormalReturn(result);
 	}
 
@@ -57,7 +57,7 @@ public class FollowServiceImpl implements FollowService{
 		if(id < 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
 		int fretInt = followCollegeDao.deleteFollowCollege(id);
-		followMajorDao.deleteFollowMajorByCollegeIdAndPassword(userPassword, collegeId);
+		followMajorDao.deleteFollowMajorByCollegeIdAndCode(userPassword, collegeId);
 		if(fretInt != 1)
 			throw DatabaseException.getInstance();
 		return ResponseUtil.wrapNormalReturn(DISFOLLOWCOLLEGE_SUCCESS);
