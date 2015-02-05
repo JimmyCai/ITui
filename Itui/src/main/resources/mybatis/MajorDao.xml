@@ -69,24 +69,22 @@
 	</select>
 	<select id = "searchMajors" parameterType="map" resultType="java.util.HashMap">
 		SELECT
-			SQL_CALC_FOUND_ROWS 
 			major.id as id,
 			major.name as name,
 			school,
-			s.name as college,
 			s.logo as logo,
+			s.name as college,			
 			s.is_985 as is985,
 			s.is_34 as is34,
-			s.is_211 as is211,
-			major_rank as rank,
-			degree as degree
+			s.is_211 as is211
 		FROM
-			(major join 
+			major join 
 				(select 
 					id,name,logo,is_985, is_34, is_211 
 				from 
 					college 
-				where 
+				<where>
+					<if test="area != ''">
 					city_id in
 						(select 
 							id 
@@ -99,30 +97,126 @@
 								from 
 									area 
 								where 
-									name like #{area})) 
-					and is_985 like #{is985} 
-					and is_34 like #{is34} 
-					and is_211 like #{is211}) 
-			as s on s.id = college_id) join major_info on major_info.major_id = major.id
-		WHERE 
+									name like concat(concat("%",#{area}),"%")))
+					</if> 
+					<if test="is985 != ''">
+					and is_985 like concat(concat("%",#{is985}),"%") 
+					</if>
+					<if test="is34 !=''">
+					and is_34 like concat(concat("%",#{is34}),"%") 
+					</if>
+					<if test="is211 != ''">
+					and is_211 like concat(concat("%",#{is211}),"%")
+					</if>
+				</where>
+				) 
+			as s on s.id = college_id
+		<where>
+			<if test="subject != '' or category !='' ">
 			subject_id in 
 				(select 
 					id 
 				from 
 					subject 
-				where
-					name like #{subject} and category_id in 
+				<where>
+					<if test="subjet != ''"> name like concat(concat("%",#{subject}),"%") 
+					</if>					
+					<if test="category != ''">
+						and category_id in 
 						(select 
 							id 
 						from 
 							category 
-						where 
-							name like #{category})) 
-			and type like #{type}
-			and major.name like #{condition}
+						<where> 
+						<if test="category !=''">
+							name like concat(concat("%",#{category}),"%")
+						</if>
+						</where>)
+					</if>
+				</where>
+				)
+			</if>		
+			<if test="type != ''">
+				and type like concat(concat("%",#{type}),"%")
+			</if> 
+			
+			<if test="condition != ''">
+				and major.name like concat(concat("%",#{condition}),"%")
+			</if>
+		</where>
+		order by logo
 		LIMIT #{from},#{limit}
 	</select>
-	<select id="count" resultType="java.lang.Integer">
-		SELECT FOUND_ROWS()
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			major join 
+				(select 
+					id
+				from 
+					college 
+				<where>
+					<if test="area != ''">
+					city_id in
+						(select 
+							id 
+						from 
+							city 
+						where 
+							area_id in 
+								(select 
+									id 
+								from 
+									area 
+								where 
+									name like concat(concat("%",#{area}),"%")))
+					</if> 
+					<if test="is985 != ''">
+					and is_985 like concat(concat("%",#{is985}),"%") 
+					</if>
+					<if test="is34 !=''">
+					and is_34 like concat(concat("%",#{is34}),"%") 
+					</if>
+					<if test="is211 != ''">
+					and is_211 like concat(concat("%",#{is211}),"%")
+					</if>
+				</where>
+				) 
+			as s on s.id = college_id
+		<where>
+			<if test="subject != '' or category !='' ">
+			subject_id in 
+				(select 
+					id 
+				from 
+					subject 
+				<where>
+					<if test="subjet != ''"> name like concat(concat("%",#{subject}),"%") 
+					</if>					
+					<if test="category != ''">
+						and category_id in 
+						(select 
+							id 
+						from 
+							category 
+						<where> 
+						<if test="category !=''">
+							name like concat(concat("%",#{category}),"%")
+						</if>
+						</where>)
+					</if>
+				</where>
+				)
+			</if>		
+			<if test="type != ''">
+				and type like concat(concat("%",#{type}),"%")
+			</if> 
+			
+			<if test="condition != ''">
+				and major.name like concat(concat("%",#{condition}),"%")
+			</if>
+		</where>
 	</select>
 </mapper>

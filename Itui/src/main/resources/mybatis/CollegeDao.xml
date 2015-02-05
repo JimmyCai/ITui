@@ -69,4 +69,17 @@
 		WHERE
 			college.id=#{collegeId} and school =#{school}
 	</select>
+	<select id="getCollegeInfo" parameterType="int" resultType="map">
+		SELECT
+			logo as logo,
+			college.name as college,
+			is_211 as is211,
+			is_985 as is985,
+			is_34 as is34,
+			city.name as city
+		FROM
+			college join city on college.city_id = city.id
+		WHERE
+			college.id = #{collegeId};
+	</select>
 </mapper>

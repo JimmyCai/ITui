@@ -78,4 +78,17 @@
 		FROM major_info, major, college
 		WHERE major.id=#{majorId} AND college.id=major.college_id AND major_info.major_id = major.id
 	</select>
+		<select id="finaRankAndDegreeByMajorIds" resultType="map">
+		SELECT
+			major_id as majorId,
+			major_rank as rank,
+			degree as degree
+		FROM
+			major_info
+		where
+			major_id in 
+			<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+	</select>
 </mapper>

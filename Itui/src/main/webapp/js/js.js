@@ -1,6 +1,8 @@
 // JavaScript Document
-
 $(function(){
+
+
+
 		
 
 // 搜索框
@@ -13,31 +15,21 @@ $(function(){
 		
 		
 	});
+	
 	// 搜索框ajax提交
 	$('#sou').click(function(event) {
-		var input_val=$('#scbar_txt').val();
-		var op_val=$('.nr_js').html();
-		if (op_val =="专业"){
-			op_val =1;
+			var major = $('.nr_js').text();
+			var value = $('#scbar_txt').val();
+			
+		if(major=="专业"){
+			major=1;
 		}else{
-			op_val=2
+			major=2;
 		}
-		$.ajax({
-		            		url: '/Itui/search.html',
-		            		type: 'post',
-		            		dataType:'json',
-		            		data: {c:input_val,t:1,cg:'',sj:'',mt:'',ct:'',a:'',l:'0'},
-		            		success: function(msg) {
-		            			if (msg.status ==0){
-		            			
-		            			location.href = "/Itui/searchhtml.html";
-		            		}else{
-		            			alert(msg.errMessage);
-		            		}
-		           		 }
-		       	 });
-		
-	});
+			location.href = 'search.html?t=' + major + '&c=' +value;
+			
+
+		});
 
 
 	var win_width=$(window).width();
@@ -47,20 +39,7 @@ $(function(){
 		}).mouseleave(function(event) {
 			$('.erwei03').css('display', 'none');
 		});
-		
-	// $('#sou').click(function(event) {
-	// 		$.ajax({
-	// 	            		url: ' search.html',
-	// 	            		type: 'post',
-	// 	            		dataType:'json',
-	// 	            		data: $("#scbar_form").serializeArray(),
-	// 	            		success: function(msg) {
-	// 	            			alert(123);
-	// 	           		 }
-	// 	       	 });
-	// 	return false;
-	// });
-
+	
 
 // 邮箱正则验证
 
@@ -150,20 +129,20 @@ $('#input_mail2').blur(function(event) {
 
 // 注册密码验证
 
-$('#pasd2').blur(function(event) {
-	var pasd2=$('#pasd2').val();
-	var reg =/^[A-Za-z]\w{6,15}$/;
-	if(reg.test(pasd2)){
+// $('#pasd2').blur(function(event) {
+// 	var pasd2=$('#pasd2').val();
+// 	var reg =/^[A-Za-z]\w{6,15}$/;
+// 	if(reg.test(pasd2)){
 			
-			$('.pasd4').html('√密码合法').css('color', '#6fd415');
-		}else{
-			$('.pasd4').html('×密码不合法').css('color', '#d14b02');
+// 			$('.pasd4').html('√密码合法').css('color', '#6fd415');
+// 		}else{
+// 			$('.pasd4').html('×密码不合法').css('color', '#d14b02');
 			
-			}
-		if(pasd2==''){
-		$('.pasd4').html('密码不能为空');
-	}
-});
+// 			}
+// 		if(pasd2==''){
+// 		$('.pasd4').html('密码不能为空');
+// 	}
+// });
 
 
 // 再次输入密码验证

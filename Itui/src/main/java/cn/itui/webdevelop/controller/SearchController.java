@@ -27,13 +27,16 @@ public class SearchController{
 	@RequestMapping(value=URLConstants.SEARCH, method=RequestMethod.POST)
 	public String search(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
+		System.out.println("search");
 		String tString= request.getParameter("t");
 		if (tString==null) {
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		}
+		System.out.println(tString);
 		int type=Integer.parseInt(tString);
 		String condition = request.getParameter("c");
 		if (condition==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+
 			
 		String result;
 		if (type==1){
@@ -43,6 +46,7 @@ public class SearchController{
 			String subject = request.getParameter("sj");
 			if (subject==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 			String area = request.getParameter("a");
+
 			if (area==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 			String college_type = request.getParameter("ct");
 			if (college_type==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
@@ -58,7 +62,11 @@ public class SearchController{
 			String requestStr = RequestUtil.getUserBaseInfo(request) + "t:" + tString + "\tc:" + condition + "\tcg:" + category + "\tsj:" + subject
 					+ "\ta:" + area + "\tct:" + college_type + "\tmt:" + major_type + "\tl:" + limit;
 			rRLogger.info(requestStr);
+
+			long serviceStart = System.currentTimeMillis();
+
 			result = majorService.searchMajorsList(condition, category, subject, major_type, college_type, area, limit);
+			System.out.println("service time:"+(System.currentTimeMillis() - serviceStart));
 		}else if (type==2){
 			//college
 			String requestStr = RequestUtil.getUserBaseInfo(request) + "t:" + tString + "\tc:" + condition;

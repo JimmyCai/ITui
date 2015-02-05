@@ -11,6 +11,8 @@
 DD_belatedPNG.fix('*');
 </script>
 <![endif]-->
+<script src="dist/js/jquery.min.js"></script>
+
 </head>
 <body>
 <div class="top0"></div>
@@ -21,11 +23,11 @@ DD_belatedPNG.fix('*');
 			<div class="input01">
 				 <div class="dropdown">
 					<button type="button" class="btn dropdown-toggle d_down" id="dropdownMenu1" >
-						<span class="nr_js">学校</span >
+						<span class="nr_js">专业</span >
 						<span class="caret"> ▼</span>
 					</button>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-						<li role="presentation" class="zhuanye"><a href="javascript:;">专业</a></li>
+						<li role="presentation" class="zhuanye"><a href="javascript:;">学校</a></li>
 					</ul>
 				 </div>
 							 	
@@ -34,7 +36,7 @@ DD_belatedPNG.fix('*');
 					<input class="form-control search_input" placeholder=" 搜索学校或专业，如：北京大学" id="scbar_txt" name="srchtxt" type="text">
 				</div>
 
-				<button class="btn btn-sub" id="sou" type="submit">
+				<button class="btn btn-sub" id="sou" type="button">
 					<div class="glyphicon glyphicon-search"></div>
 				</button>
 			</div>
@@ -45,7 +47,7 @@ DD_belatedPNG.fix('*');
 		<div class="item" id="item01">
 			<div class="h03"><h3>学科门类</h3></div>
 			<ul class="obj01">
-				<li class="li0 li1">
+				<li class="li0 li1 hong sub_all">
 					<a href="javascript:;">全部</a>
 					
 				</li>
@@ -53,6 +55,7 @@ DD_belatedPNG.fix('*');
 					<a href="javascript:;">哲学</a>
 					<span class="span01">▼</span>
 					<span class="span02">▲</span>
+
 				</li>
 				<li class="li0 subject">
 					<a href="javascript:;">经济学</a>
@@ -163,6 +166,7 @@ DD_belatedPNG.fix('*');
 				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
 				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
 			</ul>
+
 
 			<ul class="obj_son obj_ss" id="obj_s4">
 				<div class="arrow"><img src="images/21.jpg" alt=""></div>
@@ -330,7 +334,7 @@ DD_belatedPNG.fix('*');
 		<div class="item" id="item02">
 			<div class="h03"><h3>院校层次</h3></div>
 			<ul class="obj01">
-				<li class="li0 li1">
+				<li class="li0 li1 cengci hong">
 					<a href="javascript:;">全部</a>
 					
 				</li>
@@ -353,7 +357,7 @@ DD_belatedPNG.fix('*');
 		<div class="item" id="item03">
 			<div class="h03"><h3>学术类型</h3></div>
 			<ul class="obj01">
-				<li class="li0 li1">
+				<li class="li0 li1 hong leixing">
 					<a href="javascript:;">全部</a>
 				</li>
 				<li class="li0 leixing">
@@ -370,20 +374,20 @@ DD_belatedPNG.fix('*');
 		<div class="item" id="item04">
 			<div class="h03"><h3>地区</h3></div>
 			<ul class="obj01">
-				<li class="ite04 area01"><a href="javascript:;">一区</a></li>
-				<li class="ite04 area0"><a href="javascript:;">全部</a></li>
+				<li class="ite04 area01 li1 hong"><a href="javascript:;">全部</a></li>
+				<li class="ite04 qu_0"><a href="javascript:;">一区</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">北京</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">上海  </a></li>
+				<li class="ite04 ite044"><a href="javascript:;">上海</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">湖北</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">广东</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">浙江</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">天津</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">江苏</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">四川 </a></li>
-				<li class="ite04 ite044"><a href="javascript:;">福建  </a></li>
+				<li class="ite04 ite044"><a href="javascript:;">四川</a></li>
+				<li class="ite04 ite044"><a href="javascript:;">福建</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">江西</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">山东</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">河南 </a></li>
+				<li class="ite04 ite044"><a href="javascript:;">河南</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">湖南</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">河北</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">山西</a></li>
@@ -393,7 +397,7 @@ DD_belatedPNG.fix('*');
 				<li class="ite04 ite044"><a href="javascript:;">重庆</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">陕西</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">黑龙江</a></li>
-				<li class="ite04 area01"><a href="javascript:;">二区</a></li>
+				<li class="ite04 area02 qu_0"><a href="javascript:;">二区</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">云南</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">广西</a></li>
 				<li class="ite04 ite044"><a href="javascript:;">贵州</a></li>
@@ -415,10 +419,13 @@ DD_belatedPNG.fix('*');
 	<div id="nav2">
 		<ul class="condition0" id="condition">
 			<p class="tiaojian">筛选条件:</p>
+			<li class="cond cond0"><span class="close">×</span></li>
 			<li class="cond cond1"><span class="close">×</span></li>
 			<li class="cond cond2"><span class="close">×</span></li>
 			<li class="cond cond3"><span class="close">×</span></li>
 			<li class="cond cond4"><span class="close">×</span></li>
+			<li class="cond cond5"><span class="close">×</span></li>
+			
 			
 		</ul>
 	</div>
@@ -426,8 +433,8 @@ DD_belatedPNG.fix('*');
 	<div id="nav3">
 		<div class="h02"><h2>哲学经济学</h2><div class="arrow2"><img src="images/22.jpg" alt=""></div></div>
 		<div class="main">
-			<ul>
-				<li class="jquery_0">
+			<ul class="main_ul">
+				<!-- <li class="jquery_0">
 					<div class="pic"><img src="images/23.jpg" alt=""></div>
 					<div class="info">
 						<p class="major"><a href="" target="_blank">哲学经济（北京外国语大学）</a></p>
@@ -501,23 +508,17 @@ DD_belatedPNG.fix('*');
 							<div class="group2 difficult2"><p>报考难度</p></div>
 						</div>
 					</div>
-				</li>
+				</li> -->
+
+				
 			</ul>
 		</div>
 		
 
 
-		<!-- <div class="page0">
-			<span class="previous">上一页</span>
-			<a href="javascript:;" class="pages">1</a>
-			<a href="javascript:;" class="pages">2</a>
-			<a href="javascript:;" class="pages">3</a>
-			<a href="javascript:;" class="pages">4</a>
-			<a href="javascript:;" class="pages">…</a>
-			<span class="next">下一页</span>
-		</div> -->
 
-		<div class="pages"></div>
+		<div class="pages"><div class="page_0"></div></div>
+
 		
 	</div>
 	
@@ -576,10 +577,7 @@ DD_belatedPNG.fix('*');
 <script src="dist/js/jquery.min.js"></script>
 
 <script type="text/javascript" src="js/search.js"></script>
-<script type="text/javascript">
-
-
-</script>
+<script src="js/jquery.cookie.js"></script>
 
 
 
