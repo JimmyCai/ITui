@@ -16,4 +16,6 @@ public interface CollegeDao {
 
 	public List<HashMap<String, Object>> findMajorsBySchool(int collegeId,
 			String school);
+
+	public HashMap<String, Object> getCollegeInfo(int collegeId);
 }

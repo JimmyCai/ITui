@@ -64,13 +64,13 @@ public class CollegeServiceImpl implements CollegeService {
 //				college.put("localRank", "不参与排名");
 //			}
 			
-			HashMap<String, Object> itemMap = new HashMap<String, Object>();
-			itemMap.put(String.valueOf(i), college);
-			list.add(itemMap);
+//			HashMap<String, Object> itemMap = new HashMap<String, Object>();
+//			itemMap.put(String.valueOf(i), college);
+			list.add(college);
 		}
 		jsonMap.put("list", list);
 		jsonMap.put("type", "college");
-		jsonMap.put("num", list.size());
+		jsonMap.put("total", list.size());
 		return ResponseUtil.wrapNormalReturn(jsonMap);
 	}
 
@@ -89,11 +89,10 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @author warrior
 	 */
 	public String findSchoolsById(int collegeId) {
-		// TODO Auto-generated method stub
+		HashMap<String, Object> result = collegeDao.getCollegeInfo(collegeId);
 		List<String> schools = collegeDao.findSchoolsByCollegeId(collegeId);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("school", schools);
-		return ResponseUtil.wrapNormalReturn(map);
+		result.put("school", schools);
+		return ResponseUtil.wrapNormalReturn(result);
 	}
 
 	/**

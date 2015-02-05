@@ -169,7 +169,7 @@ ul,ol,li{list-style:none}
 	float: left;
 }
 .li0{
-	/*width: 96px;*/
+	
 	height: 20px;
 	
 	text-align: center;
@@ -190,12 +190,17 @@ ul,ol,li{list-style:none}
 	
 	font-size: 14px;
 	color: #333;
+	padding-left: 2px;
+	+padding-left: 0px;
 }
 
 .li0 span{
-	margin-left: 2px;
+	margin-left: 0px;
 	+margin-left: 0px;
 	font-size: 12px;
+
+	margin-right: 2px;
+	+margin-right: 0px;
 }
 .span02{
 	
@@ -205,6 +210,9 @@ ul,ol,li{list-style:none}
 .li1{
 	margin-left: 20px;
 	_margin-left: 10px;
+}
+.li1 a{
+	color: #fff;
 }
 .obj_son{
 	width: 860px;
@@ -441,6 +449,7 @@ ul,ol,li{list-style:none}
 	height: 68px;
 }
 
+
 /*标签*/
 #nav2{
 	width: 1024px;
@@ -477,7 +486,7 @@ ul,ol,li{list-style:none}
 /*筛选结果*/
 #nav3{
 	width: 1024px;
-	height: 780px;
+	
 	border: 1px solid blue;
 	box-shadow: 0px 0px 3px #000;
 	margin: 0 auto;
@@ -668,7 +677,7 @@ ul,ol,li{list-style:none}
 	margin-left: 5px;
 	_margin-left: 4px;
 }
-.pages{
+/*.pages{
 	display: block;
 	width: 26px;
 	height: 26px;
@@ -678,7 +687,8 @@ ul,ol,li{list-style:none}
 	text-align: center;
 	margin-left: 5px;
 	_margin-left: 4px;
-}
+	background-color: #fff;
+}*/
 
 /*页面脚*/
 .foot{
@@ -781,8 +791,11 @@ border-top: 4px solid #f4b802;
 .area01{
 	margin-left: 20px;
 }
+.area02{
+	margin-left: 58px;
+}
 
-.cond span .xk_0{
+.cond span {
 	
 }
 .tiaojian{
@@ -829,7 +842,53 @@ border-top: 4px solid #f4b802;
 }
 
 /*分页*/
-.pages {text-align:right;width:90%;margin:20px auto;padding-top:0px;height:26px;overflow:hidden; border: 1px solid blue;float: right;margin-right: 30px;}
-.pages a {text-align:center;padding:10px;border:1px solid #CCC;margin:0px 5px;text-decoration:none;color:#333;}
+.pages {
+		text-align:center;
+		margin:20px auto;
+		padding-top:0px;
+		height:28px;
+		overflow:hidden; 
+		border: 1px solid blue;
+		margin-right: 30px;
+
+	}
+.pages a {text-align:center;padding:10px;border:1px solid #CCC;margin:0px 5px;text-decoration:none;color:#333; line-height: 28px;}
 .pages a:hover {border:1px solid #FC0;color:#F60;}
 .pages .this {border:1px solid #FC0;color:#F60;}
+
+
+.major_a2{
+	margin-left: 10px;
+};
+/*.major a.major_a1{
+	color: red;
+}*/
+.pages{
+	
+}
+
+.pages .page_b{
+	
+	height: 28px;
+	
+	float: left;
+	background-color: pink;
+	margin-left: 16px;
+	
+}
+.page_0{
+	height: 28px;
+	background-color: yellow;
+	float: right;
+}
+.ming{
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	font-size: 24px;
+}
+.range_2{
+	font-size: 16px;
+	color: #333;
+}
+

@@ -40,14 +40,19 @@
  				<value>search</value>
  				<value>getCollegeSchools</value>
  				<value>getSchoolMajors</value>
- 				<value>login</value>
- 				<value>register</value>
+
  				<value>followCollege</value>
  				<value>disFollowCollege</value>
  				<value>getFollowColleges</value>
  				<value>followMajor</value>
  				<value>disFollowMajor</value>
  				<value>getFollowMajors</value>
+ 
+  				<value>login</value>
+ 				<value>register</value>				
+ 				<value>activate</value>
+ 				<value>resendEmail</value>
+ 				<value>resetPassword</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>

@@ -10,6 +10,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	</bean>
 	<bean id="userDao" class="cn.itui.webdevelop.dao.impl.UserDaoImpl">
 		<property name="sqlSession" ref="sqlSession"></property>
+		<property name="user" ref="user"></property>
 	</bean>
 	
 	<bean id="userInfoDao" class="cn.itui.webdevelop.dao.impl.UserInfoDaoImpl">
@@ -19,6 +20,12 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
 	<bean id="followMajorDao" class="cn.itui.webdevelop.dao.impl.FollowMajorDaoImpl">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	
+	<bean id="user" class="cn.itui.webdevelop.model.User">
+	</bean>
+	<bean id="majorInfoDao" class="cn.itui.webdevelop.dao.impl.MajorInfoDaoImpl">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
 </beans>

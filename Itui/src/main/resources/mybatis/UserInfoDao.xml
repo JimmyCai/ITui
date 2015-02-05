@@ -9,4 +9,8 @@
 		WHERE
 			id=#{id}
 	</select>
+	<insert id="insertUserLogo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+    	INSERT user_info
+    	VALUES (#{id}, null,null,null,null,#{logo},null,null,null,null,null,null,null,null,null,null,null) 
+	</insert>
 </mapper>

@@ -24,12 +24,15 @@ public class SearchController{
 	@RequestMapping(value=URLConstants.SEARCH, method=RequestMethod.POST)
 	public String search(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
+		System.out.println("search");
 		String tString= request.getParameter("t");
 		if (tString==null) {
 			throw ParameterErrorException.getInstance("缺少参数");
 		}
+		System.out.println(tString);
 		int type=Integer.parseInt(tString);
 		String condition = request.getParameter("c");
+		System.out.println(condition);
 		if (condition==null) throw ParameterErrorException.getInstance("缺少参数");
 			
 		String result;
@@ -40,6 +43,7 @@ public class SearchController{
 			String subject = request.getParameter("sj");
 			if (subject==null) throw ParameterErrorException.getInstance("缺少参数");
 			String area = request.getParameter("a");
+			System.out.println(area);
 			if (area==null) throw ParameterErrorException.getInstance("缺少参数");
 			String college_type = request.getParameter("ct");
 			if (college_type==null) throw ParameterErrorException.getInstance("缺少参数");
@@ -52,8 +56,9 @@ public class SearchController{
 			}catch (Exception e){
 				throw MyNumberFormatException.getInstance();
 			}
-			
+			long serviceStart = System.currentTimeMillis();
 			result = majorService.searchMajorsList(condition, category, subject, major_type, college_type, area, limit);
+			System.out.println("service time:"+(System.currentTimeMillis() - serviceStart));
 		}else if (type==2){
 			//college
 			result = collegeService.searchCollegeList(condition);

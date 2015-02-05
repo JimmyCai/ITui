@@ -19,15 +19,16 @@ public class CollegeController {
 	private static Log rRLogger = LogFactory.getLog("requestResponse");
 	public static final String USERPASSWORD = "userPassword";
 	public static final String COLLEGEID = "collegeId";
+	private static final String CID="cid";
 	private CollegeService collegeService;
 	private FollowService followService;
 
 	@RequestMapping(URLConstants.COLLEGE)
 	public String getCollegeSchools(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		if (request.getParameter("cid") ==null) throw ParameterErrorException.getInstance("缺少参数");
+		if (request.getParameter(CID) ==null) throw ParameterErrorException.getInstance("缺少参数");
 		int collegeId = 1;
 		try{
-			collegeId = Integer.parseInt(request.getParameter("cid"));
+			collegeId = Integer.parseInt(request.getParameter(CID));
 		}catch (Exception e){
 			throw MyNumberFormatException.getInstance();
 		}
@@ -36,12 +37,12 @@ public class CollegeController {
 	
 	@RequestMapping(URLConstants.SCHOOL)
 	public String getSchoolMajors(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		if (request.getParameter("cid")==null) {
+		if (request.getParameter(CID)==null) {
 			throw ParameterErrorException.getInstance("缺少参数");
 		}
 		int collegeId = 1;
 		try {
-			Integer.parseInt(request.getParameter("cid"));
+			Integer.parseInt(request.getParameter(CID));
 		} catch (Exception e) {
 			throw MyNumberFormatException.getInstance();
 		}
