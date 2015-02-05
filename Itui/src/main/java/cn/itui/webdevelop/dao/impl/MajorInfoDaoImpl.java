@@ -13,12 +13,12 @@ public class MajorInfoDaoImpl implements MajorInfoDao {
 	
 	public MajorInfo getMajorInfoById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("cn.itui.webdevelop.dao.MajorInfoDao.getMajorInfoById", id);
 	}
 
 	public HashMap<String, Object> findMajorAllInfoByMajorId(int majorId) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("cn.itui.webdevelop.dao.MajorInfoDao.findMajorAllInfoByMajorId", majorId);
 	}
 
 	public List<HashMap<String, Object>> findRankAndDegreeByMajorIds(
