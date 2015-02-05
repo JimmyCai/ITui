@@ -3,10 +3,14 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
-<bean 
+<bean id="configProperties"
 class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	<property name="location">
+	<property name="locations">
+	<list>
 		<value>WEB-INF/classes/properties/database.properties</value>
+		<value>WEB-INF/classes/properties/email.properties</value>
+		<value>WEB-INF/classes/properties/recaptcha.properties</value>
+	</list>
 	</property>
 </bean>
 

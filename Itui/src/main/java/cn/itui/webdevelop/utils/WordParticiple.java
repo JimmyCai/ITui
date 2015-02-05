@@ -13,11 +13,12 @@ public class WordParticiple {
 	 * @return
 	 */
 	public static String participle(String word) {
-		String result = "%";
+		String result = "";
 //		System.out.println(condition.length());
-		for (int i = 0; i < word.length(); i++) {
+		for (int i = 0; i < word.length()-1; i++) {
 			result += word.toCharArray()[i] + "%";
 		}
+		if (word.length() > 0)result+=word.toCharArray()[word.length()-1];
 		return result;
 	}
 	/**

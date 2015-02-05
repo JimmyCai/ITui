@@ -66,4 +66,8 @@ public class CollegeDaoImpl implements CollegeDao{
 		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.findMajorsBySchool", parameterMap);
 	}
 
+	public HashMap<String, Object> getCollegeInfo(int collegeId) {
+		return sqlSession.selectOne("cn.itui.webdevelop.dao.CollegeDao.getCollegeInfo", collegeId);
+	}
+
 }
