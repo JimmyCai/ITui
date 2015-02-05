@@ -3,12 +3,16 @@
 <mapper namespace="cn.itui.webdevelop.dao.FollowMajorDao">
 	<select id="findFollowMajorByUserCode" parameterType="String" resultType="java.util.HashMap">
 		SELECT
-			follow_major.id as id,
+			follow_major.id as followMajorId,
+			follow_college.id as followCollegeId,
 			major.id as majorId,
+			college.id as collegeId,
+			college.name as collegeName,
 			major.name as majorName
-		FROM follow_major,major,user
+		FROM follow_major,major,user,college,follow_college
 		WHERE 
-			follow_major.user_id=user.id AND follow_major.major_id=major.id AND user.code=#{code}
+			follow_major.user_id=user.id AND follow_major.major_id=major.id AND college.id=major.college_id AND college.id=follow_college.college_id AND user.id=follow_college.user_id AND user.code=#{code}
+		ORDER BY college.id
 	</select>
 	
 	<select id="isUserFollowMajor" parameterType="map" resultType="java.util.HashMap">

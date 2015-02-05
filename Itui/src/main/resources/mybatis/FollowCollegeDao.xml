@@ -3,7 +3,7 @@
 <mapper namespace="cn.itui.webdevelop.dao.FollowCollegeDao">
 	<select id="findFollowCollegeByUserCode" parameterType="String" resultType="java.util.HashMap">
 		SELECT
-			follow_college.id as id,
+			follow_college.id as followCollegeId,
 			college.id as collegeId,
 			college.logo as collegeLogo,
 			college.name as collegeName

@@ -23,7 +23,211 @@
 	URL:www.itui.cn/getmajorinfo?mid=""
 	html/detailinfo.html
         
-        {"status":0,"normalReturn":{"baseInfo":{"collegeIndexPage":"http://www.itui.cn/college?cid=15601569"},"gradeInfo":{"grade":"B+","rateGrade":"C","scoreGrade":"A","collegeGrade":"C","cityGrade":"A"},"rankInfo":{"majorRank":"88","collegeRank":"322","collegeLocalRank":"31"},"scoreInfo":{"yearScoreInfo":[{"score":340,"year":2012},{"score":340,"year":2013},{"score":330,"year":2014}],"scoreAvg":337,"scoreLowYear":2014,"scoreLow":330,"scoreHigh":340,"trend":"波动较小"},"competitionInfo":{"degree":"4.77","rateDegree":"中","scoreDegree":"高","collegeDegree":"中","cityDegree":"高","degreeDescription":"一般"},"applyAdmitInfo":{"rate":"43.7%","applyCount":32,"admitCount":14,"exemptionCount":-1},"majorRecommendInfo":{"mainInfo":[{"color":3,"majorName":"法学","schoolName":"文法学院","value":"37.2%"},{"color":3,"majorName":"马克思主义理论","schoolName":"思想政治理论教研部","value":"83.3%"},{"color":3,"majorName":"（专业硕士）法律（法学）","schoolName":"文法学院","value":"35.4%"},{"color":3,"majorName":"法学","schoolName":"文法学院","value":"37.2%"},{"color":3,"majorName":"马克思主义理论","schoolName":"思想政治理论教研部","value":"83.3%"},{"color":3,"majorName":"（专业硕士）法律（法学）","schoolName":"文法学院","value":"35.4%"},{"color":3,"majorName":"法学","schoolName":"文法学院","value":"37.2%"},{"color":3,"majorName":"马克思主义理论","schoolName":"思想政治理论教研部","value":"83.3%"}],"similarCount":0,"nearCount":0,"correlateCount":0,"transdisciplinaryCount":8},"interestedMajorInfo":{"mainInfo":[{"college":"北京理工大学","school":"人文与社会科学学院","name":"应用经济学","applyAdmitRate":"42.9%"},{"college":"北京航空航天大学","school":"人文社会科学学院","name":"应用经济学","applyAdmitRate":"28.8%"},{"college":"中国石油大学(北京)","school":"工商管理学院","name":"应用经济学","applyAdmitRate":"26.3%"},{"college":"中国石油大学(北京)","school":"中国能源战略研究院","name":"应用经济学","applyAdmitRate":"26.3%"}]},"interestedCollegeInfo":{"mainInfo":[{"level":"null","name":"齐鲁工业大学","rank":320},{"level":"null","name":"西安工程大学","rank":321},{"level":"null","name":"广东财经大学","rank":323},{"level":"null","name":"武汉轻工大学","rank":324}]}}}
+{
+:   "status":0,
+:   "normalReturn":
+:   {
+:   :   "baseInfo":
+:   :   {
+:   :   :   "majorId":"76038883",
+:   :   :   "logo":"10001.png",
+:   :   :   "majorName":"（专业硕士）眼科学",
+:   :   :   "typeInfo":"211/985/34所",
+:   :   :   "school":"第二临床医学院",
+:   :   :   "collegeId":"87528753",
+:   :   :   "followId":-1
+:   :   },
+:   :   "gradeInfo":
+:   :   {
+:   :   :   "grade":"A+",
+:   :   :   "rateGrade":"A",
+:   :   :   "scoreGrade":"B",
+:   :   :   "collegeGrade":"A",
+:   :   :   "cityGrade":"A"
+:   :   },
+:   :   "rankInfo":
+:   :   {
+:   :   :   "majorRank":"2",
+:   :   :   "collegeRank":"1",
+:   :   :   "collegeLocalRank":"1"
+:   :   },
+:   :   "scoreInfo":
+:   :   {
+:   :   :   "yearScoreInfo":
+:   :   :   [
+:   :   :   :   {
+:   :   :   :   :   "score":310,
+:   :   :   :   :   "year":2011
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "score":315,
+:   :   :   :   :   "year":2012
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "score":300,
+:   :   :   :   :   "year":2013
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "score":300,
+:   :   :   :   :   "year":2014
+:   :   :   :   }
+:   :   :   ],
+:   :   :   "scoreAvg":306,
+:   :   :   "scoreLowYear":2013,
+:   :   :   "scoreLow":300,
+:   :   :   "scoreHigh":315,
+:   :   :   "trend":"波动较小"
+:   :   },
+:   :   "competitionInfo":
+:   :   {
+:   :   :   "degree":"9.05",
+:   :   :   "rateDegree":"高",
+:   :   :   "scoreDegree":"中",
+:   :   :   "collegeDegree":"高",
+:   :   :   "cityDegree":"高",
+:   :   :   "degreeDescription":"困难"
+:   :   },
+:   :   "applyAdmitInfo":
+:   :   {
+:   :   :   "rate":"7.1",
+:   :   :   "applyDescription":"一般",
+:   :   :   "admitDescription":"一般",
+:   :   :   "applyCount":14,
+:   :   :   "admitCount":1,
+:   :   :   "exemptionCount":2
+:   :   },
+:   :   "majorRecommendInfo":
+:   :   {
+:   :   :   "mainInfo":
+:   :   :   [
+:   :   :   :   {
+:   :   :   :   :   "majorId":"83449556",
+:   :   :   :   :   "color":0,
+:   :   :   :   :   "majorName":"（专业硕士）眼科学",
+:   :   :   :   :   "schoolName":"第一临床医学院",
+:   :   :   :   :   "value":"27.3%"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "majorId":"11672565",
+:   :   :   :   :   "color":0,
+:   :   :   :   :   "majorName":"（专业硕士）眼科学",
+:   :   :   :   :   "schoolName":"第三临床医学院",
+:   :   :   :   :   "value":"0.1%"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "majorId":"56286944",
+:   :   :   :   :   "color":1,
+:   :   :   :   :   "majorName":"（专业硕士）妇产科学",
+:   :   :   :   :   "schoolName":"第一临床医学院",
+:   :   :   :   :   "value":"4.3%"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "majorId":"18233208",
+:   :   :   :   :   "color":1,
+:   :   :   :   :   "majorName":"（专业硕士）妇产科学",
+:   :   :   :   :   "schoolName":"第二临床医学院",
+:   :   :   :   :   "value":"18.8%"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "majorId":"56197124",
+:   :   :   :   :   "color":1,
+:   :   :   :   :   "majorName":"（专业硕士）妇产科学",
+:   :   :   :   :   "schoolName":"第三临床医学院",
+:   :   :   :   :   "value":"9.4%"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "majorId":"50586595",
+:   :   :   :   :   "color":1,
+:   :   :   :   :   "majorName":"（专业硕士）妇产科学",
+:   :   :   :   :   "schoolName":"深圳·北京大学/香港科技大学医学中心",
+:   :   :   :   :   "value":"25.0%"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "majorId":"27114093",
+:   :   :   :   :   "color":1,
+:   :   :   :   :   "majorName":"（专业硕士）耳鼻咽喉科学",
+:   :   :   :   :   "schoolName":"第五临床医学院",
+:   :   :   :   :   "value":"19.6%"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "majorId":"41935680",
+:   :   :   :   :   "color":1,
+:   :   :   :   :   "majorName":"（专业硕士）耳鼻咽喉科学",
+:   :   :   :   :   "schoolName":"第一临床医学院",
+:   :   :   :   :   "value":"42.9%"
+:   :   :   :   }
+:   :   :   ],
+:   :   :   "similarCount":2,
+:   :   :   "nearCount":6,
+:   :   :   "correlateCount":0,
+:   :   :   "transdisciplinaryCount":0
+:   :   },
+:   :   "interestedMajorInfo":
+:   :   {
+:   :   :   "mainInfo":
+:   :   :   [
+:   :   :   :   {
+:   :   :   :   :   "college":"首都医科大学",
+:   :   :   :   :   "majorId":28522,
+:   :   :   :   :   "school":"宣武医院",
+:   :   :   :   :   "name":"（专业硕士）眼科学",
+:   :   :   :   :   "degree":"6.04"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "college":"首都医科大学",
+:   :   :   :   :   "majorId":28554,
+:   :   :   :   :   "school":"附属北京友谊医院",
+:   :   :   :   :   "name":"（专业硕士）眼科学",
+:   :   :   :   :   "degree":"5.95"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "college":"首都医科大学",
+:   :   :   :   :   "majorId":28473,
+:   :   :   :   :   "school":"附属北京同仁医院",
+:   :   :   :   :   "name":"（专业硕士）眼科学",
+:   :   :   :   :   "degree":"5.83"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "college":"北京协和医学院",
+:   :   :   :   :   "majorId":2845,
+:   :   :   :   :   "school":"北京协和医院",
+:   :   :   :   :   "name":"（专业硕士）眼科学",
+:   :   :   :   :   "degree":"5.56"
+:   :   :   :   }
+:   :   :   ]
+:   :   },
+:   :   "interestedCollegeInfo":
+:   :   {
+:   :   :   "mainInfo":
+:   :   :   [
+:   :   :   :   {
+:   :   :   :   :   "level":"211/985/34所",
+:   :   :   :   :   "collegeId":"39093912",
+:   :   :   :   :   "name":"清华大学",
+:   :   :   :   :   "rank":2
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "level":"null",
+:   :   :   :   :   "collegeId":"11871727",
+:   :   :   :   :   "name":"中国科学院大学",
+:   :   :   :   :   "rank":3
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "level":"211/985/34所",
+:   :   :   :   :   "collegeId":"43994560",
+:   :   :   :   :   "name":"复旦大学",
+:   :   :   :   :   "rank":3
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "level":"211/985/34所",
+:   :   :   :   :   "collegeId":"32653447",
+:   :   :   :   :   "name":"南京大学",
+:   :   :   :   :   "rank":4
+:   :   :   :   }
+:   :   :   ]
+:   :   }
+:   }
+}
 
 5.获取复试信息
 	URL:/getretestinfo.html?mid=“”
@@ -32,15 +236,19 @@
 
 6.关注学校
 	URL:/followcollege.html
-	post{up:”user password”, cid:”college id”}
+	post{code:”code”, cid:”college id”}
+
+{“status”:1,”normalReturn”:”关注学校成功！”}
 
 取消关注学校：
 	URL:/disfollowcollege.html
-	post{id:””, up:”user password”, cid:”college id”}
+	post{id:””, code:”code”, cid:”college id”}
+
+{“status”:1,”normalReturn”:”取消关注学校成功！”}
 
 获取关注的学校：
 	URL:/getfollowcollege.html
-	post{up:””user password}
+	post{code:”code”}
 
 {
 :   "status":0,
@@ -69,32 +277,64 @@
 
 7.关注专业
 	URL：/followmajor.html
-	post{up:”user password”, mid:”major id”}
+	post{code:”code”, mid:”major id”}
+
+{“status”:1,”normalReturn”:”关注专业成功！”}
 
 取消关注专业
 	URL：/disfollowmajor.html
 	post{id:””}
+
+{“status”:1,”normalReturn”:”取消关注专业成功！”}
+
 获取关注的专业
 	URL：/getfollowmajor.html
-	post{up:”user password”}
+	post{code:”code”}
 {
 :   "status":0,
 :   "normalReturn":
 :   [
 :   :   {
-:   :   :   "majorId":3,
-:   :   :   "id":1,
-:   :   :   "majorName":"财政学"
+:   :   :   "collegeId":224,
+:   :   :   "collegeName":"安徽大学",
+:   :   :   "followCollegeId":2,
+:   :   :   "followMajorCount":1,
+:   :   :   "followMajors":
+:   :   :   [
+:   :   :   :   {
+:   :   :   :   :   "majorId":120,
+:   :   :   :   :   "followMajorId":11,
+:   :   :   :   :   "majorName":"（专业硕士）会计"
+:   :   :   :   }
+:   :   :   ]
 :   :   },
 :   :   {
-:   :   :   "majorId":5,
-:   :   :   "id":8,
-:   :   :   "majorName":"投资经济学"
+:   :   :   "collegeId":238,
+:   :   :   "collegeName":"安徽财经大学",
+:   :   :   "followCollegeId":1,
+:   :   :   "followMajorCount":2,
+:   :   :   "followMajors":
+:   :   :   [
+:   :   :   :   {
+:   :   :   :   :   "majorId":5,
+:   :   :   :   :   "followMajorId":8,
+:   :   :   :   :   "majorName":"投资经济学"
+:   :   :   :   },
+:   :   :   :   {
+:   :   :   :   :   "majorId":12,
+:   :   :   :   :   "followMajorId":9,
+:   :   :   :   :   "majorName":"教育经济与管理"
+:   :   :   :   }
+:   :   :   ]
 :   :   },
 :   :   {
-:   :   :   "majorId":12,
-:   :   :   "id":9,
-:   :   :   "majorName":"教育经济与管理"
+:   :   :   "collegeId":225,
+:   :   :   "collegeName":"中国科学技术大学",
+:   :   :   "followCollegeId":9,
+:   :   :   "followMajorCount":0,
+:   :   :   "followMajors":
+:   :   :   [
+:   :   :   ]
 :   :   }
 :   ]
 }
