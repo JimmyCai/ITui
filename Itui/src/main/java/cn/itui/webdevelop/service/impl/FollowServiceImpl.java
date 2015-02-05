@@ -1,7 +1,11 @@
 package cn.itui.webdevelop.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import cn.itui.webdevelop.dao.FollowCollegeDao;
 import cn.itui.webdevelop.dao.FollowMajorDao;
@@ -20,44 +24,45 @@ public class FollowServiceImpl implements FollowService{
 	
 	private final static int MD5LENGTH = 32;
 
-	public String followCollege(String userPassword, int collegeId) throws ParameterErrorException, DatabaseException {
-		if(userPassword.length() != MD5LENGTH || collegeId <= 0)
+	public String followCollege(String code, int collegeId) throws ParameterErrorException, DatabaseException {
+		if(code.length() != MD5LENGTH || collegeId <= 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		int retInt = followCollegeDao.insertFollowCollegeWithCollegeId(userPassword, collegeId);
+		int retInt = followCollegeDao.insertFollowCollegeWithCollegeId(code, collegeId);
 		if(retInt != 1)
 			throw DatabaseException.getInstance();
 		return ResponseUtil.wrapNormalReturn(FOLLOWCOLLEGE_SUCCESS);
 	}
 
-	public String followMajor(String userPassword, int majorId) throws ParameterErrorException, DatabaseException {
-		if(userPassword.length() != MD5LENGTH || majorId <= 0)
+	public String followMajor(String code, int majorId) throws ParameterErrorException, DatabaseException {
+		if(code.length() != MD5LENGTH || majorId <= 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		int imr = followMajorDao.insertFollowMajor(userPassword, majorId);
+		int imr = followMajorDao.insertFollowMajor(code, majorId);
 		if(imr != 1)
 			throw DatabaseException.getInstance();
-		followCollegeDao.insertFollowCollegeWithMajorId(userPassword, majorId);		
+		followCollegeDao.insertFollowCollegeWithMajorId(code, majorId);		
 		return ResponseUtil.wrapNormalReturn(FOLLOWMAJOR_SUCCESS);
 	}
 
-	public String getFollowColleges(String userPassword) throws ParameterErrorException {
-		if(userPassword.length() != 32)
+	public String getFollowColleges(String code) throws ParameterErrorException {
+		if(code.length() != MD5LENGTH)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		List<HashMap<String, Object>> result = followCollegeDao.findFollowCollegeByUserPassword(userPassword);
+		List<HashMap<String, Object>> result = followCollegeDao.findFollowCollegeByUserCode(code);
 		return ResponseUtil.wrapNormalReturn(result);
 	}
 
-	public String getFollowMajors(String userPassword) throws ParameterErrorException {
-		if(userPassword.length() != 32)
+	public String getFollowMajors(String code) throws ParameterErrorException {
+		if(code.length() != MD5LENGTH)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		List<HashMap<String, Object>> result = followMajorDao.findFollowMajorByUserPassword(userPassword);
-		return ResponseUtil.wrapNormalReturn(result);
+		List<HashMap<String, Object>> followMajors = followMajorDao.findFollowMajorByUserCode(code);
+		List<HashMap<String, Object>> followColleges = followCollegeDao.findFollowCollegeByUserCode(code);
+		return buildJson(followMajors, followColleges);
 	}
 
-	public String deleteFollowCollege(int id, String userPassword, int collegeId) throws ParameterErrorException, DatabaseException {
+	public String deleteFollowCollege(int id, String code, int collegeId) throws ParameterErrorException, DatabaseException {
 		if(id < 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
 		int fretInt = followCollegeDao.deleteFollowCollege(id);
-		followMajorDao.deleteFollowMajorByCollegeIdAndPassword(userPassword, collegeId);
+		followMajorDao.deleteFollowMajorByCollegeIdAndCode(code, collegeId);
 		if(fretInt != 1)
 			throw DatabaseException.getInstance();
 		return ResponseUtil.wrapNormalReturn(DISFOLLOWCOLLEGE_SUCCESS);
@@ -70,6 +75,58 @@ public class FollowServiceImpl implements FollowService{
 		if(retInt < 0)
 			throw DatabaseException.getInstance();
 		return ResponseUtil.wrapNormalReturn(DISFOLLOWMAJOR_SUCCESS);
+	}
+	
+	private String buildJson(List<HashMap<String, Object>> followMajors, List<HashMap<String, Object>> followColleges) {
+		HashMap<Integer, List<HashMap<String, Object>>> collegeIdMajors = new HashMap<Integer, List<HashMap<String,Object>>>();
+		for(HashMap<String, Object> curList : followMajors) {
+			int curCollegeId = (Integer)curList.get("collegeId");
+			if(!collegeIdMajors.containsKey(curCollegeId)) {
+				List<HashMap<String, Object>> tmpList = new ArrayList<HashMap<String,Object>>();
+				tmpList.add(curList);
+				collegeIdMajors.put(curCollegeId, tmpList);
+			}
+			else {
+				collegeIdMajors.get(curCollegeId).add(curList);
+			}
+		}
+		
+		List<LinkedHashMap<String, Object>> result = new ArrayList<LinkedHashMap<String,Object>>();
+		Set<Entry<Integer, List<HashMap<String, Object>>>> collegeNameMajorsSet = collegeIdMajors.entrySet();
+		for(Entry<Integer, List<HashMap<String, Object>>> curEntry : collegeNameMajorsSet) {
+			List<HashMap<String, Object>> curCollegeMajors = curEntry.getValue();
+			int collegeId = curEntry.getKey();
+			String collegeName = (String)curCollegeMajors.get(0).get("collegeName");
+			int followCollegeId = (Integer)curCollegeMajors.get(0).get("followCollegeId");
+			List<HashMap<String, Object>> resultMajors = new ArrayList<HashMap<String,Object>>();
+			for(HashMap<String, Object> curMajor : curCollegeMajors) {
+				HashMap<String, Object> tmpMap = new HashMap<String, Object>();
+				tmpMap.put("majorId", curMajor.get("majorId"));
+				tmpMap.put("followMajorId", curMajor.get("followMajorId"));
+				tmpMap.put("majorName", curMajor.get("majorName"));
+				resultMajors.add(tmpMap);
+			}
+			LinkedHashMap<String, Object> curResultMap = new LinkedHashMap<String, Object>();
+			curResultMap.put("collegeId", collegeId);
+			curResultMap.put("collegeName", collegeName);
+			curResultMap.put("followCollegeId", followCollegeId);
+			curResultMap.put("followMajorCount", curCollegeMajors.size());
+			curResultMap.put("followMajors", resultMajors);
+			result.add(curResultMap);
+		}
+		for(HashMap<String, Object> curMap : followColleges) {
+			if(!collegeIdMajors.containsKey((Integer)curMap.get("collegeId"))) {
+				LinkedHashMap<String, Object> curResultMap = new LinkedHashMap<String, Object>();
+				curResultMap.put("collegeId", curMap.get("collegeId"));
+				curResultMap.put("collegeName", curMap.get("collegeName"));
+				curResultMap.put("followCollegeId", curMap.get("followCollegeId"));
+				curResultMap.put("followMajorCount", 0);
+				curResultMap.put("followMajors", new ArrayList<String>());
+				result.add(curResultMap);
+			}
+		}
+
+		return ResponseUtil.wrapNormalReturn(result);
 	}
 
 	public FollowCollegeDao getFollowCollegeDao() {

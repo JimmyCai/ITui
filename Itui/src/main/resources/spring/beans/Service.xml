@@ -26,6 +26,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		<property name="majorInfoDao" ref="majorInfoDao"></property>
 		<property name="scoreDao" ref="scoreDao"></property>
 		<property name="retestDao" ref="retestDao"></property>
+		<property name="followMajorDao" ref="followMajorDao"></property>
 		<property name="majorRecommendFilter" ref="majorRecommendFilter"></property>
 		<property name="collegeRecommendFilter" ref="collegeRecommendFilter"></property>
 	</bean>	

@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import cn.itui.webdevelop.model.MajorInfo;
+import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.exception.DatabaseException;
 
 /**
@@ -17,7 +18,7 @@ import cn.itui.webdevelop.utils.exception.DatabaseException;
 public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	public static final int SAMECOLLEGE_MAJORCOUNT = 8;
 	public static final int SAMEMAJOR_MAJORCOUNT = 4;
-	private static final String APPLYADMITRATE = "applyAdmitRate";
+	private static final String DEGREE = "degree";
 
 	/**
 	 * 对candidates根据code进行刷选
@@ -103,6 +104,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		if(retMajors == null || toAdd == null)
 			return;
 		HashMap<String, Object> majorCurInfo = new HashMap<String, Object>();
+		majorCurInfo.put("majorId", EnDeCode.encodePara((Integer)toAdd.get("id")));
 		majorCurInfo.put("majorName", toAdd.get("name"));
 		majorCurInfo.put("schoolName", toAdd.get("school"));
 		majorCurInfo.put("color", color);
@@ -150,43 +152,47 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	}
 
 	/**
-	 * 根据rate进行major的刷选
+	 * 根据degree进行major的刷选
 	 */
 	public List<HashMap<String, Object>> recommendMajorFilter(
-			List<HashMap<String, Object>> candidates, double rate) throws Exception{
+			List<HashMap<String, Object>> candidates, double degree) throws Exception{
 		if(candidates == null)
 			throw DatabaseException.getInstance();
 		List<HashMap<String, Object>> resultMaps = new ArrayList<HashMap<String,Object>>();
-		double curRate = 0;
-		double lastRate = 0;
+		double curDegree = 0;
+		double lastDegree = 0;
 		if(candidates.size() == 0)
 			return new ArrayList<HashMap<String,Object>>();
-		curRate = (Double)candidates.get(0).get(APPLYADMITRATE);
+		curDegree = (Double)candidates.get(0).get(DEGREE);
 		int index = 0;
-		for(int i = 1; i < candidates.size(); i++) {
-			lastRate = curRate;
-			curRate = (Double)candidates.get(i).get(APPLYADMITRATE);
-			if(rate < curRate && rate > lastRate) {
+		int i = 1;
+		for(; i < candidates.size(); i++) {
+			lastDegree = curDegree;
+			curDegree = (Double)candidates.get(i).get(DEGREE);
+			if(degree < curDegree && degree > lastDegree) {
 				index = i;
 			}
 		}
+		if(i == candidates.size())
+			index = candidates.size() - 1;
+		System.err.println("degree:" + degree + "\tindex:" + index + "\ti:" + i);
 		HashMap<String, Object> tmpMap = candidates.get(index);
-		double curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
-		tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate, true));
+		double curAADegree = (Double)tmpMap.get(DEGREE);				
+		tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
 		resultMaps.add(tmpMap);
 		for(int length = 1; resultMaps.size() < candidates.size(); length++) {
 			if(index - length >= 0) {
 				tmpMap = candidates.get(index - length);
-				curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
-				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate, true));
+				curAADegree = (Double)tmpMap.get(DEGREE);				
+				tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
 					return resultMaps;
 			}
 			if(index + length < candidates.size()) {
 				tmpMap = candidates.get(index + length);
-				curAARate = (Double)tmpMap.get(APPLYADMITRATE);				
-				tmpMap.put("applyAdmitRate", MajorInfo.translateRate(curAARate, true));
+				curAADegree = (Double)tmpMap.get(DEGREE);				
+				tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
 					return resultMaps;
