@@ -13,6 +13,7 @@ import cn.itui.webdevelop.utils.RequestUtil;
 import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.exception.DatabaseException;
 import cn.itui.webdevelop.utils.exception.MyNumberFormatException;
+import cn.itui.webdevelop.utils.exception.NotLoginException;
 import cn.itui.webdevelop.utils.exception.OtherException;
 import cn.itui.webdevelop.utils.exception.ParameterErrorException;
 import cn.itui.webdevelop.utils.exception.SessionExceedException;
@@ -35,7 +36,7 @@ public class RequestResponseAdvice implements MethodInterceptor{
 			ResponseUtil.httpResponse(response, result);
 			rRLogger.info(RequestUtil.getUserBaseInfo(request) + "\n" + "RESULT:\n" + result + "\n");
 		}catch(Exception e) {
-			if(e instanceof DatabaseException || e instanceof MyNumberFormatException || e instanceof ParameterErrorException || e instanceof SessionExceedException) {
+			if(e instanceof DatabaseException || e instanceof MyNumberFormatException || e instanceof ParameterErrorException || e instanceof SessionExceedException || e instanceof NotLoginException) {
 				ResponseUtil.httpResponseException(response, e);
 				e.printStackTrace();
 				rRLogger.error(RequestUtil.getUserBaseInfo(request) + "\n" + "RESULT EXCEPTION MESSAGE:\n" + e.getMessage() + "EXCEPTION CLASS:" + e.getClass() + "\n");

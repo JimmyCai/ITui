@@ -28,7 +28,7 @@
 		FROM
 			college
 		WHERE
-			rank IN (#{curRank}-4, #{curRank}-3, #{curRank}-2, #{curRank}-1, #{curRank}, #{curRank}+1, #{curRank}+2, #{curRank}+3, #{curRank}+4) AND id NOT IN (#{collegeId})
+			rank IN (#{curRank}-4, #{curRank}-3, #{curRank}-2, #{curRank}-1, #{curRank}, #{curRank}+1, #{curRank}+2, #{curRank}+3, #{curRank}+4) AND id NOT IN (#{collegeId}) AND rank>0
 		ORDER BY rank
 	</select>
 	

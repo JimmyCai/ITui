@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="cn.itui.webdevelop.dao.FollowMajorDao">
-	<select id="findFollowMajorByUserPassword" parameterType="String" resultType="java.util.HashMap">
+	<select id="findFollowMajorByUserCode" parameterType="String" resultType="java.util.HashMap">
 		SELECT
-			follow_major.id as id,
+			follow_major.id as followMajorId,
+			follow_college.id as followCollegeId,
 			major.id as majorId,
+			college.id as collegeId,
+			college.name as collegeName,
 			major.name as majorName
-		FROM follow_major,major,user
+		FROM follow_major,major,user,college,follow_college
 		WHERE 
-			follow_major.user_id=user.id AND follow_major.major_id=major.id AND user.password=#{password}
+			follow_major.user_id=user.id AND follow_major.major_id=major.id AND college.id=major.college_id AND college.id=follow_college.college_id AND user.id=follow_college.user_id AND user.code=#{code}
+		ORDER BY college.id
+	</select>
+	
+	<select id="isUserFollowMajor" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			follow_major.id as id
+		FROM follow_major, user
+		WHERE follow_major.major_id=#{majorId} AND user.id=follow_major.user_id AND user.code=#{code}
 	</select>
 	
 	<select id="insertFollowMajor" parameterType="map" resultType="int">
 		INSERT INTO follow_major(user_id, major_id)
-		VALUES((SELECT id FROM user WHERE password=#{userPassword}),#{majorId})
+		VALUES((SELECT id FROM user WHERE code=#{code}),#{majorId})
 	</select>
 	
 	<select id="deleteFollowMajorById" parameterType="int" resultType="int">
 		DELETE FROM follow_major WHERE id=#{id}
 	</select>
 	
-	<select id="deleteFollowMajorByCollegeIdAndPassword" parameterType="map" resultType="int">
+	<select id="deleteFollowMajorByCollegeIdAndCode" parameterType="map" resultType="int">
 		DELETE FROM follow_major
-		WHERE user_id IN (SELECT id FROM user WHERE password=#{userPassword})
+		WHERE user_id IN (SELECT id FROM user WHERE code=#{code})
 			AND major_id IN (SELECT id FROM major WHERE college_id=#{collegeId})
 	</select>
 </mapper>
