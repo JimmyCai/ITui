@@ -2,6 +2,8 @@ package cn.itui.webdevelop.utils;
 
 import java.util.Random;
 
+import cn.itui.webdevelop.utils.exception.ParameterErrorException;
+
 /**
  * 加密解密类
  * @author jimmycai
@@ -16,8 +18,11 @@ public class EnDeCode {
 	 * @param paraCode为要解码的code
 	 * @return
 	 * @throws NumberFormatException 
+	 * @throws ParameterErrorException 
 	 */
-	public static int decodePara(String paraCode) throws NumberFormatException{
+	public static int decodePara(String paraCode) throws NumberFormatException, ParameterErrorException{
+		if(paraCode.length() < 4)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
 		int decodeId = 0;
 		String randomStr = paraCode.substring(0, 4);
 		String code = paraCode.substring(4);

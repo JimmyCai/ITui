@@ -28,8 +28,11 @@ public class FollowCollegeDaoImpl implements FollowCollegeDao{
 		return sqlSession.insert("cn.itui.webdevelop.dao.FollowCollegeDao.insertFollowCollegeWithMajorId", parameter);
 	}
 
-	public int deleteFollowCollege(int id) {
-		return sqlSession.delete("cn.itui.webdevelop.dao.FollowCollegeDao.deleteFollowCollege", id);
+	public int deleteFollowCollegeByCollegeIdAndCode(int collegeId, String code) {
+		HashMap<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("code", code);
+		parameter.put("collegeId", collegeId);
+		return sqlSession.delete("cn.itui.webdevelop.dao.FollowCollegeDao.deleteFollowCollegeByCollegeIdAndCode", parameter);
 	}
 
 	public SqlSession getSqlSession() {

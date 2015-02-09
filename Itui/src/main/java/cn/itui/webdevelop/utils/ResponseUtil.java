@@ -28,6 +28,7 @@ public class ResponseUtil {
 //			response.addHeader("Transfer-Encoding", "chunked");
 			response.setBufferSize(65536);
 			System.out.println(response.getBufferSize());
+
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(res.toString());
 			response.getWriter().flush();
@@ -48,6 +49,7 @@ public class ResponseUtil {
 //			response.addHeader("Transfer-Encoding", "chunked");
 			response.setBufferSize(65536);
 			System.out.println(response.getBufferSize());
+
 			response.setCharacterEncoding("UTF-8");
 			HashMap<String, Object>	responseJsonMap = new HashMap<String, Object>();
 			responseJsonMap.put("status", -1);

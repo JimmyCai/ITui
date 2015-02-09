@@ -238,13 +238,15 @@
 	URL:/followcollege.html
 	post{code:”code”, cid:”college id”}
 
-{“status”:1,”normalReturn”:”关注学校成功！”}
+成功：{“status”:1,”normalReturn”:”关注学校成功！”}
+不成功：会抛出一个异常，返回的为{"errMessage":"出错啦！","status":-1}
 
 取消关注学校：
 	URL:/disfollowcollege.html
-	post{id:””, code:”code”, cid:”college id”}
+	post{code:”code”, cid:”college id”}
 
-{“status”:1,”normalReturn”:”取消关注学校成功！”}
+成功：{“status”:1,”normalReturn”:”取消关注学校成功！”}
+不成功：会抛出一个异常，返回的为{"errMessage":"出错啦！","status":-1}
 
 获取关注的学校：
 	URL:/getfollowcollege.html
@@ -279,13 +281,15 @@
 	URL：/followmajor.html
 	post{code:”code”, mid:”major id”}
 
-{“status”:1,”normalReturn”:”关注专业成功！”}
+成功：{“status”:1,”normalReturn”:”关注专业成功！”}
+不成功：会抛出一个异常，返回的为{"errMessage":"出错啦！","status":-1}
 
 取消关注专业
 	URL：/disfollowmajor.html
-	post{id:””}
+	post{code:“”, mid:””}
 
-{“status”:1,”normalReturn”:”取消关注专业成功！”}
+成功：{“status”:1,”normalReturn”:”取消关注专业成功！”}
+不成功：会抛出一个异常，返回的为{"errMessage":"出错啦！","status":-1}
 
 获取关注的专业
 	URL：/getfollowmajor.html
