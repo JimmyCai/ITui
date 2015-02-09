@@ -3,9 +3,9 @@ var xueke0="",xueke1="",xueke2="",xueke3="",xueke4="",xueke5="",num_0=0;
 $(function(){
 	// 专业学校转换
 	$('.d_down').click(function(event) {
-				$('.dropdown-menu').css('display', 'block');
+		$('.dropdown-menu').css('display', 'block');
 	});
-	$('.zhuanye  a ').click(function(event) {
+	$('.zhuanye  a').click(function(event) {
 		$('.dropdown-menu').css('display', 'none');
 		var neirong=$(this).html();
 		var neirong2=$('.nr_js').html();
@@ -13,25 +13,18 @@ $(function(){
 		$('.zhuanye  a ').html(neirong2);
 	});
 	
-	function cond_hide(){
-		$('.cond0').hide();
-		$('.cond1').hide();
-		$('.cond2').hide();
-		$('.cond3').hide();
-		$('.cond4').hide();
-	}
-	cond_hide();
-	$('.cond5').show();
+
+	
 
 	// 学科门类
 	$('.span02').hide();
 
 	$('.subject').mouseenter(function(event) {
 		var li_num=$(this).index();
-		$(this).addClass('hong').siblings('.subject').removeClass('hong');
-		$(this).siblings('li').removeClass('hong');
-		$(this).find('a').css('color', '#fff');
-		$(this).siblings('li').find('a').css('color', '#333');
+//		$(this).addClass('hong').siblings('.subject').removeClass('hong');
+//		$(this).siblings('li').removeClass('hong');
+//		$(this).find('a').css('color', '#fff');
+//		$(this).siblings('li').find('a').css('color', '#333');
 		$(this).siblings('.subject').find('a').css('color', '#333');
 		$(this).find('.span01').hide();
 		$(this).siblings('.subject').find('.span01').show();
@@ -44,37 +37,29 @@ $(function(){
 	// 学科全部点击事件
 	
 	$('.sub_all').click(function(event) {
-		$('.cond0').show();
+		$('.cond0').hide();
 		$('.cond0 .xk_0').remove();
 		xueke0=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke0+"</span>").prependTo(".cond0");
 		$('.cond1').hide();
 		xueke0="";
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
-
-
-
-
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
 	
+	//一级学科点击事件
 	$('.obj_son li').click(function(event) {
 		$('.cond1').show();
 		$('.cond1 .xk_0').remove();
 		 xueke1=$(this).find('a').text();
 		 xueke0=$('.redd').find('a').text();
-
 		$("<span class='xk_0'>"+xueke1+"</span>").prependTo(".cond1");
-
 		$('.cond0').show();
 		$('.cond0 .xk_0').remove();
 		xueke0=$('.redd').find('a').text();
 		$("<span class='xk_0'>"+xueke0+"</span>").prependTo(".cond0");
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
-	
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);	
 	});
 
-	
-	// 鼠标移出1秒钟后div消失
 	$('.obj_son').mouseleave(function(event) {
 			$('.obj_son').css('display', 'none');
 			$('.subject').find('.span02').hide();
@@ -82,6 +67,10 @@ $(function(){
 	});
 
 	$('.subject').click(function(event) {
+		$(this).addClass('hong').siblings('.subject').removeClass('hong');
+		$(this).siblings('li').removeClass('hong');
+		$(this).find('a').css('color', '#fff');
+		$(this).siblings('li').find('a').css('color', '#333');
 		var li_num=$(this).index();
 		$(this).find('.span02').hide();
 		$(this).find('.span01').show();
@@ -91,56 +80,76 @@ $(function(){
 		xueke0=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke0+"</span>").prependTo(".cond0");
 		$('.cond1').hide();
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
-		
-		
-		
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);	
 	});
 
 
 	//全部标签样式
-	$('.li1').click(function(event) {
-		
-		$(this).addClass('hong').siblings('li').removeClass('hong');
-		$(this).find('a').css('color', '#fff');
-		$(this).siblings('li').find('a').css('color', '#333');
-		$(this).siblings('li').find('.span01').show();
-		$(this).siblings('li').find('.span02').hide();
+	function all_style(li_class){
+		console.log(li_class);
+		$(li_class).addClass('hong').siblings('li').removeClass('hong');
+		$(li_class).find('a').css('color', '#fff');
+		$(li_class).siblings('li').find('a').css('color', '#333');
+		$(li_class).siblings('li').find('.span01').show();
+		$(li_class).siblings('li').find('.span02').hide();
 		$('.obj_son').css('display', 'none');
+	}
+	$('.li1').click(function(event) {
+		all_style('.li1');		
 	});
 
 	// 院校层次
-	$('.cengci').mouseover(function(event) {
+//	$('.cengci').mouseover(function(event) {
+//		$(this).addClass('hong').siblings('li').removeClass('hong');
+//		$(this).find('a').css('color', '#fff');
+//		$(this).siblings('li').find('a').css('color', '#333');
+//	});
+	// 院校层次点击事件
+	$('.cengci').click(function(event) {
 		$(this).addClass('hong').siblings('li').removeClass('hong');
 		$(this).find('a').css('color', '#fff');
 		$(this).siblings('li').find('a').css('color', '#333');
-	});
-	// 院校你层次点击事件
-	$('.cengci').click(function(event) {
 		$('.cond2').show();
 		$('.cond2 .xk_0').remove();
 		xueke2=$(this).find('a').text();
 		console.log(xueke2);
 		$("<span class='xk_0'>"+xueke2+"</span>").prependTo(".cond2");
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
-
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
-
+	//全部 院校层次点击事件
+	$('.all_cengci').click(function(event){
+		$('.cond2').hide();
+		$('.cond2 .xk_0').remove();
+		xueke2=$(this).find('a').text();
+		$("<span class='xk_0'>"+xueke2+"</span>").prependTo(".cond2");
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
+	});
 	// 学术类型
 
-	$('.leixing').mouseover(function(event) {
+//	$('.leixing').mouseover(function(event) {
+//		$(this).addClass('hong').siblings('li').removeClass('hong');
+//		$(this).find('a').css('color', '#fff');
+//		$(this).siblings('li').find('a').css('color', '#333');
+//	});
+	
+	$('.leixing').click(function(event) {
 		$(this).addClass('hong').siblings('li').removeClass('hong');
 		$(this).find('a').css('color', '#fff');
 		$(this).siblings('li').find('a').css('color', '#333');
-	});
-	
-	$('.leixing').click(function(event) {
 		$('.cond3').show();
 		$('.cond3 .xk_0').remove();
 		 xueke3=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke3+"</span>").prependTo(".cond3");
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 
+	});
+//	类型全部点击函数
+	$('.all_leixing').click(function(event){
+		$('.cond3').hide();
+		$('.cond3 .xk_0').remove();
+		xueke3=$(this).find('a').text();
+		$("<span class='xk_0'>"+xueke3+"</span>").prependTo(".cond3");
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
 
 	// 地区------全部
@@ -153,27 +162,31 @@ $(function(){
 	
 	
 	$('.area01').click(function(event) {
-		$('.cond4').show();
+
+		$('.cond4').hide();
 		$('.cond4 .xk_0').remove();
 		xueke4=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke4+"</span>").prependTo(".cond4");
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
 	
 	// 地区------省市
-	$('.ite044').mouseover(function(event) {
+//	$('.ite044').mouseover(function(event) {
+//		$(this).addClass('hong');
+//		$(this).siblings('.ite04').removeClass('hong');
+//		$(this).find('a').css('color', '#fff');
+//		$(this).siblings('.ite04').find('a').css('color', '#333');
+//	});
+	$('.ite044').click(function(event) {
 		$(this).addClass('hong');
 		$(this).siblings('.ite04').removeClass('hong');
 		$(this).find('a').css('color', '#fff');
 		$(this).siblings('.ite04').find('a').css('color', '#333');
-	});
-	$('.ite044').click(function(event) {
 		$('.cond4').show();
 		$('.cond4 .xk_0').remove();
 		xueke4=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke4+"</span>").prependTo(".cond4");
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
-		
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);		
 	});
 	
 
@@ -185,55 +198,66 @@ $(function(){
 	// 关闭标签
 	$('.cond0 .close').click(function(event) {
 		xueke0="";
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
+		all_style('.sub_all');
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);		
 	});
 	$('.cond1 .close').click(function(event) {
 		xueke1="";
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
 	$('.cond2 .close').click(function(event) {
 		xueke2="";
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
+		all_style('.all_cengci');
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
 	$('.cond3 .close').click(function(event) {
 		xueke3="";
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
+		all_style('.all_leixing');
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
 	$('.cond4 .close').click(function(event) {
 		xueke4="";
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
+		all_style('.area01');
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
 	$('.cond5 .close').click(function(event) {
 		xueke5="";
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
 
-	
-
-
 // 筛选条件ajax提交
-
 function ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
-
 		console.log(t1);
 		$.ajax({
 		 	url: 'back/search.html',
 			 type: 'post',
 			 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:num_0},
 			 success: function(msg) {
-			 var data=eval("msg="+msg);
-			 
+			 var data=eval("msg="+msg);			 
 			  if(data.status=='0'){
 				  $(".main_ul").html('');
 			   	ajax_01 (data);
-
-			  }else{}
-			            			
-			            			
-			          }
+			  }else{}    			
+			 }
 		});
-
 	}
+
+function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
+	console.log(t1);
+	$.ajax({
+	 	url: 'back/search.html',
+		 type: 'post',
+		 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:num_0},
+		 success: function(msg) {
+		location.href="search.html?t="+t1+"&c="+xueke5;
+		 var data=eval("msg="+msg);			 
+		  if(data.status=='0'){
+			  $(".main_ul").html('');
+		   	ajax_01 (data);
+		  }else{}    			
+		 }
+	});
+}
 
 //搜索框事件
 // 搜索框ajax提交
@@ -243,30 +267,23 @@ function ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 
 		if(t1=="专业"){
 			t1=1;
-		}else{
 			t1=2;
 
 		}
 		 cond5_charu();
 
 		xueke0="",xueke1="",xueke2="",xueke3="",xueke4="";
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0)
-		
+		$('.cond0').hide();
+		$('.cond1').hide();
+		$('.cond2').hide();
+		$('.cond3').hide();
+		$('.cond4').hide();
+		page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 		
 	});
-
-
-
-
-
 });
+//页面加载函数结束
 
-
-// 分页
-
-
-
-	
 function getPar(par){
     //获取当前URL
     var local_url =decodeURI(document.location.href) ; 
@@ -289,15 +306,35 @@ var c1 = getPar('c');
 if (!c1) {
 	c1 = '';
 };
+
  xueke5=c1;
+ console.log(xueke5+"par");
+function cond_hide(){
+		$('.cond0').hide();
+		$('.cond1').hide();
+		$('.cond2').hide();
+		$('.cond3').hide();
+		$('.cond4').hide();
+		$('.cond5').hide();
+}
+cond_hide();
+
 
 // 插入首页搜索条件
- function cond5_charu(){
- 	
- 	 $('.cond5 .xk_0').remove();
- 	$("<span class='xk_0'>"+xueke5+"</span>").prependTo(".cond5");
+ function cond5_charu(){ 
+	console.log(xueke5);
+ 	$('.cond5 .xk_0').remove();
+// 	$("<span class='xk_0'>"+xueke5+"</span>").after(".keyword");
+ 	$('.keyword').after("<span class='xk_0'>"+xueke5+"</span>");
  }
- cond5_charu();
+ 
+if(xueke5!="")
+{
+	$('.cond5').show();
+	console.log(xueke5+"sg");
+	cond5_charu();
+}
+ 
 
 
 
@@ -323,47 +360,32 @@ $(function(){
 
 });
 
-function ajax_01 (data)
-			{
-				// 将接收到的数据存储进自定义对象内
-				type0=data.normalReturn.type;
-				console.log("type:"+type0);
-				 list=data.normalReturn.list;
-				obj_json={array:list};
-				// 封装插入标签函数
-				//处理搜索类型为学校
-				if (type0=='college') {
-//					console.log("college begin");
-					page_num=data.normalReturn.total;
-					round_1();//第一次for循环结束
-					collage_hide();
-
-				// 定义总条数
-
-				 pageShow(1,page_num);// 分页
-				
-				}else{
-				//处理搜索类型为专业
-
-				// 将接收到的数据存储进自定义对象内
-//				type0=data.normalReturn.type;
-//				 list=data.normalReturn.list;
-//				obj_json={array:list};
-				page_num=data.normalReturn.total;
-				console.log("total:"+page_num);
-				round_1();//第一次for循环结束
-//				collage_hide();
-				// 定义总条数
-
-				 pageShow(1,page_num);// 分页
-				
-				}
-
-			}
+function ajax_01 (data){
+	// 将接收到的数据存储进自定义对象内
+	$('.item_total').text(data.normalReturn.total);
+	type0=data.normalReturn.type;
+	list=data.normalReturn.list;
+	obj_json={array:list};
+	// 封装插入标签函数
+	//处理搜索类型为学校
+	if (type0=='college') {
+		page_num=data.normalReturn.total;
+		round_1();//第一次for循环结束
+		collage_hide();
+		// 定义总条数
+		pageShow(1,page_num);// 分页
+	}else{
+		//处理搜索类型为专业
+		page_num=data.normalReturn.total;
+		round_1();//第一次for循环结束
+		pageShow(1,page_num);// 分页
+	}
+}
 
 
 function city_hide(i){
 	if (type0=='college'){
+		console.log(obj_json.array[i].city);
 		return obj_json.array[i].city;
 	}else{
 		return obj_json.array[i].school;	
@@ -384,7 +406,7 @@ function round_1(){
 		var length = page_num;
 		if (length > 14) length = 14;
 		console.log(length);
-		for (var i=0;i<=length;i++)
+		for (var i=0;i<length;i++)
 		{	
 			charu(i);
 			// 条目点击函数
@@ -394,34 +416,18 @@ function round_1(){
 		
 }//循环插入函数
 
-function jump_info()
-		{
-		$('.jquery_0').click(function(event) {
-			// var ttt=$(this).index();
-			var pic_para=$(this).find('img').attr('src');
-			// var name1_para=$(this).find('.major_a1').text();
-			var name2_para=$(this).find('.major_a2').text();
-			var leve01_para=$(this).find('.sch_name span:eq(0)').text();
-			var leve02_para=$(this).find('.sch_name span:eq(1)').text();
-			var leve03_para=$(this).find('.sch_name span:eq(2)').text();
-			var range_para=$(this).find('.range').text();
-			var thisid_para=$(this).find('.major').children('a').attr('href');
-			// alert(this_id);
-			
-			$.cookie("pic", pic_para,{path:"/"});
-			$.cookie("name2", name2_para,{path:"/"});
-			$.cookie("leve01", leve01_para,{path:"/"});
-			$.cookie("leve02", leve02_para,{path:"/"});
-			$.cookie("leve03", leve03_para,{path:"/"});
-			$.cookie("range", range_para,{path:"/"});
-			$.cookie("thisid", thisid_para,{path:"/"});
-			
-			
-			location.href="info.html";
-			
-			
+function jump_info(){
+		$('.jquery_0').click(function(event){
+
+			var thisid_para=$(this).find('.major').children('span').attr('major_href');
+			if(type0 == 'major'){
+				location.href="info.html?major="+thisid_para;				
+			}else {
+				location.href="school.html?name="+thisid_para;
+			}
+				
 		});	
-		}
+}
 
 function charu(i){ 
 	var name=city_hide(i);
@@ -429,12 +435,12 @@ function charu(i){
 	var htmlcode01 = '\
 		<li class="jquery_0">\
 			<div class="pic">\
-				<img src="http://42.96.190.127:8080/itui/images/' +obj_json.array[i].logo + '" alt="">\
+				<img src="http://www.itui.cn/itui/images/' +obj_json.array[i].logo + '" alt="">\
 			</div>\
 			<div class="info">\
 				<p class="major">\
-					<a class="major_a1" href="' + obj_json.array[i].id + '"target="_blank">' + obj_json.array[i].name + '</a>\
-					<a class="major_a2" href="'+obj_json.array[i].id+'"  target="_blank">' + obj_json.array[i].college + '</a>\
+					<span class="major_a1" major_href="' + obj_json.array[i].id + '">' + obj_json.array[i].name + '</span>\
+					<span class="major_a2" major_href="'+obj_json.array[i].id+'">' + obj_json.array[i].college + '</span>\
 				</p>\
 				<p class="sch_name">';
 		if (obj_json.array[i].is211=='1') {
@@ -446,6 +452,9 @@ function charu(i){
 		if (obj_json.array[i].is985=='1') {
 			htmlcode01 += '<span>985</span>';
 		};
+		
+//		console.log(obj_json.array[i].rank);
+		
 		htmlcode01 +='</p>\
 				<p class="range"><span class="range_2">所属院系：</span>\
 					<span>' + name+ '</span>\
@@ -457,7 +466,7 @@ function charu(i){
 						<p class="shuzi1">' + obj_json.array[i].rank + '</p>\
 					</div>\
 					<div class="group2 sort2">\
-						<p>学校排名</p>\
+						<p>专业排名</p>\
 					</div>\
 				</div>\
 				<div class="difficult0">\
@@ -474,15 +483,13 @@ function charu(i){
 	$('.main_ul').append(htmlcode01);
 }//封装插入标签函数结束
 
-
+var pageText = 15;
 function pageShow(ThisPage,PageCount){
 					//ThisPage = 当前页
 					//PageCount = 总条数
 					//获取当前页之后，可通过Ajax进行返值。
 					$(function() {
-						//每页条数
-						var pageText = 15;
-						
+						//每页条数					
 						
 						//分页总数
 						var pageNumber = Math.ceil(PageCount / pageText);
@@ -538,26 +545,26 @@ function pageShow(ThisPage,PageCount){
 
 //类型为college时用于控制页面显示
 function collage_hide(){
-	$('.sort2 p').text('本地排名');
-	$('.difficult2 p').text('全国排名');
+	$('.sort2 p').text('全国排名');
+	$('.difficult2 p').text('本地排名');
 	$('.range_2').text('所属城市:');
 	$('.major_a2').hide();	
 }
 
 function click_charu(){
 	$('.pages .page_b').click(function(event){     	
-		var this_strr=$(this).text();
-		var this_num=parseInt(this_strr.match(/[1-9]+/));
+		var this_pageNum_strr=$(this).text();
+		var this_num=parseInt(this_pageNum_strr.match(/[0-9]+/));
 		console.log("this_num:"+this_num);
 		$('.main_ul').html('');
 		pageShow(this_num,page_num);
 		var length = (this_num-1)*15+14;
 		if (length > page_num) length = page_num;
-		console.log("length:"+length);
+//		console.log("length:"+length);
 		var l_0=(Math.floor((this_num-1)/20))*300;
 //		console.log(l);
 		if (l_0 == l){
-			for(var i=(this_num-1)*15-l_0;i<=length-l_0;i++)
+			for(var i=(this_num-1)*15-l_0;i<length-l_0;i++)
 			{
 				console.log(i);
 				charu(i);
@@ -588,6 +595,8 @@ function click_charu(){
 							{
 								
 						// 将接收到的数据存储进自定义对象内
+								console.log(data3.normalReturn.total);
+								$('.item_total').text(data3.normalReturn.total);
 								type0=data3.normalReturn.type;
 								console.log("type:"+type0);
 								list=data3.normalReturn.list;
@@ -596,7 +605,7 @@ function click_charu(){
 								if (length > page_num) length = page_num;
 			   			for(i=(this_num-1)*15-l_0;i<length - l_0;i++)
 			   				{
-			   					console.log(i);
+//			   					console.log(i);
 			   					charu(i);
 			   					if (type0 == "college") collage_hide();
 			   					jump_info();
@@ -606,15 +615,6 @@ function click_charu(){
 
 						}
 					});//点击是aja请求
-
-				
-
-//				click_ajax();
-					
-				
-				
-				
-
 					
 								//超过20页的请求
 			}//如果不等于向后台请求数据

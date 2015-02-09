@@ -21,7 +21,6 @@ ul,ol,li{list-style:none}
 	
 	width: 1000px;
 	height: 500px;
-	border: 1px solid red;
 }
 .top0{
 	width: 100%;
@@ -41,7 +40,6 @@ ul,ol,li{list-style:none}
 	width: 1024px;
 	
 	margin:0 auto;
-	border: 1px solid red;
 	margin-top: -88px;
 }
 /*顶部*/
@@ -133,7 +131,6 @@ ul,ol,li{list-style:none}
 #nav1{
 	width: 1024px;
 	height: 222px;
-	border: 1px solid blue;
 	margin: 0 auto;
 	margin-top: 30px;
 	box-shadow: 0 0 3px #000;
@@ -260,12 +257,11 @@ ul,ol,li{list-style:none}
 	
 	_position: relative;
 	_z-index: 100;
-	background-color: yellow;
 
 }
 #obj_s2 .arrow{
 	position: absolute;
-	left: 127px;
+	left: 134px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
@@ -273,7 +269,7 @@ ul,ol,li{list-style:none}
 }
 #obj_s3 .arrow{
 	position: absolute;
-	left: 190px;
+	left: 200px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
@@ -288,63 +284,63 @@ ul,ol,li{list-style:none}
 }
 #obj_s5 .arrow{
 	position: absolute;
-	left: 313px;
+	left: 320px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
 }
 #obj_s6 .arrow{
 	position: absolute;
-	left: 375px;
+	left: 385px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
 }
 #obj_s7 .arrow{
 	position: absolute;
-	left: 438px;
+	left: 450px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
 }
 #obj_s8 .arrow{
 	position: absolute;
-	left: 494px;
+	left: 506px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
 }
 #obj_s9 .arrow{
 	position: absolute;
-	left: 549px;
+	left: 562px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
 }
 #obj_s10 .arrow{
 	position: absolute;
-	left: 604px;
+	left: 624px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
 }
 #obj_s11 .arrow{
 	position: absolute;
-	left: 667px;
+	left: 690px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
 }
 #obj_s12 .arrow{
 	position: absolute;
-	left: 739px;
+	left: 760px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
 }
 #obj_s13 .arrow{
 	position: absolute;
-	left: 806px;
+	left: 830px;
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
@@ -454,7 +450,6 @@ ul,ol,li{list-style:none}
 #nav2{
 	width: 1024px;
 	height: 40px;
-	border: 1px solid blue;
 	box-shadow: 0px 0px 3px #000;
 	margin: 0 auto;
 	margin-top: 12px;
@@ -463,7 +458,7 @@ ul,ol,li{list-style:none}
 }
 .cond{
 	min-width: 30px;
-	
+	margin-top:8px;
 	height: 20px;
 	border: 1px solid #e67917;
 	float: left;
@@ -481,13 +476,12 @@ ul,ol,li{list-style:none}
 .condition0{
 	margin-top: 9px;
 	margin-left: 40px;
+	overflow:hidden;
 }
 
 /*筛选结果*/
 #nav3{
 	width: 1024px;
-	
-	border: 1px solid blue;
 	box-shadow: 0px 0px 3px #000;
 	margin: 0 auto;
 	margin-top: 32px;
@@ -529,8 +523,8 @@ ul,ol,li{list-style:none}
 	
 }
 .pic{
-	width: 100px;
-	height: 100px;
+	width: 90px;
+	height: 90px;
 	border-radius: 50%;
 	border: 1px solid #cbcbcb;
 	float: left;
@@ -540,13 +534,13 @@ ul,ol,li{list-style:none}
 
 }
 .pic img{
-	margin:5px auto 0 auto;
-	
+	margin:0 auto 0 auto;
+	width: 90px;
+	height: 90px;
 
 }
 .info{
 	height: 90px;
-	border: 1px solid blue;
 	float: left;
 	margin-left: 20px;
 	margin-top: 30px;
@@ -563,7 +557,7 @@ ul,ol,li{list-style:none}
 	+float: none;*/
 	
 }
-.major a{
+.major span{
 	font-size: 22px;
 	color: #38699f;
 	line-height: 24px;
@@ -596,7 +590,6 @@ ul,ol,li{list-style:none}
 .group0{
 	width: 210px;
 	height: 90px;
-	border: 1px solid blue;
 	float: right;
 	margin-top: 30px;
 }
@@ -651,7 +644,6 @@ ul,ol,li{list-style:none}
 .page0{
 	width: 300px;
 	height: 30px;
-	border: 1px solid blue;
 	float:right;
 	margin-top:30px;
 	margin-right: 30px;
@@ -758,7 +750,6 @@ border-top: 4px solid #f4b802;
 	width: 184px;
 	height: 68px;
 	float: right;
-	border: 1px solid blue;
 }
 .right_li{
 	float: left;
@@ -803,7 +794,7 @@ border-top: 4px solid #f4b802;
 	color: #E67917;
 	float: left;
 	height: 42px;
-	
+	line-height:42px;
 	margin-right: 20px;
 }
 
@@ -812,7 +803,6 @@ border-top: 4px solid #f4b802;
 .erwei{
 	width: 40px;
 	height: 120px;
-	border: 1px solid blue;
 	position: fixed;
 	right: 100px;
 	bottom: 100px;
@@ -848,7 +838,6 @@ border-top: 4px solid #f4b802;
 		padding-top:0px;
 		height:28px;
 		overflow:hidden; 
-		border: 1px solid blue;
 		margin-right: 30px;
 
 	}
@@ -860,35 +849,28 @@ border-top: 4px solid #f4b802;
 .major_a2{
 	margin-left: 10px;
 };
-/*.major a.major_a1{
-	color: red;
-}*/
 .pages{
 	
 }
 
 .pages .page_b{
-	
 	height: 28px;
-	
 	float: left;
-	background-color: pink;
 	margin-left: 16px;
 	
 }
 .page_0{
 	height: 28px;
-	background-color: yellow;
 	float: right;
 }
 .ming{
 	width: 100px;
 	height: 100px;
-	background-color: red;
 	font-size: 24px;
 }
 .range_2{
 	font-size: 16px;
 	color: #333;
 }
+
 

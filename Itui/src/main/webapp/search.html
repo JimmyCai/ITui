@@ -1,10 +1,636 @@
 <!doctype html>
-<html >
-
+<html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta http-equiv="Access-Control-Allow-Origin" content="*" />
 <title>爱推搜索页</title>
-<link rel="stylesheet" type="text/css" href="css/search.css">
+<link rel="stylesheet" type="text/css"
+	href="css/search.css">
+</head>
+<body>
+	<div class="top0"></div>
+	<div class="contain">
+		<div id="nav0">
+			<div class="logo0"></div>
+			<form id="scbar_form" method="post" autocomplete="off" action=""
+				class="form-search-site">
+				<div class="input01">
+					<div class="dropdown">
+						<button type="button" class="btn dropdown-toggle d_down"
+							id="dropdownMenu1">
+							<span class="nr_js">专业</span> <span class="caret"> ▼</span>
+						</button>
+						<ul class="dropdown-menu" role="menu"
+							aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="zhuanye"><a
+								href="javascript:;">学校</a></li>
+						</ul>
+					</div>
+					<div class="input_0">
+						<input class="form-control search_input"
+							placeholder=" 搜索学校或专业，如：北京大学" id="scbar_txt" name="srchtxt"
+							type="text">
+					</div>
+					<button class="btn btn-sub" id="sou" type="button">
+						<div class="glyphicon glyphicon-search"></div>
+					</button>
+				</div>
+			</form>
+		</div>
+
+		<div id="nav1">
+			<div class="item" id="item01">
+				<div class="h03">
+					<h3>学科门类</h3>
+				</div>
+				<ul class="obj01">
+					<li class="li0 li1 hong sub_all"><a href="javascript:;">全部</a>
+					</li>
+					<li class="li0 subject"><a href="javascript:;">哲学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">经济学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">法学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">教育学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">文学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">历史学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">理学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">工学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">农学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">医学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">军事学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">管理学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+					<li class="li0 subject"><a href="javascript:;">艺术学</a> <span
+						class="span01">▼</span> <span class="span02">▲</span></li>
+
+				</ul>
+				<ul class="obj_son obj_ss" id="obj_s1">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0101哲学</a><span
+						class="obj_span">|</span></li>
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s2">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0201理论经济学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0202应用经济学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0251（专业硕士）金融</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0252（专业硕士）应用统计</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0253（专业硕士）税务</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0254（专业硕士）国际商务</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0255（专业硕士）保险</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0256（专业硕士）资产评估</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0257（专业硕士）审计</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0270统计学</a><span
+						class="obj_span">|</span></li>
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s3">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0301法学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0303政治学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0303社会学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0304民族学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0305马克思主义理论</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0306公安学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0351（专业硕士）法律</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0352（专业硕士）社会工作</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0353（专业硕士）警务</a><span
+						class="obj_span">|</span></li>
+				</ul>
+
+
+				<ul class="obj_son obj_ss" id="obj_s4">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0401教育学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0402心理学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0403体育学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0451（专业硕士）教育</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0452（专业硕士）体育</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0453（专业硕士）汉语国际教育</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0454（专业硕士）应用心理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">04710471</a><span
+						class="obj_span">|</span></li>
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s5">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0501中国语言文学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0502外国语言文学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0503新闻传播学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0551（专业硕士）翻译</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0552（专业硕士）新闻与传播</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0553（专业硕士）出版</a><span
+						class="obj_span">|</span></li>
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s6">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0601考古学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0602中国史</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0603世界史</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0651（专业硕士）文物与博物馆</a><span
+						class="obj_span">|</span></li>
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s7">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0701数学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0702物理学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0703化学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0704天文学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0705地理学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0706大气科学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0707海洋科学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0708地球物理学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0709地质学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0710生物学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0711系统科学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0712科学技术史</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0713生态学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0714统计学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0771心理学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0772力学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0773材料科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0774电子科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0775计算机科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0776环境科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0777生物医学工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0778基础医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0779公共卫生与预防医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0780药学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0781中药学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">07840784</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">07850785</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">07860786</a><span
+						class="obj_span">|</span></li>
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s8">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0801力学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0802机械工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0803光学工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0804仪器科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0805材料科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0806冶金工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0807动力工程及工程热物理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0808电气工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0809电子科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0810信息与通信工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0811控制科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0812计算机科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0813建筑学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0814土木工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0815水利工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0816测绘科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0817化学工程与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0818地质资源与地质工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0819矿业工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0820石油与天然气工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0821纺织科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0822轻工技术与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0823交通运输工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0824船舶与海洋工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0825航空宇航科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0826兵器科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0827核科学与技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0828农业工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0829林业工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0830环境科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0831生物医学工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0832食品科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0833城乡规划学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0834风景园林学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0835软件工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0837安全科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0838公安技术</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0851（专业硕士）建筑学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0852（专业硕士）工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0853（专业硕士）城市规划</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0870科学技术史</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0871管理科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0872设计学</a><span
+						class="obj_span">|</span></li>
+
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s9">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">0901作物学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0902园艺学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0903农业资源与环境</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0904植物保护</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0905畜牧学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0906兽医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0907林学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0908水产</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0909草学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0951（专业硕士）农业推广</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0952（专业硕士）兽医</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0953（专业硕士）风景园林</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0954（专业硕士）林业</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0971环境科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0972食品科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">0973风景园林学</a><span
+						class="obj_span">|</span></li>
+
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s10">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">1001基础医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1002临床医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1003口腔医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1004公共卫生与预防医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1005中医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1006中西医结合</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1007药学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1008中药学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1009特种医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1011护理学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1051（专业硕士）临床医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1052（专业硕士）口腔医学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1053（专业硕士）公共卫生</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1054（专业硕士）护理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1055（专业硕士）药学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1056（专业硕士）中药学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1072生物医学工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">10731073</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">10741074</a><span
+						class="obj_span">|</span></li>						
+
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s11">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">1101军事思想及军事历史</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1102战略学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1103战役学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1104战术学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1105军队指挥学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1106军制学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1107军队政治工作学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1108军事后勤学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1109军事装备学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1110军事训练学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1151（专业硕士）军事</a><span
+						class="obj_span">|</span></li>
+
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s12">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">1201管理科学与工程</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1202工商管理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1203农林经济管理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1204公共管理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1205图书情报与档案管理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1251（专业硕士）工商管理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1252（专业硕士）公共管理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1253（专业硕士）会计</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1254（专业硕士）旅游管理</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1255（专业硕士）图书情报</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1256（专业硕士）工程管理</a><span
+						class="obj_span">|</span></li>
+
+				</ul>
+
+				<ul class="obj_son obj_ss" id="obj_s13">
+					<div class="arrow">
+						<img src="images/21.jpg" alt="">
+					</div>
+					<li class="xueke"><a href="javascript:;">1301艺术学理论</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1302音乐与舞蹈学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1303戏剧与影视学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1304美术学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1305设计学</a><span
+						class="obj_span">|</span></li>
+					<li class="xueke"><a href="javascript:;">1351（专业硕士）艺术</a><span
+						class="obj_span">|</span></li>
+				</ul>
+			</div>
+			<div class="item" id="item02">
+				<div class="h03">
+					<h3>院校层次</h3>
+				</div>
+				<ul class="obj01">
+					<li class="li0 li1 hong all_cengci"><a href="javascript:;">全部</a>
+					</li>
+					<li class="li0 cengci"><a href="javascript:;">34所</a></li>
+					<li class="li0 cengci"><a href="javascript:;">985</a></li>
+					<li class="li0 cengci"><a href="javascript:;">211</a></li>
+					<li class="li0 cengci"><a href="javascript:;">普通</a></li>
+				</ul>
+			</div>
+
+			<div class="item" id="item03">
+				<div class="h03">
+					<h3>学术类型</h3>
+				</div>
+				<ul class="obj01">
+					<li class="li0 li1 hong all_leixing"><a href="javascript:;">全部</a>
+					</li>
+					<li class="li0 leixing"><a href="javascript:;">学术型</a></li>
+					<li class="li0 leixing"><a href="javascript:;">专业型</a></li>
+				</ul>
+			</div>
+
+			<div class="item" id="item04">
+				<div class="h03">
+					<h3>地区</h3>
+				</div>
+				<ul class="obj01">
+					<li class="ite04 area01 li1 hong"><a href="javascript:;">全部</a></li>
+					<li class="ite04 qu_0"><span>一区</span></li>
+					<li class="ite04 ite044"><a href="javascript:;">北京</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">上海</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">湖北</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">广东</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">浙江</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">天津</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">江苏</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">四川</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">福建</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">江西</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">山东</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">河南</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">湖南</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">河北</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">山西</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">辽宁</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">吉林</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">安徽</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">重庆</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">陕西</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">黑龙江</a></li>
+					<li class="ite04 area02 qu_0"><span>二区</span></li>
+					<li class="ite04 ite044"><a href="javascript:;">云南</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">广西</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">贵州</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">西藏</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">新疆</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">宁夏</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">甘肃</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">青海</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">海南</a></li>
+					<li class="ite04 ite044"><a href="javascript:;">内蒙古</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="nav2">
+			<ul class="condition0" id="condition">
+				<p class="tiaojian">筛选条件:</p>
+				<li class="cond cond0"><span class="close">×</span></li>
+				<li class="cond cond1"><span class="close">×</span></li>
+				<li class="cond cond2"><span class="close">×</span></li>
+				<li class="cond cond3"><span class="close">×</span></li>
+				<li class="cond cond4"><span class="close">×</span></li>
+				<li class="cond cond5"><span class="keyword">关键词:</span><span class="close">×</span></li>
+			</ul>
+		</div>
+
+		<div id="nav3">
+			<div class="h02">
+				<h2><span>找到</span><span class="item_total"></span><span>条</span></h2>
+				<div class="arrow2">
+					<img src="images/22.jpg" alt="">
+				</div>
+			</div>
+			<div class="main">
+				<ul class="main_ul">
+				</ul>
+			</div>
+			<div class="pages">
+				<div class="page_0"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="foot">
+		<ul class="left">
+			<li class="li00"><a href="javascript:;" target="_blank">关于我们</a></li>
+			<li class="li01"><a href="javascript:;" target="_blank">隐私声明</a></li>
+			<li class="li02"><a href="javascript:;" target="_blank">帮助中心</a></li>
+			<li class="li03"><a href="javascript:;" target="_blank">人才招聘</a></li>
+			<li class="li04"><a href="javascript:;" target="_blank">友情链接</a></li>
+			<li class="li05"><a href="javascript:;" target="_blank">联系我们</a></li>
+		</ul>
+
+		<ul class="right">
+			<li class="right_li"><a href="javascript:;" target="_blank"><img
+					src="images/13.png" alt=""></a></li>
+			<li class="right_li"><a href="javascript:;" target="_blank"><img
+					src="images/14.png" alt=""></a></li>
+			<li class="right_li"><a href="javascript:;" target="_blank"><img
+					src="images/15.png" alt=""></a></li>
+			<li class="right_li"><a href="javascript:;" target="_blank"><img
+					src="images/16.png" alt=""></a></li>
+		</ul>
+		<p class="statement">©2014 智慧选校® 版权所有 京ICP备1008610000</p>
+	</div>
+	<div class="erwei">
+		<div class="ew_0 ew_01"></div>
+		<div class="ew_0 ew_02"></div>
+		<div class="ew_0 back_top">
+			<p>▲</p>
+		</div>
+	</div>
+</body>
 <!--[if IE 6]>
 <script type="text/javascript" src="js/DD_belatedPNG.js" ></script>
 <script type="text/javascript">
@@ -12,575 +638,7 @@ DD_belatedPNG.fix('*');
 </script>
 <![endif]-->
 <script src="dist/js/jquery.min.js"></script>
-
-</head>
-<body>
-<div class="top0"></div>
-<div class="contain">
-	<div id="nav0">
-		<div class="logo0"></div>
-		<form  id="scbar_form" method="post" autocomplete="off" action=""  class="form-search-site">
-			<div class="input01">
-				 <div class="dropdown">
-					<button type="button" class="btn dropdown-toggle d_down" id="dropdownMenu1" >
-						<span class="nr_js">专业</span >
-						<span class="caret"> ▼</span>
-					</button>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-						<li role="presentation" class="zhuanye"><a href="javascript:;">学校</a></li>
-					</ul>
-				 </div>
-							 	
-		
-				<div class="input_0">
-					<input class="form-control search_input" placeholder=" 搜索学校或专业，如：北京大学" id="scbar_txt" name="srchtxt" type="text">
-				</div>
-
-				<button class="btn btn-sub" id="sou" type="button">
-					<div class="glyphicon glyphicon-search"></div>
-				</button>
-			</div>
-		</form>
-	</div>
-
-	<div id="nav1">
-		<div class="item" id="item01">
-			<div class="h03"><h3>学科门类</h3></div>
-			<ul class="obj01">
-				<li class="li0 li1 hong sub_all">
-					<a href="javascript:;">全部</a>
-					
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">哲学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">经济学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">法学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">教育学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">文学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">历史学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">理学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">工学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">农学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">医学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">军事学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">管理学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-				<li class="li0 subject">
-					<a href="javascript:;">艺术学</a>
-					<span class="span01">▼</span>
-					<span class="span02">▲</span>
-				</li>
-
-			</ul>
-			<ul class="obj_son obj_ss" id="obj_s1">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s2">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s3">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-
-			<ul class="obj_son obj_ss" id="obj_s4">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s5">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s6">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s7">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s8">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s9">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s10">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s11">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s12">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			<ul class="obj_son obj_ss" id="obj_s13">
-				<div class="arrow"><img src="images/21.jpg" alt=""></div>
-				<li class="xueke"><a href="javascript:;">0701数学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0702物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0703化学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0704天文学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0705地理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0706大气科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0707海洋科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0708地球物理学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0709地质学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0710生物学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0711系统科学</a><span class="obj_span">|</span></li>
-				<li class="xueke"><a href="javascript:;">0712科学技术史</a><span class="obj_span">|</span></li>
-			</ul>
-
-			
-		</div>
-
-		<div class="item" id="item02">
-			<div class="h03"><h3>院校层次</h3></div>
-			<ul class="obj01">
-				<li class="li0 li1 cengci hong">
-					<a href="javascript:;">全部</a>
-					
-				</li>
-				<li class="li0 cengci">
-					<a href="javascript:;">34所</a>
-					
-				</li>
-				<li class="li0 cengci">
-					<a href="javascript:;">985</a>
-					
-				</li>
-				<li class="li0 cengci">
-					<a href="javascript:;">211</a>
-					
-				</li>
-				
-			</ul>
-		</div>
-
-		<div class="item" id="item03">
-			<div class="h03"><h3>学术类型</h3></div>
-			<ul class="obj01">
-				<li class="li0 li1 hong leixing">
-					<a href="javascript:;">全部</a>
-				</li>
-				<li class="li0 leixing">
-					<a href="javascript:;">学术型</a>
-				</li>
-				<li class="li0 leixing">
-					<a href="javascript:;">专业型</a>
-				</li>
-				
-				
-			</ul>
-		</div>
-
-		<div class="item" id="item04">
-			<div class="h03"><h3>地区</h3></div>
-			<ul class="obj01">
-				<li class="ite04 area01 li1 hong"><a href="javascript:;">全部</a></li>
-				<li class="ite04 qu_0"><a href="javascript:;">一区</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">北京</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">上海</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">湖北</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">广东</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">浙江</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">天津</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">江苏</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">四川</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">福建</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">江西</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">山东</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">河南</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">湖南</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">河北</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">山西</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">辽宁</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">吉林</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">安徽</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">重庆</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">陕西</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">黑龙江</a></li>
-				<li class="ite04 area02 qu_0"><a href="javascript:;">二区</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">云南</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">广西</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">贵州</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">西藏</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">新疆</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">宁夏</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">甘肃</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">青海</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">海南</a></li>
-				<li class="ite04 ite044"><a href="javascript:;">内蒙古</a></li>
-				
-				
-				
-				
-			</ul>
-		</div>
-	</div>
-
-	<div id="nav2">
-		<ul class="condition0" id="condition">
-			<p class="tiaojian">筛选条件:</p>
-			<li class="cond cond0"><span class="close">×</span></li>
-			<li class="cond cond1"><span class="close">×</span></li>
-			<li class="cond cond2"><span class="close">×</span></li>
-			<li class="cond cond3"><span class="close">×</span></li>
-			<li class="cond cond4"><span class="close">×</span></li>
-			<li class="cond cond5"><span class="close">×</span></li>
-			
-			
-		</ul>
-	</div>
-
-	<div id="nav3">
-		<div class="h02"><h2>哲学经济学</h2><div class="arrow2"><img src="images/22.jpg" alt=""></div></div>
-		<div class="main">
-			<ul class="main_ul">
-				<!-- <li class="jquery_0">
-					<div class="pic"><img src="images/23.jpg" alt=""></div>
-					<div class="info">
-						<p class="major"><a href="" target="_blank">哲学经济（北京外国语大学）</a></p>
-						<p class="sch_name"><span>211</span><span>985</span><span>34</span></p>
-						<p class="range">所属院系：<span>经济管理学院</span></p>
-					</div>
-					<div class="group0">
-						<div class="sort0">
-							<div class="group1 sort1"><p class="shuzi1">100</p></div>
-							<div class="group2 sort2"><p>学校排名</p></div>
-						</div>
-						<div class="difficult0">
-							<div class="group1 difficult1"><p class="shuzi2">9.59</p></div>
-							<div class="group2 difficult2"><p>报考难度</p></div>
-						</div>
-					</div>
-				</li>
-
-				<li class="jquery_0">
-					<div class="pic"><img src="images/23.jpg" alt=""></div>
-					<div class="info">
-						<p class="major"><a href="" target="_blank">哲学经济（北京外国语大学）</a></p>
-						<p class="sch_name"><span>211</span><span>985</span><span>34</span></p>
-						<p class="range">所属院系：<span>经济管理学院</span></p>
-					</div>
-					<div class="group0">
-						<div class="sort0">
-							<div class="group1 sort1"><p class="shuzi1">100</p></div>
-							<div class="group2 sort2"><p>学校排名</p></div>
-						</div>
-						<div class="difficult0">
-							<div class="group1 difficult1"><p class="shuzi2">9.59</p></div>
-							<div class="group2 difficult2"><p>报考难度</p></div>
-						</div>
-					</div>
-				</li>
-
-				<li class="jquery_0">
-					<div class="pic"><img src="images/23.jpg" alt=""></div>
-					<div class="info">
-						<p class="major"><a href="" target="_blank">哲学经济（北京外国语大学）</a></p>
-						<p class="sch_name"><span>211</span><span>985</span><span>34</span></p>
-						<p class="range">所属院系：<span>经济管理学院</span></p>
-					</div>
-					<div class="group0">
-						<div class="sort0">
-							<div class="group1 sort1"><p class="shuzi1">100</p></div>
-							<div class="group2 sort2"><p>学校排名</p></div>
-						</div>
-						<div class="difficult0">
-							<div class="group1 difficult1"><p class="shuzi2">9.59</p></div>
-							<div class="group2 difficult2"><p>报考难度</p></div>
-						</div>
-					</div>
-				</li>
-
-				<li class="jquery_0">
-					<div class="pic"><img src="images/23.jpg" alt=""></div>
-					<div class="info">
-						<p class="major"><a href="" target="_blank">哲学经济（北京外国语大学）</a></p>
-						<p class="sch_name"><span>211</span><span>985</span><span>34</span></p>
-						<p class="range">所属院系：<span>经济管理学院</span></p>
-					</div>
-					<div class="group0">
-						<div class="sort0">
-							<div class="group1 sort1"><p class="shuzi1">100</p></div>
-							<div class="group2 sort2"><p>学校排名</p></div>
-						</div>
-						<div class="difficult0">
-							<div class="group1 difficult1"><p class="shuzi2">9.59</p></div>
-							<div class="group2 difficult2"><p>报考难度</p></div>
-						</div>
-					</div>
-				</li> -->
-
-				
-			</ul>
-		</div>
-		
-
-
-
-		<div class="pages"><div class="page_0"></div></div>
-
-		
-	</div>
-	
-
-
-
-
-
-	
-</div>
-
-
-
-<div class="foot">
-	<ul class="left">
-		<li class="li00"><a href="javascript:;" target="_blank">关于我们</a></li>
-		<li class="li01"><a href="javascript:;" target="_blank">隐私声明</a></li>
-		<li class="li02"><a href="javascript:;" target="_blank">帮助中心</a></li>
-		<li class="li03"><a href="javascript:;" target="_blank">人才招聘</a></li>
-		<li class="li04"><a href="javascript:;" target="_blank">友情链接</a></li>
-		<li class="li05"><a href="javascript:;" target="_blank">联系我们</a></li>
-
-	</ul>
-	
-	<ul class="right">
-		<li class="right_li"><a href="javascript:;" target="_blank"><img src="images/13.png" alt=""></a></li>
-		<li class="right_li"><a href="javascript:;" target="_blank"><img src="images/14.png" alt=""></a></li>
-		<li class="right_li"><a href="javascript:;" target="_blank"><img src="images/15.png" alt=""></a></li>
-		<li class="right_li"><a href="javascript:;" target="_blank"><img src="images/16.png" alt=""></a></li>
-	</ul>
-	<p class="statement">©2014 智慧选校® 版权所有 京ICP备1008610000</p>
-</div>
-
-
-<div class="erwei">
-	<div class="ew_0 ew_01"></div>
-	<div class="ew_0 ew_02"></div>
-	<div class="ew_0 back_top">
-		<p>▲</p>
-	</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="dist/js/jquery.min.js"></script>
-
-<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript"
+	src="js/search.js"></script>
 <script src="js/jquery.cookie.js"></script>
-
-
-
-</body>
-
 </html>

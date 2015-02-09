@@ -23,7 +23,11 @@ public class ResponseUtil {
 	 */
 	public static void httpResponse(HttpServletResponse response, Object res) {
 		try {
-			response.setHeader("Content-type", "text/html;charset=UTF-8");
+			response.addHeader("Content-type", "text/html;charset=UTF-8");
+//			response.addHeader("Access-Control-Allow-Origin", "*");
+//			response.addHeader("Transfer-Encoding", "chunked");
+			response.setBufferSize(65536);
+			System.out.println(response.getBufferSize());
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(res.toString());
 			response.getWriter().flush();
@@ -39,7 +43,11 @@ public class ResponseUtil {
 	 */
 	public static void httpResponseException(HttpServletResponse response, Exception exception) {
 		try{
-			response.setHeader("Content-type", "text/html;charset=UTF-8");
+			response.addHeader("Content-type", "text/html;charset=UTF-8");
+//			response.addHeader("Access-Control-Allow-Origin", "*");
+//			response.addHeader("Transfer-Encoding", "chunked");
+			response.setBufferSize(65536);
+			System.out.println(response.getBufferSize());
 			response.setCharacterEncoding("UTF-8");
 			HashMap<String, Object>	responseJsonMap = new HashMap<String, Object>();
 			responseJsonMap.put("status", -1);

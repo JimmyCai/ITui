@@ -22,7 +22,7 @@ import cn.itui.webdevelop.utils.exception.ParameterErrorException;
 public class SearchController{
 	private static Log rRLogger = LogFactory.getLog("requestResponse");
 	private MajorService majorService;
-	private CollegeService collegeService;
+	private CollegeService collegeService;	
 	
 	@RequestMapping(value=URLConstants.SEARCH, method=RequestMethod.POST)
 	public String search(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -45,6 +45,7 @@ public class SearchController{
 			if (category==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 			String subject = request.getParameter("sj");
 			if (subject==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+			if (subject.length() > 4) subject = subject.substring(4);
 			String area = request.getParameter("a");
 
 			if (area==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
