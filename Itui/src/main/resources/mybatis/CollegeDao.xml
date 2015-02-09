@@ -50,7 +50,8 @@
 		ON
 			college.city_id = city.id
 		WHERE
-			college.name like #{condition}
+			college.name like concat(concat('%',#{condition}), '%')
+		order by rank
 	</select>
 	<select id="findSchoolsByCollegeId" resultType="java.lang.String">
 		SELECT

@@ -1,27 +1,18 @@
 <!doctype html>
-<html lang="zh-CN">
+<html>
 <head>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>爱推首页</title>
-	<link rel="stylesheet" type="text/css" href="css/01css.css"/>
-	<link rel="stylesheet" href="dist/css/bootstrap.min.css">
-	<script src="dist/js/jquery.min.js"></script>
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  	<!--[if lt IE 9]>
-  	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
- 	 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-  	<![endif]-->
-	
+<meta http-equiv="Content-Type" content="text/html" />
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<title>爱推首页</title>
+<link rel="stylesheet" type="text/css" href="css/01css.css" />
+<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css">
 </head>
-
-
 <body>
 	<div class="container0">
 		<div class="nav_top">
-			<button class="load load1" data-toggle="modal" data-target="#myModal2">
+			<button class="load load1" data-toggle="modal"
+				data-target="#myModal2">
 				<div class="load_tp load1_tp"></div>
 				<p>用户注册</p>
 			</button>
@@ -30,227 +21,186 @@
 				<p>用户登陆</p>
 			</button>
 		</div>
-
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-   		aria-labelledby="myModalLabel" aria-hidden="true">
-      			<div class="modal-dialog">
-            			<div class="modal-content">
-
-			                  	<div class="modal-header">
-				                           <button type="button" class="close" 
-				                              data-dismiss="modal" aria-hidden="true">
-				                                 &times;
-				                           </button>
-				                          <div class="biaoti"><img src="images/17.png" alt=""></div>
-				                          <p class="bt_p1">第三方账号登录</p>
-			                  	</div>
-			                  	<div class="modal-body">
-			                  		<div class="right_0">
-				                  		<ul class="right right1">
-								<li><a class="lia01" href="" target="_blank"></a></li>
-								<li><a class="lia02" href="" target="_blank"></a></li>
-								<li><a class="lia03" href="" target="_blank"></a></li>
-								<li><a class="lia04" href="" target="_blank"></a></li>
-							</ul>
-						</div>
-						<p class="bt_p1">已有账号登录</p>
-					 </div>
-			                  	<div class="modal-footer">
-				                        <form id="denglu" method="post" autocomplete="off" action="" class="form-search-site" role="form" title="请输入有效的邮箱"> 
-				                        	<div class="part01">
-				                        		<label for="">邮箱: </label>
-				                        		<input class="form-control youxiang kuang" name="mail" value=""  id="input_mail" type="text">
-				                        	</div>
-							
-			        				<div id="tishi_mail"><p class="tsTxt_error maildiv01"></p></div>
-							
-							<div class="part02">
-								<label for="name" class="mima">密码</label>
-			        					<input class="form-control pasd" name="pasd" value="" id="pasd" type="password" title="请输入6-15位密码">
-							 	
-							</div>
-
-							<div id="tishi_pass"><a href="" target="" class="tspass_error pasdiv01">忘记密码</a></div>
-
-							<button type="button" class="btn btn-primary dl_ti load" id="load" name="load" >
-				                           			登录
-				                       			</button>
-
-							
-
-				                        </form>
-				                       <div class="success01">
-				                       	<p>成功登陆页面</p>
-				                       </div>
-			                  	</div>
-           	 			</div>
-       			</div>
-		</div>
-
-
-		
-
+	 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      	      <div class="modal-dialog">
+            	<div class="modal-content">
+	               <div class="modal-header">
+		       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+		       </button>
+			<div class="biaoti">
+			   <img src="images/17.png" alt="">
+			</div>
+			
+		   </div>
+		   <div class="modal-body" style="height:60px;">
+		   
+		     <p class="bt_p1 bt_p01">已有账号登录</p>
+		  </div>
+		  <div class="modal-footer">
+		    <form id="denglu" method="post" autocomplete="off" action="" class="form-search-site" role="form" title="请输入有效的邮箱"> 
+		    <div class="part01">
+		      <label for="">邮箱: </label>
+		        <input class="form-control youxiang kuang" name="mail" value=""  id="input_mail" type="text">
+		    </div>
+		    <div id="tishi_mail">
+		        <p class="tsTxt_error maildiv01"></p>
+		    </div>
+		    <div class="part02">
+		       <label for="name" class="mima">密码</label>
+		       <input class="form-control pasd" name="pasd" value="" id="pasd" type="password" title="请输入6-15位密码">
+		    </div>
+                            <div id="tishi_pass">
+                               <a href="" target="" class="tspass_error pasdiv01">忘记密码</a>
+                            </div>
+		    <button type="button" class="btn btn-primary dl_ti load" id="load" name="load" >登录
+                            </button>
+	             </form>
+		 <div class="success01">
+	                <p>成功登陆页面</p>
+	             </div>
+	           </div>
+           	       </div>
+       	   </div>
+	</div>
 		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" 
    		aria-labelledby="myModalLabel" aria-hidden="true">
-      			<div class="modal-dialog">
-            			<div class="modal-content">
-
-			                  	<div class="modal-header">
-				                           <button type="button" class="close" 
-				                              data-dismiss="modal" aria-hidden="true">
-				                                 &times;
-				                           </button>
-				                          <div class="biaoti"><img src="images/17.png" alt=""></div>
-				                          <p class="bt_p1">第三方账号登陆</p>
-			                  	</div>
-			                  	<div class="modal-body">
-			                  		<ul class="right right1">
-							<li><a class="lia01" href="" target="_blank"></a></li>
-							<li><a class="lia02" href="" target="_blank"></a></li>
-							<li><a class="lia03" href="" target="_blank"></a></li>
-							<li><a class="lia04" href="" target="_blank"></a></li>
-						</ul>
-						<p class="bt_p1">新用户注册</p>
-					 </div>
-			                  	<div class="modal-footer">
-				                        <form id="zhuce" method="post" autocomplete="off" action="" class="form-search-site" role="form"> 
-				                        	<div class="part01">
-				                        		<label for="">邮箱:</label>
-				                        		<input class="form-control" name="mail_zc" value=""  id="input_mail2" type="text" title="请输入有效的邮箱">
-				                        	</div>
-							
-			        				<div id="tishi_mail"><p class="tsTxt_error zc_email"></p></div>
-							
-							<div class="part02">
-								<label for="name" class="mima">设置密码:</label>
-								<input class="form-control pasd2" name="pasd2" value="" id="pasd2" type="password" title="请输入6-15位密码">
-							</div>
-							
-			        				
-
-			        				<div id="tishi_mail"><p class="tsTxt_error pasd4"></p></div>
-
-			        				<div class="part02">
-			        					<label for="name" >再次输入密码:</label>
-			        					<input class="form-control pasd3" name="pasd3" value="" id="pasd3" type="password" title="请再次输入相同的密码">
-			        				</div>
-
-			        				<div id="tishi_mail"><p class="tsTxt_error ecqu"></p></div>
-
-			        				
-
-
-							 <button type="button" class="btn btn-primary t_jiao" id="register" name="register" >
-				                           			注册
-				                       	 </button>
-
-				                        </form>
-				                         <div class="success02">
-				                       	<p>恭喜注册成功！</p>
-				                       </div>
-				                       
-			                  	</div>
-           	 			</div>
-       			</div>
-		</div>
-		
-
-
-
-		
-	</div>
-		<!-- 模态框 -->
-
-		<div class="container1">
-			<img class="img-responsive img_bj" src="images/01.png" alt="">
-			<div class="nav_top2">
-				<ul class="top2">
-					<li><a href=""><img class="img-responsive" src="images/05.png" alt=""></a></li>
-					<li><a href=""><img class="img-responsive" src="images/06.png" alt=""></a></li>
-					<li><a href=""><img class="img-responsive" src="images/07.png" alt=""></a></li>
-					<li><a href=""><img class="img-responsive" src="images/08.png" alt=""></a></li>
-					<li><a href=""><img class="img-responsive" src="images/09.png" alt=""></a></li>
-				</ul>
-			</div>
-
-			<div class="center0 row">
-				<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-					<p class="item0">简单你的备考</p>
-				</div>
-
-				 <form id="scbar_form" method="post" autocomplete="off" action=""  class="form-search-site" role="form"> 
-						 <div class="dise"></div> 
-						 <div class="input01">
-							 <div class="dropdown">
-							 	<button type="button" class="btn dropdown-toggle d_down" id="dropdownMenu1" data-toggle="dropdown"><span class="nr_js">专业</span >
-							 	<span class="caret"></span>
-							 	</button>
-							 	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-							 		<li role="presentation" class="zhuanye"><a href="javascript:;">学校</a></li>
-							 	</ul>
-							 </div>
-						 	
-		     					
-						 		
-
-						 	<div class="col-md-7 col-sm-7 col-xs-6">
-						 		<input class="form-control search_input" placeholder="搜索学校或专业，如：北京大学" id="scbar_txt" name="srchtxt" type="text" >
-						 	</div>
-
-						 	<button class="btn btn-sub" id="sou" type="button" ><span class="glyphicon glyphicon-search"></span>搜索</button>
-						 </div>
-					 	
-				  		
-				 </form>
-				
-
-				
-			</div>
-
-			<div class="erwei">
-				<div class="erwei0">
-					<div class="erwei01"><img class="img-responsive" src="images/11.jpg" alt=""></div>
-					<div class="erwei01"><img class="img-responsive" src="images/12.jpg" alt=""></div>
-				</div>
-				
-				<div class="erwei03"><img class="img-responsive" src="images/10.png" alt=""></div>
-			</div>
-		</div>
-
-		<div class="foot ">
-			<ul class="left">
-				<li class="li01"><a href="" target="_blank">关于我们</a></li>
-				<li class="li02"><a href="" target="_blank">隐私声明</a></li>
-				<li class="li03"><a href="" target="_blank">帮助中心</a></li>
-				<li class="li04"><a href="" target="_blank">人才招聘</a></li>
-				<li class="li05"><a href="" target="_blank">友情链接</a></li>
-				<li class="li06"><a href="" target="_blank">联系我们</a></li>
-			</ul>
-
+      <div class="modal-dialog">
+            <div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close"  data-dismiss="modal" aria-hidden="true">  &times;</button>
+			 <div class="biaoti">
+			 	<img src="images/17.png" alt="">
+			 </div>
 			
-			<ul class="right">
-				<li><a class="lia01" href="" target="_blank"></a></li>
-				<li><a class="lia02" href="" target="_blank"></a></li>
-				<li><a class="lia03" href="" target="_blank"></a></li>
-				<li><a class="lia04" href="" target="_blank"></a></li>
+		</div>
+		<div class="modal-body" style="height:60px;">
+		  
+		   <p class="bt_p1 bt_p02">新用户注册</p>
+	          </div>
+	          <div class="modal-footer">
+		<form id="zhuce" method="post" autocomplete="off" action="" class="form-search-site" role="form"> 
+			<div class="part01">
+			    <label for="">邮箱:</label>
+			    <input class="form-control" name="mail_zc" value=""  id="input_mail2" type="text" title="请输入有效的邮箱">
+			</div>
+							
+			 <div id="tishi_mail">
+			 	<p class="tsTxt_error zc_email"></p>
+			 </div>
+			<div class="part02">
+				<label for="name" class="mima">设置密码:</label>
+				<input class="form-control pasd2" name="pasd2" value="" id="pasd2" type="password" title="请输入6-15位密码">
+			</div>
+			<div id="tishi_mail">
+			   <p class="tsTxt_error pasd4"></p>
+			</div>
+			<div class="part02">
+			    <label for="name" >再次输入密码:</label>
+			    <input class="form-control pasd3" name="pasd3" value="" id="pasd3" type="password" title="请再次输入相同的密码">
+			</div>
+			<div id="tishi_mail">
+			    <p class="tsTxt_error ecqu"></p>
+			</div>
+			<button type="button" class="btn btn-primary t_jiao" id="register" name="register" >注册
+			</button>
+		</form>
+		<div class="success02">
+			<p>恭喜注册成功！</p>
+		</div>
+				                       
+	         </div>
+           	</div>
+        </div>
+ </div>
+	</div>
+	<!-- 模态框 -->
+
+	<div class="container1">
+		<img class="img-responsive img_bj" src="images/01.png" alt="">
+		<div class="nav_top2">
+			<ul class="top2">
+				<li><a href=""><img class="img-responsive"
+						src="images/05.png" alt=""></a></li>
+				<li><a href=""><img class="img-responsive"
+						src="images/06.png" alt=""></a></li>
+				<li><a href=""><img class="img-responsive"
+						src="images/07.png" alt=""></a></li>
+				<li><a href=""><img class="img-responsive"
+						src="images/08.png" alt=""></a></li>
+				<li><a href=""><img class="img-responsive"
+						src="images/09.png" alt=""></a></li>
 			</ul>
-			<p class="statement">©2014 智慧选校® 版权所有 京ICP备1008610000</p>
+		</div>
+		<div class="center0 row">
+			<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+				<p class="item0">简单你的备考</p>
+			</div>
+			<form id="scbar_form" method="post" autocomplete="off" action=""
+				class="form-search-site" role="form">
+				<div class="dise"></div>
+				<div class="input01">
+					<div class="dropdown">
+						<button type="button" class="btn dropdown-toggle d_down"
+							id="dropdownMenu1" data-toggle="dropdown">
+							<span class="nr_js">专业</span> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu"
+							aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="zhuanye"><a
+								href="javascript:;">学校</a></li>
+						</ul>
+					</div>
+					<div class="col-md-7 col-sm-7 col-xs-6">
+						<input class="form-control search_input"
+							placeholder="搜索学校或专业，如：北京大学" id="scbar_txt" name="srchtxt"
+							type="text">
+					</div>
+					<button class="btn btn-sub" id="sou" type="button">
+						<span class="glyphicon glyphicon-search"></span>搜索
+					</button>
+				</div>
+			</form>
+		</div>
+		<div class="erwei">
+			<div class="erwei0">
+				<div class="erwei01">
+					<img class="img-responsive" src="images/11.jpg" alt="">
+				</div>
+				<div class="erwei01">
+					<img class="img-responsive" src="images/12.jpg" alt="">
+				</div>
+			</div>
+			<div class="erwei03">
+				<img class="img-responsive" src="images/10.png" alt="">
+			</div>
 		</div>
 	</div>
-	
-
-
-
-
-
-
-	<div class="clear"></div> 
-	
+	<div class="foot ">
+		<ul class="left">
+			<li class="li01"><a href="" target="_blank">关于我们</a></li>
+			<li class="li02"><a href="" target="_blank">隐私声明</a></li>
+			<li class="li03"><a href="" target="_blank">帮助中心</a></li>
+			<li class="li04"><a href="" target="_blank">人才招聘</a></li>
+			<li class="li05"><a href="" target="_blank">友情链接</a></li>
+			<li class="li06"><a href="" target="_blank">联系我们</a></li>
+		</ul>
+		<ul class="right">
+			<li><a class="lia01" href="" target="_blank"></a></li>
+			<li><a class="lia02" href="" target="_blank"></a></li>
+			<li><a class="lia03" href="" target="_blank"></a></li>
+			<li><a class="lia04" href="" target="_blank"></a></li>
+		</ul>
+		<p class="statement">©2014 智慧选校® 版权所有 京ICP备1008610000</p>
+	</div>
+	<div class="clear"></div>
 </body>
+<script src="dist/js/jquery.min.js"></script>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+ 	 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  	<![endif]-->
 <script src="dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/js.js"></script>
-<script type="text/javascript">
-	
-</script>
-
+<script type="text/javascript" src="js/js.js" charset="utf-8"></script>
 </html>

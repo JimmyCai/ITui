@@ -1,6 +1,6 @@
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, button, p, blockquote, th, td {margin:0;padding:0;font-family:"Microsoft Yahei", verdana, helvetica, clean, sans-serif;outline: 0;word-break:break-all;word-wrap:break-word;font-size:12px;}
-h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-size:100%;font-weight:normal}
-input{vertical-align:middle}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend,  textarea, button, p, blockquote, th, td {margin:0;padding:0;font-family:"Microsoft Yahei", verdana, helvetica, clean, sans-serif;outline: 0;word-break:break-all;word-wrap:break-word;font-size:12px; }
+h1,h2,h3,h4,h5,h6,button,select,textarea{font-size:100%;font-weight:normal}
+/*input{vertical-align:middle}*/
 table{border-collapse:collapse;border-spacing:0;}
 img{border:none;display:block}
 a{text-decoration:none;color:#000;}
@@ -21,7 +21,6 @@ ul,ol,li{list-style:none}
 	
 	width: 1000px;
 	height: 500px;
-	border: 1px solid red;
 }
 .top0{
 	width: 100%;
@@ -35,38 +34,46 @@ ul,ol,li{list-style:none}
 	  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed9a1d',endColorstr='#df7312',grandientType=1); /** IE7 **/ 
 	   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed9a1d',endColorstr='#df7312',grandientType=1); /** IE8 **/
 	   box-shadow: 2px 2px 4px #9e9c9c;
-
 }
 .containa{
 	width: 1024px;
-	
 	margin:0 auto;
-	border: 1px solid red;
 	margin-top: -88px;
 }
 /*顶部*/
 #nav0{
 	width: 1024px;
 	height: 88px;
-	
 	margin: 0 auto;
+	_background-color: #ed991d;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ed9a1d), to(#df7312)); /** Chrome Safari **/
+	 background: -moz-linear-gradient(top, #ed9a1d, #df7312); /** FireFox **/
+	  background: -o-linear-gradient(top, #ed9a1d, #df7312);/** Opear **/ 
+	  background: -ms-linear-gradient(#ed9a1d 0%,#df7312 100%);/** IE9 IE10 **/ 
+	  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed9a1d',endColorstr='#df7312',grandientType=1); /** IE7 **/ 
+	   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed9a1d',endColorstr='#df7312',grandientType=1); /** IE8 **/
+	   box-shadow: 2px 2px 4px #9e9c9c;
+	   position: relative;
 }
 .logo0{
 	width: 300px;
 	height: 80px;
-	border: 1px solid green;
 	float: left;
 	background: url(../images/18.png) no-repeat;
 }
 #scbar_form{
-	float: right;
-	
+	float: left;
+	margin-left: 90px;
 	margin-top: 25px;
+}
+#scbar_txt{
+	text-indent: 2em;
 }
 .input01{
 	overflow: hidden;
 	width: 508px;
 	+width: 512px;
+
 	
 }
 .dropdown-menu{
@@ -90,14 +97,15 @@ ul,ol,li{list-style:none}
 
 }
 .search_input{
-	width: 400px;
-	height: 32px;
+	width: 360px;
+	height: 30px;
 	border: 1px solid #e67917;
 	border-right:none;
 	color:#666;
 	font-size: 14px;
 	line-height: 32px;
 	+padding-left: 6px;
+
 
 }
 .glyphicon-search{
@@ -133,16 +141,18 @@ ul,ol,li{list-style:none}
 
 #nav01{
 	width: 1024px;
-	height: 154px;
 	margin: 0 auto;
-	border: 1px solid blue;
 	margin-top: 30px;
 	background-color: #fff;
 	box-shadow: 0px 0px 5px #333;
+	overflow: hidden;
+	color: #555;
 }
+
+/*20150206页面头样式结束*/
 .sch_name{
-	width: 100px;
-	height: 100px;
+	width: 90px;
+	height: 90px;
 	border: 1px solid #e4e4e4;
 	border-radius: 50%;
 	overflow: hidden;
@@ -156,14 +166,14 @@ ul,ol,li{list-style:none}
 .sch_name a img{
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 5px;
-
+	/*margin-top: 5px;*/
+	width: 90px;
+	height: 90px;
 
 }
 .sch_info{
 	width: 284px;
 	height: 100px;
-	border: 1px solid blue;
 	float: left;
 	margin-left: 12px;
 	margin-top: 26px;
@@ -174,8 +184,15 @@ ul,ol,li{list-style:none}
 	color: #333;
 	width: 284px;
 	height: 22px;
-	text-align: center;
+	text-align: left;
+	padding-left:14px;
 	color: #333;
+	
+	/*color: transparent;
+	opacity: 0.3;
+	text-shadow:2px 3px 5px #000,-2px -3px 5px #000;*/
+
+
 }
 .level{
 	width: 284px;
@@ -208,7 +225,6 @@ ul,ol,li{list-style:none}
 .college{
 	width: 284px;
 	height: 24px;
-	background-color: pink;
 	margin-top: 10px;
 	color: #333;
 	
@@ -235,12 +251,11 @@ ul,ol,li{list-style:none}
 	width: 169px;
 	height: 154px;
 	float: left;
-	border-left: 1px solid red;
+	border-left:1px solid #cbcbcb;
 }
 .image0{
 	width: 59px;
 	height: 59px;
-	border: 1px solid blue;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 44px;
@@ -268,7 +283,6 @@ ul,ol,li{list-style:none}
 	height: 234px;
 	margin: 0 auto;
 	margin-top: 30px;
-	border: 1px solid blue;
 	background-color: #5db9e3;
 	box-shadow: 0px 0px 5px #333;
 	position: relative;
@@ -276,7 +290,6 @@ ul,ol,li{list-style:none}
 .nav02_item{
 	width: 300px;
 	height: 20px;
-	border: 1px solid red;
 	margin-top: 10px;
 	color: #fff;
 	
@@ -291,11 +304,11 @@ ul,ol,li{list-style:none}
 }
 .item_icon p{
 	float: left;
+	color: #fff;
 }
 .pingji{
 	width: 150px;
 	height: 120px;
-	border: 1px solid red;
 	position: absolute;
 	left: 38px;
 	top: 72px;
@@ -306,6 +319,7 @@ font-size: 124px;
 position: absolute;
 left: 10px;
 top: -10px;
+color: #fff;
 
 }
 .jia{
@@ -314,11 +328,11 @@ top: -10px;
 	left: 80px;
 	top: -10px;
 	font-weight: 700;
+	color: #fff;
 }
 .bar{
 	width: 340px;
 	height: 140px;
-	border: 1px solid red;
 	position: absolute;
 	left: 192px;
 	top: 60px;
@@ -333,7 +347,6 @@ top: -10px;
 .bar0{
 	width: 290px;
 	height: 20px;
-	border: 1px solid red;
 	float: left;
 	margin-left: 10px;
 }
@@ -446,16 +459,16 @@ margin-left: 4px;
 	
 }
 .a_A{
-	width:25%;
+	/*width:25%;*/
 }
 .b_B{
-	width:50%;
+	/*width:50%;*/
 }
 .c_C{
-	width:75%;
+	/*width:75%;*/
 }
 .d_D{
-	width:100%;
+	/*width:100%;*/
 }
 .pb-container{
 	background: #cfe6f0;
@@ -492,7 +505,6 @@ margin-left: 4px;
 .para{
 	width: 428px;
 	height: 170px;
-	border: 1px solid yellow;
 	position: absolute;
 	left: 547px;
 	top: 38px;
@@ -501,7 +513,6 @@ margin-left: 4px;
 	width: 277px;
 	height: 142px;
 	background: url(../images/29.png) no-repeat;
-	border: 1px solid red;
 	margin-top: 15px;
 	float: left;
 	position: relative;
@@ -556,7 +567,6 @@ margin-left: 4px;
 	height: 288px;
 	margin: 0 auto;
 	margin-top: 30px;
-	border: 1px solid blue;
 	background-color: #fff;
 	box-shadow: 0px 0px 5px #333;
 	position: relative;
@@ -614,16 +624,16 @@ margin-left: 4px;
 	font-size: 20px;
 	margin-top: -35px;
 }
-.rank_tp1{
+.rank_tp1 p{
 	color: #ffaf67;
 	
 }
-.rank_tp2{
+.rank_tp2 p{
 	color: #5db9e3;
 	
 }
 
-.rank_tp3{
+.rank_tp3 p{
 	color: #b2d155;
 	
 }
@@ -631,11 +641,11 @@ margin-left: 4px;
 /*第四部分*/
 
 #nav04{
-	/*width: 1024px;*/
+	width: 1024px;
 	height: 316px;
 	margin: 0 auto;
 	margin-top: 30px;
-	border: 1px solid blue;
+
 	background-color: #fff;
 	box-shadow: 0px 0px 5px #333;
 	position: relative;
@@ -645,7 +655,6 @@ margin-left: 4px;
 #main2{
 	width: 750px;
 	height: 300px;
-	border: 1px solid red;
 	position:absolute;
 	left: 0px;
 	top: 0px;
@@ -654,7 +663,6 @@ margin-left: 4px;
 .result0{
 	width: 200px;
 	height: 200px;
-	border: 1px solid green;
 	position: absolute;
 	right: 50px;
 	top: 60px;
@@ -706,7 +714,7 @@ margin-left: 4px;
 	height: 264px;
 	margin: 0 auto;
 	margin-top: 30px;
-	border: 1px solid blue;
+
 	background-color: #fff;
 	box-shadow: 0px 0px 5px #333;
 	position: relative;
@@ -736,7 +744,6 @@ margin-left: 4px;
 .score0{
 	width: 184px;
 	height: 130px;
-	border: 1px solid blue;
 	font-size: 74px;
 	color: #fab071;
 	font-weight: 700;
@@ -771,7 +778,6 @@ margin-left: 4px;
 .bar_5{
 	width: 444px;
 	height: 140px;
-	border: 1px solid red;
 	position: absolute;
 	left: 290px;
 	top: 86px;
@@ -875,7 +881,7 @@ margin-left: 4px;
 	
 	
 }
-.a_A_5{
+/*.a_A_5{
 	width:25%;
 }
 .b_B_5{
@@ -886,7 +892,7 @@ margin-left: 4px;
 }
 .d_D_5{
 	width:100%;
-}
+}*/
 .pb-container_5{
 	background: #f4f5f6;
 }
@@ -918,7 +924,6 @@ margin-left: 4px;
 .bar0_5{
 	width: 440px;
 	height: 20px;
-	border: 1px solid red;
 	float: left;
 	/*margin-left: 10px;*/
 }
@@ -942,7 +947,6 @@ margin-left: 4px;
 .zongjie_5{
 	width: 240px;
 	height: 140px;
-	border: 1px solid blue;
 	position: absolute;
 	left: 744px;
 	top: 86px;
@@ -950,7 +954,6 @@ margin-left: 4px;
 .arrow_5{
 	width: 56px;
 	height: 44px;
-	border: 1px solid red;
 	float: left;
 	background: url(../images/icon01.png) -244px -1380px no-repeat;
 	margin-top: 44px;
@@ -973,7 +976,6 @@ margin-left: 4px;
 }
 .tip{
 	width: 100px;
-	border: 1px solid green;
 	position: absolute;
 	left: 744px;
 	top: 86px;
@@ -1023,7 +1025,6 @@ margin-left: 4px;
 	height: 436px;
 	margin: 0 auto;
 	margin-top: 30px;
-	border: 1px solid blue;
 	background-color: #fff;
 	box-shadow: 0px 0px 5px #333;
 	position: relative;
@@ -1031,7 +1032,6 @@ margin-left: 4px;
 .nav06_bj{
 	width: 984px;
 	height: 345px;
-	border: 1px solid blue;
 	position: absolute;
 	left: 0px;
 	top: 68px;
@@ -1096,6 +1096,7 @@ margin-left: 4px;
 }
 .percent01{
 	background-color: #f2615c;
+	display: none;
 	
 }
 .percent02{
@@ -1192,7 +1193,7 @@ margin-left: 4px;
 	position: absolute;
 	left: 200px;
 	top: 70px;
-	z-index: 100;
+	z-index: 60;
 	border-radius: 10px;background-color: #f6f6f6;
 	padding-top: 20px;
 	
@@ -1206,7 +1207,6 @@ margin-left: 4px;
 	font-size: 24px;
 	line-height: 30px;
 	color: #a09f9f;
-	/*background-color: green;*/
 	text-align: center;
 
 
@@ -1239,7 +1239,6 @@ margin-left: 4px;
 	height: 486px;
 	margin: 0 auto;
 	margin-top: 30px;
-	border: 1px solid blue;
 	background-color: #fff;
 	box-shadow: 0px 0px 5px #333;
 	position: relative;
@@ -1247,7 +1246,6 @@ margin-left: 4px;
 .chart{
 	width: 787px;
 	height: 264px;
-	border: 1px solid blue;
 	position: absolute;
 	left: 38px;
 	top: 30px;
@@ -1264,11 +1262,8 @@ margin-left: 4px;
 }
 .cha_li0{
 	width: 78px;
-	
-	background-color: pink;
 	position: absolute;
 	
-	border-top: 1px solid blue;
 
 }
 .cha_li1{
@@ -1318,11 +1313,9 @@ margin-left: 4px;
 }
 .bar_cha{
 	width: 42px;
-	
-	background-color: green;
 }
 .bar_cha1{
-	height: 120px;
+	/*height: 150px;*/
 }
 .bar_cha2{
 	height: 80px;
@@ -1383,7 +1376,7 @@ margin-left: 4px;
 	z-index:0;
 }
 .occup1{
-	height: 120px;
+	/*height: 150px;*/
 }
 
 .occup2{
@@ -1414,7 +1407,6 @@ margin-left: 4px;
 .chart_right{
 	width: 166px;
 	height: 244px;
-	border: 1px solid red;
 	position: absolute;
 	right: 30px;
 	top: 80px;
@@ -1438,7 +1430,6 @@ margin-left: 4px;
 .scale{
 	width: 24px;
 	height: 156px;
-	border: 1px solid green;
 	float: left;
 	background: url(../images/icon01.png) -278px -526px no-repeat;
 
@@ -1446,7 +1437,6 @@ margin-left: 4px;
 .similar{
 	width: 88px;
 	height: 158px;
-	border: 1px solid green;
 	float: right;
 	margin-top: 36px;
 	margin-right: 25px;
@@ -1492,7 +1482,6 @@ margin-left: 4px;
 	position: absolute;
 	left: 20px;
 	top: 340px;
-	border: 1px solid blue;
 }
 .zhu{
 	font-size: 14px;
@@ -1512,7 +1501,6 @@ margin-left: 4px;
 	height: 280px;
 	margin: 0 auto;
 	margin-top: 30px;
-	border: 1px solid blue;
 	background-color: #fff;
 	box-shadow: 0px 0px 5px #333;
 	position: relative;
@@ -1531,7 +1519,6 @@ margin-left: 4px;
 .major{
 	width: 511px;
 	height: 200px;
-	border: 1px solid red;
 	border-left: none;
 	margin-top: 10px;
 	+margin-top: 10px;
@@ -1581,6 +1568,7 @@ margin-left: 4px;
 	line-height: 40px;
 	color: #555;
 	font-size: 14px;
+	/*padding-left: 10px;*/
 }
 .order1{
 	width: 16px;
@@ -1601,7 +1589,6 @@ margin-left: 4px;
 	height: 40px;
 	font-size: 14px;
 	color: #555;
-	background-color: orange;
 	overflow: hidden;
 	
 }
@@ -1609,7 +1596,6 @@ margin-left: 4px;
 	
 	width: 220px;
 	height: 40px;
-	background-color: pink;
 	overflow: hidden;
 }
 .nandu0{
@@ -1628,23 +1614,14 @@ margin-left: 4px;
 	position: absolute;
 	left: 32px;
 	top: 0px;
-	background-color: green;
 }
-/*.zy_name p{
-	height: 40px;
-	line-height: 40px;
-	font-size: 14px;
-	position: absolute;
-	background-color: green;
-}*/
+
 
 .name_full{
 	height: 40px;
 	line-height: 40px;
 	font-size: 14px;
 	position: absolute;
-	background-color: green;
-	
 	left: 32px;
 	top: 0px;
 	
@@ -1668,6 +1645,496 @@ margin-left: 4px;
 	right: 0px;
 	bottom: -50px;
 	background-color: yellow;
+}
+
+/*20150206*/
+/*2015年0203编辑用户登录模态框*/
+#modal_load{
+	width:100%;
+	height: 100%;
+	   position: absolute;
+	   left: 0px;
+	   top: 0px;
+	   z-index: 70;
+	   display: none;
+
+}
+
+.gai_load{
+	width:100%;
+	height: 100%;
+	background-color: #000;
+	 filter:alpha(opacity=70);   
+	   -moz-opacity:0.7;   
+	   -khtml-opacity: 0.7;   
+	   opacity: 0.7; 
+	   position: absolute;
+	   left: 0px;
+	   top: 0px;
+
+}
+.tab{
+	width:500px;
+	height: 500px;
+	background-color: #fff;
+	border-radius: 6px;
+}
+.header{
+	widows: 500px;
+	height: 40px;
+	border-bottom: 1px solid #cbcbcb;
+
+}
+.header p{
+	float: left;
+	font-size: 18px;
+	line-height: 40px;
+	width: 60px;
+	text-align: center;
+	margin-left: 10px;
+
+}
+.loaditem{
+	color: #428BCA;
+	border-bottom: 1px solid #428BCA;
+	cursor: pointer;
+	
+}
+.regsitem{
+	color: #FF7F27;
+	cursor: pointer;
+}
+/*20150206*/
+.header .prompt{
+	width: 200px;
+	float: right;
+	color: #B2D155;
+	height: 40px;
+	margin-right: 10px;
+}
+.tab_page{
+	width:500px;
+	height: 290px;
+	position: relative;
+}
+.loadpage{
+	width: 500px;
+	height: 280px;
+	background-color: #F8F4A0;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: none;
+}
+.regspage{
+	width: 500px;
+	height: 280px;
+	background-color: #E0F896;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	/*display: none;*/
+}
+.waitpage
+{
+width: 500px;
+height: 280px;
+background-color: #cbcbcb;
+position: absolute;
+left: 0px;
+top: 0px;
+display: none;
+font-size: 24px;
+line-height: 280px;
+color: #999;
+text-align: center;
+}
+.otherload{
+	widows: 498px;
+	height: 100px;
+}
+.other-account{
+	width:100%;
+	height: 24px;
+	font-size: 12px;
+	color:#999;
+	line-height: 24px;
+	text-align: center;
+	margin-top: 10px;
+}
+.ituilogo{
+	width: 100%;
+	height: 60px;
+	margin-top: 10px;
+	border-bottom: 1px solid #cbcbcb;
+}
+.ituilogo a{
+	display: block;
+	height: 60px;
+	width: 130px;
+	background: url(../images/17.png) no-repeat;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+.others{
+	width:100%;
+	height: 40px;
+	margin-top: 10px;
+}
+.others-acc{
+	width:50%;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.others-acc li{
+	float: left;
+	margin-left: 20px;
+	_margin-left: 10px;
+}
+.close{
+	width:24px;
+	height: 24px;
+	font-size: 24px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	text-align: center;
+	line-height: 24px;
+	cursor: pointer;
+	border-radius:6px;
+}
+
+#loadform{
+	width: 490px;
+	height: 270px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.box1{
+	width: 60%;
+	height: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+.box2{
+	width: 60%;
+	height: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+.mailp{
+	line-height: 40px;
+	line-height: 30px;
+	float: left;
+	font-size: 14px;
+}
+.pasdp{
+	line-height: 40px;
+	line-height: 30px;
+	float: left;
+	font-size: 14px;
+}
+.mail_inp{
+	width:80%;
+	float: left;
+	line-height: 24px;
+	color: #666;
+}
+.pasd_inp{
+	width:80%;
+	float: left;
+	line-height: 24px;
+	color: #666;
+}
+.pasdp{
+	float: left;
+}
+.errmsg{
+	float: left;
+	widows: 80%;
+	height: 20px;
+	margin-left: 40px;
+	line-height: 20px;
+	background-color: yellow;
+	margin-top: 10px;
+}
+.forget{
+	float: left;
+	widows: 80%;
+	height: 20px;
+	margin-left: 40px;
+	line-height: 20px;
+	background-color: yellow;
+	margin-top: 10px;
+}
+
+/*注册框*/
+#regsrorm{
+	width: 490px;
+	height: 270px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.box0{
+	width: 70%;
+	height: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+.box_x{
+	width: 70%;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+.regs_p{
+	line-height: 40px;
+	line-height: 30px;
+	font-size: 14px;
+	float: left;
+}
+.regs_mail{
+	width:70%;
+	float: left;
+	line-height: 24px;
+	color: #666;
+	margin-left: 24px;
+}
+.same_pasd{
+	width:70%;
+	float: left;
+	line-height: 24px;
+	color: #666;
+}
+.regs_pasd
+{
+width:70%;
+float: left;
+line-height: 24px;
+color: #666;
+}
+
+
+
+.errregs{
+	float: left;
+	width: 70%;
+	height: 20px;
+	margin-left: 70px;
+	line-height: 20px;
+	background-color: yellow;
+	margin-top: 10px;
+}
+.same{
+	float: left;
+	widows: 80%;
+	height: 20px;
+	margin-left: 70px;
+	line-height: 20px;
+	background-color: yellow;
+	margin-top: 10px;
+}
+.pasd_p{
+	float: left;
+	widows: 80%;
+	height: 20px;
+	margin-left: 70px;
+	line-height: 20px;
+	background-color: yellow;
+	margin-top: 10px;
+}
+.sure_p{
+	line-height: 40px;
+	line-height: 30px;
+	float: left;
+	font-size: 14px;
+}
+.set_p{
+	line-height: 40px;
+	line-height: 30px;
+	float: left;
+	font-size: 14px;
+}
+.button_regs{
+	width:100px;
+	height: 40px;
+	background-color: #FF7F27;
+	font-size: 20px;
+	color: #fff;
+	border-radius: 6px;
+	line-height: 40px;
+	text-align: center;
+	margin-top: 10px;
+	cursor: pointer;
+	float: left;
+	margin-left: 40px;
+	border:none;
+
+}
+.reset_regs{
+	width:100px;
+	height: 40px;
+	background-color: #428BCA;
+	font-size: 20px;
+	color: #fff;
+	border-radius: 6px;
+	line-height: 40px;
+	text-align: center;
+	margin-top: 10px;
+	cursor: pointer;
+	float: left;
+	margin-left: 40px;;
+}
+.button_load{
+	width:100px;
+	height: 40px;
+	background-color: #428BCA;
+	font-size: 20px;
+	color: #fff;
+	border-radius: 6px;
+	line-height: 40px;
+	text-align: center;
+	margin-top: 20px;
+	cursor: pointer;
+	float: left;
+	margin-left: 46px;
+}
+.reset_load
+{
+	width:100px;
+	height: 40px;
+	background-color: #FF7F27;
+	font-size: 20px;
+	color: #fff;
+	border-radius: 6px;
+	line-height: 40px;
+	text-align: center;
+	margin-top: 20px;
+	cursor: pointer;
+	float: left;
+	margin-left: 46px;
+
+}
+
+/*用户中心头像显示*/
+/*已经登录*/
+.user{
+	width:40px;
+	height: 40px;
+	float: left;
+	margin-top: 20px;
+	margin-left: 66px;
+	position: relative;
+	display: none;
+}
+.user a{
+	display: block;
+	width:40px;
+	height: 40px;
+	border-radius: 50%;
+	overflow: hidden;
+	
+}
+.user img{
+	width: 40px;
+	height: 40px;
+}
+.load_p{
+	color: #fff;
+	height: 40px;
+	font-size: 14px;
+	position: absolute;
+	left: 980px;
+	top: 50px;
+}
+
+/*尚未登录或退出*/
+.user2{
+	width:40px;
+	height: 40px;
+	float: left;
+	margin-top: 20px;
+	margin-left: 66px;
+	position: relative;
+	display: none;
+}
+.user2 a
+{
+	display: block;
+	width:40px;
+	height: 40px;
+	border-radius: 50%;
+	overflow: hidden;
+	
+
+}
+.drop_menu{
+	width: 120px;
+	position: absolute;
+	left: -66px;
+	top: 60px;
+	display: none;
+	border-radius: 6px;
+}
+.arrow_up
+{
+	position:absolute;
+	top:-20px;
+	right:30px; /* 圆角的位置需要细心调试哦 */
+	width:0;
+	height:0;
+	font-size:0;
+	border:solid 10px;
+	/*border-color:#E27A14 #E27A14 #E27A14 #ffca74;*/
+	border-color:#E27A14 #E27A14 #E27A14 #f6f6f6;
+	-moz-transform:rotate(-90deg);
+	-webkit-transform:rotate(90deg);
+}
+.collect{
+	width: 120px;
+	height: 36px;
+	border-bottom: 1px solid #cbcbcb;
+	border-left: 1px solid #5DB9E3;
+	/*background-color: #ffca74;*/
+	background-color: #f6f6f6;
+	cursor: pointer;
+	border-radius: 6px;
+}
+.coll_pic0{
+	width:24px;
+	height: 24px;
+	float: left;
+	background: url(../images/statr3.png) no-repeat;
+	margin-left: 4px;
+	margin-top: 4px;
+}
+.colllist{
+	color: #555;
+	font-size: 16px;
+	line-height: 36px;
+	padding-left: 10px;
+	float: left;
+}
+.coll_pic1{
+	width:24px;
+	height: 24px;
+	float: left;
+	background: url(../images/off3.png) no-repeat;
+	margin-left: 4px;
+	margin-top: 4px;
+}
+.collout{
+	color: #555;
+	font-size: 16px;
+	line-height: 36px;
+	padding-left: 10px;
+	float: left;
 }
 
 
@@ -1760,7 +2227,6 @@ border-top: 4px solid #f4b802;
 	width: 184px;
 	height: 68px;
 	float: right;
-	border: 1px solid blue;
 }
 .right_li{
 	float: left;
@@ -1811,7 +2277,6 @@ border-top: 4px solid #f4b802;
 .erwei{
 	width: 40px;
 	height: 120px;
-	border: 1px solid blue;
 	position: fixed;
 	right: 70px;
 	bottom: 0px;
@@ -1850,7 +2315,6 @@ border-top: 4px solid #f4b802;
 .mao{
 	width: 130px;
 	height: 340px;
-	border: 1px solid blue;
 	position: absolute;
 	right: 0px;
 	top: 120px;
@@ -1873,7 +2337,6 @@ border-top: 4px solid #f4b802;
 	height: 278px;
 	width: 84px;
 	border-left:2px solid #a8a5a6;
-	/*background-color: pink;*/
 	position: absolute;
 	left: 10px;
 	top: 26px;
@@ -1928,7 +2391,17 @@ border-top: 4px solid #f4b802;
 }
 
 /*分页*/
-.pages {text-align:right;width:90%;margin:20px auto;padding-top:0px;height:26px;overflow:hidden; border: 1px solid blue;float: right;margin-right: 30px;}
+.pages {text-align:right;width:90%;margin:20px auto;padding-top:0px;height:26px;overflow:hidden; float: right;margin-right: 30px;}
 .pages a {text-align:center;padding:10px;border:1px solid #CCC;margin:0px 5px;text-decoration:none;color:#333;}
 .pages a:hover {border:1px solid #FC0;color:#F60;}
 .pages .this {border:1px solid #FC0;color:#F60;}
+
+
+
+.yuanxi,.sch_full{
+	padding-left: 10px;
+}
+.item_icon p{
+	float: left;
+	color: #fff;
+}

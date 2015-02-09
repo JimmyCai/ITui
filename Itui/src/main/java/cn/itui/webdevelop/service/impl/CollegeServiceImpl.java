@@ -92,6 +92,7 @@ public class CollegeServiceImpl implements CollegeService {
 		HashMap<String, Object> result = collegeDao.getCollegeInfo(collegeId);
 		List<String> schools = collegeDao.findSchoolsByCollegeId(collegeId);
 		result.put("school", schools);
+		result.put("followId", -1);
 		return ResponseUtil.wrapNormalReturn(result);
 	}
 
