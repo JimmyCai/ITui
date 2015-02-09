@@ -72,13 +72,16 @@ public class MajorInfoController {
 	
 	@RequestMapping(value=URLConstants.DISFOLLOWMAJOR, method=RequestMethod.POST)
 	public String disFollowMajor(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String idStr = request.getParameter("id");
-		if(idStr == null)
+		String code = request.getParameter(CODE);
+		String majorIdStr = request.getParameter(MAJORID);
+		if(code == null)
+			throw NotLoginException.getInstance();
+		if(majorIdStr == null)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		int id = Integer.parseInt(idStr);
-		String requestStr = RequestUtil.getUserBaseInfo(request) + "ID:" + id;
+		int majorId = EnDeCode.decodePara(majorIdStr);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + CODE + ":" + code + "\t" + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
-		return followService.deleteFollowMajor(id);
+		return followService.deleteFollowMajor(code, majorId);
 	}
 	
 	@RequestMapping(value=URLConstants.GETFOLLOWMAJOR, method=RequestMethod.POST)

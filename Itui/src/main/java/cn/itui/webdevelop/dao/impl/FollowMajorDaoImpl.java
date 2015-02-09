@@ -32,8 +32,11 @@ public class FollowMajorDaoImpl implements FollowMajorDao{
 		return sqlSession.insert("cn.itui.webdevelop.dao.FollowMajorDao.insertFollowMajor", parameter);
 	}
 
-	public int deleteFollowMajorById(int id) {
-		return sqlSession.delete("cn.itui.webdevelop.dao.FollowMajorDao.deleteFollowMajorById", id);
+	public int deleteFollowMajorByMajorIdAndCode(String code, int majorId) {
+		HashMap<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("code", code);
+		parameter.put("majorId", majorId);
+		return sqlSession.delete("cn.itui.webdevelop.dao.FollowMajorDao.deleteFollowMajorByMajorIdAndCode", parameter);
 	}
 	
 	public int deleteFollowMajorByCollegeIdAndCode(String code,

@@ -58,20 +58,20 @@ public class FollowServiceImpl implements FollowService{
 		return buildJson(followMajors, followColleges);
 	}
 
-	public String deleteFollowCollege(int id, String code, int collegeId) throws ParameterErrorException, DatabaseException {
-		if(id < 0)
+	public String deleteFollowCollege(String code, int collegeId) throws ParameterErrorException, DatabaseException {
+		if(collegeId < 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		int fretInt = followCollegeDao.deleteFollowCollege(id);
+		int fretInt = followCollegeDao.deleteFollowCollegeByCollegeIdAndCode(collegeId, code);
 		followMajorDao.deleteFollowMajorByCollegeIdAndCode(code, collegeId);
 		if(fretInt != 1)
 			throw DatabaseException.getInstance();
 		return ResponseUtil.wrapNormalReturn(DISFOLLOWCOLLEGE_SUCCESS);
 	}
 
-	public String deleteFollowMajor(int id) throws ParameterErrorException, DatabaseException {
-		if(id < 0)
+	public String deleteFollowMajor(String code, int majorId) throws ParameterErrorException, DatabaseException {
+		if(majorId < 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
-		int retInt = followMajorDao.deleteFollowMajorById(id);
+		int retInt = followMajorDao.deleteFollowMajorByMajorIdAndCode(code, majorId);
 		if(retInt < 0)
 			throw DatabaseException.getInstance();
 		return ResponseUtil.wrapNormalReturn(DISFOLLOWMAJOR_SUCCESS);
