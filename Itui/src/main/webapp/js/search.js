@@ -12,7 +12,10 @@ $(function(){
 		$('.nr_js').html(neirong);
 		$('.zhuanye  a ').html(neirong2);
 	});
-	
+//	鼠标移出下拉框1秒后下拉框消失
+	$('.dropdown-menu').mouseout(function(event){
+		setTimeout("$('.dropdown-menu').css('display', 'none')",20);
+	});
 
 	
 
@@ -267,9 +270,10 @@ function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 
 		if(t1=="专业"){
 			t1=1;
+		}else{
 			t1=2;
-
 		}
+			
 		 cond5_charu();
 
 		xueke0="",xueke1="",xueke2="",xueke3="",xueke4="";
@@ -306,9 +310,16 @@ var c1 = getPar('c');
 if (!c1) {
 	c1 = '';
 };
-
  xueke5=c1;
- console.log(xueke5+"par");
+ 
+ if (t1=='1'){
+	 $('.nr_js').html('专业');
+	 $('.zhuanye a').html('学校');
+ }else{
+	 $('.nr_js').html('学校');
+	 $('.zhuanye a').html('专业');
+ }
+ 
 function cond_hide(){
 		$('.cond0').hide();
 		$('.cond1').hide();

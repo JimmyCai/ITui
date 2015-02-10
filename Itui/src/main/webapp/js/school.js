@@ -10,7 +10,10 @@ $(function(){
 		$('.nr_js').html(neirong);
 		$('.zhuanye  a ').html(neirong2);
 	});
-	
+//	鼠标移出下拉框1秒后下拉框消失
+	$('.dropdown-menu').mouseout(function(event){
+		setTimeout("$('.dropdown-menu').css('display', 'none')",1000);
+	});
 	//回顶部事件
 	$body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
 
@@ -117,12 +120,12 @@ function Attention(follwid)
 	$('.image2').click(function(event)
 	{
 		cancel_atten();
-		attention_ajax()
+		attention_ajax();
 	});
 	$('.image4').click(function(event)
 	 {
 		atten();
-		attention_ajax()
+		cancelattention_ajax(follwid);
 	});
 }
 
@@ -174,21 +177,29 @@ $.ajax
 		$('.sch_name').find('img').attr('src', 'http://www.itui.cn/itui/images/'+img_src);
 		$('.cityp_2').text(city_coll);
 		$('.sch_info').find('h3').text(data.normalReturn.college);
-		if (data.normalReturn.is34 == 1) {
-			console.log(34);
-			$('.level01').find('p').html('34所');
-		}
-		if (data.normalReturn.is985 == 1) {
-			$('.level02').find('p').text('985');
-		}
-		if (data.normalReturn.is211 == 1) {
-			$('.level03').find('p').text('211');
-		}
 		if (data.normalReturn.is34==0 && data.normalReturn.is985==0 && data.normalReturn.is211==0){
 			$('.level01').find('p').text('普通');
 			$('.level02').remove();
 			$('.level03').remove();
+		}else{
+			if (data.normalReturn.is34 == 1) {
+				$('.level01').find('p').html('34所');
+			}else{
+				$('.level01').remove();
+			}
+			if (data.normalReturn.is985 == 1) {
+				$('.level02').find('p').text('985');
+			}else{
+				$('.level02').remove();
+			}
+		
+			if (data.normalReturn.is211 == 1) {
+				$('.level03').find('p').text('211');
+			}else{
+				$('.level03').remove();
+			}
 		}
+
 		
 		//获得关注信息
 		var followid=data.normalReturn.followId;
@@ -515,7 +526,7 @@ $('.collect').mouseenter(function(event)
 	});	
 }
 userCenter();
-//如果点击关注将学校id发送给服务器
+//如果点击关注将学校id发送给服务器   关注发送
 function attention_ajax()
 {
 	$.ajax({
@@ -523,6 +534,24 @@ function attention_ajax()
 		type: 'post',
 		dataType: 'html',
 		data: {'cid': collageid, 'code': "f4071ec84347304e83512c25f8af4f67"},
+		success: function(msg){
+			var data = eval('msg='+msg);
+			if(status==0)
+			{
+				console.log(collageid);
+			}
+		}	
+	});
+}
+
+//如果点击关注将学校id发送给服务器   取消关注发送
+function cancelattention_ajax(follwid)
+{
+	$.ajax({
+		url: 'disfollowcollege.html',
+		type: 'post',
+		dataType: 'html',
+		data: {'cid': collageid, 'code': "f4071ec84347304e83512c25f8af4f67",'id':follwid},
 		success: function(msg){
 			var data = eval('msg='+msg);
 			if(status==0)

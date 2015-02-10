@@ -121,6 +121,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		baseInfoMap.put("school", majorAllInfos.get("school"));
 		baseInfoMap.put("collegeId", EnDeCode.encodePara((Integer)majorAllInfos.get("collegeId")));
 		baseInfoMap.put("followId", followId);
+		baseInfoMap.put("college", majorAllInfos.get("college"));
 		
 		//grade info
 		LinkedHashMap<String, Object> gradeInfoMap = new LinkedHashMap<String, Object>();

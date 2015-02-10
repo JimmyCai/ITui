@@ -9,6 +9,10 @@ $(function(){
 		$('.nr_js').html(neirong);
 		$('.zhuanye  a ').html(neirong2);
 	});
+//	鼠标移出下拉框1秒后下拉框消失
+	$('.dropdown-menu').mouseout(function(event){
+		setTimeout("$('.dropdown-menu').css('display', 'none')",1000);
+	});
 	
 	// 搜索框ajax提交
 $('#sou').click(function(event){
@@ -19,7 +23,7 @@ $('#sou').click(function(event){
 
 // 按下回车调用跳转函数至信息页
 document.onkeydown = function(e)
-   {  
+{  
      var ev = document.all ? window.event : e;
      if(ev.keyCode==13) 
      {
@@ -27,7 +31,7 @@ document.onkeydown = function(e)
 	   var value = $('#scbar_txt').val();
 	   search_jump(major,value);	
      }
-   }
+}
 
 //确定二维码位置
 var win_width=$(window).width();

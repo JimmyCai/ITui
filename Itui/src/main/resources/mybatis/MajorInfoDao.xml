@@ -63,6 +63,7 @@
 			major_info.language as language,
 			major_info.math as math,
 			college.id as collegeId,
+			college.name as college,
 			college.logo as logo,
 			college.is_211 as is211,
 			college.is_985 as is985,

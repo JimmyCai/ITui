@@ -14,6 +14,10 @@ $(function(){
 		$('.nr_js').html(neirong);
 		$('.zhuanye  a ').html(neirong2);
 	});
+//	鼠标移出下拉框1秒后下拉框消失
+	$('.dropdown-menu').mouseout(function(event){
+		setTimeout("$('.dropdown-menu').css('display', 'none')",1000);
+	});
 
 	// 柱状图横坐标全称显示
 	$('.course_full').hide();
@@ -178,15 +182,16 @@ $(function(){
 	});
 
 });
+//页面加载函数结束
 
-var year01='';
-var year02='';
-var year03='';
-var year04='';
-var score01='';
-var score02='';
-var score03='';
-var score04='';
+//var year01='';
+//var year02='';
+//var year03='';
+//var year04='';
+//var score01='';
+//var score02='';
+//var score03='';
+//var score04='';
 var score_min='';
 var score_max=';'
 
@@ -209,6 +214,7 @@ function getPar(par){
     return get_par;
 }
 var thisid = getPar('major');
+var followid = -1;
 
 //接收数据
 function major_ajax()
@@ -221,8 +227,14 @@ function major_ajax()
 		 success: function(msg){	
 			 var data = eval('msg='+msg);
 			 if(status==0){
+				 
 				data = data.normalReturn;
 				var baseInfo=data.baseInfo;
+				$('.coll_1').append(data.baseInfo.college+'/');
+				$('.sch0').text(data.baseInfo.college);
+//				获得followid
+				followid=baseInfo.followId;
+				Attention();
 				// 提取学校的三个类型
 				var str_type=baseInfo.typeInfo;
 				console.log(str_type);
@@ -246,16 +258,11 @@ function major_ajax()
 				ranking_charu(data.rankInfo.collegeRank,rank_tag2,rank_item2);
 				ranking_charu(data.rankInfo.collegeLocalRank,rank_tag3,rank_item3);
 				// 折线图变量
-				year01=data.scoreInfo.yearScoreInfo[0].year;
-				score01=data.scoreInfo.yearScoreInfo[0].score;
-				console.log(data.scoreInfo.yearScoreInfo[0]);
-				year02=data.scoreInfo.yearScoreInfo[1].year;
-				console.log(year02);
-				score02=data.scoreInfo.yearScoreInfo[1].score;
-				year03=data.scoreInfo.yearScoreInfo[2].year;
-				score03=data.scoreInfo.yearScoreInfo[2].score;
-				year04=data.scoreInfo.yearScoreInfo[3].year;
-				score04=data.scoreInfo.yearScoreInfo[3].score;
+				for (var i = 0; i < data.scoreInfo.yearScoreInfo.length; i++){
+					year[i] = data.scoreInfo.yearScoreInfo[i].year;
+					score[i] = data.scoreInfo.yearScoreInfo[i].score;
+				}
+
 				score_min=data.scoreInfo.scoreLow;
 				//调用折线图函数
 				line_0();
@@ -319,7 +326,7 @@ function major_ajax()
 
 				}
 				// 8个柱状图显示
-				for(i=0;i<8;i++)
+				for(var i=0;i< maininfo.length;i++)
 				{
 					// 将每个专业的id存进数组
 					major_bar.push(maininfo[i].majorId);
@@ -478,12 +485,8 @@ if(length0>3)
 		rank_tag.find('.rank_p').css('font-size', '60px');
 	}else{
 		rank_tag.find('.rank_p').css('font-size', '80px');
-	}
-	
+	}	
  }
-
-
-
 var strA=null;
 // alert(strA.length);
 var grade_A=$('.grade').eq(4).find('.grade1').text();
@@ -501,36 +504,14 @@ var grade_Cand_05=$('.grade5').text();
 
 
 var arr_grade = new Array(grade_Cand_05, grade_Band_04, grade_Band_03, grade_Aand_02, grade_Aand_01);
-
-
-
-
-
-
 // 得出四年分数中的最大数
-var score01_int='';
-var score02_int='';
-var score03_int='';
-var score04_int='';
-
-
 function max_score_find()
-{	score01_int=parseInt(score01);
-	score02_int=parseInt(score02);
-	score03_int=parseInt(score03);
-	score04_int=parseInt(score04);
-	var arr_score = new Array(score01_int, score02_int, score03_int, score04_int );
-	for(i=0;i<arr_score.length;i++)
-	{
-		max_num=arr_score[0];
-		if(arr_score[i]>max_num)
-		{
-			var score_t=arr_score[0];
-			arr_score[0]=arr_score[i];
-			arr_score[i]= score_t;
-		}
+{	
+	var max_score = 0;
+	for (var i = 0;  i < score.length; i++){
+		if (max_score < score[i]) max_score = score[i];
 	}
-	return arr_score[0];
+	return max_score;
 }
 
  // 折线使用
@@ -544,7 +525,7 @@ function max_score_find()
                             var myChart=echarts.init(document.getElementById('main2'));
                             var option={
                                                 legend:{
-                                                    data: [ '平均分']
+                                                    data: [ '初试平均分']
                                                 },
                                                 tooltip:{
                                                     trigger: 'item',
@@ -553,7 +534,8 @@ function max_score_find()
                                                 xAxis :[
                                                     {
                                                         type: 'category', 
-                                                        data:[year01, year02, year03, year04],
+//                                                        data:[year01, year02, year03, year04],
+                                                        data:year,
                                                         name:'时间'
                                                      },
                                                 ],
@@ -581,7 +563,8 @@ function max_score_find()
                                                                           
                                                                         }
                                                     },
-                                                    data:[score01, score02, score03,score04]
+//                                                    data:[score01, score02, score03,score04]
+                                                    data:score
                                                 }
                                                
                                             ]
@@ -597,6 +580,8 @@ function max_score_find()
 
  // 插入平平均分
  var score_avg="", score_lowyear="",score_trend="";
+ var year = new Array();
+ var score= new Array();
 
  function score_tag()
  {
@@ -655,14 +640,14 @@ function applyAdmit(rate_percent){
 // 报录比解释标签
 function applyexceed(applyCount,admitCount,exemptionCount,applyDescription,admitDescription)
 {
-	if(applyCount=='')
+	if(applyCount=='' || applyCount =='-1')
 	{
 		$('.baok').text('?');
 	}else{
 		$('.baok').text(applyCount);
 	}
 
-	if(admitCount=='')
+	if(admitCount=='' || admitCount == '-1')
 	{
 		$('.luqu').text('?');
 	}else{
@@ -845,7 +830,89 @@ function inster_collage(collage_index,collage_name,collage_leve,collage_rank,col
 	});
 }
 
+//点击关注按钮
+//关注按钮自定义函数开始
+//关注该学校
+function atten()
+{
+	$('.image2').css('display', 'block');
+	$('.image4').css('display', 'none');
+	$('.gz_sch1').text('关注该专业');
+}
+//取消关注
+function cancel_atten()
+{
+$('.image4').css('display', 'block');
+$('.image2').css('display', 'none');
+$('.gz_sch1').text('取消关注');
+}
+//判断用户是否关注了当前院校
+function Attention()
+{	
+	if(followid==-1)
+	{
+		atten();
+	}else
+	{		
+		cancel_atten();
+	}
+	$('.image2').click(function(event)
+	{
+		attention_ajax();
+	});
+	$('.image4').click(function(event)
+	 {
+		cancelattention_ajax(followid);
+	});
+}
 
+//关注按钮自定义函数结束
+
+//如果点击关注将学校id发送给服务器   关注发送
+function attention_ajax()
+{
+	$.ajax({
+		url: 'followmajor.html',
+		type: 'post',
+		dataType: 'html',
+		data: {'mid': thisid, 'code': "f4071ec84347304e83512c25f8af4f67"},
+		success: function(msg){
+			var data = eval('msg='+msg);
+			if(status==0)
+			{
+				cancel_atten();
+			}else{
+				console.log("err att");
+			}
+		}	
+	});
+}
+
+//如果点击关注将学校id发送给服务器   取消关注发送
+function cancelattention_ajax()
+{
+	$.ajax({
+		url: 'disfollowmajor.html',
+		type: 'post',
+		dataType: 'html',
+		data: {'id': followid},
+		success: function(msg){
+			var data = eval('msg='+msg);
+			if(data.status == 0)
+			{
+				console.log("cancel");
+				followid=-1;
+				atten();
+			}
+			else{
+				console.log("err can");
+				cancel_atten();
+			}
+		}	
+	});
+}
+
+//关注自定义函数结束
 // 20150206编辑
 // 动态加载css加载
 function Fuzzy()
