@@ -76,9 +76,11 @@
 			s.name as college,			
 			s.is_985 as is985,
 			s.is_34 as is34,
-			s.is_211 as is211
+			s.is_211 as is211,
+			major_rank as rank,
+			degree as degree
 		FROM
-			major join 
+			(major join 
 				(select 
 					id,name,logo,is_985, is_34, is_211 
 				from 
@@ -110,7 +112,7 @@
 					</if>
 				</where>
 				) 
-			as s on s.id = college_id
+			as s on s.id = college_id)
 		<where>
 			<if test="subject != '' or category !='' ">
 			subject_id in 
@@ -144,7 +146,7 @@
 				and major.name like concat(concat("%",#{condition}),"%")
 			</if>
 		</where>
-		order by logo
+		order by rank, degree
 		LIMIT #{from},#{limit}
 	</select>
 	

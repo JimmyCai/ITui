@@ -6,6 +6,10 @@ package cn.itui.webdevelop.controller;
  *
  */
 public class URLConstants {
+	
+	public static final String ROOT="/";
+	public static final String INDEX="/index";
+	
 	public static final String GETMAJORINFO = "/getmajorinfo";
 	public static final String SEARCH="/back/search";
 	public static final String GETRETESTINFO = "/getretestinfo";

@@ -25,7 +25,7 @@ public class MajorServiceImpl implements MajorService {
 		String is985 = "";
 		String is34 = "";
 		String is211 = "";
-		if (!(college_type.equalsIgnoreCase("") || college_type.startsWith("其他"))) {
+		if (!(college_type.equalsIgnoreCase("") || college_type.startsWith("普通"))) {
 			if (college_type.startsWith("985")) {
 				// 985
 				is985 = "1";
@@ -38,8 +38,9 @@ public class MajorServiceImpl implements MajorService {
 				// 211
 				is211 = "1";
 			}
-		}else if (college_type.startsWith("其他")){
+		}else if (college_type.startsWith("普通")){
 			is211=is34=is985="0";
+			System.out.println("普通");
 		}
 		is211 = WordParticiple.filterAll(is211);
 		is34 = WordParticiple.filterAll(is34);
@@ -75,23 +76,29 @@ public class MajorServiceImpl implements MajorService {
 		
 		System.out.println("length:"+idList.size());
 		
-		List<HashMap<String, Object>> rankAndDegrees = majorInfoDao.findRankAndDegreeByMajorIds(idList);
+//		List<HashMap<String, Object>> rankAndDegrees = new ArrayList<HashMap<String,Object>>();
+//		if (idList.size() > 0){
+//			rankAndDegrees = majorInfoDao.findRankAndDegreeByMajorIds(idList);
+//		}
 		System.out.println("rank_degree_time:"+(System.currentTimeMillis() - rank_degreeStart));
 		for (int i = 0; i < majorList.size(); i++){
 			HashMap<String, Object> map = majorList.get(i);
-
-			for (int j = 0; j < rankAndDegrees.size(); j++){
-				
-				if ((Integer)rankAndDegrees.get(j).get("majorId") == (Integer)map.get("id")){
-					int rank = (Integer)(rankAndDegrees.get(j).get("rank"));
+//			System.out.println("size:"+rankAndDegrees.size());
+//			for (int j = 0; j < rankAndDegrees.size(); j++){
+//				int majorId = (Integer)rankAndDegrees.get(j).get("majorId");
+//				int id = (Integer)map.get("id");
+//				System.out.println("majorId:"+majorId+" id:"+id);
+//				if (majorId == id){
+//					System.err.println(true);
+					int rank = (Integer)(map.get("rank"));
 					if (rank > 1000){ 
 						map.put("rank", rank%1000+"+");
 					}else {
 						map.put("rank", rank);
 					}
-					map.put("degree", rankAndDegrees.get(j).get("degree"));
-				}
-			}
+//					map.put("degree", rankAndDegrees.get(j).get("degree"));
+//				}
+//			}
 			map.put("id", EnDeCode.encodePara((Integer)map.get("id")));
 			
 		}

@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.itui.webdevelop.dao.MajorDao;
@@ -141,19 +140,11 @@ public class MajorDaoImpl implements MajorDao {
 		parameter.put("area", area);
 		return sqlSession.selectOne("cn.itui.webdevelop.dao.MajorDao.count", parameter);
 	}
-
-//	public List<HashMap<String, Object>> findRankAndDegreeByMajorIds(
-//			List<Integer> list) {
-////		HashMap<String, Object> parameter = new HashMap<String, Object>();
-////		parameter.put("list", list);
-//		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorDao.finaRankAndDegreeByMajorIds", list);
-//	}
 }
 
 class MyResultHandler implements ResultHandler {
 
 	public void handleResult(ResultContext context) {
-		// TODO Auto-generated method stub
 
 	}
 
