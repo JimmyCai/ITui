@@ -19,6 +19,7 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 	public static final int SAMECOLLEGE_MAJORCOUNT = 8;
 	public static final int SAMEMAJOR_MAJORCOUNT = 4;
 	private static final String DEGREE = "degree";
+	private static final String MAJORID = "majorId";
 
 	/**
 	 * 对candidates根据code进行刷选
@@ -175,24 +176,29 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		}
 		if(i == candidates.size())
 			index = candidates.size() - 1;
-		System.err.println("degree:" + degree + "\tindex:" + index + "\ti:" + i);
 		HashMap<String, Object> tmpMap = candidates.get(index);
-		double curAADegree = (Double)tmpMap.get(DEGREE);				
+		double curAADegree = (Double)tmpMap.get(DEGREE);	
+		int majorId = (Integer)tmpMap.get(MAJORID);
 		tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
+		tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
 		resultMaps.add(tmpMap);
 		for(int length = 1; resultMaps.size() < candidates.size(); length++) {
 			if(index - length >= 0) {
 				tmpMap = candidates.get(index - length);
-				curAADegree = (Double)tmpMap.get(DEGREE);				
+				curAADegree = (Double)tmpMap.get(DEGREE);	
+				majorId = (Integer)tmpMap.get(MAJORID);
 				tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
+				tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
 					return resultMaps;
 			}
 			if(index + length < candidates.size()) {
 				tmpMap = candidates.get(index + length);
-				curAADegree = (Double)tmpMap.get(DEGREE);				
+				curAADegree = (Double)tmpMap.get(DEGREE);	
+				majorId = (Integer)tmpMap.get(MAJORID);
 				tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
+				tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
 					return resultMaps;
