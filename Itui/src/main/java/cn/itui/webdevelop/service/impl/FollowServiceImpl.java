@@ -24,6 +24,10 @@ public class FollowServiceImpl implements FollowService{
 	
 	private final static int MD5LENGTH = 32;
 
+	/**
+	 * 关注学校，参数为用户code和collegeId
+	 * 成功则返回_SUCCESS消息，否则会抛出异常
+	 */
 	public String followCollege(String code, int collegeId) throws ParameterErrorException, DatabaseException {
 		if(code.length() != MD5LENGTH || collegeId <= 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
@@ -33,6 +37,10 @@ public class FollowServiceImpl implements FollowService{
 		return ResponseUtil.wrapNormalReturn(FOLLOWCOLLEGE_SUCCESS);
 	}
 
+	/**
+	 * 关注专业，参数为用户code和majorId
+	 * 成功则返回_SUCCESS消息，否则会抛出异常
+	 */
 	public String followMajor(String code, int majorId) throws ParameterErrorException, DatabaseException {
 		if(code.length() != MD5LENGTH || majorId <= 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
@@ -43,6 +51,9 @@ public class FollowServiceImpl implements FollowService{
 		return ResponseUtil.wrapNormalReturn(FOLLOWMAJOR_SUCCESS);
 	}
 
+	/**
+	 * 获取用户关注的学校，参数为用户code
+	 */
 	public String getFollowColleges(String code) throws ParameterErrorException {
 		if(code.length() != MD5LENGTH)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
@@ -50,6 +61,9 @@ public class FollowServiceImpl implements FollowService{
 		return ResponseUtil.wrapNormalReturn(result);
 	}
 
+	/**
+	 * 获取用户关注的专业，参数为用户code，其中包含了关注的学校
+	 */
 	public String getFollowMajors(String code) throws ParameterErrorException {
 		if(code.length() != MD5LENGTH)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
@@ -58,6 +72,9 @@ public class FollowServiceImpl implements FollowService{
 		return buildJson(followMajors, followColleges);
 	}
 
+	/**
+	 * 取消关注学校，参数为code和collegeId
+	 */
 	public String deleteFollowCollege(String code, int collegeId) throws ParameterErrorException, DatabaseException {
 		if(collegeId < 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
@@ -68,6 +85,9 @@ public class FollowServiceImpl implements FollowService{
 		return ResponseUtil.wrapNormalReturn(DISFOLLOWCOLLEGE_SUCCESS);
 	}
 
+	/**
+	 * 取消关注专业,参数为code和majorId
+	 */
 	public String deleteFollowMajor(String code, int majorId) throws ParameterErrorException, DatabaseException {
 		if(majorId < 0)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
@@ -77,6 +97,12 @@ public class FollowServiceImpl implements FollowService{
 		return ResponseUtil.wrapNormalReturn(DISFOLLOWMAJOR_SUCCESS);
 	}
 	
+	/**
+	 * 构建关注的专业的json，其中包括了关注的学校
+	 * @param followMajors
+	 * @param followColleges
+	 * @return
+	 */
 	private String buildJson(List<HashMap<String, Object>> followMajors, List<HashMap<String, Object>> followColleges) {
 		HashMap<Integer, List<HashMap<String, Object>>> collegeIdMajors = new HashMap<Integer, List<HashMap<String,Object>>>();
 		for(HashMap<String, Object> curList : followMajors) {
