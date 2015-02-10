@@ -26,7 +26,9 @@
 		WHERE NOT EXISTS(SELECT * FROM follow_college WHERE user_id IN (SELECT id FROM user WHERE code=#{code}) AND college_id IN (SELECT college_id FROM major WHERE id=#{majorId}))
 	</select>
 	
-	<select id="deleteFollowCollege" parameterType="int" resultType="int">
-		DELETE FROM follow_college WHERE id=#{id}
+	<select id="deleteFollowCollegeByCollegeIdAndCode" parameterType="map" resultType="int">
+		DELETE FROM follow_college
+		WHERE college_id=#{collegeId} 
+		AND user_id in (SELECT id FROM user WHERE code=#{code})
 	</select>
 </mapper>

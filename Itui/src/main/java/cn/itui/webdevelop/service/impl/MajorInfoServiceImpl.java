@@ -23,11 +23,6 @@ import cn.itui.webdevelop.utils.recommend.MajorRecommendResult;
 import cn.itui.webdevelop.utils.recommend.SimilarMajorRecommendFilter;
 
 public class MajorInfoServiceImpl implements MajorInfoService{
-	public static long majorAllInfoTime = 0;
-	public static long yearScoreInfoTime = 0;
-	public static long majorRecommendTime = 0;
-	public static long majorRecommendDiffCTime = 0;
-	public static long collegeRecommendTime = 0;
 	private static final int N = 4;
 	private CollegeDao collegeDao;
 	private MajorDao majorDao;
@@ -40,10 +35,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 
 	public String getMajorInfo(String userCode, int majorId) throws Exception {
 		//get major main info, base info, college logo and rank info
-		long ST = System.currentTimeMillis();
 		HashMap<String, Object> majorAllInfos = majorInfoDao.findMajorAllInfoByMajorId(majorId);
-		long ET = System.currentTimeMillis();
-		majorAllInfoTime = ET - ST;
 		if(majorAllInfos == null)
 			throw DatabaseException.getInstance();
 		
@@ -53,32 +45,20 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		int collegeId = (Integer)majorAllInfos.get("collegeId");
 		
 		//get year-score infos
-		ST = System.currentTimeMillis();
 		List<HashMap<String, Object>> yearScores = scoreDao.getLastNYearsScoreByMajorId(majorId, N);
-		ET = System.currentTimeMillis();
-		yearScoreInfoTime = ET - ST;
 
 		//recommend majors
-		ST = System.currentTimeMillis();
 		List<HashMap<String, Object>> candidateMajors = majorDao.findCodeLikeMajorByCollegeId(code, collegeId);
-		ET = System.currentTimeMillis();
-		majorRecommendTime = ET - ST;
 		MajorRecommendResult recommendMajors = majorRecommendFilter.recommendMajorFilter(candidateMajors, code, majorId);
 		if(recommendMajors.getMajors().size() < SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT) {
 			recommendMajors = processTransdisciplinary(recommendMajors, candidateMajors, collegeId, majorId, code);
 		}
 		//different college major recommend
-		ST = System.currentTimeMillis();
 		List<HashMap<String, Object>> candidateDiffCollMajors = majorDao.findAreaSameCodeMajorByCollegeIdAndMajorCode(collegeId, code);
-		ET = System.currentTimeMillis();
-		majorRecommendDiffCTime = ET - ST;
 		List<HashMap<String, Object>> diffCollRecommendMajors = majorRecommendFilter.recommendMajorFilter(candidateDiffCollMajors, (Double)majorAllInfos.get("degree"));
 		//recommend college
 		int collegeRank = (Integer)majorAllInfos.get("rank");
-		ST = System.currentTimeMillis();
 		List<College> candidateColleges = collegeDao.findCollegeInRank(collegeRank, collegeId);
-		ET = System.currentTimeMillis();
-		collegeRecommendTime = ET - ST;
 		List<HashMap<String, Object>> recommendColleges = collegeRecommendFilter.recommendCollege(candidateColleges, collegeRank);
 		//build json string
 		String jsonResult = buildMajorInfoJson(majorAllInfos, followId, yearScores,recommendMajors, recommendColleges, diffCollRecommendMajors);
@@ -98,10 +78,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 	
 	private MajorRecommendResult processTransdisciplinary(MajorRecommendResult recommendMajors, List<HashMap<String, Object>> candidateMajors, int collegeId, int majorId, String code) throws Exception{
 		int needCount = SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT - recommendMajors.getMajors().size();
-		long ST = System.currentTimeMillis();
 		List<HashMap<String, Object>> allMajors = majorDao.findMajorByCollegeIdAndNotInMajorIds(collegeId, candidateMajors);
-		long ET = System.currentTimeMillis();
-		majorRecommendTime += ET - ST;
 		if(allMajors.size() >= needCount)
 			recommendMajors.setTransdisciplinaryCount(needCount);
 		recommendMajors = majorRecommendFilter.recommendMajorFilter(recommendMajors, allMajors, collegeId, majorId, code);
@@ -156,6 +133,7 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		int applyNum = (Integer)majorAllInfos.get("applyNum");
 		int admitNum = (Integer)majorAllInfos.get("admitNum");
 		applyAdmitInfoMap.put("rate", MajorInfo.translateRate((Double)majorAllInfos.get("rate"), false));
+		applyAdmitInfoMap.put("rateDescription", majorAllInfos.get("rateDescription"));
 		applyAdmitInfoMap.put("applyDescription", MajorInfo.translateApplyDescription(applyNum));
 		applyAdmitInfoMap.put("admitDescription", MajorInfo.translateAdmitDescription(admitNum));
 		applyAdmitInfoMap.put("applyCount", applyNum);

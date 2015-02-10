@@ -27,8 +27,10 @@
 		VALUES((SELECT id FROM user WHERE code=#{code}),#{majorId})
 	</select>
 	
-	<select id="deleteFollowMajorById" parameterType="int" resultType="int">
-		DELETE FROM follow_major WHERE id=#{id}
+	<select id="deleteFollowMajorByMajorIdAndCode" parameterType="map" resultType="int">
+		DELETE FROM follow_major
+		WHERE major_id=#{majorId} 
+		AND user_id in (SELECT id FROM user WHERE user.code=#{code})
 	</select>
 	
 	<select id="deleteFollowMajorByCollegeIdAndCode" parameterType="map" resultType="int">

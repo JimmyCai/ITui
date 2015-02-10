@@ -76,18 +76,16 @@ public class CollegeController {
 	
 	@RequestMapping(value=URLConstants.DISFOLLOWCOLLEGE, method=RequestMethod.POST)
 	public String disFollowCollege(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String idStr = request.getParameter("id");
 		String code = request.getParameter(CODE);
 		String collegeIdStr = request.getParameter(COLLEGEID);
 		if(code == null)
 			throw NotLoginException.getInstance();
-		if(idStr == null || collegeIdStr == null)
+		if(collegeIdStr == null)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		int id = Integer.parseInt(idStr);
 		int collegeId = EnDeCode.decodePara(collegeIdStr);
-		String requestStr = RequestUtil.getUserBaseInfo(request) + "ID:" + id + "\t" + CODE + ":" + code + "\t" + COLLEGEID + ":" + collegeId;
+		String requestStr = RequestUtil.getUserBaseInfo(request) + "\t" + CODE + ":" + code + "\t" + COLLEGEID + ":" + collegeId;
 		rRLogger.info(requestStr);
-		return followService.deleteFollowCollege(id, code, collegeId);
+		return followService.deleteFollowCollege(code, collegeId);
 	}
 	
 	@RequestMapping(value=URLConstants.GETFOLLOWCOLLEGE, method=RequestMethod.POST)
