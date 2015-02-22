@@ -175,7 +175,7 @@ data: {email: email,password:pasd},
 success:function(msg)
 {
 data=eval('msg='+msg);
-if(status==0)
+if(data.status==0)
    {
    	if(data.normalReturn.register=='false')
    	{
@@ -281,7 +281,7 @@ $.ajax({
 	success:function(msg)
 	{
 	data=eval('msg='+msg);
-	if(status==0)
+	if(data.status==0)
 	{
 	if(data.normalReturn.login=='failure')
 	{

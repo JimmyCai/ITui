@@ -31,17 +31,16 @@ public class UserServiceImpl implements UserService {
 						.get("id"));
 				map.put("login", "success");
 				map.put("logo", logo);
-				map.put("email", email);
+				map.put("code", usermap.get("code"));
 			} else {
 				map.put("login", "failure");
 				map.put("msg", "请登录您的邮箱激活帐号");
-
 			}
 		} else {
 			map.put("login", "failure");
 			map.put("msg", "用户名或密码错误");
 		}
-
+		System.out.println(map.get("login"));
 		return ResponseUtil.wrapNormalReturn(map);
 	}
 
@@ -62,7 +61,7 @@ public class UserServiceImpl implements UserService {
 				id = userInfoDao.insertUserInfo_logo(id, "defaultuserlogo.png");
 				if (id <= 0) {
 					// 后台插入用户信息失败
-					map.put("register", "false");
+					map.put("register", "failure");
 					// 回滚
 				}
 				HTMLTEXT += "?code=" + code;
@@ -71,12 +70,12 @@ public class UserServiceImpl implements UserService {
 					// 发送邮件失败
 				}
 				if (id > 0 && bool) {
-					map.put("register", "true");
+					map.put("register", "success");
 					map.put("msg", "注册成功！请验证邮箱");
 				}
 			}
 		} else {
-			map.put("register", "false");
+			map.put("register", "failure");
 			map.put("msg", "用户名已存在");
 		}
 		return ResponseUtil.wrapNormalReturn(map);

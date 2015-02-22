@@ -52,7 +52,6 @@ ul,ol,li{list-style:none}
 .logo0{
 	width: 300px;
 	height: 80px;
-	border: 1px solid green;
 	float: left;
 	background: url(../images/18.png) no-repeat;
 }
@@ -273,7 +272,6 @@ ul,ol,li{list-style:none}
 	top: -11px;
 	_position: relative;
 	_z-index: 100;
-	background-color: green;
 }
 #obj_s4 .arrow{
 	position: absolute;

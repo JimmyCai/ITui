@@ -29,7 +29,38 @@ ul,ol,li{list-style:none}
 /*main*/
 @media (min-width: 1100px) and (max-width: 1200px){}
 
-@media (max-width: 1000px) {}
+@media (min-width: 1680px) {
+	.container0{
+		background-color: green;
+	width: 100%;
+	margin:0 auto;
+	}
+	.container1{
+	width: 1680px;
+	margin:0 auto;
+	}
+	.center0{
+		width: 70%;
+		position: absolute;
+		left: 25%;
+		top: 30%;
+	}
+	#scbar_form{
+	float: left;
+	width: 100%;
+	margin-left: 10%;
+	position: relative;
+}
+.input01{
+	width: 100%;
+	height: 40px;
+	height: auto;
+	position: absolute;
+	left: 6%;
+	top: 38%;
+
+}
+}
 
 @media (max-width: 1680px) {
 	.container0{
@@ -114,7 +145,7 @@ ul,ol,li{list-style:none}
 		width: 1680px;
 		height: 68px;
 		background-color: #fff;
-		float: left;
+		margin:0 auto;
 
 	}
 	.center0{
@@ -318,8 +349,6 @@ ul,ol,li{list-style:none}
 	position: absolute;
 	left: 6%;
 	top: 38%;
-	/*box-shadow: 2px 2px 2px #333;*/
-	
 
 }
 .left{
@@ -512,6 +541,7 @@ height: 64px;
 	
 }
 .tsTxt{
+	
 	text-align: left;
 	padding-left: 12px;
 	padding-top: 8px;
@@ -692,6 +722,8 @@ height: 64px;
 	width: 100%;
 }
 
+
+
 /*20150209编辑*/
 .nr_js
 {
@@ -722,9 +754,16 @@ font-size: 16px;
 line-height: 30px;
 }
 
-
-
-
+/*页面脚修改*/
+.foot {
+	position: relative;
+}
+#cnzz_stat_icon_3967155{
+	position: absolute;
+	left: 55%;
+	top: 22px;
+	
+}
 
 
 

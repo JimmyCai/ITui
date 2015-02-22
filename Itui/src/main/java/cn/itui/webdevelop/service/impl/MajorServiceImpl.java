@@ -96,6 +96,11 @@ public class MajorServiceImpl implements MajorService {
 					}else {
 						map.put("rank", rank);
 					}
+					if (rank == 2000) {
+						map.put("rank", -1);
+					}else {
+						map.put("rank", rank);
+					}
 //					map.put("degree", rankAndDegrees.get(j).get("degree"));
 //				}
 //			}
