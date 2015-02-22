@@ -172,7 +172,7 @@ ul,ol,li{list-style:none}
 
 }
 .sch_info{
-	width: 284px;
+	width: 380px;
 	height: 100px;
 	float: left;
 	margin-left: 12px;
@@ -182,7 +182,7 @@ ul,ol,li{list-style:none}
 .sch_info h3{
 	font-size: 22px;
 	color: #333;
-	width: 284px;
+	width: 380px;
 	height: 22px;
 	text-align: left;
 	padding-left:14px;
@@ -261,8 +261,8 @@ text-align: center;
 margin-top: 8px;
 }
 .image0{
-	width: 59px;
-	height: 59px;
+	width: 63px;
+	height: 63px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 44px;
@@ -995,12 +995,49 @@ margin-left: 4px;
 	line-height: 132px;
 	font-weight: 700;
 }
+#tip_p{
+	width: 100px;
+	position: absolute;
+	left: 744px;
+	top: 86px;
+	z-index:60;
+}
+.tip_p01{
+	position: absolute;
+	left: -210px;
+	top: -40px;
+	display:none;
+	
+}
+.tip_p02{
+	position: absolute;
+	left: -210px;
+	top: 0px;
+	display:none;
+	
+}
+.tip_p03{
+	position: absolute;
+	left: -210px;
+	top: 40px;
+	display:none;
+	
+}
+.tip_p04{
+	position: absolute;
+	left: -210px;
+	top: 60px;
+	display:none;
+	
+}
+
 .tip{
 	width: 100px;
 	position: absolute;
 	left: 744px;
 	top: 86px;
-	display: none;
+	z-index:60;
+	
 }
 .tip0{
 	
@@ -1010,7 +1047,7 @@ margin-left: 4px;
 	opacity:0.5;/*其他，透明度50%*/
 	color: #fff;
 	border-radius: 4px;
-	font-size: 12px;
+	
 	
 
 }
@@ -1018,24 +1055,34 @@ margin-left: 4px;
 	position: absolute;
 	left: 0px;
 	top: 0px;
+	display:none;
 	
+	
+}
+.tip0 p{
+	margin:4px;
+	font-size: 12px;
+	text-align:center;
 }
 .tip02{
 	position: absolute;
 	left: 0px;
 	top: 38px;
+	display:none;
 	
 }
 .tip03{
 	position: absolute;
 	left: 0px;
 	top: 72px;
+	display:none;
 	
 }
 .tip04{
 	position: absolute;
 	left: 0px;
 	top: 108px;
+	display:none;
 }
 
 
@@ -1170,7 +1217,7 @@ margin-left: 4px;
 	font-weight: 700;
 }
 .biao_6{
-	width: 390px;
+	width: 450px;
 	height: 38px;
 	border: 1px solid #cbcbcb;
 	
@@ -1199,6 +1246,16 @@ margin-left: 4px;
 .biao_6 li.lanse{
 	color:#35D3E0;
 }
+
+.biao_6 ul{
+	overflow:hidden;
+	width:100%;
+	height:38px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+
 
 /*第六部分模态框*/
 .exceed{
@@ -1516,9 +1573,6 @@ margin-left: 4px;
 	height: 24px;
 	color: #6c6c6c;
 }
-.jd_1{
-	margin-top: 20px;
-}
 
 
 /*第八部分*/
@@ -1750,7 +1804,7 @@ margin-left: 4px;
 	position: absolute;
 	left: 0px;
 	top: 0px;
-	display: none;
+
 }
 .regspage{
 	width: 500px;
@@ -1759,6 +1813,7 @@ margin-left: 4px;
 	position: absolute;
 	left: 0px;
 	top: 0px;
+	display: none;
 	/*display: none;*/
 }
 .waitpage
@@ -2430,4 +2485,116 @@ border-top: 4px solid #f4b802;
 .item_icon p{
 	float: left;
 	color: #fff;
+}
+
+/*20150211*/
+.des_tag{
+	width: 980px;
+	height: 345px;
+	margin-top: 30px;
+}
+.li_degs0{
+	border-radius:6px; 
+}
+.li_desg01{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 80px;
+	top: 230px;
+	background-color: #F2615C;
+	border-radius:6px; 
+	display:none;
+}
+.li_desg02{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 170px;
+	top: 230px;
+	background-color: #E38D5E;
+	border-radius:6px; 
+	display:none;
+}
+.li_desg03{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 260px;
+	top: 230px;
+	background-color: #E38D5E;
+	border-radius:6px; 
+	display:none;
+}
+
+.li_desg04{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 348px;
+	top: 230px;
+	background-color: #DEE15C;
+	border-radius:6px; 
+	display:none;
+}
+.li_desg05{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 440px;
+	top: 230px;
+	background-color: #C5E76C;
+	border-radius:6px; 
+	display:none;
+}
+.li_desg06{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 530px;
+	top: 230px;
+	background-color: #92DA5A;
+	border-radius:6px; 
+	display:none;
+}
+.li_desg07{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 620px;
+	top: 230px;
+	background-color: #6EC35C;
+	border-radius:6px; 
+	display:none;
+}
+.li_desg08{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 710px;
+	top: 230px;
+	background-color: #62BA92;
+	border-radius:6px; 
+	display:none;
+}
+.li_desg09{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	left: 800px;
+	top: 230px;
+	background-color: #5EACAE;
+	border-radius:6px; 
+	display:none;
+
+}
+.li_desg0 p
+{
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 30px;
+	color: #fff;
+	border-radius:6px; 
+	border: 2px solid #fff;
+	text-align: center;
 }

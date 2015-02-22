@@ -119,13 +119,11 @@ function Attention(follwid)
 	}
 	$('.image2').click(function(event)
 	{
-		cancel_atten();
 		attention_ajax();
 	});
 	$('.image4').click(function(event)
 	 {
-		atten();
-		cancelattention_ajax(follwid);
+		cancelattention_ajax();
 	});
 }
 
@@ -169,7 +167,7 @@ $.ajax
 	success: function(msg)
 	{
 	var data = eval('msg='+msg);
-	if(status==0)
+	if(data.status==0)
 	{	
 		// 获得学校的logo和所属城市
 		var img_src=data.normalReturn.logo;
@@ -335,7 +333,7 @@ $.ajax
 	success: function(msg)
 	{
 	var data = eval('msg='+msg);
-	if(status==0)
+	if(data.status==0)
 	{
 		var major= data.normalReturn.major;
 		var arr_major=new Array();
@@ -533,31 +531,38 @@ function attention_ajax()
 		url: 'followcollege.html',
 		type: 'post',
 		dataType: 'html',
-		data: {'cid': collageid, 'code': "f4071ec84347304e83512c25f8af4f67"},
+		data: {'cid': collageid, 'code': $.cookie('user')},
 		success: function(msg){
 			var data = eval('msg='+msg);
-			if(status==0)
+			console.log("status:"+data.status);
+			if(data.status==0)
 			{
-				console.log(collageid);
+				cancel_atten();
+			}else{
+				alert('关注失败！');
 			}
 		}	
 	});
 }
 
 //如果点击关注将学校id发送给服务器   取消关注发送
-function cancelattention_ajax(follwid)
+function cancelattention_ajax()
 {
 	$.ajax({
 		url: 'disfollowcollege.html',
 		type: 'post',
 		dataType: 'html',
-		data: {'cid': collageid, 'code': "f4071ec84347304e83512c25f8af4f67",'id':follwid},
+		data: {'cid': collageid, 'code': $.cookie("user")},
 		success: function(msg){
 			var data = eval('msg='+msg);
-			if(status==0)
+			if(data.status==0)
 			{
-				console.log(collageid);
+				atten();
+			}else{
+				alert('取消关注失败！');
 			}
 		}	
 	});
 }
+
+$('#modal_load').hide();

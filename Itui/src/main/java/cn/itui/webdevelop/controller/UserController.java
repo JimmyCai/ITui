@@ -32,6 +32,7 @@ public class UserController {
 	public String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = request.getParameter(EMAIL);
 		String password = request.getParameter(PASSWORD);
+		System.out.println(email+password);
 		password = DigestUtils.md5DigestAsHex(password.getBytes());
 		String requestStr = RequestUtil.getUserBaseInfo(request) + EMAIL + ":" + email + "\t" + PASSWORD + ":" + password;
 		rRLogger.info(requestStr);
@@ -70,8 +71,7 @@ public class UserController {
 		String check_address = request.getParameter(CHECK_ADDRESS);
 		if (check_address == null){
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		}
-		
+		}		
 		String check_key = request.getParameter(CHECK_KEY);
 		if (check_key == null){
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);

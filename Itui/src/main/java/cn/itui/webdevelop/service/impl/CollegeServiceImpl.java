@@ -56,6 +56,9 @@ public class CollegeServiceImpl implements CollegeService {
 			if (rank > 1000){
 				college.put("rank", rank%1000+"+");
 			}
+			if (rank == 2000){
+				college.put("rank", "-1");
+			}
 //			else if (rank == -1){
 //				college.put("rank", "不参与排名");
 //			}

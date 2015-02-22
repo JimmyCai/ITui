@@ -104,6 +104,7 @@ public class MajorInfo implements java.io.Serializable {
 		}
 		try {
 			int rankI = (Integer)rank;
+			if (rankI==2000) return "-1";
 			if(rankI > 1000)
 				return (rankI - 1000) + "";
 			else if(rankI == -1)

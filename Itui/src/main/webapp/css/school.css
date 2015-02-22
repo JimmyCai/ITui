@@ -639,7 +639,6 @@ body{
 #loadform{
 	width: 490px;
 	height: 270px;
-	border: 1px solid orange;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -705,7 +704,6 @@ body{
 #regsrorm{
 	width: 490px;
 	height: 270px;
-	border: 1px solid orange;
 	margin-left: auto;
 	margin-right: auto;
 }
