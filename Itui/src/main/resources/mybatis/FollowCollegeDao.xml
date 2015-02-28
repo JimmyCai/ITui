@@ -31,4 +31,10 @@
 		WHERE college_id=#{collegeId} 
 		AND user_id in (SELECT id FROM user WHERE code=#{code})
 	</select>
+	
+	<select id="isUserFollowCollege" parameterType="map" resultType="map">
+		SELECT id
+		FROM follow_college
+		WHERE college_id=#{collegeId} AND user_id=(select id from user where code=#{code})
+	</select>
 </mapper>

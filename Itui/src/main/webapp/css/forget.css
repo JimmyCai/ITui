@@ -21,7 +21,6 @@ ul,ol,li{list-style:none}
 	
 	width: 1000px;
 	height: 500px;
-	border: 1px solid red;
 }
 .top0{
 	width: 100%;
@@ -39,7 +38,6 @@ ul,ol,li{list-style:none}
 .containa{
 	width: 1024px;
 	margin:0 auto;
-	border: 1px solid red;
 	margin-top: -88px;
 	overflow: hidden;
 }
@@ -61,7 +59,6 @@ ul,ol,li{list-style:none}
 .logo0{
 	width: 300px;
 	height: 80px;
-	border: 1px solid green;
 	float: left;
 	background: url(../images/18.png) no-repeat;
 }
@@ -149,7 +146,7 @@ ul,ol,li{list-style:none}
 #modal_load{
 	width:100%;
 	height: 100%;
-	/*background-color: pink;*/
+
 	   position: absolute;
 	   left: 0px;
 	   top: 0px;
@@ -213,7 +210,6 @@ ul,ol,li{list-style:none}
 .tab_page{
 	width:500px;
 	height: 290px;
-	background-color: pink;
 	position: relative;
 }
 .loadpage{
@@ -251,7 +247,6 @@ text-align: center;
 .otherload{
 	widows: 498px;
 	height: 100px;
-	border: 1px solid blue;
 }
 .other-account{
 	width:100%;
@@ -296,7 +291,6 @@ text-align: center;
 .close{
 	width:24px;
 	height: 24px;
-	background-color: yellow;
 	font-size: 24px;
 	position: absolute;
 	right: 0px;
@@ -309,14 +303,12 @@ text-align: center;
 #loadform{
 	width: 490px;
 	height: 270px;
-	border: 1px solid orange;
 	margin-left: auto;
 	margin-right: auto;
 }
 .box1{
 	width: 60%;
 	height: 60px;
-	border: 1px solid red;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
@@ -324,7 +316,6 @@ text-align: center;
 .box2{
 	width: 60%;
 	height: 60px;
-	border: 1px solid green;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
@@ -362,7 +353,6 @@ text-align: center;
 	height: 20px;
 	margin-left: 40px;
 	line-height: 20px;
-	background-color: yellow;
 	margin-top: 10px;
 }
 .forget{
@@ -371,7 +361,6 @@ text-align: center;
 	height: 20px;
 	margin-left: 40px;
 	line-height: 20px;
-	background-color: yellow;
 	margin-top: 10px;
 }
 
@@ -379,14 +368,12 @@ text-align: center;
 #regsrorm{
 	width: 490px;
 	height: 270px;
-	border: 1px solid orange;
 	margin-left: auto;
 	margin-right: auto;
 }
 .box0{
 	width: 70%;
 	height: 60px;
-	border: 1px solid red;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
@@ -433,7 +420,6 @@ color: #666;
 	height: 20px;
 	margin-left: 70px;
 	line-height: 20px;
-	background-color: yellow;
 	margin-top: 10px;
 }
 .same{
@@ -442,7 +428,6 @@ color: #666;
 	height: 20px;
 	margin-left: 70px;
 	line-height: 20px;
-	background-color: yellow;
 	margin-top: 10px;
 }
 .pasd_p{
@@ -451,7 +436,6 @@ color: #666;
 	height: 20px;
 	margin-left: 70px;
 	line-height: 20px;
-	background-color: yellow;
 	margin-top: 10px;
 }
 .sure_p{
@@ -532,7 +516,6 @@ color: #666;
 .user{
 	width:40px;
 	height: 40px;
-	border: 1px solid red;
 	float: left;
 	margin-top: 20px;
 	margin-left: 66px;
@@ -564,7 +547,6 @@ color: #666;
 .user2{
 	width:40px;
 	height: 40px;
-	border: 1px solid red;
 	float: left;
 	margin-top: 20px;
 	margin-left: 66px;
@@ -616,7 +598,6 @@ color: #666;
 .coll_pic0{
 	width:24px;
 	height: 24px;
-	border: 1px solid green;
 	float: left;
 	background: url(../images/statr3.png) no-repeat;
 	margin-left: 4px;
@@ -632,7 +613,6 @@ color: #666;
 .coll_pic1{
 	width:24px;
 	height: 24px;
-	border: 1px solid green;
 	float: left;
 	background: url(../images/off3.png) no-repeat;
 	margin-left: 4px;
@@ -666,12 +646,12 @@ color: #666;
 
 }
 .left{
-	width: 660px;
+	width: 600px;
 	height: 68px;
 	float: left;
 }
 .left li{
-	width: 108px;
+	width: 98px;
 	height: 64px;
 	border-right: 1px solid #cbcbcb;
 	float: left;
@@ -715,7 +695,6 @@ border-top: 4px solid #f4b802;
 	width: 184px;
 	height: 68px;
 	float: right;
-	border: 1px solid blue;
 }
 .right_li{
 	float: left;
@@ -766,7 +745,6 @@ border-top: 4px solid #f4b802;
 .erwei{
 	width: 40px;
 	height: 120px;
-	border: 1px solid blue;
 	position: fixed;
 	right: 70px;
 	bottom: 0px;
@@ -805,7 +783,6 @@ border-top: 4px solid #f4b802;
 .mao{
 	width: 130px;
 	height: 340px;
-	border: 1px solid blue;
 	position: absolute;
 	right: 0px;
 	top: 120px;
@@ -828,7 +805,7 @@ border-top: 4px solid #f4b802;
 	height: 278px;
 	width: 84px;
 	border-left:2px solid #a8a5a6;
-	/*background-color: pink;*/
+
 	position: absolute;
 	left: 10px;
 	top: 26px;
@@ -837,7 +814,6 @@ border-top: 4px solid #f4b802;
 	width: 84px;
 	height: 24px;
 	position: absolute;
-	background-color: yellow;
 }
 .an_1{
 	left: -8px;
@@ -883,7 +859,7 @@ border-top: 4px solid #f4b802;
 }
 
 /*分页*/
-.pages {text-align:right;width:90%;margin:20px auto;padding-top:0px;height:26px;overflow:hidden; border: 1px solid blue;float: right;margin-right: 30px;}
+.pages {text-align:right;width:90%;margin:20px auto;padding-top:0px;height:26px;overflow:hidden; float: right;margin-right: 30px;}
 .pages a {text-align:center;padding:10px;border:1px solid #CCC;margin:0px 5px;text-decoration:none;color:#333;}
 .pages a:hover {border:1px solid #FC0;color:#F60;}
 .pages .this {border:1px solid #FC0;color:#F60;}
@@ -907,7 +883,6 @@ width: 1024px;
 height: 400px;
 background-color: #fff;
 margin: 0 auto;
-border: 1px solid blue;
 margin-top: 30px;
 background-color: #fff;
 box-shadow: 0px 0px 5px #333;
@@ -918,7 +893,6 @@ color: #555;
 {
 width: 500px;
 height: 360px;
-background-color: pink;
 margin-left: auto;
 margin-right: auto;
 position: relative;
@@ -933,12 +907,11 @@ line-height: 40px;
 #forget_form
 {
 width: 500px;
-height: 340px;
-border:1px solid red;
+height: 300px;
 position: absolute;
 left: 0px;
 top: 42px;
-
+margin-top:40px;
 }
 .info_prompt p
 {
@@ -956,10 +929,8 @@ color: #666;
 {
 width: 400px;
 height: 80px;
-border: 1px solid blue;
 margin-left: auto;
 margin-right: auto;
-margin-top: 10px;
 }
 .div_forget .label_p
 {
@@ -981,8 +952,6 @@ height: 30px;
 font-size: 14px;
 color: red;
 line-height: 36px;
-margin-top: 10px;
-background-color: yellow;
 float: left;
 margin-left: 131px;
 /*margin-left: 36px;*/
@@ -999,11 +968,8 @@ margin-left: 32px;
 {
 width: 400px;
 height: 40px;
-border: 1px solid blue;
 margin-left: auto;
 margin-right: auto;
-margin-top: 10px;
-
 }
 .for_btn
 {
@@ -1011,7 +977,6 @@ width: 100px;
 height: 40px;
 border-radius: 6px;
 float: left;
-background-color: blue;
 margin-left: 66px;
 color: #fff;
 font-size: 16px;
@@ -1036,3 +1001,18 @@ left: 0px;
 top: 40px;
 }
 /*忘记密码样式结束*/
+#cnzz_stat_icon_3967155 {
+    position: absolute;
+    left: 50%;
+    top: 25px;
+}
+#cnzz_stat_icon_3967155 a {
+color: #428bca;
+}
+.foot{
+	position: relative;
+}
+.forget_h3{
+	margin-top:26px;
+	background-color:#eee;
+}

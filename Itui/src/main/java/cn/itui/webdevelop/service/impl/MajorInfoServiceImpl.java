@@ -82,7 +82,9 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		if(allMajors.size() >= needCount)
 			recommendMajors.setTransdisciplinaryCount(needCount);
 		recommendMajors = majorRecommendFilter.recommendMajorFilter(recommendMajors, allMajors, collegeId, majorId, code);
-		
+//		for (int i = 0; i < recommendMajors.getMajors().size(); i++){
+//			recommendMajors.getMajors().get(i).get("")
+//		}
 		return recommendMajors;
 	}
 	

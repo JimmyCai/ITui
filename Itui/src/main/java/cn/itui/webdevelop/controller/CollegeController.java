@@ -27,17 +27,20 @@ public class CollegeController {
 
 	@RequestMapping(URLConstants.COLLEGE)
 	public String getCollegeSchools(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		if (request.getParameter(CODE) == null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE); 
 		if (request.getParameter(COLLEGEID) ==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int collegeId = 1;
+		String code="";
 		try{
 			String collegeIdStr = request.getParameter(COLLEGEID);
+			code = request.getParameter(CODE);
 			collegeId = EnDeCode.decodePara(collegeIdStr);
-			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId;
+			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
 			rRLogger.info(requestStr);
 		}catch (Exception e){
 			throw MyNumberFormatException.getInstance();
 		}
-		return collegeService.findSchoolsById(collegeId);
+		return collegeService.findSchoolsById(code, collegeId);
 	}
 	
 	@RequestMapping(URLConstants.SCHOOL)
@@ -78,6 +81,7 @@ public class CollegeController {
 	public String disFollowCollege(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String code = request.getParameter(CODE);
 		String collegeIdStr = request.getParameter(COLLEGEID);
+		System.out.println(collegeIdStr+"test");
 		if(code == null)
 			throw NotLoginException.getInstance();
 		if(collegeIdStr == null)

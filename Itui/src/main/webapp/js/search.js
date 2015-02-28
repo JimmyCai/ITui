@@ -2,16 +2,16 @@
 var xueke0="",xueke1="",xueke2="",xueke3="",xueke4="",xueke5="",num_0=0;
 $(function(){
 	// 专业学校转换
-	$('.d_down').click(function(event) {
-		$('.dropdown-menu').css('display', 'block');
-	});
-	$('.zhuanye  a').click(function(event) {
-		$('.dropdown-menu').css('display', 'none');
-		var neirong=$(this).html();
-		var neirong2=$('.nr_js').html();
-		$('.nr_js').html(neirong);
-		$('.zhuanye  a ').html(neirong2);
-	});
+//	$('.d_down').click(function(event) {
+//		$('.dropdown-menu').css('display', 'block');
+//	});
+//	$('.zhuanye  a').click(function(event) {
+//		$('.dropdown-menu').css('display', 'none');
+//		var neirong=$(this).html();
+//		var neirong2=$('.nr_js').html();
+//		$('.nr_js').html(neirong);
+//		$('.zhuanye  a ').html(neirong2);
+//	});
 //	鼠标移出下拉框1秒后下拉框消失
 	$('.dropdown-menu').mouseout(function(event){
 		setTimeout("$('.dropdown-menu').css('display', 'none')",20);
@@ -285,6 +285,14 @@ function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 		page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 		
 	});
+	$('.left li').click(function(event) {
+		var about_index = $(this).index();
+		$.cookie("about_index", about_index, {
+			path : "/"
+		});
+
+		console.log($.cookie("about_index"));
+	});	
 });
 //页面加载函数结束
 
@@ -352,7 +360,7 @@ if(xueke5!="")
 
 var list=null;
 var obj_json=null;
-var page_num=null;
+var page_num=0;
 var type0=null;
 var l=num_0;
 
@@ -384,12 +392,24 @@ function ajax_01 (data){
 		round_1();//第一次for循环结束
 		collage_hide();
 		// 定义总条数
-		pageShow(1,page_num);// 分页
+		if(page_num>15){
+			pageShow(1,page_num);// 分页
+			console.log(page_num);
+		}else{
+			$('.page_0').html('');
+		}
+		
 	}else{
 		//处理搜索类型为专业
 		page_num=data.normalReturn.total;
+		console.log(page_num);
 		round_1();//第一次for循环结束
-		pageShow(1,page_num);// 分页
+		if(page_num>15){
+			pageShow(1,page_num);// 分页
+			console.log(page_num);
+		}else{
+			$('.page_0').html('');
+		}
 	}
 }
 
@@ -417,6 +437,7 @@ function round_1(){
 		var length = page_num;
 		if (length > 14) length = 14;
 		console.log(length);
+		
 		for (var i=0;i<length;i++)
 		{	
 			charu(i);
@@ -506,8 +527,8 @@ function pageShow(ThisPage,PageCount){
 						var pageNumber = Math.ceil(PageCount / pageText);
 						
 						//page分割数量
-						var pageFor = 4;
-						var pageSlipt = pageFor / 2;
+						var pageFor = 3;
+						var pageSlipt = pageFor / 3;
 						
 						var pageHTML = new Array;
 						if (pageNumber > pageFor)
@@ -518,7 +539,7 @@ function pageShow(ThisPage,PageCount){
 								
 
 							}
-							if (ThisPage > (pageFor / 2)) {
+							if (ThisPage > (pageFor / 3)) {
 								if (ThisPage >= (pageNumber - pageSlipt)) {
 									countPage = (((ThisPage - pageSlipt) + pageFor) - pageSlipt + 1);
 

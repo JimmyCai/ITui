@@ -7,16 +7,19 @@ import java.util.List;
 import java.util.Map;
 
 import cn.itui.webdevelop.dao.CollegeDao;
+import cn.itui.webdevelop.dao.FollowCollegeDao;
 import cn.itui.webdevelop.service.CollegeService;
 import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.WordParticiple;
+import cn.itui.webdevelop.utils.exception.DatabaseException;
 
 /**
  * college服务类，主要用于college搜索、查看该学校所有院系、以及查看该学校某个院系的搜索专业
  */
 public class CollegeServiceImpl implements CollegeService {
 	private CollegeDao collegeDao;
+	private FollowCollegeDao followCollegeDao;
 
 	/**
 	 * 服务于搜索页
@@ -90,12 +93,20 @@ public class CollegeServiceImpl implements CollegeService {
 	 * 根据college的id找到其school列表
 	 * @param collegeId
 	 * @author warrior
+	 * @throws DatabaseException 
 	 */
-	public String findSchoolsById(int collegeId) {
+	public String findSchoolsById(String code, int collegeId) throws DatabaseException {
 		HashMap<String, Object> result = collegeDao.getCollegeInfo(collegeId);
-		List<String> schools = collegeDao.findSchoolsByCollegeId(collegeId);
+		List<String> schools=null;
+		try {
+			schools = collegeDao.findSchoolsByCollegeId(collegeId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		result.put("school", schools);
-		result.put("followId", -1);
+		int followId = followCollegeDao.isUserFollowCollege(code, collegeId);
+		result.put("followId", followId);
 		return ResponseUtil.wrapNormalReturn(result);
 	}
 
@@ -114,6 +125,14 @@ public class CollegeServiceImpl implements CollegeService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("major", majors);
 		return ResponseUtil.wrapNormalReturn(map);
+	}
+
+	public FollowCollegeDao getFollowCollegeDao() {
+		return followCollegeDao;
+	}
+
+	public void setFollowCollegeDao(FollowCollegeDao followCollegeDao) {
+		this.followCollegeDao = followCollegeDao;
 	}
 
 }

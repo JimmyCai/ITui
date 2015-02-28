@@ -30,19 +30,19 @@ $(function(){
 		var mod_w=$('.tab').width();
 	// 二维码
 	$('.ew_ma').hide();
-	var erwei_right=(wind_w-$('.containa').width())/2-80;
-	$('.erwei').css({
-		position: 'fixed',
-		right: erwei_right+'px'
-	});
-	$('.ew_01').mouseenter(function(event) 
-	{
-		$('.ew_ma').show();
-	});
-	$('.ew_01').mouseleave(function(event) 
-	{
-		$('.ew_ma').hide();
-	});
+//	var erwei_right=(wind_w-$('.containa').width())/2-80;
+//	$('.erwei').css({
+//		position: 'fixed',
+//		right: erwei_right+'px'
+//	});
+//	$('.ew_01').mouseenter(function(event) 
+//	{
+//		$('.ew_ma').show();
+//	});
+//	$('.ew_01').mouseleave(function(event) 
+//	{
+//		$('.ew_ma').hide();
+//	});
 // 判断用户是否登录开始
 var user_value=$.cookie("user");
 // console.log(user_value);
@@ -142,7 +142,7 @@ $('.collect').mouseenter(function(event)
 	// 点击收藏列表跳转
 	$('.jump_coll').click(function(event) 
 	{
-		window.open("collect.html?t=","_blank");
+		window.open("collect.html","_blank");
 	});	
 }
 // 用户中心自定义函数结束
@@ -329,7 +329,7 @@ function submit_judge(email,pasd)
 		// 邮箱和密码若有一个错误择提交按钮不可用
 		$('.button_regs').click(function(event) {
 			$('.button_regs').attr('disabled', true);
-			$('.button_regs').css('background-color', '#cbcbcb');
+//			$('.button_regs').css('background-color', '#cbcbcb');
 		});
 
 	}
@@ -361,7 +361,7 @@ function load_judge(email,pasd)
 //		load_submit(email,pasd);
 	}else{
 		$('.button_load').attr('disabled', true);
-		$('.button_load').css('background-color', '#cbcbcb');
+//		$('.button_load').css('background-color', '#cbcbcb');
 	}
 }
 // 给登录按钮添加点击函数
@@ -419,7 +419,8 @@ mod_h=$('.tab').height();
  resize_modal();
  $('#modal_load').css('display', 'block');
  }
- modal_visiblity();
+// if ($.cookie('user') == undefined) 
+	 modal_visiblity();
 
 // 注册ajax
 function register_ajax(email,pasd)
@@ -470,7 +471,7 @@ $.ajax({
 				$('#modal_load').css('display', 'none');
 				$('.user').css('display', 'block');
 				$('.user2').css('display', 'none');
-				windoe.location.relodad();
+				window.location.reload();
 			}	
 		}
 	}

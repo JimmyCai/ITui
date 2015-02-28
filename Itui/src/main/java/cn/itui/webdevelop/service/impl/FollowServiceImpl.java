@@ -10,6 +10,7 @@ import java.util.Set;
 import cn.itui.webdevelop.dao.FollowCollegeDao;
 import cn.itui.webdevelop.dao.FollowMajorDao;
 import cn.itui.webdevelop.service.FollowService;
+import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.exception.DatabaseException;
 import cn.itui.webdevelop.utils.exception.ParameterErrorException;
@@ -68,7 +69,17 @@ public class FollowServiceImpl implements FollowService{
 		if(code.length() != MD5LENGTH)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
 		List<HashMap<String, Object>> followMajors = followMajorDao.findFollowMajorByUserCode(code);
+//		for (int i = 0; i < followMajors.size(); i++){
+//			int id = (Integer)followMajors.get(i).get("majorId");
+//			followMajors.get(i).put("majorId", EnDeCode.encodePara(id));
+//			id = (Integer)followMajors.get(i).get("collegeId");
+//			followMajors.get(i).put("collegeId", EnDeCode.encodePara(id));
+//		}
 		List<HashMap<String, Object>> followColleges = followCollegeDao.findFollowCollegeByUserCode(code);
+//		for (int i = 0; i < followColleges.size(); i++){
+//			int id = (Integer)(followColleges.get(i).get("collegeId"));
+//			followColleges.get(i).put("collegeId", EnDeCode.encodePara(id));
+//		}
 		return buildJson(followMajors, followColleges);
 	}
 
@@ -127,13 +138,13 @@ public class FollowServiceImpl implements FollowService{
 			List<HashMap<String, Object>> resultMajors = new ArrayList<HashMap<String,Object>>();
 			for(HashMap<String, Object> curMajor : curCollegeMajors) {
 				HashMap<String, Object> tmpMap = new HashMap<String, Object>();
-				tmpMap.put("majorId", curMajor.get("majorId"));
+				tmpMap.put("majorId", EnDeCode.encodePara((Integer)curMajor.get("majorId")));
 				tmpMap.put("followMajorId", curMajor.get("followMajorId"));
 				tmpMap.put("majorName", curMajor.get("majorName"));
 				resultMajors.add(tmpMap);
 			}
 			LinkedHashMap<String, Object> curResultMap = new LinkedHashMap<String, Object>();
-			curResultMap.put("collegeId", collegeId);
+			curResultMap.put("collegeId", EnDeCode.encodePara(collegeId));
 			curResultMap.put("collegeName", collegeName);
 			curResultMap.put("followCollegeId", followCollegeId);
 			curResultMap.put("followMajorCount", curCollegeMajors.size());
@@ -143,7 +154,7 @@ public class FollowServiceImpl implements FollowService{
 		for(HashMap<String, Object> curMap : followColleges) {
 			if(!collegeIdMajors.containsKey((Integer)curMap.get("collegeId"))) {
 				LinkedHashMap<String, Object> curResultMap = new LinkedHashMap<String, Object>();
-				curResultMap.put("collegeId", curMap.get("collegeId"));
+				curResultMap.put("collegeId", EnDeCode.encodePara((Integer)curMap.get("collegeId")));
 				curResultMap.put("collegeName", curMap.get("collegeName"));
 				curResultMap.put("followCollegeId", curMap.get("followCollegeId"));
 				curResultMap.put("followMajorCount", 0);

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.itui.webdevelop.dao.FollowCollegeDao;
+import cn.itui.webdevelop.utils.exception.DatabaseException;
 
 public class FollowCollegeDaoImpl implements FollowCollegeDao{
 	private SqlSession sqlSession;
@@ -53,5 +54,19 @@ public class FollowCollegeDaoImpl implements FollowCollegeDao{
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
+	}
+
+	/**
+	 * 查看用户是否关注该学校
+	 * @throws DatabaseException 
+	 */
+	public int isUserFollowCollege(String code, int collegeId) throws DatabaseException {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("code", code);
+		parameter.put("collegeId", collegeId);
+		List<HashMap<String, Object>> result = sqlSession.selectList("cn.itui.webdevelop.dao.FollowCollegeDao.isUserFollowCollege", parameter);
+		if (result.size() > 0) return (Integer)result.get(0).get("id");
+		return -1;
 	}
 }

@@ -43,16 +43,20 @@ public class SearchController{
 			//major
 			String category = request.getParameter("cg");
 			if (category==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+			if (category.equalsIgnoreCase("全部")) category = "";
 			String subject = request.getParameter("sj");
 			if (subject==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 			if (subject.length() > 4) subject = subject.substring(4);
 			String area = request.getParameter("a");
 
 			if (area==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+			if (area.equalsIgnoreCase("全部")) area = "";
 			String college_type = request.getParameter("ct");
 			if (college_type==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+			if (college_type.equalsIgnoreCase("全部")) college_type = "";
 			String major_type = request.getParameter("mt");
 			if (major_type==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+			if (major_type.equalsIgnoreCase("全部")) major_type = "";
 			if (request.getParameter("l")==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 			int limit = 0;
 			try{

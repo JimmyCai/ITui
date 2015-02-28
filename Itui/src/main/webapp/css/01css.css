@@ -757,11 +757,12 @@ line-height: 30px;
 /*页面脚修改*/
 .foot {
 	position: relative;
+	
 }
 #cnzz_stat_icon_3967155{
 	position: absolute;
-	left: 55%;
-	top: 22px;
+	left: 50%;
+	top: 22px;}
 	
 }
 

@@ -27,15 +27,15 @@ $(function() {
 				if (len_course > 5) {
 					$(this).siblings('.course_full').show().find('a').text(
 							text_course);
-					$(this).parent('.baowei0').find('.course').hide();
+					$(this).parent('.baowei0').find('.course').animate({display:'none'},1);
 
 				} else {
-					$('.course_full').hide();
+					$('.course_full').animate({display:'none'},1);
 				}
 			});
 	$('.course_full').stop().mouseleave(function(event) {
 		$(this).hide();
-		$(this).parent('.baowei0').find('.course').show(1000);
+		$(this).parent('.baowei0').find('.course').animate({display:'block'},1);
 	});
 
 	// 所属专业和院校部分全称展示
@@ -194,7 +194,14 @@ $(function() {
 		// $(this).addClass('rank_ac').siblings('.rank').removeClass('rank_ac');
 		// alert($(this).index());
 	});
+	$('.left li').click(function(event) {
+		var about_index = $(this).index();
+		$.cookie("about_index", about_index, {
+			path : "/"
+		});
 
+		console.log($.cookie("about_index"));
+	});	
 });
 // 页面加载函数结束
 
@@ -239,7 +246,7 @@ function major_ajax() {
 				dataType : 'html',
 				data : {
 					'mid' : thisid,
-					'code' : "991224073865e50d38d7d15a4ef2d908"
+					'code' : $.cookie('user')
 				},
 				success : function(msg) {
 					var data = eval('msg=' + msg);
@@ -248,7 +255,7 @@ function major_ajax() {
 						data = data.normalReturn;
 						var baseInfo = data.baseInfo;
 						$('.coll_1').append(data.baseInfo.college + '/');
-						$('.sch0').text(data.baseInfo.college);
+//						$('.sch0').text(data.baseInfo.college);
 						// 获得followid
 						followid = baseInfo.followId;
 						console.log("获得"+followid);
@@ -751,9 +758,6 @@ function cookie_click(bar_index, majorname, schoolname) {
 	// thisid=major_bar[bar_index];
 	// var majorname_para=majorname;
 	// var schname_para=schoolname;
-	$.cookie("thisid", thisid, {
-		path : "/"
-	});
 	// $.cookie("name2", majorname_para,{path:"/"});
 	// $.cookie("range", schname_para,{path:"/"});
 	// var href_id=$.cookie("href_id");
@@ -804,18 +808,6 @@ function inster_collage(collage_index, collage_name, collage_leve,
 		collagename = collage_name;
 		collageleve = collage_leve;
 		collagerank = collage_rank;
-		$.cookie("thiscid", thiscid, {
-			path : "/"
-		});
-		$.cookie("collagename", collagename, {
-			path : "/"
-		});
-		$.cookie("collageleve", collageleve, {
-			path : "/"
-		});
-		$.cookie("collagerank", collagerank, {
-			path : "/"
-		});
 		window.open("school.html?name=" + thiscid, "_blank");
 
 	});
@@ -891,6 +883,7 @@ function cancelattention_ajax() {
 				atten();
 			} else {
 				alert("取消关注失败!");
+				alert(data.errMsg);
 			}
 		}
 	});

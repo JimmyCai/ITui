@@ -693,6 +693,7 @@ color: #666;
 	top: 60px;
 	display: none;
 	border-radius: 6px;
+	z-index:70;
 }
 .arrow_up
 {
@@ -706,7 +707,7 @@ color: #666;
 	/*border-color:#E27A14 #E27A14 #E27A14 #ffca74;*/
 	border-color:#E27A14 #E27A14 #E27A14 #f6f6f6;
 	-moz-transform:rotate(-90deg);
-	-webkit-transform:rotate(90deg);
+	-webkit-transform:rotate(-90deg);
 }
 .collect{
 	width: 120px;
@@ -814,7 +815,7 @@ color: #666;
 	padding-right: 10px;
 }
 .li_tab01{
-	/*display: none;*/
+	display: none;
 }
 .li_tab02{
 display: none;
@@ -884,12 +885,12 @@ display: none;
 
 }
 .left{
-	width: 660px;
+	width: 600px;
 	height: 68px;
 	float: left;
 }
 .left li{
-	width: 108px;
+	width: 98px;
 	height: 64px;
 	border-right: 1px solid #cbcbcb;
 	float: left;
@@ -1037,4 +1038,15 @@ border-top: 4px solid #f4b802;
 
 .erwei{
 	/*display: none;*/
+}
+#cnzz_stat_icon_3967155 {
+    position: absolute;
+    left: 50%;
+    top: 25px;
+}
+#cnzz_stat_icon_3967155 a {
+color: #428bca;
+}
+.foot{
+	position: relative;
 }
