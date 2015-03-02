@@ -104,16 +104,7 @@ $(function(){
 		$(li_class).siblings('li').find('.span02').hide();
 		$('.obj_son').css('display', 'none');
 	}
-//	$('.li1').click(function(event) {
-//		all_style('.li1');		
-//	});
 
-	// 院校层次
-//	$('.cengci').mouseover(function(event) {
-//		$(this).addClass('hong').siblings('li').removeClass('hong');
-//		$(this).find('a').css('color', '#fff');
-//		$(this).siblings('li').find('a').css('color', '#333');
-//	});
 	// 院校层次点击事件
 	$('.cengci').click(function(event) {
 		$(this).addClass('hong').siblings('li').removeClass('hong');
@@ -136,11 +127,6 @@ $(function(){
 	});
 	// 学术类型
 
-//	$('.leixing').mouseover(function(event) {
-//		$(this).addClass('hong').siblings('li').removeClass('hong');
-//		$(this).find('a').css('color', '#fff');
-//		$(this).siblings('li').find('a').css('color', '#333');
-//	});
 	
 	$('.leixing').click(function(event) {
 		$(this).addClass('hong').siblings('li').removeClass('hong');
@@ -183,13 +169,6 @@ $(function(){
 		all_style('.area01');
 	});
 	
-	// 地区------省市
-//	$('.ite044').mouseover(function(event) {
-//		$(this).addClass('hong');
-//		$(this).siblings('.ite04').removeClass('hong');
-//		$(this).find('a').css('color', '#fff');
-//		$(this).siblings('.ite04').find('a').css('color', '#333');
-//	});
 	$('.ite044').click(function(event) {
 		$(this).addClass('hong');
 		$(this).siblings('.ite04').removeClass('hong');
@@ -490,8 +469,6 @@ function charu(i){
 		if (obj_json.array[i].is985=='1') {
 			htmlcode01 += '<span>985</span>';
 		};
-		
-//		console.log(obj_json.array[i].rank);
 		
 		htmlcode01 +='</p>\
 				<p class="range"><span class="range_2">所属院系：</span>\
