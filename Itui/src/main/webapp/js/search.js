@@ -51,6 +51,10 @@ $(function(){
 	
 	//一级学科点击事件
 	$('.obj_son li').click(function(event) {
+		$('.redd').addClass('hong').siblings('.subject').removeClass('hong');
+		$('.redd').siblings('li').removeClass('hong');
+		$('.redd').find('a').css('color', '#fff');
+		$('.redd').siblings('li').find('a').css('color', '#333');
 		$('.cond1').show();
 		$('.cond1 .xk_0').remove();
 		 xueke1=$(this).find('a').text();
@@ -83,6 +87,7 @@ $(function(){
 		xueke0=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke0+"</span>").prependTo(".cond0");
 		$('.cond1').hide();
+		
 		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);	
 	});
 
@@ -97,9 +102,20 @@ $(function(){
 		$(li_class).siblings('li').find('.span02').hide();
 		$('.obj_son').css('display', 'none');
 	}
-	$('.li1').click(function(event) {
+//	四个全部点击样式
+	$('.all_cengci').click(function(event) {
 		all_style('.li1');		
 	});
+	$('.sub_all').click(function(event) {
+		all_style('.li1');		
+	});
+	$('.all_leixing').click(function(event) {
+		all_style('.li1');		
+	});
+	$('.area01').click(function(event) {
+		all_style('.li1');		
+	});
+
 
 	// 院校层次
 //	$('.cengci').mouseover(function(event) {
@@ -526,9 +542,10 @@ function pageShow(ThisPage,PageCount){
 						//分页总数
 						var pageNumber = Math.ceil(PageCount / pageText);
 						
+						
 						//page分割数量
-						var pageFor = 3;
-						var pageSlipt = pageFor / 3;
+						var pageFor = 4;
+						var pageSlipt = pageFor / 2;
 						
 						var pageHTML = new Array;
 						if (pageNumber > pageFor)
@@ -539,7 +556,7 @@ function pageShow(ThisPage,PageCount){
 								
 
 							}
-							if (ThisPage > (pageFor / 3)) {
+							if (ThisPage > (pageFor / 2)) {
 								if (ThisPage >= (pageNumber - pageSlipt)) {
 									countPage = (((ThisPage - pageSlipt) + pageFor) - pageSlipt + 1);
 
@@ -569,6 +586,16 @@ function pageShow(ThisPage,PageCount){
 							
 
 							
+							
+						}else{
+							$('.page_0').html('');
+							for(w=1;w<=pageNumber;w++)
+								{
+//								pageHTML += "<div class=\"page_b\"><a href=\"javascript:pageShow("+w+",'"+PageCount+"');\">" +w+ "</a></div>";
+								pageHTML02="<div class=\"page_b\"><a href=\"javascript:pageShow("+w+",'"+PageCount+"');\">" +w+ "</a></div>";
+								$('.page_0').append(pageHTML02);
+								console.log(pageHTML);
+								}
 							
 						}
 						click_charu();
