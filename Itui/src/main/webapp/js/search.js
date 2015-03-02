@@ -109,16 +109,16 @@ $(function(){
 
 //	四个全部点击样式
 	$('.all_cengci').click(function(event) {
-		all_style('.li1');		
+		all_style('.all_cengci');		
 	});
 	$('.sub_all').click(function(event) {
-		all_style('.li1');		
+		all_style('.sub_all');		
 	});
 	$('.all_leixing').click(function(event) {
-		all_style('.li1');		
+		all_style('.all_leixing');		
 	});
 	$('.area01').click(function(event) {
-		all_style('.li1');		
+		all_style('.area01');		
 	});
 
 
