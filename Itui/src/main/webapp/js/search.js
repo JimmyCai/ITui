@@ -666,8 +666,7 @@ function click_charu(){
 	}//点击函数结束
 
 
-
-
+$('#modal_load').hide();
 
 
 

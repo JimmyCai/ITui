@@ -45,12 +45,23 @@ $(function(){
 //	});
 // 判断用户是否登录开始
 var user_value=$.cookie("user");
-// console.log(user_value);
 console.log(user_value+"dae");
 if(user_value ==undefined)
 {	$('.user2').css('display', 'block');
 	$('.user2').find('img').attr('src', 'images/user2.png');
 	$('.user').css('display', 'none');
+
+//	判断当前页面是否是信息页
+	var str_info=window.location.pathname;
+	var str_texting=new RegExp('info');
+	if(str_texting.test(str_info))
+	{
+	console.log('Yes');
+
+	}else{
+		console.log('no');
+		lodal_close();
+	}
 }else{
 	$('.user').css('display', 'block');
 	$('.user2').css('display', 'none');
@@ -80,17 +91,28 @@ $('#sou').click(function(event) {
 	var value = $('#scbar_txt').val();
 	search_jump(major,value);	
 });
-// 按下回车调用跳转函数至信息页
- document.onkeydown = function(e)
-    {  
-      var ev = document.all ? window.event : e;
-      if(ev.keyCode==13) 
-      {
-          var major = $('.nr_js').text();
-	var value = $('#scbar_txt').val();
-	search_jump(major,value);	
-      }
-    }
+//获得焦点时按下回车调用跳转函数至信息页
+
+$('#scbar_txt').focus(function(){
+	document.onkeydown = function(e) {
+		var ev = document.all ? window.event : e;
+		if (ev.keyCode == 13) {
+			var major = $('.nr_js').text();
+			var value = $('#scbar_txt').val();
+			search_jump(major, value);
+			console.log('focus');
+		}
+	}
+});
+// 失去焦点时按下回车无反应
+$('#scbar_txt').blur(function(){
+	document.onkeydown = function(e) {
+		var ev = document.all ? window.event : e;
+		if (ev.keyCode == 13) {
+			console.log('blur');
+		}
+	}
+});
 
 	
 });
@@ -193,7 +215,6 @@ var load_obj={objemail:'null',objpasd:'null'};
 		// 注册确认密码
 			$('.same_pasd').blur(function(event)
 			 {
-				// var pasd2=$('.regs_pasd').val();
 				var pasd3=$('.same_pasd').val();
 				if(pasd2==pasd3)
 				{
@@ -308,14 +329,7 @@ function load_modal(wind_w,wind_h,mod_w,mod_h)
 		$('.errmsg').html('');
 	});
 
-	// 关闭登录模态框
-	$('.close').click(function(event)
-	 {
-		// 模态框出现xy轴滚动条出现
-		$('body').css('overflow-y', 'visible');
-		$('body').css('overflow-x', 'visible');
-		$('#modal_load').css('display', 'none');
-	});
+	
 
 }
 
@@ -324,9 +338,11 @@ function load_modal(wind_w,wind_h,mod_w,mod_h)
 function submit_judge(email,pasd)
 {
 	if(email!='null'&&pasd!='null'){
+		console.log('qaz');
 		$('.button_regs').attr('disabled', false);
 		$('.button_regs').css('background-color', '#FF7F27');
 		submit_click(email,pasd);
+		console.log('wer');
 	}else{
 		// 邮箱和密码若有一个错误择提交按钮不可用
 		$('.button_regs').click(function(event) {
@@ -338,15 +354,17 @@ function submit_judge(email,pasd)
 }
 // 提交按钮点击函数
 function submit_click(email,pasd){
+	console.log('qian');
 	$('.button_regs').click(function(event){
 		// 在用户名和密码都输入正确的情况下调用ajax
+		console.log('zhong');
 		$('.regspage').css('display', 'none');
 		$('.waitpage').css('display', 'block');
 		// $('.waitpage').delay(3000).hide(0);
-	    setTimeout(function (){
         	$(".waitpage").hide();
         	register_ajax(email,pasd);
-    	},0);
+        	console.log('hou');
+    	
 });
 
 }
@@ -481,8 +499,20 @@ $.ajax({
 
 }
 
-
 if ($.cookie('user') != undefined){
 	console.log($.cookie('user'));
 	$('#modal_load').hide();
 }
+
+//关闭登录模态框函数
+function lodal_close()
+{
+	$('.close').click(function(event)
+			 {
+				// 模态框出现xy轴滚动条出现
+				$('body').css('overflow-y', 'visible');
+				$('body').css('overflow-x', 'visible');
+				$('#modal_load').css('display', 'none');
+			});
+}
+

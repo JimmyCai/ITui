@@ -42,7 +42,7 @@ ul,ol,li{list-style:none}
 	margin:0 auto;
 	margin-top: -88px;
 }
-/*顶部*/
+/*椤堕儴*/
 #nav0{
 	width: 1024px;
 	height: 88px;
@@ -125,7 +125,7 @@ ul,ol,li{list-style:none}
 	color:  #e67917;
 }
 
-/*分类*/
+/*鍒嗙被*/
 
 #nav1{
 	width: 1024px;
@@ -395,7 +395,7 @@ ul,ol,li{list-style:none}
 	/*display: none;*/
 }
 
-/*院校层次*/
+/*闄㈡牎灞傛*/
 .quan{
 	width: 44px;
 	height: 20px;
@@ -417,7 +417,7 @@ ul,ol,li{list-style:none}
 	color: #fff;
 }
 
-/*地区*/
+/*鍦板尯*/
 #item04{
 	height: 68px;
 	border-bottom: none;
@@ -444,7 +444,7 @@ ul,ol,li{list-style:none}
 }
 
 
-/*标签*/
+/*鏍囩*/
 #nav2{
 	width: 1024px;
 	height: 40px;
@@ -478,7 +478,7 @@ ul,ol,li{list-style:none}
 	overflow:hidden;
 }
 
-/*筛选结果*/
+/*绛涢�夌粨鏋�*/
 #nav3{
 	width: 1024px;
 	box-shadow: 0px 0px 3px #000;
@@ -681,7 +681,7 @@ ul,ol,li{list-style:none}
 	background-color: #fff;
 }*/
 
-/*页面脚*/
+/*椤甸潰鑴�*/
 .foot{
 	width: 100%;
 	height: 68px;
@@ -798,7 +798,7 @@ border-top: 4px solid #f4b802;
 }
 
 
-/*二维码*/
+/*浜岀淮鐮�*/
 .erwei{
 	width: 40px;
 	height: 120px;
@@ -830,7 +830,7 @@ border-top: 4px solid #f4b802;
 	color: #fff;
 }
 
-/*分页*/
+/*鍒嗛〉*/
 .pages {
 		text-align:center;
 		margin:20px auto;
@@ -872,7 +872,7 @@ border-top: 4px solid #f4b802;
 	color: #333;
 }
 
-/*20150227编辑*/
+/*20150227缂栬緫*/
 .user {
 width: 40px;
 height: 40px;
@@ -976,7 +976,7 @@ border-radius: 50%;
 overflow: hidden;
 }
 
-/*2015年0227编辑用户登录模态框*/
+/*2015骞�0227缂栬緫鐢ㄦ埛鐧诲綍妯℃�佹*/
 #modal_load{
 	width:100%;
 	height: 100%;
@@ -1103,7 +1103,9 @@ overflow: hidden;
 	width:24px;
 	height: 24px;
 	font-size: 24px;
-	
+	position: absolute;
+	right: 0px;
+	top: 0px;
 	text-align: center;
 	line-height: 24px;
 	cursor: pointer;
@@ -1173,7 +1175,7 @@ overflow: hidden;
 	margin-top: 10px;
 }
 
-/*注册框*/
+/*娉ㄥ唽妗�*/
 #regsrorm{
 	width: 490px;
 	height: 270px;
