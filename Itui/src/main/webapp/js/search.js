@@ -28,7 +28,8 @@ $(function(){
 //		$(this).siblings('li').removeClass('hong');
 //		$(this).find('a').css('color', '#fff');
 //		$(this).siblings('li').find('a').css('color', '#333');
-		$(this).siblings('.subject').find('a').css('color', '#333');
+//		$(this).siblings('.subject').find('a').css('color', '#333');
+//		$(this).siblings('.subject').removeClass('hong');
 		$(this).find('.span01').hide();
 		$(this).siblings('.subject').find('.span01').show();
 		$(this).find('.span02').show();
@@ -47,6 +48,7 @@ $(function(){
 		$('.cond1').hide();
 		xueke0="";
 		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
+		all_style('.sub_all');
 	});
 	
 	//一级学科点击事件
@@ -102,6 +104,7 @@ $(function(){
 		$(li_class).siblings('li').find('.span02').hide();
 		$('.obj_son').css('display', 'none');
 	}
+
 //	四个全部点击样式
 	$('.all_cengci').click(function(event) {
 		all_style('.li1');		
@@ -116,8 +119,7 @@ $(function(){
 		all_style('.li1');		
 	});
 
-
-	// 院校层次
+// 院校层次
 //	$('.cengci').mouseover(function(event) {
 //		$(this).addClass('hong').siblings('li').removeClass('hong');
 //		$(this).find('a').css('color', '#fff');
@@ -131,7 +133,6 @@ $(function(){
 		$('.cond2').show();
 		$('.cond2 .xk_0').remove();
 		xueke2=$(this).find('a').text();
-		console.log(xueke2);
 		$("<span class='xk_0'>"+xueke2+"</span>").prependTo(".cond2");
 		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
@@ -142,6 +143,7 @@ $(function(){
 		xueke2=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke2+"</span>").prependTo(".cond2");
 		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
+		all_style('.all_cengci');
 	});
 	// 学术类型
 
@@ -169,6 +171,7 @@ $(function(){
 		xueke3=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke3+"</span>").prependTo(".cond3");
 		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
+		all_style('.all_leixing');
 	});
 
 	// 地区------全部
@@ -177,6 +180,7 @@ $(function(){
 		$(this).find('a').css('color', '#fff');
 		$(this).siblings('li').removeClass('hong');
 		$(this).siblings('li').find('a').css('color', '#333');
+		
 	});
 	
 	
@@ -187,6 +191,7 @@ $(function(){
 		xueke4=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke4+"</span>").prependTo(".cond4");
 		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
+		all_style('.area01');
 	});
 	
 	// 地区------省市
@@ -246,7 +251,7 @@ $(function(){
 
 // 筛选条件ajax提交
 function ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
-		console.log(t1);
+//		console.log(t1);
 		$.ajax({
 		 	url: 'back/search.html',
 			 type: 'post',
@@ -357,7 +362,6 @@ cond_hide();
 
 // 插入首页搜索条件
  function cond5_charu(){ 
-	console.log(xueke5);
  	$('.cond5 .xk_0').remove();
 // 	$("<span class='xk_0'>"+xueke5+"</span>").after(".keyword");
  	$('.keyword').after("<span class='xk_0'>"+xueke5+"</span>");
@@ -366,7 +370,7 @@ cond_hide();
 if(xueke5!="")
 {
 	$('.cond5').show();
-	console.log(xueke5+"sg");
+//	console.log(xueke5+"sg");
 	cond5_charu();
 }
  
@@ -418,11 +422,9 @@ function ajax_01 (data){
 	}else{
 		//处理搜索类型为专业
 		page_num=data.normalReturn.total;
-		console.log(page_num);
 		round_1();//第一次for循环结束
 		if(page_num>15){
 			pageShow(1,page_num);// 分页
-			console.log(page_num);
 		}else{
 			$('.page_0').html('');
 		}
@@ -452,7 +454,6 @@ function degree_hide(i){
 function round_1(){
 		var length = page_num;
 		if (length > 14) length = 14;
-		console.log(length);
 		
 		for (var i=0;i<length;i++)
 		{	

@@ -97,16 +97,18 @@ $('#sou').click(function(event) {
 // 页面加载函数结束
 // 
 // 搜索框处理自定义函数开始
-function search_jump(major,value)
-{
-	if(major=="专业")
-	{
-		major=1;
-	}else
-	{
-		major=2;
+function search_jump(major, value) {
+	console.log(major);
+	console.log(value);
+	if (major == "专业") {
+		major = 1;
+		window.open("search.html?t=" + major + "&c=" + value);
+	} else {
+		major = 2;
+		window.open("search_school.html?t=" + major + "&c=" + value);
 	}
-	window.open("search.html?t="+major+"&c="+value,"_blank");
+	
+	console.log("????");
 }
 
 // 搜索框处理自定义函数结束
