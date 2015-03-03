@@ -466,6 +466,12 @@ function register_ajax(email,pasd)
 					$('.regsitem').css('border-bottom', 'none');
 					$('.prompt').text('先去邮箱查看邮件激活吧!').css('color', 'red');
 				}
+			}else
+			{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";	
 			}
 		}
 	});	
@@ -493,6 +499,12 @@ $.ajax({
 				$('.user2').css('display', 'none');
 				window.location.reload();
 			}	
+		}else
+		{
+//			404错误页面
+			var err_msg=data.errMessage;
+			$.cookie("err_msg",err_msg, {path : "/"});
+			location.href="error.html";
 		}
 	}
 	});

@@ -214,7 +214,10 @@ function index_register_ajax(email, pasd) {
 				}
 
 			}else{
-				$('.bt_p02').text('出错啦！请刷新页面再试！').css('color','red');
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 		}
 	});
@@ -318,7 +321,13 @@ function index_load_ajax(email, pasd) {
 			    	},1500);
 				}
 
-			}
+			}else
+				{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
+				}
 		}
 	});
 

@@ -246,7 +246,13 @@ function ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 			  if(data.status=='0'){
 				  $(".main_ul").html('');
 			   	ajax_01 (data);
-			  }else{}    			
+			  }else
+			  {
+//					404错误页面
+					var err_msg=data.errMessage;
+					$.cookie("err_msg",err_msg, {path : "/"});
+					location.href="error.html";
+			  }    			
 			 }
 		});
 	}
@@ -263,7 +269,13 @@ function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 		  if(data.status=='0'){
 			  $(".main_ul").html('');
 		   	ajax_01 (data);
-		  }else{}    			
+		  }else
+		  {
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";  
+		  }    			
 		 }
 	});
 }
@@ -625,7 +637,8 @@ function click_charu(){
 				l=l_0;
 									
 				
-				$.ajax({
+
+({
 					url: 'back/search.html',
 					type: 'POST',
 					data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:l_0},
@@ -654,7 +667,13 @@ function click_charu(){
 			   					jump_info();
 			   				}
 
-						 }else{}
+						 }else
+						 {
+//								404错误页面
+								var err_msg=data.errMessage;
+								$.cookie("err_msg",err_msg, {path : "/"});
+								location.href="error.html";
+						 }
 
 						}
 					});//点击是aja请求
