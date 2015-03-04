@@ -27,7 +27,7 @@ public class CollegeController {
 
 	@RequestMapping(URLConstants.COLLEGE)
 	public String getCollegeSchools(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		if (request.getParameter(CODE) == null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE); 
+//		if (request.getParameter(CODE) == null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE); 
 		if (request.getParameter(COLLEGEID) ==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int collegeId = 1;
 		String code="";
