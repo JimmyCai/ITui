@@ -239,8 +239,8 @@ var followid = -1;
 
 // 接收数据
 function major_ajax() {
-	$
-			.ajax({
+	
+	$.ajax({
 				url : 'getmajorinfo.html',
 				type : 'get',
 				dataType : 'html',
@@ -250,7 +250,8 @@ function major_ajax() {
 				},
 				success : function(msg) {
 					var data = eval('msg=' + msg);
-					if (data.status == 0) {
+					if (data.status == 0) 
+					{
 
 						data = data.normalReturn;
 						var baseInfo = data.baseInfo;
@@ -389,6 +390,12 @@ function major_ajax() {
 						}
 
 						// console.log(data.rankInfo.majorRank);
+					}else
+					{
+//						404错误页面
+						var err_msg=data.errMessage;
+						$.cookie("err_msg",err_msg, {path : "/"});
+						location.href="error.html";	
 					}
 				}
 			});
@@ -861,7 +868,10 @@ function attention_ajax() {
 			if (data.status == 0) {
 				cancel_atten();
 			} else {
-				alert("关注失败!");
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 		}
 	});
@@ -882,8 +892,10 @@ function cancelattention_ajax() {
 			if (data.status == 0) {
 				atten();
 			} else {
-				alert("取消关注失败!");
-				alert(data.errMsg);
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 		}
 	});

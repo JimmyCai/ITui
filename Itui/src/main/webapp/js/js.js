@@ -21,15 +21,28 @@ $(function() {
 		search_jump(major, value);
 	});
 
-	// 按下回车调用跳转函数至信息页
-	document.onkeydown = function(e) {
-		var ev = document.all ? window.event : e;
-		if (ev.keyCode == 13) {
-			var major = $('.nr_js').text();
-			var value = $('#scbar_txt').val();
-			search_jump(major, value);
+	// 获得焦点时按下回车调用跳转函数至信息页
+	
+	$('#scbar_txt').blur(function(){
+		document.onkeydown = function(e) {
+			var ev = document.all ? window.event : e;
+			if (ev.keyCode == 13) {
+				var major = $('.nr_js').text();
+				var value = $('#scbar_txt').val();
+				search_jump(major, value);
+				console.log('focus');
+			}
 		}
-	}
+	});
+	// 失去焦点时按下回车无反应
+	$('#scbar_txt').blur(function(){
+		document.onkeydown = function(e) {
+			var ev = document.all ? window.event : e;
+			if (ev.keyCode == 13) {
+				console.log('blur');
+			}
+		}
+	});
 
 	// 确定二维码位置
 	var win_width = $(window).width();
@@ -49,8 +62,6 @@ $(function() {
 			major = 2;
 			window.open("search_school.html?t=" + major + "&c=" + value);
 		}
-		
-		console.log("????");
 	}
 	$('.left li').click(function(event) {
 		var about_index = $(this).index();
@@ -110,8 +121,9 @@ function index_pasd() {
 				if (reg.test(indexpasd2)) {
 					$('.pasd4').html('√密码合法').css('color', '#6fd415');
 					// 注册确认密码
-					$('#pasd3').blur(
-							function(event) {
+					$('#pasd3').keyup(function(event) 
+							{
+						console.log('shishi');
 								var indexpasd3 = $('#pasd3').val();
 								if (indexpasd2 == indexpasd3) {
 									$('.ecqu').html('√密码一致').css('color',
@@ -146,8 +158,11 @@ index_pasd();
 // 判断注册对象是不是null
 function index_submit_judge(index_email, indexpasd3) {
 	if (index_email != 'null' && indexpasd3 != 'null') {
+		$('#register').attr('disabled', false);
+		$('#register').css('background-color', '#3276B1');
+		console.log('qaz');
 		index_submit_click(index_email, indexpasd3);
-		console.log('true');
+		console.log('wer');
 	} else {
 		// 邮箱和密码若有一个错误择提交按钮不可用
 		$('#register').attr('disabled', false);
@@ -157,9 +172,13 @@ function index_submit_judge(index_email, indexpasd3) {
 
 // 点击提交按钮函数
 function index_submit_click(email, pasd) {
+	console.log('qian');
 	$('#register').click(function(event) {
 		// 在用户名和密码都输入正确的情况下调用ajax
+		console.log('zhong');
 		index_register_ajax(email, pasd);
+		console.log('hou');
+		
 	});
 
 }
@@ -176,13 +195,15 @@ function index_register_ajax(email, pasd) {
 		},
 		success : function(msg) {
 			data = eval('msg=' + msg);
+			console.log(data);
 			if (data.status == 0) {
-				if (data.normalReturn.register == 'false') {
-					$('.bt_p02').text(data.normalReturn.msg + '请重新注册').css(
+				
+				if (data.normalReturn.register == 'failure') {
+					$('.bt_p02').text(data.normalReturn.msg ).css(
 							'color', 'red');
-					$('#register').attr('disabled', false);
-					$('#register').css('background-color', '#3276B1');
-					console.log('false');
+					$('#register').attr('disabled', true);
+					$('#register').css('background-color', '#cbcbcb');
+					$('#input_mail2').focus();
 				} else {
 					$('.bt_p02').text('先去邮箱查看邮件激活吧!').css('color', 'red');
 					$('#register').attr('disabled', true);
@@ -191,6 +212,11 @@ function index_register_ajax(email, pasd) {
 					console.log(email);
 				}
 
+			}else{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 		}
 	});
@@ -250,6 +276,7 @@ function index_load_judge(email, pasd) {
 		index_loadsubmit(email, pasd);
 	} else {
 		$('#load').attr('disabled', false);
+		
 	}
 }
 // 判断登录对像是否为空结束
@@ -257,7 +284,6 @@ function index_load_judge(email, pasd) {
 // 登录点击函数
 function index_loadsubmit(email, pasd) {
 	$('#load').click(function(event) {
-
 		index_load_ajax(email, pasd);
 	});
 }
@@ -279,6 +305,7 @@ function index_load_ajax(email, pasd) {
 					$('#load').attr('disabled', false);
 					$('.bt_p01').text(data.normalReturn.msg + '请重新登录！').css(
 							'color', 'red');
+					$('#input_mail').focus();
 					console.log(email);
 					console.log(pasd);
 				} else {
@@ -286,13 +313,25 @@ function index_load_ajax(email, pasd) {
 					$('#load').css('background-color', '#cbcbcb');
 					$('.bt_p01').text('恭喜你登录成功了！').css('color', 'red');
 					$.cookie('user', data.normalReturn.code,{path:'/'});
+//					三秒之后将登录框关掉
+					setTimeout(function (){
+					$('#myModal').hide();
+					$('.modal-backdrop').hide();
+			    	},1500);
 				}
 
-			}
+			}else
+				{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
+				}
 		}
 	});
 
 }
 
-// 登录模态框验证结束
+
+
 

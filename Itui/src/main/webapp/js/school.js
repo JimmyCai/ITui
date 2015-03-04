@@ -196,6 +196,12 @@ function schoolList_ajax() {
 				for (i = 0; i < school.length; i++) {
 					collage_liTag(i, school[i]);
 				}
+			}else
+			{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 		}
 	});
@@ -323,6 +329,12 @@ function majorList_ajax(course_trim) {
 					var mid = $(this).attr('newid');
 					major_jump(mid);
 				});
+			}else
+			{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 
 		}
@@ -491,8 +503,12 @@ function attention_ajax() {
 			console.log("status:" + data.status);
 			if (data.status == 0) {
 				cancel_atten();
-			} else {
-				alert('关注失败！');
+			} else 
+			{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 		}
 	});
@@ -512,8 +528,12 @@ function cancelattention_ajax() {
 			var data = eval('msg=' + msg);
 			if (data.status == 0) {
 				atten();
-			} else {
-				alert('取消关注失败！');
+			} else 
+			{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 		}
 	});

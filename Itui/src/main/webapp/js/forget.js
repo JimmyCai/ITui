@@ -159,7 +159,13 @@ if(status==0)
 
    	}
      
-   }
+   }else
+   {
+//		404错误页面
+		var err_msg=data.errMessage;
+		$.cookie("err_msg",err_msg, {path : "/"});
+		location.href="error.html";  
+    }
 }
 });
 	

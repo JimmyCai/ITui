@@ -489,6 +489,12 @@ function collect_ajax() {
 						console.log(window_H);
 						console.log(nav01_H);
 						document.getElementById('sch_list').style.cssText = 'overflow: auto;height: '+sch_H+'px;overflow-x:hidden;'
+					}else
+					{
+//						404错误页面
+						var err_msg=data.errMessage;
+						$.cookie("err_msg",err_msg, {path : "/"});
+						location.href="error.html";
 					}
 
 				}
@@ -511,6 +517,12 @@ function post_cid(cid) {
 			var data = eval('msg=' + msg);
 			if (status == 0) {
 				console.log(cid);
+			}else
+			{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 
 		}
@@ -535,6 +547,12 @@ function post_mid(mid, id) {
 //				console.log(mid);
 				var num = $('.total_num0'+id).text() - 1;
 				$('.total_num0'+id).text(num);
+			}else
+			{
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
 			}
 
 		}

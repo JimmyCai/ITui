@@ -118,6 +118,12 @@ ul,ol,li{list-style:none}
 		float: right;
 		width: 40px;
 	}
+	#cnzz_stat_icon_3967155{
+	position: absolute;
+	left: 50%;
+	top: 22px;}
+	
+}
 
 }
 @media (min-width: 1680px) {
@@ -429,6 +435,9 @@ height: 64px;
 	.nav_top{
 		height: 40px;
 	}
+	
+	
+	}
 }
 
 @media (max-width: 790px){
@@ -448,10 +457,10 @@ height: 64px;
 		margin-left: 4px;
 		margin-right: 4px;
 	}
-
-
-
-
+	#cnzz_stat_icon_3967155{
+	position: absolute;
+	left: 70%;
+	top: 22px;}
 }
 @media (max-width: 600px){
 	.center0{
@@ -667,7 +676,7 @@ height: 64px;
 
 
 
-/*15年1月22日修改*/
+/*15骞�1鏈�22鏃ヤ慨鏀�*/
 .modal-body{
 	height: 160px;
 }
@@ -724,7 +733,7 @@ height: 64px;
 
 
 
-/*20150209编辑*/
+/*20150209缂栬緫*/
 .nr_js
 {
 font-size: 16px;
@@ -754,17 +763,12 @@ font-size: 16px;
 line-height: 30px;
 }
 
-/*页面脚修改*/
+/*椤甸潰鑴氫慨鏀�*/
 .foot {
 	position: relative;
 	
 }
-#cnzz_stat_icon_3967155{
-	position: absolute;
-	left: 50%;
-	top: 22px;}
-	
-}
+
 
 
 
