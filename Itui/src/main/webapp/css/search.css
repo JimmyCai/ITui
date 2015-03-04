@@ -1033,6 +1033,18 @@ overflow: hidden;
 	color: #FF7F27;
 	cursor: pointer;
 }
+.header .prompt{
+	width: 200px;
+	float: right;
+	color: #B2D155;
+	height: 40px;
+	margin-right: 10px;
+}
+.tab_page{
+	width:500px;
+	height: 290px;
+	position: relative;
+}
 .tab_page{
 	width:500px;
 	height: 290px;

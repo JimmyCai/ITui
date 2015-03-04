@@ -229,6 +229,8 @@ $(function(){
 	});
 	$('.cond4 .close').click(function(event) {
 		xueke4="";
+		//设置当前页的url
+		window.location.hash="#."+xueke4;
 		all_style('.area01');
 		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
