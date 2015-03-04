@@ -187,7 +187,6 @@ function index_submit_click(email, pasd) {
 function index_register_ajax(email, pasd) {
 	$.ajax({
 		url : 'register.html',
-		// url: 'regs.php?msg'+Math.random(),
 		type : 'post',
 		dataType : 'html',
 		data : {

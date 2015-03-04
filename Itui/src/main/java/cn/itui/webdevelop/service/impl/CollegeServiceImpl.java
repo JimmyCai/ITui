@@ -28,12 +28,36 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @param condition 用户输入字符串
 	 * @return 搜索结果的json
 	 */
-	public String searchCollegeList(String condition) {
+	public String searchCollegeList(String condition, String area, String collegeType) {
 		/*****分词*****/
 		condition = WordParticiple.participle(condition);
 		System.out.println(condition);
 		/***** 分词结束 *****/
-		List<HashMap<String, Object>> searchResult = collegeDao.searchCollegesByName(condition);
+		String is985 = "";
+		String is34 = "";
+		String is211 = "";
+		if (!(collegeType.equalsIgnoreCase("") || collegeType.startsWith("普通"))) {
+			if (collegeType.startsWith("985")) {
+				// 985
+				is985 = "1";
+			} 
+			if (collegeType.startsWith("34")) {
+				// 34
+				is34 = "1";
+			} 
+			if (collegeType.startsWith("211")) {
+				// 211
+				is211 = "1";
+			}
+		}else if (collegeType.startsWith("普通")){
+			is211=is34=is985="0";
+			System.out.println("普通");
+		}
+		is211 = WordParticiple.filterAll(is211);
+		is34 = WordParticiple.filterAll(is34);
+		is985 = WordParticiple.filterAll(is985);		
+
+		List<HashMap<String, Object>> searchResult = collegeDao.searchCollegesByName(condition,area, is211,is34,is985);
 		for(HashMap<String, Object> curList : searchResult) {
 			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
 		}

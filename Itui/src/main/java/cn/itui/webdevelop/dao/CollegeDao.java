@@ -10,7 +10,7 @@ public interface CollegeDao {
 
 	public List<College> findCollegeInRank(int rank, int collegeId);
 
-	public List<HashMap<String, Object>> searchCollegesByName(String condition);
+	public List<HashMap<String, Object>> searchCollegesByName(String condition, String area, String is211, String is34, String is985);
 
 	public List<String> findSchoolsByCollegeId(int id);
 
