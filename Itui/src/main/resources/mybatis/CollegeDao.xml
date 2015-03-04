@@ -42,15 +42,33 @@
 			is_34 as is34,
 			rank as rank,
 			local_rank as localRank,
-			city.name as city
+			temp.name as city
 		FROM
 			college 
 		JOIN
-			city
+			(select 
+				city.id as id, city.name as name, area.name as area 
+			from 
+				city join area on city.area_id = area.id 
+			<where>
+				<if test="area != ''">
+				area.name like concat(concat("%", #{area}), "%") 
+				</if>	
+			</where>				
+			) as temp
 		ON
-			college.city_id = city.id
+			college.city_id = temp.id
 		WHERE
 			college.name like concat(concat('%',#{condition}), '%')
+			<if test="is34 != ''">
+			and is_34 like concat(concat("%", #{is34}), "%")
+			</if>
+			<if test="is985 != ''">
+			and is_985 like concat(concat("%", #{is985}),"%")
+			</if>
+			<if test="is211 != ''">
+			and is_211 like concat(concat("%", #{is211}), "%")
+			</if>		
 		order by rank
 	</select>
 	<select id="findSchoolsByCollegeId" resultType="java.lang.String">

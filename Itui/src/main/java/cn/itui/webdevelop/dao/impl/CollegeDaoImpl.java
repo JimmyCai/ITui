@@ -42,8 +42,14 @@ public class CollegeDaoImpl implements CollegeDao{
 	 * 根据condition搜索学校
 	 * hashmap的key有id, name, logo, is211, is985, is34, rank, loaclRank, city
 	 */
-	public List<HashMap<String, Object>> searchCollegesByName(String condition) {
-		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.searchCollegesByName", condition);
+	public List<HashMap<String, Object>> searchCollegesByName(String condition, String area, String is211, String is34, String is985) {
+		HashMap<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("area", area);
+		parameter.put("condition", condition);
+		parameter.put("is211", is211);
+		parameter.put("is34", is34);
+		parameter.put("is985", is985);
+		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.searchCollegesByName", parameter);
 	}
 
 	/**

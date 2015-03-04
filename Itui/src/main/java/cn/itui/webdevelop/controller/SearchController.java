@@ -37,7 +37,15 @@ public class SearchController{
 		String condition = request.getParameter("c");
 		if (condition==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 
-			
+		String area = request.getParameter("a");
+
+		if (area==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		if (area.equalsIgnoreCase("全部")) area = "";
+		String college_type = request.getParameter("ct");
+		if (college_type==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		if (college_type.equalsIgnoreCase("全部")) college_type = "";
+
+		
 		String result;
 		if (type==1){
 			//major
@@ -47,13 +55,6 @@ public class SearchController{
 			String subject = request.getParameter("sj");
 			if (subject==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 			if (subject.length() > 4) subject = subject.substring(4);
-			String area = request.getParameter("a");
-
-			if (area==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-			if (area.equalsIgnoreCase("全部")) area = "";
-			String college_type = request.getParameter("ct");
-			if (college_type==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-			if (college_type.equalsIgnoreCase("全部")) college_type = "";
 			String major_type = request.getParameter("mt");
 			if (major_type==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 			if (major_type.equalsIgnoreCase("全部")) major_type = "";
@@ -76,7 +77,7 @@ public class SearchController{
 			//college
 			String requestStr = RequestUtil.getUserBaseInfo(request) + "t:" + tString + "\tc:" + condition;
 			rRLogger.info(requestStr);
-			result = collegeService.searchCollegeList(condition);
+			result = collegeService.searchCollegeList(condition, area, college_type);
 		}else {
 			//error
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);

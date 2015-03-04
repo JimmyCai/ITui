@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	public static final String SUBJECT="爱推帐号激活";
 	private UserDao userDao;
 	private UserInfoDao userInfoDao;
-	public static String HTMLTEXT = "www.itui.cn/activate";
+	public static String HTMLTEXT = "Hey,\n欢迎注册 爱推itui.cn 的账户。\n请慎重对待本邮件中的确认链接！这会在爱推 Itui.cn 上创建一个新的账户！\n爱推-简单你的备考。\n通过我们的服务简化备考阶段院校和专业信息收集的过程，我们直接提供准确、详细的院校和专业信息。\n如果确认，请点请点击以下链接完成注册。\nhttp://www.itui.cn/activate";
 	private JavaMailSender javaMailSender;
 	private String systemEmail;
 
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 					map.put("register", "failure");
 					// 回滚
 				}
-				HTMLTEXT += "?code=" + code;
+				HTMLTEXT += "?code=" + code+"\n爱推网";
 				boolean bool = sendMail(email, SUBJECT, HTMLTEXT);
 				if (!bool) {
 					// 发送邮件失败
