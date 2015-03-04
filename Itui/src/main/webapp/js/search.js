@@ -195,7 +195,10 @@ $(function(){
 		$('.cond4 .xk_0').remove();
 		xueke4=$(this).find('a').text();
 		$("<span class='xk_0'>"+xueke4+"</span>").prependTo(".cond4");
-		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);		
+		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);	
+		//设置当前页的url
+		window.location.hash="#."+xueke4;
+		console.log(decodeURI(window.location.hash));
 	});
 	
 
@@ -264,7 +267,7 @@ function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 		 type: 'post',
 		 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:num_0},
 		 success: function(msg) {
-		location.href="search.html?t="+t1+"&c="+xueke5;
+		location.href="search.html?t="+t1+"&c="+xueke5+"&#.";
 		 var data=eval("msg="+msg);			 
 		  if(data.status=='0'){
 			  $(".main_ul").html('');
@@ -683,9 +686,6 @@ function click_charu(){
 								
 		});	
 	}//点击函数结束
-//获得当前页的url
-//window.location.search="?t=1&c=美术&ming"
-console.log(decodeURI(window.location.search));
 
 $('#modal_load').hide();
 
