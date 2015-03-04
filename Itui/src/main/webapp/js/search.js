@@ -683,7 +683,9 @@ function click_charu(){
 								
 		});	
 	}//点击函数结束
-
+//获得当前页的url
+//window.location.search="?t=1&c=美术&ming"
+console.log(decodeURI(window.location.search));
 
 $('#modal_load').hide();
 

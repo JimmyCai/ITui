@@ -252,7 +252,6 @@ function major_ajax() {
 					var data = eval('msg=' + msg);
 					if (data.status == 0) 
 					{
-
 						data = data.normalReturn;
 						var baseInfo = data.baseInfo;
 						$('.coll_1').append(data.baseInfo.college + '/');
@@ -394,8 +393,11 @@ function major_ajax() {
 					{
 //						404错误页面
 						var err_msg=data.errMessage;
+						if(err_msg!=='请先登录！')
+						{
 						$.cookie("err_msg",err_msg, {path : "/"});
-						location.href="error.html";	
+						location.href="error.html";
+						}else{console.log(err_msg);}
 					}
 				}
 			});
@@ -870,8 +872,11 @@ function attention_ajax() {
 			} else {
 //				404错误页面
 				var err_msg=data.errMessage;
+				if(err_msg!=='请先登录！')
+				{
 				$.cookie("err_msg",err_msg, {path : "/"});
 				location.href="error.html";
+				}else{console.log(err_msg);}
 			}
 		}
 	});
@@ -894,8 +899,11 @@ function cancelattention_ajax() {
 			} else {
 //				404错误页面
 				var err_msg=data.errMessage;
+				if(err_msg!=='请先登录！')
+				{
 				$.cookie("err_msg",err_msg, {path : "/"});
 				location.href="error.html";
+				}else{console.log(err_msg);}
 			}
 		}
 	});

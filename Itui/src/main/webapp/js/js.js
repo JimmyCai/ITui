@@ -23,7 +23,7 @@ $(function() {
 
 	// 获得焦点时按下回车调用跳转函数至信息页
 	
-	$('#scbar_txt').blur(function(){
+	$('#scbar_txt').focus(function(){
 		document.onkeydown = function(e) {
 			var ev = document.all ? window.event : e;
 			if (ev.keyCode == 13) {
@@ -333,6 +333,8 @@ function index_load_ajax(email, pasd) {
 
 }
 
-
+//获得meta标签
+$('meta[name="Keywords"]').attr('content','lalallalal');
+//console.log(str_meta);
 
 

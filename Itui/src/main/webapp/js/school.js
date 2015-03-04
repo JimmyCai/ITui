@@ -144,6 +144,7 @@ var collageid = getPar('name');
 // ajax接收学校数据
 
 function schoolList_ajax() {
+	
 	$.ajax({
 		url : 'college.html',
 		type : 'get',
@@ -154,7 +155,9 @@ function schoolList_ajax() {
 		},
 		success : function(msg) {
 			var data = eval('msg=' + msg);
+			console.log(data);
 			if (data.status == 0) {
+				
 				// 获得学校的logo和所属城市
 				var img_src = data.normalReturn.logo;
 				var city_coll = data.normalReturn.city;
@@ -198,16 +201,25 @@ function schoolList_ajax() {
 				}
 			}else
 			{
-//				404错误页面
-				var err_msg=data.errMessage;
+			//404错误页面
+			var err_msg=data.errMessage;
+			if(err_msg!=='缺少参数')
+				{
 				$.cookie("err_msg",err_msg, {path : "/"});
 				location.href="error.html";
+				console.log('参数2');
+				}else
+				{
+					console.log('参数0');
+				}
+				
 			}
 		}
 	});
 
 }
 schoolList_ajax();
+
 
 var collage_text = "你发额巨份给你发333";
 // var school_obj={name:''};
@@ -331,10 +343,17 @@ function majorList_ajax(course_trim) {
 				});
 			}else
 			{
-//				404错误页面
+				//404错误页面
 				var err_msg=data.errMessage;
-				$.cookie("err_msg",err_msg, {path : "/"});
-				location.href="error.html";
+				if(err_msg!=='缺少参数')
+					{
+					$.cookie("err_msg",err_msg, {path : "/"});
+					location.href="error.html";
+					console.log('参数2');
+					}else
+					{
+						console.log('参数0');
+					}
 			}
 
 		}
@@ -505,10 +524,17 @@ function attention_ajax() {
 				cancel_atten();
 			} else 
 			{
-//				404错误页面
+				//404错误页面
 				var err_msg=data.errMessage;
-				$.cookie("err_msg",err_msg, {path : "/"});
-				location.href="error.html";
+				if(err_msg!=='缺少参数')
+					{
+					$.cookie("err_msg",err_msg, {path : "/"});
+					location.href="error.html";
+					console.log('参数2');
+					}else
+					{
+						console.log('参数0');
+					}
 			}
 		}
 	});
@@ -530,10 +556,17 @@ function cancelattention_ajax() {
 				atten();
 			} else 
 			{
-//				404错误页面
+				//404错误页面
 				var err_msg=data.errMessage;
-				$.cookie("err_msg",err_msg, {path : "/"});
-				location.href="error.html";
+				if(err_msg!=='缺少参数')
+					{
+					$.cookie("err_msg",err_msg, {path : "/"});
+					location.href="error.html";
+					console.log('参数2');
+					}else
+					{
+						console.log('参数0');
+					}
 			}
 		}
 	});

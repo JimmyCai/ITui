@@ -470,8 +470,11 @@ function register_ajax(email,pasd)
 			{
 //				404错误页面
 				var err_msg=data.errMessage;
+				if(err_msg!=='请先登录！')
+				{
 				$.cookie("err_msg",err_msg, {path : "/"});
-				location.href="error.html";	
+				location.href="error.html";
+				}else{console.log(err_msg);}
 			}
 		}
 	});	
@@ -503,8 +506,11 @@ $.ajax({
 		{
 //			404错误页面
 			var err_msg=data.errMessage;
+			if(err_msg!=='请先登录！')
+			{
 			$.cookie("err_msg",err_msg, {path : "/"});
 			location.href="error.html";
+			}else{console.log(err_msg);}
 		}
 	}
 	});
