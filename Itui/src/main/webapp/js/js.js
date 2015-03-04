@@ -167,8 +167,7 @@ function index_submit_click(email, pasd) {
 // 首页注册ajax
 function index_register_ajax(email, pasd) {
 	$.ajax({
-		url : 'http://www.itui.cn/register',
-		// url: 'regs.php?msg'+Math.random(),
+		url : 'register.html',
 		type : 'post',
 		dataType : 'html',
 		data : {
