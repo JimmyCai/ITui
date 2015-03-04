@@ -770,7 +770,25 @@ line-height: 30px;
 }
 
 
-
+/*同意条款*/
+.agree_file
+{
+width: 60%;
+height:20px;
+border: 1px solid red;
+margin-left: auto;
+margin-right:auto;
+}
+.agree_input{
+	float: left;
+}
+.agree_p{
+	float: left;
+	margin-left:20px;
+}
+.agree_p a{
+	line-height: 20px;
+}
 
 
 

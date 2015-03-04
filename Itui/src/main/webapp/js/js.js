@@ -154,14 +154,42 @@ function index_pasd() {
 }
 index_pasd();
 // 注册密码验证结束
-
+//给用户协议添加点击函数
+var check_state=1;
+$('.agree_input').click(function(event) {
+	checkbox_agree();
+	console.log(check_state);
+	
+});
+console.log(check_state);
+function checkbox_agree()
+{
+	if($('.agree_input').prop('checked')==true)
+	{
+		console.log('true');
+		check_state=1;
+		
+	}else
+	{
+		console.log('false');
+		check_state=0;
+	}
+}
 // 判断注册对象是不是null
 function index_submit_judge(index_email, indexpasd3) {
 	if (index_email != 'null' && indexpasd3 != 'null') {
+//		判断用户协议是否被选中
+		console.log(check_state);
+		if(check_state==0)
+		{
+			index_submit_click(index_email, indexpasd3);	
+		}
+		
+		
 		$('#register').attr('disabled', false);
 		$('#register').css('background-color', '#3276B1');
 		console.log('qaz');
-		index_submit_click(index_email, indexpasd3);
+		
 		console.log('wer');
 	} else {
 		// 邮箱和密码若有一个错误择提交按钮不可用
@@ -208,8 +236,7 @@ function index_register_ajax(email, pasd) {
 					$('.bt_p02').text('先去邮箱查看邮件激活吧!').css('color', 'red');
 					$('#register').attr('disabled', true);
 					$('#register').css('background-color', '#cbcbcb');
-					console.log(pasd);
-					console.log(email);
+					
 				}
 
 			}else{
