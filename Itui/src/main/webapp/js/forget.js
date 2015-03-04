@@ -135,8 +135,8 @@ function forget_register_ajax(email,pasd)
 $.ajax
 ({
 // url: 'http://42.96.190.127:8080/Itui/register?msg'+Math.random(),
-url: 'regs.php?msg'+Math.random(),
-type: 'post',
+url: 'reset_password',
+type: 'get',
 dataType: 'html',
 data: {email: email,password:pasd},
 success:function(msg)

@@ -68,23 +68,23 @@ public class UserController {
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		}
 		password = DigestUtils.md5DigestAsHex(password.getBytes());
-		String check_address = request.getParameter(CHECK_ADDRESS);
-		if (check_address == null){
-			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		}		
-		String check_key = request.getParameter(CHECK_KEY);
-		if (check_key == null){
-			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		}
-
-		if (Touclick.check(check_key,check_address, null, null,null)){
+//		String check_address = request.getParameter(CHECK_ADDRESS);
+//		if (check_address == null){
+//			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+//		}		
+//		String check_key = request.getParameter(CHECK_KEY);
+//		if (check_key == null){
+//			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+//		}
+//
+//		if (Touclick.check(check_key,check_address, null, null,null)){
 		
 			return userService.resetPassword(email, password);
-		}else {
-			HashMap<String, Object> result = new HashMap<String, Object>();
-			result.put("msg", "验证码错误");
-			return ResponseUtil.wrapNormalReturn(result);
-		}
+//		}else {
+//			HashMap<String, Object> result = new HashMap<String, Object>();
+//			result.put("msg", "验证码错误");
+//			return ResponseUtil.wrapNormalReturn(result);
+//		}
 	}
 	
 	@RequestMapping(value=URLConstants.RESEND_EMAIL)
