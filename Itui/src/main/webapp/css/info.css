@@ -79,7 +79,7 @@ ul,ol,li{list-style:none}
 .dropdown-menu{
 	display: none;
 	width: 71px;
-	height: 20px;
+	height: 30px;
 	background-color: #fff;
 	margin-left: 1px;
 }
@@ -87,9 +87,10 @@ ul,ol,li{list-style:none}
 	display: block;
 	width: 71px;
 	height: 20px;
-	line-height: 20px;
+	line-height: 30px;
 	text-align: center;
 	color: #E67917;
+	margin-left:-6px;
 }
 .dropdown{
 	float: left;
@@ -2100,22 +2101,33 @@ color: #666;
 
 /*用户中心头像显示*/
 /*已经登录*/
-.user{
-	width:40px;
-	height: 40px;
-	float: left;
-	margin-top: 20px;
-	margin-left: 66px;
-	position: relative;
-	display: none;
+/*用户状态*/
+.user {
+width: 80px;
+height: 60px;
+float: left;
+margin-top: 20px;
+margin-left: 36px;
+position: relative;
+display: none;
 }
-.user a{
-	display: block;
-	width:40px;
-	height: 40px;
-	border-radius: 50%;
-	overflow: hidden;
-	
+.user a {
+display: block;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+overflow: hidden;
+margin-left:auto;
+margin-right:auto;
+}
+.drop_menu {
+width: 120px;
+position: absolute;
+left: -46px;
+top: 60px;
+display: none;
+border-radius: 6px;
+z-index:50;
 }
 .user img{
 	width: 40px;
@@ -2150,14 +2162,7 @@ color: #666;
 	
 
 }
-.drop_menu{
-	width: 120px;
-	position: absolute;
-	left: -66px;
-	top: 60px;
-	display: none;
-	border-radius: 6px;
-}
+
 .arrow_up
 {
 	position:absolute;
@@ -2600,4 +2605,24 @@ border-top: 4px solid #f4b802;
 }
 #cnzz_stat_icon_3967155 a {
 color: #428bca;
+}
+/*同意条款*/
+.agree_file
+{
+width: 70%;
+height:20px;
+margin-left: auto;
+margin-right:auto;
+}
+.agree_input{
+	margin-top:2px;
+	float: left;
+}
+.agree_p{
+	float: left;
+	margin-left:20px;
+}
+.agree_p a{
+	line-height: 20px;
+	color:#428BCA;
 }

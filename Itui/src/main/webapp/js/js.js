@@ -63,6 +63,7 @@ $(function() {
 			window.open("search_school.html?t=" + major + "&c=" + value+"&#.");
 		}
 	}
+	//给页面尾添加点击函数
 	$('.left li').click(function(event) {
 		var about_index = $(this).index();
 		$.cookie("about_index", about_index, {
@@ -72,8 +73,22 @@ $(function() {
 		console.log($.cookie("about_index"));
 	});
 
+	//给用户协议添加点击跳转函数
+	$('.agree_p').click(function(event) {
+		var about_index ="2";
+		$.cookie("about_index", about_index, {
+			path : "/"
+		});
+		window.open("about.html");
+		console.log($.cookie("about_index"));
+	});
 });
 // 页面加载函数结束
+//判断用户是否登录
+if ($.cookie('user') != undefined){
+	$('.load2 p').text("已登录");
+	console.log($.cookie('user'));
+}
 
 // 创建注册对象
 var indexregs_obj = {
@@ -178,14 +193,8 @@ function checkbox_agree()
 // 判断注册对象是不是null
 function index_submit_judge(index_email, indexpasd3) {
 	if (index_email != 'null' && indexpasd3 != 'null') {
-//		判断用户协议是否被选中
-		console.log(check_state);
-		if(check_state==0)
-		{
-			index_submit_click(index_email, indexpasd3);	
-		}
-		
-		
+//		调用点击函数
+		index_submit_click(index_email, indexpasd3);	
 		$('#register').attr('disabled', false);
 		$('#register').css('background-color', '#3276B1');
 		console.log('qaz');
@@ -204,7 +213,10 @@ function index_submit_click(email, pasd) {
 	$('#register').click(function(event) {
 		// 在用户名和密码都输入正确的情况下调用ajax
 		console.log('zhong');
-		index_register_ajax(email, pasd);
+		if(check_state==1)
+		{
+			index_register_ajax(email, pasd);	
+		}
 		console.log('hou');
 		
 	});
@@ -345,6 +357,9 @@ function index_load_ajax(email, pasd) {
 					$('#myModal').hide();
 					$('.modal-backdrop').hide();
 			    	},1500);
+//					登录成功后改变登录状态显示
+					$('.load2 p').text("已登录");
+					
 				}
 
 			}else
