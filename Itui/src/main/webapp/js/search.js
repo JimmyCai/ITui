@@ -693,4 +693,13 @@ $('#modal_load').hide();
 
 
 
+var code_str=window.location.search;
+var code_value=code_str.split("=");
+console.log(code_str);
+//console.log(code_value);
+
+var code_123=code_str.substring(3,(code_str.length+1));
+console.log(code_123);
+
+
 	

@@ -1,5 +1,5 @@
 <!doctype html>
-<html >
+<html>
 
 <head>
 <meta charset="UTF-8">
@@ -11,71 +11,169 @@
 DD_belatedPNG.fix('*');
 </script>
 <![endif]-->
+<script src="dist/js/jquery.min.js"></script>
+
 </head>
 <style type="text/css">
-.email{
+.email {
 	max-width: 1000px;
 	border: 1px solid #cbcbcb;
-	margin:0 auto;
+	margin: 0 auto;
 	margin-top: 20px;
 }
-.header{
+
+.header {
 	width: 100%;
 	height: 60px;
 	/*border:1px solid green;*/
-	margin:0 auto;
-	background-color: #f6f6f6; 
-	border-bottom:2px solid #E67917;
+	margin: 0 auto;
+	background-color: #f6f6f6;
+	border-bottom: 2px solid #E67917;
 }
-.logo{
+
+.logo {
 	margin-left: 20px;
 	float: left;
 }
-.logo a{display: block;width: 130px;height: 60px;}
-h2{
+
+.logo a {
+	display: block;
+	width: 130px;
+	height: 60px;
+}
+
+h2 {
 	color: #064487;
 }
-.item{
+
+.item {
 	width: 70%;
 	height: 60px;
 	float: left;
 	text-align: center;
-
 }
-.contain{
+
+.contain {
 	width: 90%;
 	/*border:1px solid green;*/
-	margin:0 auto;
-	margin-bottom: 20px;}
-.paragraph{font-size: 20px;}
-.paragraph02{color: #E67917;}
-.sure_href a{color: #2A6496;}
-.reset_href a{color: #2A6496;}
-.prompt{height: 20px;line-height: 20px;}
-</style>
-<body>
-<div class="email">
-	<div class="header">
-		<div class="logo">
-			<a href="" target="_blank">
-			<img src="images/17.png" alt="">
-			</a>
-		</div>
-		<div class="item"><h2>激活成功</h2></div>
-	</div>
-	<div class="contain">
-		<p class="paragraph">Hi</p>
-		<p class="paragraph">恭喜你注册成功了！</p>
-		<p class="paragraph">赶快去登录，尽情的浏览爱推提供的信息吧！</p>
-		<p class="paragraph02">爱推-简单你的备考</p>
-		<p class="paragraph02">通过我们的服务简化备考阶段院校和专业信息收集的过程，我们直接提供准确、详细的院校和专业信息</p>
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
 
-		<div class="sure_href">
-			<a href="index.html">→欢迎进入爱推</a>
+.paragraph {
+	font-size: 20px;
+}
+
+.paragraph02 {
+	color: #E67917;
+}
+
+.sure_href a {
+	color: #2A6496;
+}
+
+.reset_href a {
+	color: #2A6496;
+}
+
+.prompt {
+	height: 20px;
+	line-height: 20px;
+}
+/*如果激活失败*/
+.fail {
+	width: 90%;
+	border: 1px solid green;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+.fail_pic img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.paragraph3 {
+	text-align: center;
+	font-size: 30px;
+	color: #666;
+}
+
+.contain_01 {
+	display: none;
+}
+
+.contain_02 {
+	display: none;
+}
+</style>
+
+<body>
+	<div class="email">
+		<div class="header">
+			<div class="logo">
+				<a href="" target="_blank"> <img src="images/17.png" alt="">
+				</a>
+			</div>
+			<div class="item">
+				<h2>激活成功</h2>
+			</div>
 		</div>
-		
-	</div>
-</div>
+		<div class="contain contain_01" >
+			<p class="paragraph">Hi</p>
+			<p class="paragraph">恭喜你注册成功了！</p>
+			<p class="paragraph">赶快去登录，尽情的浏览爱推提供的信息吧！</p>
+			<p class="paragraph02">爱推-简单你的备考</p>
+			<p class="paragraph02">通过我们的服务简化备考阶段院校和专业信息收集的过程，我们直接提供准确、详细的院校和专业信息</p>
+
+			<div class="sure_href">
+				<a href="index.html">→欢迎进入爱推</a>
+			</div>
+		</div>
+		<div class="contain contain_02" >
+			<div class="fail">
+				<div class="fail_pic">
+					<img src="images/shibai.png">
+				</div>
+				<p class="paragraph3">请重新注册</p>
+			</div>
+		</div>
+		</div>
+	<script type="text/javascript">
+		$(function() {
+			//var code_str=window.location.search;
+			var code_str = "?code=f389a4167dd5473c7e70bfae4e7401af"
+			console.log(code_str);
+			var code_value = code_str.substring(6, (code_str.length + 1));
+			console.log(code_value);
+
+			$.ajax({
+				url : 'activate',
+				type : 'get',
+				dataType : 'html',
+				data : {
+					"code" : code_value
+				},
+				success : function(msg) {
+					var data = eval('msg=' + msg);
+					console.log(msg);
+					if (data.status == 0) {
+						$('.contain_01').css('display', 'block');
+						$('.contain_02').css('display', 'none');
+						consele.log('激活成功');
+					} else {
+						$('.contain_01').css('display', 'none');
+						$('.contain_02').css('display', 'block');
+						$('.item h2').text('激活失败！');
+						$('.paragraph3').text(data.normalReturn.msg);
+						consele.log('激活失败');
+					}
+				}
+			});
+		});
+	</script>
 </body>
 
 </html>
