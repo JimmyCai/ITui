@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>爱推重置邮件页</title>
+<title>爱推激活邮件页</title>
 
 <!--[if IE 6]>
 <script type="text/javascript" src="js/DD_belatedPNG.js" ></script>
@@ -39,15 +39,13 @@ h2{
 	width: 70%;
 	height: 60px;
 	float: left;
+	/*border: 1px solid red;*/
 	text-align: center;
-}
-@media (max-width: 560px){
-.item{
-	width: 50%;
-}
+
 }
 .contain{
 	width: 90%;
+	/*border:1px solid green;*/
 	margin:0 auto;
 	margin-bottom: 20px;}
 .paragraph{font-size: 20px;}
@@ -64,15 +62,19 @@ h2{
 			<img src="images/17.png" alt="">
 			</a>
 		</div>
-		<div class="item"><h2>密码重置邮件</h2></div>
+		<div class="item"><h2>注册激活邮件</h2></div>
 	</div>
 	<div class="contain">
-		<p class="paragraph">尊敬的用户，您好!</p>
-		<p class="paragraph">请使用以下的链接重置您的密码:</p>
-		<div class="reset_href">
-			<a href="www.itui.cn/activate?code=f389a4167dd5473c7e70bfae4e7401af" target="_blank">www.itui.cn/activate?code=f389a4167dd5473c7e70bfae4e7401afwww.itui.cn/activate?code=f389a4167dd5473c7e70bfae4e7401af</a>
+		<p class="paragraph">Hey,${user}</p>
+		<p class="paragraph">欢迎注册 爱推itui.cn 的账户。</p>
+		<p class="paragraph">请慎重对待本邮件中的确认链接！这会在爱推 Itui.cn 上创建一个新的账户！</p>
+		<p class="paragraph02">爱推-简单你的备考</p>
+		<p class="paragraph02">通过我们的服务简化备考阶段院校和专业信息收集的过程，我们直接提供准确、详细的院校和专业信息</p>
+		<p class="paragraph">如果确认，请点请点击以下链接完成注册。</p>
+		<div class="sure_href">
+			<p>${url}</p>
 		</div>
-		<p class="prompt">(如链接无法点击，请复制链接到浏览器地址栏打开页面)</p>
+		
 	</div>
 </div>
 </body>

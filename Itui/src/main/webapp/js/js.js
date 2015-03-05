@@ -75,6 +75,8 @@ $(function() {
 });
 // 页面加载函数结束
 
+//window.location.href = "http://www.itui.cn";
+
 // 创建注册对象
 var indexregs_obj = {
 	objemail : 'null',

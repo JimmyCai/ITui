@@ -5,8 +5,10 @@ import java.util.HashMap;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import cn.itui.webdevelop.dao.UserDao;
 import cn.itui.webdevelop.dao.UserInfoDao;
@@ -15,11 +17,13 @@ import cn.itui.webdevelop.utils.ResponseUtil;
 
 public class UserServiceImpl implements UserService {
 
-	public static final String SUBJECT="爱推帐号激活";
+	public static final String ACTIVATE_SUBJECT="爱推帐号激活";
+	public static final String RESET_SUBJECT="爱推帐户密码重置";
 	private UserDao userDao;
 	private UserInfoDao userInfoDao;
-	public static String HTMLTEXT = "Hey,\n欢迎注册 爱推itui.cn 的账户。\n请慎重对待本邮件中的确认链接！这会在爱推 Itui.cn 上创建一个新的账户！\n爱推-简单你的备考。\n通过我们的服务简化备考阶段院校和专业信息收集的过程，我们直接提供准确、详细的院校和专业信息。\n如果确认，请点请点击以下链接完成注册。\nhttp://www.itui.cn/activate";
+	public static String HTMLTEXT = "http://www.itui.cn/sure.html";
 	private JavaMailSender javaMailSender;
+	private VelocityEngine velocityEngine;
 	private String systemEmail;
 
 	public String doLogin(String email, String password) throws Exception{
@@ -54,20 +58,25 @@ public class UserServiceImpl implements UserService {
 		HashMap<String, Object> matchmap = userDao.match(email, null);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (matchmap == null) {
+			String url = HTMLTEXT + "?code=" + code;
+			HashMap<String, Object> model = new HashMap<String, Object>();
+			model.put("user", email);
+			model.put("url", url);
+			String vmFile = "cn/itui/webdevelop/utils/email_active.vm";
+			boolean bool = sendMail(email, ACTIVATE_SUBJECT, vmFile, model);
+			if (!bool) {
+				// 发送邮件失败
+			}
 			int id = userDao.insertUser(email, password, code, type);
 			System.out.println(id);
 			if (id > 0) {
 				// 应该异步调用，否则将出现事务处理的回滚
 				id = userInfoDao.insertUserInfo_logo(id, "defaultuserlogo.png");
-				if (id <= 0) {
+				while (id <= 0) {
 					// 后台插入用户信息失败
-					map.put("register", "failure");
+//					map.put("register", "failure");
 					// 回滚
-				}
-				HTMLTEXT += "?code=" + code+"\n爱推网";
-				boolean bool = sendMail(email, SUBJECT, HTMLTEXT);
-				if (!bool) {
-					// 发送邮件失败
+					id = userInfoDao.insertUserInfo_logo(id, "defaultuserlogo.png");
 				}
 				if (id > 0 && bool) {
 					map.put("register", "success");
@@ -108,7 +117,7 @@ public class UserServiceImpl implements UserService {
 		return ResponseUtil.wrapNormalReturn(map);
 	}
 
-	public boolean sendMail(String to, String subject, String htmlText)
+	public boolean sendMail(String to, String subject, String vmFile, HashMap<String, Object> model) 
 			throws Exception {
 		try {
 			MimeMessage msg = javaMailSender.createMimeMessage();
@@ -117,7 +126,8 @@ public class UserServiceImpl implements UserService {
 			msgHelper.setFrom(systemEmail);
 			msgHelper.setTo(to);
 			msgHelper.setSubject(subject);
-			msgHelper.setText(htmlText, true);
+			String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, vmFile, model);
+			msgHelper.setText(text, true);
 
 			javaMailSender.send(msg);
 			return true;
@@ -162,18 +172,29 @@ public class UserServiceImpl implements UserService {
 		HashMap<String, Object> match = userDao.match(email, null);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		if (match != null){
-			if (sendMail(email, SUBJECT, HTMLTEXT+"?code="+match.get("code"))){
+			HashMap<String, Object> model = new HashMap<String, Object>();
+			String vmFile = "cn/itui/webdevelop/utils/email_active.vm";
+			boolean bool = sendMail(email, ACTIVATE_SUBJECT, vmFile, model);
+			if (bool){
 				result.put("resendEmail", "success");
-				result.put("msg", "激活邮件已发送");
+				result.put("msg", "密码重置邮件已发送");
 			}else {
 				result.put("resendEmail", "failure");
-				result.put("msg", "未能发送激活邮件");
+				result.put("msg", "未能发送密码重置邮件，请重试");
 			};
 		}else {
 			result.put("resendEmail", "failure");
 			result.put("msg", "用户名不存在");
 		}
 		return ResponseUtil.wrapNormalReturn(result);
+	}
+
+	public VelocityEngine getVelocityEngine() {
+		return velocityEngine;
+	}
+
+	public void setVelocityEngine(VelocityEngine velocityEngine) {
+		this.velocityEngine = velocityEngine;
 	}
 
 }

@@ -342,7 +342,6 @@ function submit_judge(email,pasd)
 		$('.button_regs').attr('disabled', false);
 		$('.button_regs').css('background-color', '#FF7F27');
 		submit_click(email,pasd);
-		console.log('wer');
 	}else{
 		// 邮箱和密码若有一个错误择提交按钮不可用
 		$('.button_regs').click(function(event) {
@@ -445,6 +444,7 @@ mod_h=$('.tab').height();
 // 注册ajax
 function register_ajax(email,pasd)
 {
+	console.log("register_ajax");
 	$.ajax({
 		url: 'register.html',
 		type: 'post',
