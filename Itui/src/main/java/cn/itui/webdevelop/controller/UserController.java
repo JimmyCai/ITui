@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.itui.webdevelop.service.UserService;
 import cn.itui.webdevelop.utils.RequestUtil;
-import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.exception.ParameterErrorException;
 
 
@@ -25,8 +24,8 @@ public class UserController {
 	private UserService userService;
 	private static final String EMAIL="email";
 	private static final String CODE = "code";
-	private static final String CHECK_ADDRESS="check_address";
-	private static final String CHECK_KEY="check_key";
+	//private static final String CHECK_ADDRESS="check_address";
+	//private static final String CHECK_KEY="check_key";
 
 	@RequestMapping(value=URLConstants.LOGIN, method=RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -67,7 +66,7 @@ public class UserController {
 		if (password == null){
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		}
-		password = DigestUtils.md5DigestAsHex(password.getBytes());
+//		password = DigestUtils.md5DigestAsHex(password.getBytes());
 //		String check_address = request.getParameter(CHECK_ADDRESS);
 //		if (check_address == null){
 //			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
@@ -91,6 +90,20 @@ public class UserController {
 	public String resendEmail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = request.getParameter(EMAIL);
 		return userService.resendEmail(email);
+	}
+	
+	@RequestMapping(value=URLConstants.SEND_RESET_EMAIL)
+	public String sendResetEmail(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		String email = request.getParameter(EMAIL);
+		if (email == null){
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		}
+		String password = request.getParameter(PASSWORD);
+		if (password == null){
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		}
+		password = DigestUtils.md5DigestAsHex(password.getBytes());		
+		return userService.sendResetEmail(email, password);
 	}
 
 	public UserService getUserService() {

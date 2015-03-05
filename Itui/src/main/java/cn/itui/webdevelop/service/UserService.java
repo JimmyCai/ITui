@@ -10,4 +10,5 @@ public interface UserService {
 	public boolean sendMail(String to, String subject, String vmFile, HashMap<String, Object> model) throws Exception;
 	public String resetPassword(String email, String password) throws Exception;
 	public String resendEmail(String email) throws Exception;
+	public String sendResetEmail(String email, String password)throws Exception;
 }

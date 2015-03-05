@@ -28,5 +28,6 @@ public class URLConstants {
 	public static final String LOGIN="/login";
 	public static final String REGISTER="/register";
 	public static final String RESET_PASSWORD="/reset_password";
+	public static final String SEND_RESET_EMAIL="/sendResetEmail";
 	public static final String RESEND_EMAIL="/resend_email";
 }
