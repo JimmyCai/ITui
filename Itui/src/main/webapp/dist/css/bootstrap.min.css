@@ -56,12 +56,15 @@
 }
 .dropdown-menu{
 	min-width: 100%;
+	height:40px;
 	border-radius: 0px;
 	padding:0px;
 	margin:0px;
 }
+.dropdown-menu li{margin-top:10px;}
 .zhuanye a{
 	text-align: center;
+	
 	
 }
 
@@ -69,6 +72,7 @@
 	color: #E67917;
 	padding:0px;
 	margin:0px;
+	padding-left:-6px;
 }
 .dropdown-menu > li > a:hover{
 	color: #E67917;

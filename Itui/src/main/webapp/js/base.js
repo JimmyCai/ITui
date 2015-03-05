@@ -113,6 +113,14 @@ $('#scbar_txt').blur(function(){
 		}
 	}
 });
+//点击用户协议跳转
+$('.agree_p').click(function(event){
+	$.cookie("about_index", "2", {
+		path : "/"
+	});
+	console.log($.cookie("about_index"));
+	window.open("about.html");
+});
 
 	
 });
@@ -332,16 +340,39 @@ function load_modal(wind_w,wind_h,mod_w,mod_h)
 	
 
 }
-
+//给用户协议添加点击函数
+var check_state=1;
+$('.agree_input').click(function(event) {
+	checkbox_agree();
+	console.log(check_state);
+	
+});
+console.log(check_state);
+function checkbox_agree()
+{
+	if($('.agree_input').prop('checked')==true)
+	{
+		console.log('true');
+		check_state=1;
+		
+	}else
+	{
+		console.log('false');
+		check_state=0;
+	}
+}
 
 // 判断注册对象是不是null
 function submit_judge(email,pasd)
 {
 	if(email!='null'&&pasd!='null'){
-		console.log('qaz');
+		//调用点击函数
+		submit_click(email,pasd);
 		$('.button_regs').attr('disabled', false);
 		$('.button_regs').css('background-color', '#FF7F27');
+
 		submit_click(email,pasd);
+
 	}else{
 		// 邮箱和密码若有一个错误择提交按钮不可用
 		$('.button_regs').click(function(event) {
@@ -357,11 +388,15 @@ function submit_click(email,pasd){
 	$('.button_regs').click(function(event){
 		// 在用户名和密码都输入正确的情况下调用ajax
 		console.log('zhong');
-		$('.regspage').css('display', 'none');
-		$('.waitpage').css('display', 'block');
+//		$('.regspage').css('display', 'none');
+//		$('.waitpage').css('display', 'block');
 		// $('.waitpage').delay(3000).hide(0);
-        	$(".waitpage").hide();
-        	register_ajax(email,pasd);
+//        	$(".waitpage").hide();
+        	if(check_state==1)
+        	{
+        		register_ajax(email,pasd);
+        	}
+        	
         	console.log('hou');
     	
 });

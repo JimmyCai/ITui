@@ -279,7 +279,11 @@ $(function() {
 		$(".waitpage").hide();
 		var email = $('.regs_mail').val();
 		var pasd = $('.same_pasd').val();
-		register_ajax(email, pasd);
+		if(check_state==1)
+		{
+			register_ajax(email, pasd);	
+		}
+		
 
 		console.log('hou');
 
@@ -292,7 +296,37 @@ $(function() {
 
 		}
 	});
+	//点击用户协议跳转
+	$('.agree_p').click(function(event){
+		$.cookie("about_index", "2", {
+			path : "/"
+		});
+		console.log($.cookie("about_index"));
+		window.open("about.html");
+	});
 });
+//页面加载函数结束
+//给用户协议添加点击函数
+var check_state=1;
+$('.agree_input').click(function(event) {
+	checkbox_agree();
+	console.log(check_state);
+	
+});
+console.log(check_state);
+function checkbox_agree()
+{
+	if($('.agree_input').prop('checked')==true)
+	{
+		console.log('true');
+		check_state=1;
+		
+	}else
+	{
+		console.log('false');
+		check_state=0;
+	}
+}
 
 function search_jump(major, value) {
 	if (major == "专业") {

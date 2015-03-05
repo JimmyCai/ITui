@@ -69,7 +69,7 @@ ul,ol,li{list-style:none}
 .dropdown-menu{
 	display: none;
 	width: 71px;
-	height: 20px;
+	height: 30px;
 	background-color: #fff;
 	margin-left: 1px;
 }
@@ -77,9 +77,10 @@ ul,ol,li{list-style:none}
 	display: block;
 	width: 71px;
 	height: 20px;
-	line-height: 20px;
+	line-height: 30px;
 	text-align: center;
 	color: #E67917;
+	margin-left:-6px;
 }
 .dropdown{
 	float: left;
@@ -447,7 +448,7 @@ ul,ol,li{list-style:none}
 /*鏍囩*/
 #nav2{
 	width: 1024px;
-	height: 40px;
+	height: 60px;
 	box-shadow: 0px 0px 3px #000;
 	margin: 0 auto;
 	margin-top: 12px;
@@ -457,14 +458,15 @@ ul,ol,li{list-style:none}
 .cond{
 	min-width: 50px;
 	margin-top:8px;
-	height: 20px;
+	height: 24px;
 	border: 1px solid #e67917;
 	float: left;
-	line-height: 20px;
+	line-height: 22px;
 	text-align: center;
 	margin-right: 10px;
 	cursor: pointer;
 	position:relative;
+	margin-top:16px;
 	
 }
 .cond span{
@@ -520,7 +522,7 @@ ul,ol,li{list-style:none}
 	border-bottom:1px dotted #cbcbcb;
 	margin-left: auto;
 	margin-right: auto;
-	
+	cursor:pointer;
 }
 .pic{
 	width: 90px;
@@ -793,8 +795,8 @@ border-top: 4px solid #f4b802;
 	font-size: 16px;
 	color: #E67917;
 	float: left;
-	height: 42px;
-	line-height:42px;
+	height: 60px;
+	line-height:60px;
 	margin-right: 20px;
 }
 
@@ -873,13 +875,13 @@ border-top: 4px solid #f4b802;
 	color: #333;
 }
 
-/*20150227缂栬緫*/
+/*20150227用户状态*/
 .user {
-width: 40px;
-height: 40px;
+width: 80px;
+height: 60px;
 float: left;
 margin-top: 20px;
-margin-left: 66px;
+margin-left: 36px;
 position: relative;
 display: none;
 }
@@ -889,11 +891,13 @@ width: 40px;
 height: 40px;
 border-radius: 50%;
 overflow: hidden;
+margin-left:auto;
+margin-right:auto;
 }
 .drop_menu {
 width: 120px;
 position: absolute;
-left: -66px;
+left: -46px;
 top: 60px;
 display: none;
 border-radius: 6px;
@@ -1120,6 +1124,7 @@ overflow: hidden;
 	line-height: 24px;
 	cursor: pointer;
 }
+
 .ituilogo .close{
 	width:24px;
 	height: 24px;
@@ -1348,3 +1353,37 @@ color: #666;
 	#cnzz_stat_icon_3967155 a{
 	color:#428bca;
 	}
+/*同意条款*/
+.agree_file
+{
+width: 70%;
+height:20px;
+border: 1px solid red;
+margin-left: auto;
+margin-right:auto;
+}
+.agree_input{
+	margin-top:2px;
+	float: left;
+}
+.agree_p{
+	float: left;
+	margin-left:20px;
+}
+.agree_p a{
+	line-height: 20px;
+	color:#428BCA;
+}
+.cond .close{
+	width:20px;
+	height: 20px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 22px;
+	cursor: pointer;
+	background-color:#E67917;
+	border-radius:4px;
+	color:#fff;
+	margin-right:3px;
+	
+}
