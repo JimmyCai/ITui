@@ -163,6 +163,12 @@
 		<artifactId>spring-context-support</artifactId>
 		<version>4.1.4.RELEASE</version>
 	</dependency>
+	<dependency>
+		<groupId>org.apache.velocity</groupId>
+		<artifactId>velocity</artifactId>
+		<version>1.7</version>
+	</dependency>
+	
 	
 	<!-- module kaptcha -->
 	<dependency>

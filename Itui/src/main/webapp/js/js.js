@@ -90,6 +90,8 @@ if ($.cookie('user') != undefined){
 	console.log($.cookie('user'));
 }
 
+//window.location.href = "http://www.itui.cn";
+
 // 创建注册对象
 var indexregs_obj = {
 	objemail : 'null',

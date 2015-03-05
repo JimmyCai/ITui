@@ -63,7 +63,18 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		<property name="userInfoDao" ref="userInfoDao"></property>
 		<property name="javaMailSender" ref="javaMailSender"></property>
 		<property name="systemEmail" value="${email.systemEmail}"></property>
+		<property name="velocityEngine" ref="velocityEngine"></property>
 	</bean>
+	
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<value>
+				resource.loader=class
+				class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+			</value>
+		</property>
+	</bean>
+	
 	<bean id="userController" class="cn.itui.webdevelop.controller.UserController">
 		<property name="userService" ref="userService"></property>
 	</bean>
