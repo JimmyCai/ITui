@@ -58,8 +58,10 @@
 			) as temp
 		ON
 			college.city_id = temp.id
-		WHERE
+		<where>
+			<if test="condition != ''">
 			college.name like concat(concat('%',#{condition}), '%')
+			</if>
 			<if test="is34 != ''">
 			and is_34 like concat(concat("%", #{is34}), "%")
 			</if>
@@ -68,8 +70,43 @@
 			</if>
 			<if test="is211 != ''">
 			and is_211 like concat(concat("%", #{is211}), "%")
-			</if>		
+			</if>
+		</where>	
 		order by rank
+		limit #{from}, #{limit}
+	</select>
+	<select id="getTotal" parameterType = "map" resultType="int">
+		SELECT 
+			count(*) as total
+		FROM
+			college 
+		JOIN
+			(select 
+				city.id as id, city.name as name, area.name as area 
+			from 
+				city join area on city.area_id = area.id 
+			<where>
+				<if test="area != ''">
+				area.name like concat(concat("%", #{area}), "%") 
+				</if>	
+			</where>				
+			) as temp
+		ON
+			college.city_id = temp.id
+		<where>
+			<if test="condition != ''">
+			college.name like concat(concat('%',#{condition}), '%')
+			</if>
+			<if test="is34 != ''">
+			and is_34 like concat(concat("%", #{is34}), "%")
+			</if>
+			<if test="is985 != ''">
+			and is_985 like concat(concat("%", #{is985}),"%")
+			</if>
+			<if test="is211 != ''">
+			and is_211 like concat(concat("%", #{is211}), "%")
+			</if>
+		</where>
 	</select>
 	<select id="findSchoolsByCollegeId" resultType="java.lang.String">
 		SELECT

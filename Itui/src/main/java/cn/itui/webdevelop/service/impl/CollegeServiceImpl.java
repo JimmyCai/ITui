@@ -20,6 +20,7 @@ import cn.itui.webdevelop.utils.exception.DatabaseException;
 public class CollegeServiceImpl implements CollegeService {
 	private CollegeDao collegeDao;
 	private FollowCollegeDao followCollegeDao;
+	private int limit;
 
 	/**
 	 * 服务于搜索页
@@ -28,7 +29,7 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @param condition 用户输入字符串
 	 * @return 搜索结果的json
 	 */
-	public String searchCollegeList(String condition, String area, String collegeType) {
+	public String searchCollegeList(String condition, String area, String collegeType, int from) {
 		/*****分词*****/
 		condition = WordParticiple.participle(condition);
 		System.out.println(condition);
@@ -57,12 +58,13 @@ public class CollegeServiceImpl implements CollegeService {
 		is34 = WordParticiple.filterAll(is34);
 		is985 = WordParticiple.filterAll(is985);		
 
-		List<HashMap<String, Object>> searchResult = collegeDao.searchCollegesByName(condition,area, is211,is34,is985);
+		List<HashMap<String, Object>> searchResult = collegeDao.searchCollegesByName(condition,area, is211,is34,is985, from, limit);
+		int total = collegeDao.getTotal(condition,area, is211,is34,is985);
 		for(HashMap<String, Object> curList : searchResult) {
 			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
 		}
 		System.out.println(searchResult.size());
-		String json = buildJson(searchResult);
+		String json = buildJson(searchResult, total);
 		return json;
 	}
 
@@ -70,9 +72,10 @@ public class CollegeServiceImpl implements CollegeService {
 	 * 将搜索结果封装为json
 	 * 	这里还处理了排名大于1000的问题
 	 * @param searchResult
+	 * @param total 
 	 * @return
 	 */
-	private String buildJson(List<HashMap<String, Object>> searchResult) {
+	private String buildJson(List<HashMap<String, Object>> searchResult, int total) {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < searchResult.size(); i++) {
@@ -100,7 +103,7 @@ public class CollegeServiceImpl implements CollegeService {
 		}
 		jsonMap.put("list", list);
 		jsonMap.put("type", "college");
-		jsonMap.put("total", list.size());
+		jsonMap.put("total", total);
 		return ResponseUtil.wrapNormalReturn(jsonMap);
 	}
 
@@ -157,6 +160,14 @@ public class CollegeServiceImpl implements CollegeService {
 
 	public void setFollowCollegeDao(FollowCollegeDao followCollegeDao) {
 		this.followCollegeDao = followCollegeDao;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
 }
