@@ -36,6 +36,7 @@ public class SearchController{
 		int type=Integer.parseInt(tString);
 		String condition = request.getParameter("c");
 		if (condition==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		condition = condition.replace(" ", "");
 
 		String area = request.getParameter("a");
 
