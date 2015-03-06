@@ -44,7 +44,13 @@ public class SearchController{
 		String college_type = request.getParameter("ct");
 		if (college_type==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		if (college_type.equalsIgnoreCase("全部")) college_type = "";
-
+		if (request.getParameter("l")==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		int limit = 0;
+		try{
+			limit = Integer.parseInt(request.getParameter("l"));
+		}catch (Exception e){
+			throw MyNumberFormatException.getInstance();
+		}
 		
 		String result;
 		if (type==1){
@@ -58,13 +64,6 @@ public class SearchController{
 			String major_type = request.getParameter("mt");
 			if (major_type==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 			if (major_type.equalsIgnoreCase("全部")) major_type = "";
-			if (request.getParameter("l")==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-			int limit = 0;
-			try{
-				limit = Integer.parseInt(request.getParameter("l"));
-			}catch (Exception e){
-				throw MyNumberFormatException.getInstance();
-			}
 			String requestStr = RequestUtil.getUserBaseInfo(request) + "t:" + tString + "\tc:" + condition + "\tcg:" + category + "\tsj:" + subject
 					+ "\ta:" + area + "\tct:" + college_type + "\tmt:" + major_type + "\tl:" + limit;
 			rRLogger.info(requestStr);
@@ -77,7 +76,7 @@ public class SearchController{
 			//college
 			String requestStr = RequestUtil.getUserBaseInfo(request) + "t:" + tString + "\tc:" + condition;
 			rRLogger.info(requestStr);
-			result = collegeService.searchCollegeList(condition, area, college_type);
+			result = collegeService.searchCollegeList(condition, area, college_type, limit);
 		}else {
 			//error
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);

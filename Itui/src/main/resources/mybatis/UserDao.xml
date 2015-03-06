@@ -31,7 +31,8 @@
 			user
 		SET
 			password=#{password},
-			code=#{code}
+			code=#{code}，
+			active=1
 		where
 			email = #{email}
 	</update>

@@ -455,7 +455,7 @@ function degree_hide(i){
 
 function round_1(){
 		var length = page_num;
-		if (length > 14) length = 14;
+		if (length > 15) length = 15;
 		
 		for (var i=0;i<length;i++)
 		{	
@@ -618,7 +618,7 @@ function click_charu(){
 		console.log("this_num:"+this_num);
 		$('.main_ul').html('');
 		pageShow(this_num,page_num);
-		var length = (this_num-1)*15+14;
+		var length = (this_num-1)*15+15;
 		if (length > page_num) length = page_num;
 //		console.log("length:"+length);
 		var l_0=(Math.floor((this_num-1)/20))*300;
@@ -640,9 +640,7 @@ function click_charu(){
 			if(l_0!=l)
 			{
 				l=l_0;
-				
-
-$.ajax({
+				$.ajax({
 					url: 'back/search.html',
 					type: 'POST',
 					data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:l_0},
@@ -661,7 +659,7 @@ $.ajax({
 								console.log("type:"+type0);
 								list=data3.normalReturn.list;
 								obj_json={array:list};
-								var length = (this_num-1)*15+14;
+								var length = (this_num-1)*15+15;
 								if (length > page_num) length = page_num;
 			   			for(i=(this_num-1)*15-l_0;i<length - l_0;i++)
 			   				{

@@ -529,7 +529,7 @@ $.ajax({
 		if(data.status==0){
 			if(data.normalReturn.login=='failure')
 			{
-				alert("登录失败");
+				alert(data.normalReturn.msg);
 			}else{
 				$.cookie("user", data.normalReturn.code,{path:"/"});
 				$('#modal_load').css('display', 'none');
