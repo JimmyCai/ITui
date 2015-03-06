@@ -199,6 +199,10 @@ function schoolList_ajax() {
 				for (i = 0; i < school.length; i++) {
 					collage_liTag(i, school[i]);
 				}
+				var nav02_H=$('#nav02').height()+30;
+				$('#nav02').css('height',nav02_H+'px');
+				
+				console.log($('#nav02').height());
 			}else
 			{
 			//404错误页面
