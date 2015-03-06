@@ -640,10 +640,9 @@ function click_charu(){
 			if(l_0!=l)
 			{
 				l=l_0;
-									
 				
 
-({
+$.ajax({
 					url: 'back/search.html',
 					type: 'POST',
 					data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:l_0},
