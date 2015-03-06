@@ -2,17 +2,17 @@
 
 $(function() {
 	// 专业学校转换
-	$('.d_down').click(function(event) {
-		$('.dropdown-menu').css('display', 'block');
-	});
-
-	$('.zhuanye  a ').click(function(event) {
-		$('.dropdown-menu').css('display', 'none');
-		var neirong = $(this).html();
-		var neirong2 = $('.nr_js').html();
-		$('.nr_js').html(neirong);
-		$('.zhuanye  a ').html(neirong2);
-	});
+//	$('.d_down').click(function(event) {
+//		$('.dropdown-menu').css('display', 'block');
+//	});
+//
+//	$('.zhuanye  a ').click(function(event) {
+//		$('.dropdown-menu').css('display', 'none');
+//		var neirong = $(this).html();
+//		var neirong2 = $('.nr_js').html();
+//		$('.nr_js').html(neirong);
+//		$('.zhuanye  a ').html(neirong2);
+//	});
 	// 鼠标移出下拉框1秒后下拉框消失
 	$('.dropdown-menu').mouseout(function(event) {
 		setTimeout("$('.dropdown-menu').css('display', 'none')", 1000);
@@ -24,10 +24,19 @@ $(function() {
 			function(event) {
 				var len_course = $(this).find('a').text().length;
 				var text_course = $(this).find('a').text();
-				if (len_course > 5) {
+				if (len_course >5) {
+					if(len_course==6)
+					{
+						$(this).siblings('.course_full').css('bottom','-30px');
+						//$(this).siblings('.course_full').find('a')css('text-align','right');
+					}else
+					{
+						$(this).siblings('.course_full').css('bottom','-50px');
+					}
 					$(this).siblings('.course_full').show().find('a').text(
 							text_course);
 					$(this).parent('.baowei0').find('.course').animate({display:'none'},1);
+					
 
 				} else {
 					$('.course_full').animate({display:'none'},1);
@@ -700,7 +709,7 @@ function columnchart(bar_index, column_height, majorname, bar_color, schoolname)
 	if (column_height >= 100) {
 		$('.bar_cha' + (bar_index + 1)).css('height', 100 * 1.5 + 'px');
 		$('.occup' + (bar_index + 1)).css('height', 100 * 1.5 + 'px');
-		$('.value' + (bar_index + 1)).text('>=100%');
+		$('.value' + (bar_index + 1)).text('≥100%');
 		$('.course' + (bar_index + 1)).find('a').text(majorname);
 		$('.course_full' + (bar_index + 1)).find('a').text(majorname);
 		$('.bar_cha' + (bar_index + 1)).css('background-color', '#cbcbcb');
