@@ -317,8 +317,12 @@ DD_belatedPNG.fix('*');
 	 </li>
 	 <li class="li_tab li_tab05">
 	 	<h2 class="h_2">友情链接</h2>
-	 	<h3 class="h_3">友情链接啦啦啦</h3>
-	 	<p class="Paragraph">如果您对本协议或本服务有意见或建议，可与爱推网客户服务部门联系（kefu@itui.cn），我们会给予您必要的帮助。（正文完）</p>
+	 	<h3 class="h_3">中国研究生招生信息网 <a href="http://yz.chsi.com.cn/" target="_blank" style="color:#428BCA;">http://yz.chsi.com.cn/</a></h3>
+	 	<h3 class="h_3">中国教育在线 <a href="http://www.eol.cn/" target="_blank" style="color:#428BCA;">http://www.eol.cn/</a></h3>
+	 	<h3 class="h_3">学堂在线 <a href=" http://www.xuetangx.com/" target="_blank" style="color:#428BCA;"> http://www.xuetangx.com/</a></h3>
+	 	<h3 class="h_3">100教育 <a href="http://www.100.com/" target="_blank" style="color:#428BCA;">http://www.100.com/</a></h3>
+	 	<h3 class="h_3">好学网 <a href="http://www.pmkaoyan.com/" target="_blank" style="color:#428BCA;">http://www.pmkaoyan.com/</a></h3>
+	 	<p class="Paragraph" style="width:98%;margin-left:auto;margin-right:auto;">如果您对本协议或本服务有意见或建议，可与爱推网客户服务部门联系（kefu@itui.cn），我们会给予您必要的帮助。（正文完）</p>
 	 </li>
 	  <li class="li_tab li_tab06">
 	 	<h1 class="h_1">联系我们</h1>
@@ -344,12 +348,12 @@ DD_belatedPNG.fix('*');
 
 <div class="foot">
 	<ul class="left">
-		<li class="li00"><a href="javascript:;" target="_blank">关于我们</a></li>
-		<li class="li01"><a href="javascript:;" target="_blank">隐私声明</a></li>
-		<li class="li02"><a href="javascript:;" target="_blank">用户协议</a></li>
-		<li class="li03"><a href="javascript:;" target="_blank">人才招聘</a></li>
-		<li class="li04"><a href="javascript:;" target="_blank">友情链接</a></li>
-		<li class="li05"><a href="javascript:;" target="_blank">联系我们</a></li>
+		<li class="li00"><a href="javascript:;" >关于我们</a></li>
+		<li class="li01"><a href="javascript:;" >隐私声明</a></li>
+		<li class="li02"><a href="javascript:;" >用户协议</a></li>
+		<li class="li03"><a href="javascript:;" >人才招聘</a></li>
+		<li class="li04"><a href="javascript:;" >友情链接</a></li>
+		<li class="li05"><a href="javascript:;">联系我们</a></li>
 
 	</ul>
 	
@@ -496,6 +500,14 @@ $('.s_li').click(function(event) {
 	$('.li_tab0'+(this_index+1)).siblings('li').css('display', 'none');
 	$(this).siblings('.s_li').removeClass('blue_border');
 	console.log(this_index);
+});
+$('.left li').click(function(event){
+	var foot_index=$(this).index()+1;
+	console.log(foot_index);
+	$('.s_li0'+foot_index).addClass('blue_border');
+	$('.li_tab0'+foot_index).css('display', 'block');
+	$('.li_tab0'+foot_index).siblings('li').css('display', 'none');
+	$('.s_li0'+foot_index).siblings('li').removeClass('blue_border');
 });
 </script>
 

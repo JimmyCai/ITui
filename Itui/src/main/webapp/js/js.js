@@ -381,3 +381,33 @@ $('meta[name="Keywords"]').attr('content','lalallalal');
 //console.log(str_meta);
 
 
+$('.no_email').click(function(event){
+	console.log(indexregs_obj.objemail);
+	console.log(indexregs_obj.objpasd);
+	no_email_ajax();
+});
+function no_email_ajax()
+{
+	$.ajax
+	({
+		url: 'resend_email',
+		type: 'get',
+		dataType: 'html',
+		data: {"email": indexregs_obj.objemail},
+		success:function(msg)
+		{
+		data=eval('msg='+msg);
+		console.log(data);
+		if(data.status==0)
+		{
+			
+		$('.no_emP').text(data.normalReturn.msg);
+
+		}
+		else
+		{
+			
+		}
+		}
+	});
+}

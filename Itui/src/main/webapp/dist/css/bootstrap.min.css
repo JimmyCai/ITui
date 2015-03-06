@@ -43,13 +43,25 @@
 	margin-top: 10px;
 }
 
+
+@media (min-width: 600px){
 .t_jiao{
 	display: block;
 	float: none;
 	width: 30%;
-	margin-top: 20px;
-	margin-right: auto;
-	margin-left: auto;
+float:left;
+margin-right:20px;
+margin-left:70px;
+}
+}
+@media (max-width: 599px){
+.t_jiao{
+	display: block;
+	float: none;
+	width: 30%;
+float:left;
+
+}
 }
 .btn:hover{
 	color: #fff;
@@ -100,4 +112,7 @@ label{
 	margin-top: 20px;
 	margin-right: auto;
 	margin-left: auto;
+}
+.no_email p{
+	text-align:center;
 }

@@ -788,15 +788,45 @@ margin-right:auto;
 .agree_p a{
 	line-height: 20px;
 }
+/*20150306编辑*/
+.two_btn{
+width: 60%;
+height: 40px;
+margin-left: auto;
+margin-right: auto;
+margin-top:10px;
+	
+}
 
 
 
+@media (min-width: 600px){
+	.no_email{
+	width:120px;
+	height:40px;
+	float: left;
+	color:#F59D2B;
+	cursor:pointer;
+}
+.no_email p{
+	line-height:36px;
+}
 
+}
 
+@media (max-width: 599px){
+	.no_email{
+	width:120px;
+	height:40px;
+	float: left;
+	color:#F59D2B;
+	cursor:pointer;
+}
+.no_email p{
+	line-height:36px;
+}
 
-
-
-
+}
 
 
 
