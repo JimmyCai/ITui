@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>爱推激活重置密码成功页</title>
+
+<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG.js" ></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+<script src="dist/js/jquery.min.js"></script>
+
+</head>
+<style type="text/css">
+.email {
+	max-width: 1000px;
+	border: 1px solid #cbcbcb;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.header {
+	width: 100%;
+	height: 60px;
+	/*border:1px solid green;*/
+	margin: 0 auto;
+	background-color: #f6f6f6;
+	border-bottom: 2px solid #E67917;
+}
+
+.logo {
+	margin-left: 20px;
+	float: left;
+}
+
+.logo a {
+	display: block;
+	width: 130px;
+	height: 60px;
+}
+
+h2 {
+	color: #064487;
+}
+
+.item {
+	width: 70%;
+	height: 60px;
+	float: left;
+	text-align: center;
+}
+
+.contain {
+	width: 90%;
+	/*border:1px solid green;*/
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.paragraph {
+	font-size: 20px;
+}
+
+.paragraph02 {
+	color: #E67917;
+}
+
+.sure_href a {
+	color: #2A6496;
+}
+
+.reset_href a {
+	color: #2A6496;
+}
+
+.prompt {
+	height: 20px;
+	line-height: 20px;
+}
+/*如果激活失败*/
+.fail {
+	width: 90%;
+	border: 1px solid green;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+.fail_pic img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.paragraph3 {
+	text-align: center;
+	font-size: 30px;
+	color: #666;
+}
+
+.contain_01 {
+	display: none;
+}
+
+.contain_02 {
+	display: none;
+}
+</style>
+
+<body>
+	<div class="email">
+		<div class="header">
+			<div class="logo">
+				<a href="" target="_blank"> <img src="images/17.png" alt="">
+				</a>
+			</div>
+			<div class="item">
+				<h2>激活成功</h2>
+			</div>
+		</div>
+		<div class="contain contain_01" >
+			<p class="paragraph">Hi</p>
+			<p class="paragraph">重置密码成功！</p>
+			<p class="paragraph para_success">赶快去登录，尽情的浏览爱推提供的信息吧！</p>		
+			<div class="sure_href">
+				<a href="index.html">→进入爱推首页</a>
+			</div>
+		</div>
+		<div class="contain contain_02" >
+			<div class="fail">
+				<p class="paragraph3">请重新注册</p>
+				<div class="sure_href">
+					<a href="index.html" style="margin-left:42%;">→进入爱推首页</a>
+				</div>
+			</div>
+		</div>
+		</div>
+	<script type="text/javascript">
+		$(function() {
+			//var code_str="?email=zhonghh09@gmail.com&code=19592fec979d8355b1260f432a33dfb5";
+			var code_str=window.location.search;
+			var arr_str=code_str.split("&");
+			var email_value=arr_str[0].substring(7,(arr_str[0].length+1));
+			var code_value=arr_str[1].substring(5,(arr_str[1].length+1));
+			console.log(email_value);
+			console.log(code_value);
+
+			$.ajax({
+				url : 'reset_password.html',
+				type : 'get',
+				dataType : 'html',
+				data : {
+					"email" : email_value,"code":code_value
+				},
+				success : function(msg) {
+					var data = eval('msg=' + msg);
+					console.log(msg);
+					if (data.status == 0) {
+						if(data.normalReturn.reset=="success")
+							{
+							$('.contain_01').css('display', 'block');
+							$('.contain_02').css('display', 'none');
+							$('.para_success').text(data.normalReturn.msg);
+							consele.log('激活重置成功');
+							}else
+							{
+								$('.contain_01').css('display', 'none');
+								$('.contain_02').css('display', 'block');
+								$('.item h2').text('重置密码失败');
+								$('.paragraph3').text(data.normalReturn.msg);
+								
+							}
+						
+					} else {
+						console.log('重置失败');
+						$('.contain_01').css('display', 'none');
+						$('.contain_02').css('display', 'block');
+						$('.item h2').text('重置密码失败');
+						$('.paragraph3').text(data.errMessage);
+						
+					}
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>
