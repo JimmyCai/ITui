@@ -145,6 +145,7 @@ ul,ol,li{list-style:none}
 
 #nav01{
 	width: 1024px;
+	height:420px;
 	margin: 0 auto;
 	margin-top: 30px;
 	background-color: #fff;
@@ -169,6 +170,7 @@ ul,ol,li{list-style:none}
 #sch_list
 {
 width: 790px;
+height:391px;
 margin-left: 10px;
 float: left;
 margin-top: 10px;
@@ -973,4 +975,17 @@ margin-right:auto;
 .agree_p a{
 	line-height: 20px;
 	color:#428BCA;
+}
+/*20150306编辑*/
+.schname{
+	cursor:pointer;
+}
+.schname:hover{
+	color:#0EDED7;
+}
+.li_list p{
+	cursor:pointer;
+}
+.li_list p:hover{
+	color:#0EDED7;
 }

@@ -13,7 +13,7 @@ $(function(){
 		$('.nr_js').html(neirong);
 		$('.zhuanye  a ').html(neirong2);
 	});
-	
+	// 页面加载函数结束
 	//回顶部事件
 	$body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
 

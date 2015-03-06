@@ -52,23 +52,29 @@ $(function() {
 
 	var user_value = $.cookie("user");
 	if (user_value == undefined) {
+		
 		$('.user2').css('display', 'block');
 		$('.user2').find('img').attr('src', 'images/user2.png');
 		$('.user').css('display', 'none');
 		// 判断当前页面是否是信息页
 		var str_info = window.location.pathname;
 		var str_texting = new RegExp('info');
+		console.log(str_info);
 		if (str_texting.test(str_info)) {
+			console.log('info');
 		} else {
-			// lodal_close();
+			console.log('no');
+			 lodal_close();
 			$('body').css('overflow-y', 'visible');
 			$('body').css('overflow-x', 'visible');
-			$('#modal_load').css('display', 'none');
+			$('#modal_load').hide();
 		}
-		$('#modal_load').hide();
+		
 	} else {
+		$('#modal_load').hide();
 		$('.user').css('display', 'block');
 		$('.user2').css('display', 'none');
+		
 	}
 
 	$('.d_down').click(function(event) {
@@ -461,4 +467,15 @@ function load_judge(email,pasd)
 		$('.button_load').attr('disabled', true);
 //		$('.button_load').css('background-color', '#cbcbcb');
 	}
+}
+//关闭登录模态框函数
+function lodal_close()
+{
+	$('.close').click(function(event)
+			 {
+				// 模态框出现xy轴滚动条出现
+				$('body').css('overflow-y', 'visible');
+				$('body').css('overflow-x', 'visible');
+				$('#modal_load').css('display', 'none');
+			});
 }
