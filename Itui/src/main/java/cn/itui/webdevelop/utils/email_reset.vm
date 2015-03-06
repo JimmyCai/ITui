@@ -70,7 +70,7 @@ h2{
 		<p class="paragraph">尊敬的${user}，您好!</p>
 		<p class="paragraph">请使用以下的链接重置您的密码:</p>
 		<div class="reset_href">
-			<a href="reset_state.html" target="_blank">${url}</a>
+			<div>${url}</div>
 		</div>
 		<p class="prompt">(如链接无法点击，请复制链接到浏览器地址栏打开页面)</p>
 	</div>

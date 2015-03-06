@@ -67,7 +67,7 @@ h2{
 	<div class="contain">
 		<p class="paragraph">Hey,${user}</p>
 		<p class="paragraph">欢迎注册 爱推itui.cn 的账户。</p>
-		<p class="paragraph">请慎重对待本邮件中的确认链接！这会在爱推 Itui.cn 上创建一个新的账户！</p>
+		<p class="paragraph">请慎重对待本邮件中的确认链接！这会在爱推 itui.cn 上创建一个新的账户！</p>
 		<p class="paragraph02">爱推-简单你的备考</p>
 		<p class="paragraph02">通过我们的服务简化备考阶段院校和专业信息收集的过程，我们直接提供准确、详细的院校和专业信息</p>
 		<p class="paragraph">如果确认，请点请点击以下链接完成注册。</p>

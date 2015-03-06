@@ -143,7 +143,7 @@
 			</if> 
 			
 			<if test="condition != ''">
-				and major.name like concat(concat("%",#{condition}),"%")
+				and major.fullname like concat(concat("%",#{condition}),"%")
 			</if>
 		</where>
 		order by rank, degree
@@ -217,7 +217,7 @@
 			</if> 
 			
 			<if test="condition != ''">
-				and major.name like concat(concat("%",#{condition}),"%")
+				and major.fullname like concat(concat("%",#{condition}),"%")
 			</if>
 		</where>
 	</select>
