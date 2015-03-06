@@ -279,8 +279,8 @@ $(function() {
 	$('.button_regs').click(function(event) {
 		// 在用户名和密码都输入正确的情况下调用ajax
 		console.log('zhong');
-		$('.regspage').css('display', 'none');
-		$('.waitpage').css('display', 'block');
+//		$('.regspage').css('display', 'none');
+//		$('.waitpage').css('display', 'block');
 		// $('.waitpage').delay(3000).hide(0);
 		$(".waitpage").hide();
 		var email = $('.regs_mail').val();
@@ -375,7 +375,7 @@ function register_ajax(email, pasd) {
 					// 登录成功则向用户显示登录窗口
 					$('.loadpage').css('display', 'block');
 					$('.loaditem').css('border-bottom', '2px solid #428BCA');
-					$('.regspage').css('display', 'none');
+//					$('.regspage').css('display', 'none');
 					$('.regsitem').css('border-bottom', 'none');
 					$('.prompt').text('先去邮箱查看邮件激活吧!').css('color', 'red');
 				}
