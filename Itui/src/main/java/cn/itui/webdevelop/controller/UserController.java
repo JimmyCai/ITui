@@ -51,7 +51,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value=URLConstants.ACTIVATE)
-	public String acitvate(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String activate(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String code = request.getParameter(CODE);
 		return userService.activate(code);
 	}
@@ -62,7 +62,7 @@ public class UserController {
 		if (email == null){
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		}
-		String password = request.getParameter(PASSWORD);
+		String password = request.getParameter(CODE);
 		if (password == null){
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		}

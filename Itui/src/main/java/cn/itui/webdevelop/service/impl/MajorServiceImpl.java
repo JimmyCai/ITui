@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.dao.MajorInfoDao;
 import cn.itui.webdevelop.service.MajorService;
@@ -14,6 +15,7 @@ import cn.itui.webdevelop.utils.WordParticiple;
 public class MajorServiceImpl implements MajorService {
 	private MajorDao majorDao;
 	private MajorInfoDao majorInfoDao;
+	private CollegeDao collegeDao;
 	private int limit;
 	
 	/**
@@ -54,7 +56,6 @@ public class MajorServiceImpl implements MajorService {
 		}else {
 			type = WordParticiple.filterAll(major_type);
 		}
-
 		condition = WordParticiple.participle(condition);
 		// 全部
 		category = WordParticiple.filterAll(category);
@@ -146,5 +147,13 @@ public class MajorServiceImpl implements MajorService {
 
 	public void setMajorInfoDao(MajorInfoDao majorInfoDao) {
 		this.majorInfoDao = majorInfoDao;
+	}
+
+	public CollegeDao getCollegeDao() {
+		return collegeDao;
+	}
+
+	public void setCollegeDao(CollegeDao collegeDao) {
+		this.collegeDao = collegeDao;
 	}
 }
