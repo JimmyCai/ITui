@@ -144,8 +144,8 @@ h2 {
 		</div>
 	<script type="text/javascript">
 		$(function() {
-			//var code_str=window.location.search;
-			var code_str = "?code=f389a4167dd5473c7e70bfae4e7401af"
+			var code_str=window.location.search;
+			//var code_str = "?code=f389a4167dd5473c7e70bfae4e7401af"
 			console.log(code_str);
 			var code_value = code_str.substring(6, (code_str.length + 1));
 			console.log(code_value);
@@ -163,13 +163,13 @@ h2 {
 					if (data.status == 0) {
 						$('.contain_01').css('display', 'block');
 						$('.contain_02').css('display', 'none');
-						consele.log('激活成功');
+						console.log('激活成功');
 					} else {
 						$('.contain_01').css('display', 'none');
 						$('.contain_02').css('display', 'block');
 						$('.item h2').text('激活失败！');
 						$('.paragraph3').text(data.normalReturn.msg);
-						consele.log('激活失败');
+						console.log('激活失败');
 					}
 				}
 			});
