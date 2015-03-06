@@ -1,7 +1,5 @@
 package cn.itui.webdevelop.controller;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -53,6 +51,8 @@ public class UserController {
 	@RequestMapping(value=URLConstants.ACTIVATE)
 	public String activate(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String code = request.getParameter(CODE);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + CODE + ":" + code;
+		rRLogger.info(requestStr);
 		return userService.activate(code);
 	}
 	
@@ -77,7 +77,8 @@ public class UserController {
 //		}
 //
 //		if (Touclick.check(check_key,check_address, null, null,null)){
-		
+		String requestStr = RequestUtil.getUserBaseInfo(request) + EMAIL + ":" + email + "\t" + CODE + ":" + password;
+		rRLogger.info(requestStr);
 			return userService.resetPassword(email, password);
 //		}else {
 //			HashMap<String, Object> result = new HashMap<String, Object>();
@@ -89,6 +90,8 @@ public class UserController {
 	@RequestMapping(value=URLConstants.RESEND_EMAIL)
 	public String resendEmail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = request.getParameter(EMAIL);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + EMAIL + ":" + email;
+		rRLogger.info(requestStr);
 		return userService.resendEmail(email);
 	}
 	
@@ -102,7 +105,9 @@ public class UserController {
 		if (password == null){
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		}
-		password = DigestUtils.md5DigestAsHex(password.getBytes());		
+		password = DigestUtils.md5DigestAsHex(password.getBytes());	
+		String requestStr = RequestUtil.getUserBaseInfo(request) + EMAIL + ":" + email + "\t" + PASSWORD + ":" + password;
+		rRLogger.info(requestStr);
 		return userService.sendResetEmail(email, password);
 	}
 

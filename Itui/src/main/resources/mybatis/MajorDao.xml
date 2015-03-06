@@ -146,7 +146,7 @@
 				and major.fullname like concat(concat("%",#{condition}),"%")
 			</if>
 		</where>
-		order by rank, degree
+		order by rank, degree desc
 		LIMIT #{from},#{limit}
 	</select>
 	

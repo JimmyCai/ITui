@@ -89,16 +89,6 @@ public class CollegeServiceImpl implements CollegeService {
 			if (rank == 2000){
 				college.put("rank", "-1");
 			}
-//			else if (rank == -1){
-//				college.put("rank", "不参与排名");
-//			}
-//			int localRank = (Integer)college.get("localRank");
-//			if (localRank == -1){
-//				college.put("localRank", "不参与排名");
-//			}
-			
-//			HashMap<String, Object> itemMap = new HashMap<String, Object>();
-//			itemMap.put(String.valueOf(i), college);
 			list.add(college);
 		}
 		jsonMap.put("list", list);

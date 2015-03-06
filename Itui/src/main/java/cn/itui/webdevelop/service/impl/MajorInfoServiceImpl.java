@@ -151,6 +151,10 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 		
 		//college recommend info
 		LinkedHashMap<String, Object> collegeRecommendMap = new LinkedHashMap<String, Object>();
+		for (int i = 0; i < recommendColleges.size(); i++){
+			HashMap<String, Object> tempMap = recommendColleges.get(i);
+			tempMap.put("rank", MajorInfo.translateRank(tempMap.get("rank")));
+		}
 		collegeRecommendMap.put("mainInfo", recommendColleges);
 		
 		//different college same major recommend info

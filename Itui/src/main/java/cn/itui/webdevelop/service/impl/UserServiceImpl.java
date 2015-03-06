@@ -6,7 +6,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.velocity.app.VelocityEngine;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.velocity.VelocityEngineUtils;
@@ -52,7 +51,6 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * 该方法未完成，一个是插入用户默认头像未完成，即没有完成处理失败情况 二是没有处理发送邮件失败情况
-	 * 
 	 * @throws Exception
 	 */
 	public String doRegister(String email, String password, String code,
@@ -112,6 +110,9 @@ public class UserServiceImpl implements UserService {
 		this.userInfoDao = userInfoDao;
 	}
 
+	/**
+	 * @param code 激活码
+	 */
 	public String activate(String code) throws Exception {
 		int id = userDao.activate(code);
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -123,6 +124,14 @@ public class UserServiceImpl implements UserService {
 		return ResponseUtil.wrapNormalReturn(map);
 	}
 
+	/**
+	 * 发送邮件
+	 * @param to 目的地址
+	 * @param subject 主题
+	 * @param vmFile velocity模板
+	 * @param model 邮件html参数
+	 * @return true:发送成功;false:发送失败
+	 */
 	public boolean sendMail(String to, String subject, String vmFile,
 			HashMap<String, Object> model) throws Exception {
 		try {
@@ -159,6 +168,11 @@ public class UserServiceImpl implements UserService {
 		this.javaMailSender = javaMailSender;
 	}
 
+	/**
+	 * 重置密码
+	 * @param email 邮箱地址
+	 * @param password 密码
+	 */
 	public String resetPassword(String email, String password) throws Exception {
 		int id = userDao.updatePassword(email, password);
 		HashMap<String, Object> result = new HashMap<String, Object>();
@@ -173,6 +187,10 @@ public class UserServiceImpl implements UserService {
 		return ResponseUtil.wrapNormalReturn(result);
 	}
 
+	/**
+	 * 重新发送激活邮件
+	 * @param email邮箱地址
+	 */
 	public String resendEmail(String email) throws Exception {
 		HashMap<String, Object> match = userDao.match(email, null);
 		HashMap<String, Object> result = new HashMap<String, Object>();
@@ -218,15 +236,15 @@ public class UserServiceImpl implements UserService {
 
 			if (bool) {
 				result.put("reset", "success");
-				result.put("msg", "发送邮件成功");
+				result.put("msg", "发送邮件成功，请查收");
 			} else {
 				// 抛出异常
 				result.put("reset", "failure");
-				result.put("msg", "发送邮件失败");
+				result.put("msg", "发送邮件失败，请重试");
 			}
 		} else {
 			result.put("reset", "failure");
-			result.put("msg", "用户名不存在");
+			result.put("msg", "用户名不存在,请注册");
 		}
 		return ResponseUtil.wrapNormalReturn(result);
 	}

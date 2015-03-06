@@ -92,16 +92,13 @@ public class MajorServiceImpl implements MajorService {
 //				if (majorId == id){
 //					System.err.println(true);
 					int rank = (Integer)(map.get("rank"));
-					if (rank > 1000){ 
+					if (rank > 1000){
 						map.put("rank", rank%1000+"+");
-					}else {
-						map.put("rank", rank);
 					}
-					if (rank == 2000) {
-						map.put("rank", -1);
-					}else {
-						map.put("rank", rank);
+					if (rank == 2000){
+						map.put("rank", "-1");
 					}
+
 //					map.put("degree", rankAndDegrees.get(j).get("degree"));
 //				}
 //			}
