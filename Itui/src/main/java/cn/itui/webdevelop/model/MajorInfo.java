@@ -104,13 +104,20 @@ public class MajorInfo implements java.io.Serializable {
 		}
 		try {
 			int rankI = (Integer)rank;
-			if (rankI==2000) return "-1";
-			if(rankI > 1000)
-				return (rankI - 1000) + "";
-			else if(rankI == -1)
-				return "null";
-			else
-				return rankI + "";
+			if (rankI > 1000){
+				return rankI%1000+"+";
+			}
+			if (rankI == 2000){
+				return "-1";
+			}
+			return String.valueOf(rankI);
+//			if (rankI==2000) return "-1";
+//			if(rankI > 1000)
+//				return (rankI - 1000) + "+";
+//			else if(rankI == -1)
+//				return "null";
+//			else
+//				return rankI + "";
 		} catch (Exception e) {
 			return "null";
 		}
