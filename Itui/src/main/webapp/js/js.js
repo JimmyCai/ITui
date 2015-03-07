@@ -227,7 +227,7 @@ function index_register_ajax(email, pasd) {
 				if (data.normalReturn.register == 'failure') {
 					$('.bt_p02').text(data.normalReturn.msg ).css(
 							'color', 'red');
-					$('#register').attr('disabled', true);
+					$('#register').attr('disabled', false);
 					$('#register').css('background-color', '#cbcbcb');
 					$('#input_mail2').focus();
 				} else {
