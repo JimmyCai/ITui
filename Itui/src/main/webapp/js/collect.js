@@ -170,7 +170,7 @@ function click_cid(j){
 $('.schname0'+j).click(function(event) {
 	var c_id=$('.item0'+j).attr('new_cid');
 	console.log(c_id);
-	window.open("http://localhost:8080/Itui/school.html?name="+c_id,"_blank");
+	window.open("school.html?name="+c_id,"_blank");
 	
 });
 }
@@ -179,7 +179,7 @@ function click_mid(j,w){
 	
 	$('.ul0'+j).find('.lilist_0'+w).find('p').click(function(event) {
 		var m_id=$('.ul0'+j).find('.lilist_0'+w).attr('new_mid');
-		window.open("http://localhost:8080/Itui/info.html?major="+m_id,"_blank");	
+		window.open("info.html?major="+m_id,"_blank");	
 		console.log(m_id);
 	});
 	}
