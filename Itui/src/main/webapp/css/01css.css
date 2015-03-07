@@ -828,7 +828,22 @@ margin-top:10px;
 
 }
 
+.logged{
+width: 100px;
+height: 34px;
+float: right;
+cursor: pointer;
+border: medium none;
+display:none;
+}
+.logged p{
+font-size: 14px;
+line-height: 34px;
+padding-left: 4px;
+float: left;
+color:#0FCCCC;
 
+}
 
 
 
