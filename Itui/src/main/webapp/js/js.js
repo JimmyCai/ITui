@@ -411,7 +411,6 @@ if ($.cookie('user') != undefined){
 	$('.logged').click(function(event){
 		window.open("collect.html","_blank");
 	});
-	console.log($.cookie("username"));
 	
 }
 console.log($.cookie("username"));
