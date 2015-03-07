@@ -25,7 +25,6 @@ $(function() {
 			// 当窗口发生变化时得到动态的窗口宽高
 			 wind_h=$(window).height();
 			 wind_w=$(window).width();
-			
 			 mod_h=$('.tab').height();
 			 mod_w=$('.tab').width();
 			modal_position(wind_h,wind_w,mod_h,mod_w);
@@ -62,6 +61,7 @@ $(function() {
 		console.log(str_info);
 		if (str_texting.test(str_info)) {
 			console.log('info');
+			Infolodal_close();
 		} else {
 			console.log('no');
 			 lodal_close();
@@ -70,10 +70,25 @@ $(function() {
 			$('#modal_load').hide();
 		}
 		
-	} else {
+	} else 
+	{
 		$('#modal_load').hide();
 		$('.user').css('display', 'block');
 		$('.user2').css('display', 'none');
+		//如果已经登录则显示用户名
+		var username=$.cookie("username");
+		var user_name='<div class="username">'+username+'</div>';
+		$('#nav0').append(user_name);
+		$('.username').css({
+			width:"150px",
+		height:"20px",
+		float:"right",
+		color:"#fff",
+		position:"absolute",
+		right:"-50px",
+		bottom:"4px",
+		});
+		
 		
 	}
 
@@ -140,6 +155,9 @@ $(function() {
 			$('.drop_menu').remove();
 			console.log($.cookie('user'));
 			$.removeCookie('user', {
+				path : '/'
+			});
+			$.removeCookie('username', {
 				path : '/'
 			});
 			window.location.reload();
@@ -312,6 +330,12 @@ $(function() {
 	});
 });
 //页面加载函数结束
+$('.prompt').text("登录后相关数据才能显示！");
+$('.header .prompt').css("color","#428BCA");
+$('.header .prompt').css("width","300px");
+
+
+
 //给用户协议添加点击函数
 var check_state=1;
 $('.agree_input').click(function(event) {
@@ -418,6 +442,8 @@ function load_ajax(email, pasd) {
 					$('.user').css('display', 'block');
 					$('.user2').css('display', 'none');
 					window.location.reload();
+					$.cookie("username",load_obj.objemail,{path:"/"});
+					console.log(load_obj.objemail);
 				}
 			} else {
 				// 404错误页面
@@ -479,3 +505,19 @@ function lodal_close()
 				$('#modal_load').css('display', 'none');
 			});
 }
+//信息页时登录函数
+function Infolodal_close()
+{
+	$('.close').click(function(event)
+	{
+	$('.header .prompt').css('color','red');
+	$('.prompt').text("无法关闭！登录后相关数据才能显示！");
+	$('.header .prompt').stop().animate({'line-height':'18px'},10,function(){
+		$('.header .prompt').stop().animate({'line-height':'40px'},10)
+	});
+	console.log('close');
+	});
+}
+
+
+

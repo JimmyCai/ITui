@@ -30,7 +30,6 @@ $(function() {
 				var major = $('.nr_js').text();
 				var value = $('#scbar_txt').val();
 				search_jump(major, value);
-				console.log('focus');
 			}
 		}
 	});
@@ -39,7 +38,6 @@ $(function() {
 		document.onkeydown = function(e) {
 			var ev = document.all ? window.event : e;
 			if (ev.keyCode == 13) {
-				console.log('blur');
 			}
 		}
 	});
@@ -53,8 +51,6 @@ $(function() {
 	});
 	// 搜索跳转
 	function search_jump(major, value) {
-		console.log(major);
-		console.log(value);
 		if (major == "专业") {
 			major = 1;
 			window.open("search.html?t=" + major + "&c=" + value+"&#.");
@@ -84,13 +80,7 @@ $(function() {
 	});
 });
 // 页面加载函数结束
-//判断用户是否登录
-if ($.cookie('user') != undefined){
-	$('.load2 p').text("已登录");
-	console.log($.cookie('user'));
-}
 
-//window.location.href = "http://www.itui.cn";
 
 // 创建注册对象
 var indexregs_obj = {
@@ -140,7 +130,6 @@ function index_pasd() {
 					// 注册确认密码
 					$('#pasd3').keyup(function(event) 
 							{
-						console.log('shishi');
 								var indexpasd3 = $('#pasd3').val();
 								if (indexpasd2 == indexpasd3) {
 									$('.ecqu').html('√密码一致').css('color',
@@ -178,7 +167,7 @@ $('.agree_input').click(function(event) {
 	console.log(check_state);
 	
 });
-console.log(check_state);
+
 function checkbox_agree()
 {
 	if($('.agree_input').prop('checked')==true)
@@ -199,9 +188,6 @@ function index_submit_judge(index_email, indexpasd3) {
 		index_submit_click(index_email, indexpasd3);	
 		$('#register').attr('disabled', false);
 		$('#register').css('background-color', '#3276B1');
-		console.log('qaz');
-		
-		console.log('wer');
 	} else {
 		// 邮箱和密码若有一个错误择提交按钮不可用
 		$('#register').attr('disabled', false);
@@ -219,8 +205,6 @@ function index_submit_click(email, pasd) {
 		{
 			index_register_ajax(email, pasd);	
 		}
-		console.log('hou');
-		
 	});
 
 }
@@ -272,6 +256,7 @@ var indexload_obj = {
 	objemail : 'null',
 	objpasd : 'null'
 };
+
 // 登录邮箱验证开始
 function index_load_email() {
 	$('#input_mail')
@@ -347,8 +332,8 @@ function index_load_ajax(email, pasd) {
 					$('.bt_p01').text(data.normalReturn.msg + '请重新登录！').css(
 							'color', 'red');
 					$('#input_mail').focus();
-					console.log(email);
-					console.log(pasd);
+				
+					
 				} else {
 					$('#load').attr('disabled', true);
 					$('#load').css('background-color', '#cbcbcb');
@@ -361,6 +346,16 @@ function index_load_ajax(email, pasd) {
 			    	},1500);
 //					登录成功后改变登录状态显示
 					$('.load2 p').text("已登录");
+					console.log($.cookie('user'));
+					$('.load1').hide();
+					$('.load2').hide();
+					$('.logged').show();
+					$('.logged').click(function(event){
+						window.open("collect.html","_blank");
+					});
+					$.cookie("username",indexload_obj.objemail,{path:"/"});
+					console.log($.cookie("username"));
+					
 					
 				}
 
@@ -378,9 +373,6 @@ function index_load_ajax(email, pasd) {
 
 //获得meta标签
 $('meta[name="Keywords"]').attr('content','lalallalal');
-//console.log(str_meta);
-
-
 $('.no_email').click(function(event){
 	console.log(indexregs_obj.objemail);
 	console.log(indexregs_obj.objpasd);
@@ -400,9 +392,7 @@ function no_email_ajax()
 		console.log(data);
 		if(data.status==0)
 		{
-			
 		$('.no_emP').text(data.normalReturn.msg);
-
 		}
 		else
 		{
@@ -411,3 +401,17 @@ function no_email_ajax()
 		}
 	});
 }
+//判断用户是否登录
+if ($.cookie('user') != undefined){
+	$('.load2 p').text("已登录");
+	console.log($.cookie('user'));
+	$('.load1').hide();
+	$('.load2').hide();
+	$('.logged').show();
+	$('.logged').click(function(event){
+		window.open("collect.html","_blank");
+	});
+	console.log($.cookie("username"));
+	
+}
+console.log($.cookie("username"));
