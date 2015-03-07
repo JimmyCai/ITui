@@ -1786,10 +1786,9 @@ margin-left: 4px;
 }
 /*20150206*/
 .header .prompt{
-	width: 200px;
+	width: 250px;
 	float: right;
-	color: #B2D155;
-	height: 40px;
+	color: #428BCA;	height: 40px;
 	margin-right: 10px;
 }
 .tab_page{

@@ -46,7 +46,7 @@ ul,ol,li{list-style:none}
 #nav0{
 	width: 1024px;
 	height: 88px;
-	
+	position:relative;
 	margin: 0 auto;
 }
 .logo0{
@@ -1385,5 +1385,14 @@ margin-right:auto;
 	border-radius:4px;
 	color:#fff;
 	margin-right:3px;
+}
+.username{
+	width:150px;
+	height:20px;
+	float:right;
+	color:#fff;
+	position:absolute;
+	right:-50px;
+	bottom:4px;
 	
 }
