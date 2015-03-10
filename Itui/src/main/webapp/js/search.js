@@ -614,19 +614,19 @@ function collage_hide(){
 function click_charu(){
 	$('.pages .page_b').click(function(event){     	
 		var this_pageNum_strr=$(this).text();
+		//当点击页码的时候就回到顶部
+		 $(window).scrollTop(450);
 		var this_num=parseInt(this_pageNum_strr.match(/[0-9]+/));
 		console.log("this_num:"+this_num);
+		console.log('dingbu');
 		$('.main_ul').html('');
 		pageShow(this_num,page_num);
 		var length = (this_num-1)*15+14;
 		if (length > page_num) length = page_num;
-//		console.log("length:"+length);
 		var l_0=(Math.floor((this_num-1)/20))*300;
-//		console.log(l);
 		if (l_0 == l){
 			for(var i=(this_num-1)*15-l_0;i<length-l_0;i++)
 			{
-				console.log(i);
 				charu(i);
 				if (type0 == "college") collage_hide();
 				jump_info();
@@ -635,14 +635,11 @@ function click_charu(){
 		}
 
 
-			console.log("l_0:"+l_0);
-			console.log("l:"+l);
 			if(l_0!=l)
 			{
 				l=l_0;
 				
-
-$.ajax({
+              $.ajax({
 					url: 'back/search.html',
 					type: 'POST',
 					data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:l_0},
@@ -694,11 +691,7 @@ $('#modal_load').hide();
 
 var code_str=window.location.search;
 var code_value=code_str.split("=");
-console.log(code_str);
-//console.log(code_value);
 
 var code_123=code_str.substring(3,(code_str.length+1));
-console.log(code_123);
-
 
 	
