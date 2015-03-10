@@ -62,7 +62,7 @@ $(function() {
 	});
 	setTimeout(function () {
 		$('.erwei04').hide();
-	}, 3000);
+	}, 5000);
 	// 搜索跳转
 	function search_jump(major, value) {
 		if (major == "专业") {
@@ -243,10 +243,10 @@ function index_register_ajax(email, pasd) {
 				if (data.normalReturn.register == 'failure') {
 					$('.bt_p02').text(data.normalReturn.msg ).css(
 							'color', 'red');
-<<<<<<< HEAD
+
 					$('#register').attr('disabled', false);
 					$('#register').css('background-color', '#cbcbcb');
-=======
+
 					//重置表单
 					$('#zhuce')[0].reset();
 					$('.zc_email').html('');
@@ -255,7 +255,7 @@ function index_register_ajax(email, pasd) {
 					$('#register').attr('disabled', false);
 					$('#register').css('background-color', '#3276B1');
 
->>>>>>> origin/dawang0123
+
 					$('#input_mail2').focus();
 				} else {
 					$('.bt_p02').text('先去邮箱查看邮件激活吧!').css('color', 'red');
