@@ -164,7 +164,8 @@ $(function() {
 			});
 			window.location.reload();
 		});
-	}).mouseleave(function(event) {
+	});
+	$('.drop_menu').mouseleave(function(event) {
 		$('.drop_menu').css('display', 'none');
 	});
 
