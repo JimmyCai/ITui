@@ -31,7 +31,7 @@ ul,ol,li{list-style:none}
 
 @media (min-width: 1680px) {
 	.container0{
-		background-color: green;
+		background-color: #fff;
 	width: 100%;
 	margin:0 auto;
 	}
@@ -114,6 +114,9 @@ ul,ol,li{list-style:none}
 	.erwei03{
 		float:right;
 	}
+	.erwei04{
+		float:right;
+	}
 	.erwei0{
 		float: right;
 		width: 40px;
@@ -167,6 +170,9 @@ ul,ol,li{list-style:none}
 		bottom: 2%;
 	}
 	.erwei03{
+		float:right;
+	}
+	.erwei04{
 		float:right;
 	}
 	.erwei0{
@@ -432,6 +438,10 @@ height: 64px;
 		max-width: 50%;
 		max-height: 50%;
 	}
+	.erwei04{
+		max-width: 50%;
+		max-height: 50%;
+	}
 	.nav_top{
 		height: 40px;
 	}
@@ -448,6 +458,10 @@ height: 64px;
 		top: 20%;
 	}
 	.erwei03{
+		max-width: 30%;
+		max-height: 30%;
+	}
+	.erwei04{
 		max-width: 30%;
 		max-height: 30%;
 	}
@@ -516,6 +530,9 @@ height: 64px;
 }
 .erwei03{
 	display: none;
+}
+.erwei04{
+
 }
 .biaoti img{
 	margin-left: auto;
@@ -616,6 +633,10 @@ height: 64px;
 .erwei03{
 	margin-right: 40px;
 }
+.erwei04{
+	margin-right: 40px;
+	margin-bottom:-13px;
+}
 @media (max-width: 500px){
 	.erwei0{
 		width: 20px;
@@ -624,6 +645,9 @@ height: 64px;
 		max-width: 100%;
 	}
 	.erwei03{
+	margin-right: 20px;
+	}
+	.erwei04{
 	margin-right: 20px;
 	}
 }
@@ -846,7 +870,17 @@ color:#0FCCCC;
 }
 
 
-
+.erwei04{
+	position:relative;
+}
+/*.close_trip{
+	width:20px;
+	height:20px;
+	background-color:red;
+	position:absolute;
+	right:0px;
+	top:0px;
+}*/
 
 
 /*-------------------bottom -------------------*/

@@ -45,11 +45,24 @@ $(function() {
 
 	// 确定二维码位置
 	var win_width = $(window).width();
-	$('.erwei').mouseenter(function(event) {
+	$('.qr_code01').mouseenter(function(event) {
 		$('.erwei03').css('display', 'block');
+		$('.erwei04').css('display', 'none');
 	}).mouseleave(function(event) {
 		$('.erwei03').css('display', 'none');
 	});
+	$('.qr_code02').mouseenter(function(event) {
+		$('.erwei04').css('display', 'block');
+	})
+	$('.erwei04').mouseleave(function(event) {
+		$('.erwei04').css('display', 'none');
+	});
+	$('.erwei04').click(function(event){
+		$('.erwei04').css('display', 'none');
+	});
+	setTimeout(function () {
+		$('.erwei04').hide();
+	}, 3000);
 	// 搜索跳转
 	function search_jump(major, value) {
 		if (major == "专业") {
