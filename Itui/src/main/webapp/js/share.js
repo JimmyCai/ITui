@@ -63,9 +63,11 @@ $(function() {
 			console.log('info');
 			Infolodal_close();
 		} else {
+			
 			console.log('no');
 			 lodal_close();
-			$('body').css('overflow-y', 'visible');
+			//$('body').css('overflow-y', 'visible');
+			 //$('body').css('overflow-y', 'hidden');
 			$('body').css('overflow-x', 'visible');
 			$('#modal_load').hide();
 		}
@@ -519,5 +521,69 @@ function Infolodal_close()
 	});
 }
 
+//二维码
+var erwei_html='\
+	<div class="erwei">\
+	  <div class="qr_code01">\
+	      <div class="ew_0 ew_01">\
+	       <img src="images/11.jpg" alt="">\
+	      </div>\
+	      <div class="ew_0 ew_02">\
+			<a href="http://shang.qq.com/wpa/qunwpa?idkey=87bff36de422fbdfb6a0d07119601f12cf5ccb8e51ab2c06efa64b6a1e2d98a3" target="_blank">\
+			<img src="images/qq01.png" alt="">\
+			</a>\
+	      </div>\
+		  <div class="ew_0 back_top">\
+	        <p>▲</p>\
+          </div>\
+	  </div>\
+	  <div class="qr_code01">\
+		<div class="erwei_tp01">\
+	       <img src="images/shiliu.png" alt="">\
+	    </div>\
+		<div class="erwei_tp02">\
+			<img src="images/trip.png" alt="">\
+        </div>\
+	  </div>\
+	</div>';
 
+$('body').append(erwei_html);
+$('.erwei').css({position:'fixed',
+				right:'30px',
+				bottom:'80px'});
+$('.erwei_tp01').css({position:'absolute',
+					right:'40px',
+					top:'0px',
+					display:'none'});
+$('.erwei_tp02').css({position:'absolute',
+	right:'40px',
+	top:'0px'});
 
+$('.ew_01').mouseenter(function(event) {
+	$('.erwei_tp01').css('display', 'block');
+	$('.erwei_tp02').css('display', 'none');
+}).mouseleave(function(event) {
+	$('.erwei_tp01').css('display', 'none');
+	//$('.erwei_tp02').css('display', 'block');
+});
+$('.ew_02').mouseenter(function(event) {
+	$('.erwei_tp01').css('display', 'none');
+	$('.erwei_tp02').css('display', 'block');
+});
+$('.erwei_tp02').mouseleave(function(event) {
+	$('.erwei_tp02').css('display', 'none');
+	
+});
+setTimeout(function () {
+	$('.erwei_tp02').hide();
+}, 5000);
+$('.erwei_tp02').click(function(event){
+	$('.erwei_tp02').hide();
+});
+//回顶部事件
+$body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
+$('.back_top').click(function(event)
+ {
+	$body.animate({scrollTop: $('#nav0').offset().top}, 500);
+					return false;
+});

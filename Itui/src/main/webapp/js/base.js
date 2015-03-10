@@ -16,7 +16,6 @@ $(function(){
 	// 页面加载函数结束
 	//回顶部事件
 	$body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
-
 	$('.back_top').click(function(event)
 	 {
 		$body.animate({scrollTop: $('#nav0').offset().top}, 500);

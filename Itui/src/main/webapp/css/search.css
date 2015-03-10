@@ -805,10 +805,6 @@ border-top: 4px solid #f4b802;
 .erwei{
 	width: 40px;
 	height: 120px;
-	position: absolute;
-	right: 0px;
-	bottom: 100px;
-	
 }
 .ew_0{
 	width: 40px;
@@ -816,12 +812,12 @@ border-top: 4px solid #f4b802;
 }
 .ew_01{
 	
-	background: url(../images/11.jpg) no-repeat;
+	/*background: url(../images/11.jpg) no-repeat;*/
 	
 }
 .ew_02{
 	
-	background: url(../images/12.jpg) no-repeat;
+	/*background: url(../images/12.jpg) no-repeat;*/
 }
 .back_top{
 	background-color: #7e7e7e;
@@ -1004,7 +1000,6 @@ overflow: hidden;
 	   position: absolute;
 	   left: 0px;
 	   top: 0px;
-
 }
 .tab{
 	width:500px;
@@ -1394,5 +1389,4 @@ margin-right:auto;
 	position:absolute;
 	right:-50px;
 	bottom:4px;
-	
 }
