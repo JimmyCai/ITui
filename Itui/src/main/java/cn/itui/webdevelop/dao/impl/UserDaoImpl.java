@@ -56,4 +56,9 @@ public class UserDaoImpl implements UserDao {
 		parameter.put("code", DigestUtils.md5DigestAsHex((email+password).getBytes()));
 		return sqlSession.update("cn.itui.webdevelop.dao.UserDao.updatePassword", parameter);
 	}
+
+	public int getLastId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

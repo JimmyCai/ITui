@@ -67,7 +67,8 @@ public class UserServiceImpl implements UserService {
 			if (!bool) {
 				// 发送邮件失败
 			}
-			int id = userDao.insertUser(email, password, code, type);
+//			int id = userDao.getLastId();
+			int id= userDao.insertUser(email, password, code, type);
 			System.out.println(id);
 			if (id > 0) {
 				// 应该异步调用，否则将出现事务处理的回滚

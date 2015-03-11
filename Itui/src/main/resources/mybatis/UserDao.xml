@@ -15,8 +15,8 @@
 			
 	</select>
 	<insert id="insertUser" parameterType="cn.itui.webdevelop.model.User" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO user
-		VALUES (#{id}, #{email}, #{password}, #{code}, #{type}, 0)
+		INSERT INTO user (email, password, code, type, active)
+		VALUES (#{email}, #{password}, #{code}, #{type}, 0)
 	</insert>
 	<update id="updateActive" parameterType="java.lang.String" useGeneratedKeys="true" keyProperty="id">
 		UPDATE 
@@ -31,7 +31,7 @@
 			user
 		SET
 			password=#{password},
-			code=#{code}，
+			code=#{code},
 			active=1
 		where
 			email = #{email}
