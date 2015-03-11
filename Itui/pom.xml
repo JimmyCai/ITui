@@ -8,6 +8,13 @@
   <name>Itui Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+  <!--url redirect -->
+  	<dependency>
+   		<groupId>org.tuckey</groupId>
+    	<artifactId>urlrewritefilter</artifactId>
+    	<version>4.0.3</version>
+	</dependency>
+  	
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
