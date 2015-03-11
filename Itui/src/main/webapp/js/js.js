@@ -98,8 +98,8 @@ $(function() {
 
 // 创建注册对象
 var indexregs_obj = {
-	objemail : 'null',
-	objpasd : 'null'
+	objemail : null,
+	objpasd : null
 };
 
 // 注册邮箱验证开始
@@ -120,11 +120,11 @@ function index_email() {
 						} else {
 
 							$('.zc_email').html('×邮箱不合法').css('color', 'red');
-							indexregs_obj.objemail = 'null';
+							indexregs_obj.objemail = null;
 						}
 						if (index_email == '') {
 							$('.zc_email').html('×邮箱不能为空').css('color', 'red');
-							indexregs_obj.objemail = 'null';
+							indexregs_obj.objemail = null;
 						}
 
 					});
@@ -157,18 +157,18 @@ function index_pasd() {
 								} else {
 									$('.ecqu').html('×两次密码输入必须一致').css('color',
 											'red');
-									indexregs_obj.objpasd = 'null';
+									indexregs_obj.objpasd = null;
 								}
 							});
 
 				} else {
 					$('.pasd4').html('×输入6-15位以字母开头含有字母数字的密码').css('color',
 							'red');
-					indexregs_obj.objpasd = 'null';
+					indexregs_obj.objpasd = null;
 				}
 				if (indexpasd2 == '') {
 					$('.pasd4').html('×密码不能为空').css('color', 'red');
-					indexregs_obj.objpasd = 'null';
+					indexregs_obj.objpasd = null;
 				}
 			});
 }
@@ -197,7 +197,7 @@ function checkbox_agree()
 }
 // 判断注册对象是不是null
 function index_submit_judge(index_email, indexpasd3) {
-	if (index_email != 'null' && indexpasd3 != 'null') {
+	if (index_email != null && indexpasd3 != null) {
 //		调用点击函数
 		index_submit_click(index_email, indexpasd3);	
 		//$('#register').attr('disabled', false);
@@ -275,8 +275,8 @@ function index_register_ajax(email, pasd) {
 
 // 创建登录对像
 var indexload_obj = {
-	objemail : 'null',
-	objpasd : 'null'
+	objemail : null,
+	objpasd : null
 };
 
 // 登录邮箱验证开始
@@ -319,7 +319,7 @@ index_loadpasd();
 // 
 // 判断登录对像是否为空开始
 function index_load_judge(email, pasd) {
-	if (email != 'null' && pasd != 'null') {
+	if (email != null && pasd != null) {
 		// 点击登录按钮
 		index_loadsubmit(email, pasd);
 	} else {
