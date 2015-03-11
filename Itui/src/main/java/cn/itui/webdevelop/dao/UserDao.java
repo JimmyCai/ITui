@@ -11,4 +11,6 @@ public interface UserDao {
 
 	public int updatePassword(String email, String password);
 
+	public int getLastId();
+
 }
