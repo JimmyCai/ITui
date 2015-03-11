@@ -250,7 +250,7 @@ margin-bottom: 10px;
 }
 .list_empty{
 	width: 790px;
-	height: 400px;
+	height: 290px;
 	font-size: 30px;
 	color: #888;
 	line-height: 80px;
@@ -897,24 +897,12 @@ border-top: 4px solid #f4b802;
 .erwei{
 	width: 40px;
 	height: 120px;
-	position: fixed;
-	right: 70px;
-	bottom: 100px;
-	
 }
 .ew_0{
 	width: 40px;
 	height: 40px;
 }
-.ew_01{
-	
-	background: url(../images/11.jpg) no-repeat;
-	
-}
-.ew_02{
-	
-	background: url(../images/12.jpg) no-repeat;
-}
+
 .back_top{
 	background-color: #7e7e7e;
 }

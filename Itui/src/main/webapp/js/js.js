@@ -30,6 +30,7 @@ $(function() {
 				var major = $('.nr_js').text();
 				var value = $('#scbar_txt').val();
 				search_jump(major, value);
+				return false;
 			}
 		}
 	});
@@ -44,11 +45,24 @@ $(function() {
 
 	// 确定二维码位置
 	var win_width = $(window).width();
-	$('.erwei').mouseenter(function(event) {
+	$('.qr_code01').mouseenter(function(event) {
 		$('.erwei03').css('display', 'block');
+		$('.erwei04').css('display', 'none');
 	}).mouseleave(function(event) {
 		$('.erwei03').css('display', 'none');
 	});
+	$('.qr_code02').mouseenter(function(event) {
+		$('.erwei04').css('display', 'block');
+	})
+	$('.erwei04').mouseleave(function(event) {
+		$('.erwei04').css('display', 'none');
+	});
+	$('.erwei04').click(function(event){
+		$('.erwei04').css('display', 'none');
+	});
+	setTimeout(function () {
+		$('.erwei04').hide();
+	}, 5000);
 	// 搜索跳转
 	function search_jump(major, value) {
 		if (major == "专业") {
@@ -186,10 +200,10 @@ function index_submit_judge(index_email, indexpasd3) {
 	if (index_email != 'null' && indexpasd3 != 'null') {
 //		调用点击函数
 		index_submit_click(index_email, indexpasd3);	
-		$('#register').attr('disabled', false);
-		$('#register').css('background-color', '#3276B1');
+		//$('#register').attr('disabled', false);
+		//$('#register').css('background-color', '#3276B1');
 	} else {
-		// 邮箱和密码若有一个错误择提交按钮不可用
+		// 邮箱和密码若有一个错误择提交按钮可用
 		$('#register').attr('disabled', false);
 		$('#register').css('background-color', '#3276B1');
 	}
@@ -199,6 +213,8 @@ function index_submit_judge(index_email, indexpasd3) {
 function index_submit_click(email, pasd) {
 	console.log('qian');
 	$('#register').click(function(event) {
+		$('#register').attr('disabled', true);
+		$('#register').css('background-color', '#cbcbcb');
 		// 在用户名和密码都输入正确的情况下调用ajax
 		console.log('zhong');
 		if(check_state==1)
@@ -223,12 +239,23 @@ function index_register_ajax(email, pasd) {
 			data = eval('msg=' + msg);
 			console.log(data);
 			if (data.status == 0) {
-				
+				//注册失败
 				if (data.normalReturn.register == 'failure') {
 					$('.bt_p02').text(data.normalReturn.msg ).css(
 							'color', 'red');
+
 					$('#register').attr('disabled', false);
 					$('#register').css('background-color', '#cbcbcb');
+
+					//重置表单
+					$('#zhuce')[0].reset();
+					$('.zc_email').html('');
+					$('.pasd4').html('');
+					$('.ecqu').html('');
+					$('#register').attr('disabled', false);
+					$('#register').css('background-color', '#3276B1');
+
+
 					$('#input_mail2').focus();
 				} else {
 					$('.bt_p02').text('先去邮箱查看邮件激活吧!').css('color', 'red');
