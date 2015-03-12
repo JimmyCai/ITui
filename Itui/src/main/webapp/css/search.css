@@ -1389,3 +1389,9 @@ margin-right:auto;
 	right:-50px;
 	bottom:4px;
 }
+.load_wait{
+position: absolute;
+left: 460px;
+top: 0px;
+display:none;
+}

@@ -246,6 +246,16 @@ function ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 		 	url: 'back/search.html',
 			 type: 'post',
 			 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:num_0},
+			 beforeSend:function()
+			 {
+				 console.log('red');
+				 $('.load_wait').css('display','block');
+			 },
+			 complete:function()
+			 {
+				 console.log('#fff');
+				 $('.load_wait').css('display','none');
+			 },
 			 success: function(msg) {
 			 var data=eval("msg="+msg);			 
 			  if(data.status=='0'){
@@ -404,6 +414,11 @@ $(function(){
 function ajax_01 (data){
 	// 将接收到的数据存储进自定义对象内
 	$('.item_total').text(data.normalReturn.total);
+	console.log(typeof(data.normalReturn.total));
+	if(data.normalReturn.total==0)
+		{
+		
+		}
 	type0=data.normalReturn.type;
 	list=data.normalReturn.list;
 	obj_json={array:list};
@@ -691,7 +706,6 @@ $('#modal_load').hide();
 
 var code_str=window.location.search;
 var code_value=code_str.split("=");
-
 var code_123=code_str.substring(3,(code_str.length+1));
 
 	
