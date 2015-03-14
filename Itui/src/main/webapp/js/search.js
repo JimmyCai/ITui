@@ -1,17 +1,7 @@
 // JavaScript Document
 var xueke0="",xueke1="",xueke2="",xueke3="",xueke4="",xueke5="",num_0=0;
 $(function(){
-	// 专业学校转换
-//	$('.d_down').click(function(event) {
-//		$('.dropdown-menu').css('display', 'block');
-//	});
-//	$('.zhuanye  a').click(function(event) {
-//		$('.dropdown-menu').css('display', 'none');
-//		var neirong=$(this).html();
-//		var neirong2=$('.nr_js').html();
-//		$('.nr_js').html(neirong);
-//		$('.zhuanye  a ').html(neirong2);
-//	});
+
 //	鼠标移出下拉框1秒后下拉框消失
 	$('.dropdown-menu').mouseout(function(event){
 		setTimeout("$('.dropdown-menu').css('display', 'none')",20);
@@ -39,7 +29,6 @@ $(function(){
 		
 	});
 	// 学科全部点击事件
-	
 	$('.sub_all').click(function(event) {
 		$('.cond0').hide();
 		$('.cond0 .xk_0').remove();
@@ -248,12 +237,10 @@ function ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 			 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:num_0},
 			 beforeSend:function()
 			 {
-				 console.log('red');
 				 $('.load_wait').css('display','block');
 			 },
 			 complete:function()
 			 {
-				 console.log('#fff');
 				 $('.load_wait').css('display','none');
 			 },
 			 success: function(msg) {
@@ -278,6 +265,14 @@ function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 	 	url: 'back/search.html',
 		 type: 'post',
 		 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:num_0},
+		 beforeSend:function()
+		 {
+			 $('.load_wait').css('display','block');
+		 },
+		 complete:function()
+		 {
+			 $('.load_wait').css('display','none');
+		 },
 		 success: function(msg) {
 		location.href="search.html?t="+t1+"&c="+xueke5+"&#.";
 		 var data=eval("msg="+msg);			 
@@ -414,10 +409,11 @@ $(function(){
 function ajax_01 (data){
 	// 将接收到的数据存储进自定义对象内
 	$('.item_total').text(data.normalReturn.total);
-	console.log(typeof(data.normalReturn.total));
 	if(data.normalReturn.total==0)
 		{
-		
+		$('.total_0').css('display','block');
+		}else{
+			$('.total_0').css('display','none');	
 		}
 	type0=data.normalReturn.type;
 	list=data.normalReturn.list;
@@ -658,6 +654,14 @@ function click_charu(){
 					url: 'back/search.html',
 					type: 'POST',
 					data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,c:xueke5,t:t1,l:l_0},
+					beforeSend:function()
+					 {
+						 $('.load_wait').css('display','block');
+					 },
+					 complete:function()
+					 {
+						 $('.load_wait').css('display','none');
+					 },
 						success:function(msg)
 						{ 
 							var data3=eval("msg="+msg);
@@ -707,5 +711,14 @@ $('#modal_load').hide();
 var code_str=window.location.search;
 var code_value=code_str.split("=");
 var code_123=code_str.substring(3,(code_str.length+1));
+
+//猛戳联系我们跳转
+$('.total_trip a').click(function(event){
+	$.cookie("about_index", "5", {
+		path : "/"
+	});
+	console.log($.cookie("about_index"));
+	window.open("about.html");
+});
 
 	
