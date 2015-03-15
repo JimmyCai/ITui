@@ -1389,3 +1389,31 @@ margin-right:auto;
 	right:-50px;
 	bottom:4px;
 }
+.load_wait{
+position: absolute;
+left: 460px;
+top: 0px;
+display:none;
+}
+.total_0{
+display:none;
+width: 954px;
+height:600px;
+border-bottom: 1px dotted #CBCBCB;
+margin-left: auto;
+margin-right: auto;
+
+}
+.total_0 p{
+	color:#E67917;
+	font-size:16px;
+	line-height:36px;
+}
+.total_0 p a{
+font-size:18px;
+	color:#07D2E1;
+}
+.total_tp{
+	margin-top:16px;
+	margin-bottom:16px;
+}
