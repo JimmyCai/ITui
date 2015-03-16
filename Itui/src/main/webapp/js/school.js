@@ -140,6 +140,18 @@ function getPar(par) {
 var collagename;
 var collagelevel;
 var collageid = getPar('name');
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 
 // ajax接收学校数据
 

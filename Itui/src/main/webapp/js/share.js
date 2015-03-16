@@ -347,6 +347,18 @@ $('.pasd_inp').keyup(function(event){
 	});
 });
 //页面加载函数结束
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 //定义注册对象，登录对象
 var regs_obj = {
 		objemail : null,

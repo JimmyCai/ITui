@@ -227,6 +227,7 @@ $(function(){
 		xueke5="";
 		ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0);
 	});
+	
 
 // 筛选条件ajax提交
 function ajax_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
@@ -323,6 +324,18 @@ function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 	});	
 });
 //页面加载函数结束
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 
 function getPar(par){
     //获取当前URL

@@ -241,6 +241,18 @@ function getPar(par) {
 }
 var thisid = getPar('major');
 var followid = -1;
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 
 // 接收数据
 function major_ajax() {

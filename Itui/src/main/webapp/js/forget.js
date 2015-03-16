@@ -125,6 +125,18 @@ function forget_submit_click(email, pasd) {
 }
 
 // 忘记密码ajax提交
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 // 注册ajax
 function forget_register_ajax(email,pasd)
 {

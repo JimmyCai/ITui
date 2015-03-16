@@ -15,6 +15,18 @@ $(function(){
 });
 
 //页面加载函数结束
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 // 收藏列表学校插入自定义函数开始
 
 var coll_name = "北京大学";
