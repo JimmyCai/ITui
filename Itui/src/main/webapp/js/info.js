@@ -211,19 +211,15 @@ $(function() {
 
 		console.log($.cookie("about_index"));
 	});	
+	console.log($('.sch_info h3').text());
 });
 // 页面加载函数结束
 
-// var year01='';
-// var year02='';
-// var year03='';
-// var year04='';
-// var score01='';
-// var score02='';
-// var score03='';
-// var score04='';
+
+
+//最低分最高分全局变量
 var score_min = '';
-var score_max = ';'
+var score_max = '';
 
 // 解析url参数
 function getPar(par) {
@@ -264,11 +260,17 @@ function major_ajax() {
 						data = data.normalReturn;
 						var baseInfo = data.baseInfo;
 						$('.coll_1').append(data.baseInfo.college + '/');
-//						$('.sch0').text(data.baseInfo.college);
+						
 						// 获得followid
 						followid = baseInfo.followId;
 						console.log("获得"+followid);
 						Attention();
+						//改变title标签
+						$('title').text(baseInfo.majorName+'-'+baseInfo.school+'-'+data.baseInfo.college+'-爱推网-考研大数据');
+						//关键字
+						$('meta[name="Keywords"]').attr('content', '['+baseInfo.majorName+']'+'专业排名：'+data.rankInfo.majorRank+' ['+data.baseInfo.college+']'+'学校排名：'+data.rankInfo.collegeLocalRank+'   --'+data.baseInfo.college+'近年分数线平均分：'+data.scoreInfo.scoreAvg+'  --'+data.baseInfo.college+'报录比');
+						//描述标签
+						$('meta[name="Description"]').attr('content',data.baseInfo.college+'的'+baseInfo.majorName+'专业2016年考研信息，'+'提供'+data.baseInfo.college+'最新大学排名、'+baseInfo.majorName+'最新专业排名、近四年'+data.baseInfo.college+'考研分数线、'+baseInfo.majorName+'考研调剂，独家推出考研竞争分析指数直观反应市场报录情况。');
 						// 提取学校的三个类型
 						var str_type = baseInfo.typeInfo;
 						var arr_type = new Array();
@@ -398,6 +400,7 @@ function major_ajax() {
 						}
 
 						// console.log(data.rankInfo.majorRank);
+						
 					}else
 					{
 //						404错误页面
@@ -412,6 +415,7 @@ function major_ajax() {
 			});
 }
 major_ajax();
+
 
 // nav01页面头信息
 function base_info(img_logo, majorname, schoolname, type_211, type_985,
@@ -847,7 +851,6 @@ function cancel_atten() {
 }
 // 判断用户是否关注了当前院校
 function Attention() {
-	console.log("??" + followid);
 	if (followid == -1) {
 		atten();
 		console.log("未关注");
