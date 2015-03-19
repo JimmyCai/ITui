@@ -162,7 +162,7 @@ $(function() {
 		});
 	});
 	$('.drop_menu').mouseleave(function(event) {
-		$('.drop_menu').css('display', 'none');
+		$('.drop_menu').css('display', '#fff 2px 2px 2px');
 	});
 
 	$('.collect').mouseenter(function(event) {
