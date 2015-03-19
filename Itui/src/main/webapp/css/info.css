@@ -18,7 +18,6 @@ ul,ol,li{list-style:none}
 .clearfix:after {content:''; display:block; clear:both; visibility:hidden; height:0;}
 
 .bj{
-	
 	width: 1000px;
 	height: 500px;
 }
@@ -605,6 +604,7 @@ margin-left: 4px;
 	height: 288px;
 	border-right: 1px solid #dedddd;
 	float: left;
+	cursor:pointer;
 }
 .rank1{
 	border-left: 1px solid #dedddd;

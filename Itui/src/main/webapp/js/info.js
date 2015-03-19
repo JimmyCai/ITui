@@ -241,6 +241,19 @@ function getPar(par) {
 }
 var thisid = getPar('major');
 var followid = -1;
+var cid=null;
+//点击专业排名，跳转
+$('.Ranking li').eq(0).click(function(event){
+	window.open("majorrank.html?major=" + thisid, "_blank");
+});
+//点击院校全国排名跳转
+$('.Ranking li').eq(1).click(function(event){
+	window.open("collegerank.html?cid=" + cid, "_blank");
+});
+//点击院校省内排名跳转
+$('.Ranking li').eq(2).click(function(event){
+	window.open("provincerank.html?cid=" + cid, "_blank");
+});
 //设置全局的404错误跳转页面
 $.ajaxSetup({
     statusCode: {
@@ -296,6 +309,7 @@ function major_ajax() {
 						base_info(baseInfo.logo, baseInfo.majorName,
 								baseInfo.school, arr_type[0], arr_type[1],
 								arr_type[2], baseInfo.collegeId);
+						cid=baseInfo.collegeId;
 
 						// 插入学校综合评级
 						grade_charuA(data);
