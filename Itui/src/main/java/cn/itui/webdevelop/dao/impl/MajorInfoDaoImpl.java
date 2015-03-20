@@ -32,5 +32,24 @@ public class MajorInfoDaoImpl implements MajorInfoDao {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
+	/*
+	 * add
+	 */
+	public String findSubjectNameBySubjectCode(String subjectCode){
+		return sqlSession.selectOne("cn.itui.webdevelop.dao.MajorInfoDao.findSubjectNameBySubjectCode", subjectCode);
+		
+	}
+	public List<HashMap<String, Object>> findMajorAllRankInfoBySubjectCode(String subjectCode) {
+//		return sqlSession.selectOne("cn.itui.webdevelop.dao.MajorInfoDao.findMajorAllRankInfoBySubjectCode", subjectId);
+		List<HashMap<String, Object>> resultList = sqlSession.selectList(
+				"cn.itui.webdevelop.dao.MajorInfoDao.findMajorAllRankInfoBySubjectCode", subjectCode);
+		return resultList;
+	}
+
+	public String getSubjectCode(int majorId) {
+		return sqlSession.selectOne("cn.itui.webdevelop.dao.MajorInfoDao.getSubjectCode", majorId );
+	}
+
+	
 
 }

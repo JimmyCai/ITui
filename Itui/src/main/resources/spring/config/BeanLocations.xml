@@ -53,7 +53,8 @@
  				<value>activate</value>
  				<value>resendEmail</value>
  				<value>resetPassword</value>
- 				<value>sendResetEmail</value>
+ 				
+ 				<value>getMajorRank</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>
