@@ -9,5 +9,11 @@ public interface MajorInfoDao {
 	public MajorInfo getMajorInfoById(int id);
 	public HashMap<String, Object> findMajorAllInfoByMajorId(int majorId);
 	public List<HashMap<String, Object>> findRankAndDegreeByMajorIds(List<Integer> list);
+	/*
+	 * add
+	 */
+	public String findSubjectNameBySubjectCode(String subjectCode);
+	public List<HashMap<String, Object>> findMajorAllRankInfoBySubjectCode(String subjectCode);
+	public String getSubjectCode(int majorId);
 
 }

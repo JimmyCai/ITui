@@ -94,6 +94,30 @@ public class College implements java.io.Serializable {
 			type="null";
 		return type;
 	}
+	/*
+	 * add
+	 * */
+	public static String getRankTypeString(int is34, int is985, int is211) {
+		StringBuilder typeBuilder = new StringBuilder();
+		if(is34 == 1)
+			typeBuilder.append("34所/");	
+		if(is985 == 1)
+			typeBuilder.append("985/");
+		if(is211 == 1)
+			typeBuilder.append("211");	
+		if (is211 == 0&&is985 ==0&&is34 ==0) 
+			typeBuilder.append("普通");
+		String type = null;
+		if(typeBuilder.length() > 0) {
+			if(typeBuilder.charAt(typeBuilder.length() - 1) == '/')
+				type = typeBuilder.substring(0, typeBuilder.length() - 1);
+			else
+				type = typeBuilder.toString();
+		}
+		else
+			type="null";
+		return type;
+	}
 	
 	public Integer getId() {
 		return this.id;
