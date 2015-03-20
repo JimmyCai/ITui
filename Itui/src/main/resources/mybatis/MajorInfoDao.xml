@@ -92,4 +92,39 @@
 				#{item}
 			</foreach>
 	</select>
+	
+	<!-- add -->
+	<select id="getSubjectCode" parameterType="int" resultType="String">
+		SELECT 
+		    major.code as majorCode
+		FROM
+		    major
+		WHERE major.id=#{majorId} 
+	</select>
+	
+	<select id="findSubjectNameBySubjectCode" parameterType="string" resultType="String">
+		SELECT 
+		    subject.name as subjectName
+		FROM
+		    subject
+		WHERE subject.code=#{subjectCode} 
+	</select>
+	
+	<select id="findMajorAllRankInfoBySubjectCode" parameterType="string" resultType="java.util.HashMap">
+		SELECT 
+		    major.major_rank as rank, 
+		    major.id as majorId,
+		    major.name as majorName,
+		    major.school as school,
+		    major.degree as degree,
+            college.name as college,
+            college.id as collegeId,
+            college.logo as logo,
+            college.is_985 as is985,
+            college.is_211 as is211,
+            college.is_34 as is34
+        FROM 
+            major join college on college.id = major.college_id 
+        WHERE major.major_rank &lt;1000 AND major.code like concat(#{subjectCode}, "%") order by rank
+	</select>
 </mapper>
