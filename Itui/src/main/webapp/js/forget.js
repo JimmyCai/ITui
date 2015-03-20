@@ -8,6 +8,10 @@ $(function() {
 		console.log($.cookie("about_index"));
 	});
 });
+//鼠标移出下拉框1秒后下拉框消失
+$('.dropdown-menu').mouseout(function(event){
+	setTimeout("$('.dropdown-menu').css('display', 'none')",20);
+});
 // 登录注册模态框默认不显示
 $('#modal_load').css('display', 'none');
 $('#user_unload').hide();

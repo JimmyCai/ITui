@@ -405,16 +405,32 @@ var type0=null;
 var l=num_0;
 
 $(function(){
-
-
-	$.post('back/search.html?t='+t1+'&c='+xueke5, {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,l:num_0}, function(data1) {
-		var data = eval('data1='+data1);
-//		console.log("post success");
-		if (data.status==0) {
-			ajax_01 (data);
-		}
-	}); //post结束
-
+//从信息页跳转过来第一次ajax
+	$.ajax({
+	 	url: 'back/search.html?t='+t1+'&c='+xueke5,
+		 type: 'post',
+		 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,l:num_0},
+		 beforeSend:function()
+		 {
+			 $('.load_wait').css('display','block');
+		 },
+		 complete:function()
+		 {
+			 $('.load_wait').css('display','none');
+		 },
+		 success: function(data1) {
+			 var data = eval('data1='+data1);		 
+		  if(data.status=='0'){
+		   	ajax_01 (data);
+		  }else
+		  {
+//				404错误页面
+				var err_msg=data.errMessage;
+				$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
+		  }    			
+		 }
+	});
 
 
 });
@@ -449,6 +465,7 @@ function ajax_01 (data){
 		//处理搜索类型为专业
 		page_num=data.normalReturn.total;
 		round_1();//第一次for循环结束
+		console.log('zhuanye');
 		if(page_num>15){
 			pageShow(1,page_num);// 分页
 		}else{
@@ -496,9 +513,10 @@ function jump_info(){
 
 			var thisid_para=$(this).find('.major').children('span').attr('major_href');
 			if(type0 == 'major'){
-				location.href="info.html?major="+thisid_para;				
+				//location.href="info.html?major="+thisid_para;	
+				window.open("info.html?major="+thisid_para,"_blank");
 			}else {
-				location.href="school.html?name="+thisid_para;
+				window.open("info.html?major="+thisid_para,"_blank");
 			}
 				
 		});	
@@ -642,7 +660,6 @@ function click_charu(){
 		 $(window).scrollTop(450);
 		var this_num=parseInt(this_pageNum_strr.match(/[0-9]+/));
 		console.log("this_num:"+this_num);
-		console.log('dingbu');
 		$('.main_ul').html('');
 		pageShow(this_num,page_num);
 		var length = (this_num-1)*15+15;
