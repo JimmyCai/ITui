@@ -242,17 +242,18 @@ function getPar(par) {
 var thisid = getPar('major');
 var followid = -1;
 var cid=null;
+var cid_name=null;
 //点击专业排名，跳转
 $('.Ranking li').eq(0).click(function(event){
 	window.open("majorrank.html?major=" + thisid, "_blank");
 });
 //点击院校全国排名跳转
 $('.Ranking li').eq(1).click(function(event){
-	window.open("collegerank.html?cid=" + cid, "_blank");
+	window.open("collegerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
 });
 //点击院校省内排名跳转
 $('.Ranking li').eq(2).click(function(event){
-	window.open("provincerank.html?cid=" + cid, "_blank");
+	window.open("provincerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
 });
 //设置全局的404错误跳转页面
 $.ajaxSetup({
@@ -285,7 +286,7 @@ function major_ajax() {
 						data = data.normalReturn;
 						var baseInfo = data.baseInfo;
 						$('.coll_1').append(data.baseInfo.college + '/');
-						
+						cid_name=data.baseInfo.college;
 						// 获得followid
 						followid = baseInfo.followId;
 						console.log("获得"+followid);

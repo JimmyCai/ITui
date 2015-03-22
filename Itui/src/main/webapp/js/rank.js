@@ -6,27 +6,8 @@ $(function(){
 });
 
 
-
-
 // 页面加载函数结束
-
-//解析url参数,获得id
-var code_str=window.location.search;
-var code_value=code_str.split("=");
-var mid=code_value[1];
-console.log(mid);
-// 排名页变量定义
-var data_array=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48);
-var title_name='土木工程挖掘机汽修电焊';
-var rank_num='345';
-var major_name='中央美术学院中央美术学院学院';
-var item_title='报考难度：';
-var item_value='9.65';
-var is_34='34';
-var is_211='211';
-var is_985='985';
-var img_num='defaultlogo.png';
-var w=0;
+//当前页面样式
 function page_style(back_color){
 $('.header').css('background-color', back_color);
 $('.nav_rank p').css('background-color', back_color);
@@ -50,87 +31,291 @@ $('.item_l').css('border-left','2px solid '+back_color);
 });
 
 }
+//解析url参数,获得id
+var code_str=window.location.search;
+var code_value=code_str.split("=");
+var mid=code_value[1];
+var cid_str=code_value[1].split("&");
+var cid=cid_str[0];
+var cid_name=decodeURI(code_value[2]);
+console.log(cid_name);
+console.log(cid);
+// 排名页变量定义
+var data_array=new Array();
+var title_name='土木工程挖掘机汽修电焊';
+var rank_num='345';
+var coll_name='中央美术学院中央美术学院学院';
+var item_title='城市：';
+area_city='北京';
+var item_value='9.65';
+var is_34='';
+var is_211='';
+var is_985='';
+var img_num='defaultlogo.png';
+var college_id='';
+var w=0;
 var class_num=1;
-var major_n='手摇挖掘机专业';
-var major_html='<span class="span_name name_0'+class_num+'">'+major_n+'/</span>';
-function left_insert(rank_num)
-{
-var lefthtml_li='\
-	              <li class="item item_l item_0'+rank_num+'">\
-             <div class="sch_logo">\
-                 <div class="logo_tp"><img src="images/'+img_num+'" alt=""></div>\
-             </div>\
-             <div class="rank_area">\
-                <div class="rank_0">'+rank_num+'</div>\
-                <div class="rank_wenzi">\
-                      <p class="collname">'+major_name+'</p>\
-                      <p class="level">\
-                      		<span>院校层次：</span>\
-                      		<span class="is34">'+is_34+'所/</span>\
-                      		<span class="is211">'+is_211+'/</span>\
-                      		<span class="is985">'+is_985+'</span>\
-                      </p>\
-                      <p class="diffcult">\
-                           <span>'+item_title+'</span>\
-                      </p>\
-                </div> \
-             </div> \
-             <div class="clear"></div>\
-     </li>';
-     $('.rank_body').append(lefthtml_li);	
-   //$('.item_l').find('.diffcult').append(major_html);
+var major_n=new Array('手摇挖掘机专业1','手摇挖掘机专业2');
+var level_type=new Array();
+
+function major_nInsert(j){
+	console.log('123qwe');
+	var major_html='<span class="span_name name_0'+class_num+'">'+major_n[0].majorName+'/</span>';
 }
 
-function right_insert(rank_num){
-var righthtml_li='\
-	               <li class="item item_r">\
-             <div class="sch_logo">\
-                 <div class="logo_tp"><img src="images/'+img_num+'" alt=""></div>\
+//专业排名ajax
+function major_ajax(){
+	$.ajax({
+		url: 'api/rank/major',
+		type: 'post',
+		dataType: 'html',
+		data: {'mid': mid},
+		success:function(msg)
+		{
+		var data = eval('msg=' + msg);
+		if (data.status == 0)
+		   {
+			title_name=data.normalReturn.subjectName;
+			//科目名称
+			$('.itemname').text(title_name);
+			//把接收到的数据存进自定义数组
+			for(var i=0;i<data.normalReturn.rankList.length;i++)
+			{
+			data_array[i]=data.normalReturn.rankList[i];
+			}
+			loop_insert();
+			bottom_insert();
+			console.log(data.normalReturn.rankList);
+				
+		   }else
+		   {
+			 //404错误页面
+			var err_msg=data.errMessage;
+			if(err_msg!=='请先登录！')
+			{
+			$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
+			}else{console.log(err_msg);}   
+		   }
+		}
+	});	
+}
+
+//全国排名ajax
+function college_ajax(){
+	$.ajax({
+		url: 'api/rank/college',
+		type: 'post',
+		dataType: 'html',
+		data: {'cid': cid},
+		success:function(msg)
+		{
+		var data = eval('msg=' + msg);
+		if (data.status == 0)
+		   {
+			title_name=cid_name;
+			//科目名称
+			$('.itemname').text(title_name);
+			//把接收到的数据存进自定义数组
+			for(var i=0;i<data.normalReturn.collegeRankList.length;i++)
+			{
+			data_array[i]=data.normalReturn.collegeRankList[i];
+			}
+			loop_insert();
+			bottom_insert();
+			//console.log(data.normalReturn.rankList);
+				
+		   }else
+		   {
+			 //404错误页面
+			var err_msg=data.errMessage;
+			if(err_msg!=='请先登录！')
+			{
+			$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
+			}else{console.log(err_msg);}   
+		   }
+		}
+	});	
+}
+
+//省内排名ajax
+function collegelocal_ajax(){
+	$.ajax({
+		url: 'api/rank/localrank/college',
+		type: 'post',
+		dataType: 'html',
+		data: {'cid': cid},
+		success:function(msg)
+		{
+		var data = eval('msg=' + msg);
+		if (data.status == 0)
+		   {
+			title_name=cid_name;
+			//科目名称
+			$('.itemname').text(title_name);
+			//把接收到的数据存进自定义数组
+			for(var i=0;i<data.normalReturn.collegeLocalRankList.length;i++)
+			{
+			data_array[i]=data.normalReturn.collegeLocalRankList[i];
+			}
+			loop_insert();
+			bottom_insert();
+			//console.log(data.normalReturn.rankList);
+				
+		   }else
+		   {
+			 //404错误页面
+			var err_msg=data.errMessage;
+			if(err_msg!=='请先登录！')
+			{
+			$.cookie("err_msg",err_msg, {path : "/"});
+				location.href="error.html";
+			}else{console.log(err_msg);}   
+		   }
+		}
+	});	
+}
+
+function left_insert(li_num)
+{  
+	if(level_type[0]== undefined){
+		$('.item_0'+li_num).find('.is34').remove();
+	}else if(level_type[1]== undefined){
+		$('.item_0'+li_num).find('.is211').remove();
+	}else if(level_type[2]== undefined){
+		$('.item_0'+li_num).find('.is985').remove();
+	}
+var lefthtml_li='\
+	    <li class="item item_l item_0'+li_num+'">\
+             <div class="sch_logo" nameid="'+college_id+'">\
+                 <div class="logo_tp"><img src="http://www.itui.cn/itui/images/'+img_num+'" alt=""></div>\
              </div>\
              <div class="rank_area">\
                 <div class="rank_0">'+rank_num+'</div>\
                 <div class="rank_wenzi">\
-                      <p class="collname">'+major_name+'</p>\
+                      <p class="collname" nameid="'+college_id+'">'+coll_name+'</p>\
+                      <p class="level">\
+                      		<span class="is34">'+level_type[0]+'</span>\
+                      		<span class="is211">'+level_type[1]+'</span>\
+                      		<span class="is985">'+level_type[2]+'</span>\
+                      </p>\
                       <p class="diffcult">\
                            <span>'+item_title+'</span>\
-                           <span>'+item_value+'</span>\
-                      </p>\
-                      <p class="level">\
-                      	  <span>院校层次：</span>\
-                          <span class="is34">'+is_34+'所/</span>\
-                          <span class="is211">'+is_211+'/</span>\
-                          <span class="is985">'+is_985+'</span>\
+                           <span class="area">'+area_city+'</span>\
                       </p>\
                 </div> \
              </div> \
              <div class="clear"></div>\
      </li>';
-     $('.rank_body').append(righthtml_li);		
+     $('.rank_body').append(lefthtml_li);
+     //点击学校跳转
+     $('.item_0'+li_num).find('.collname').click(function(event){
+		 var college_id=$('.item_0'+li_num).find('.collname').attr('nameid');
+		 window.open("school.html?name=" + college_id, "_blank");
+		 console.log(college_id);
+		   
+	   });
+     $('.item_0'+li_num).find('.sch_logo').click(function(event){
+		 var college_id=$('.item_0'+li_num).find('.sch_logo').attr('nameid');
+		 window.open("school.html?name=" + college_id, "_blank");
+		 console.log(college_id);
+		   
+	   });
+    
+  
+}
+
+function right_insert(li_num){
+	if(level_type[0]== undefined){
+		$('.item_0'+li_num).find('.is34').remove();
+	}else if(level_type[1]== undefined){
+		$('.item_0'+li_num).find('.is211').remove();
+	}else if(level_type[2]== undefined){
+		$('.item_0'+li_num).find('.is985').remove();
+	}
+var righthtml_li='\
+	   <li class="item item_r item_0'+li_num+'">\
+	   <div class="sch_logo" nameid="'+college_id+'">\
+       <div class="logo_tp"><img src="http://www.itui.cn/itui/images/'+img_num+'" alt=""></div>\
+   </div>\
+   <div class="rank_area">\
+      <div class="rank_0">'+rank_num+'</div>\
+      <div class="rank_wenzi">\
+            <p class="collname" nameid="'+college_id+'">'+coll_name+'</p>\
+            <p class="level">\
+            		<span class="is34">'+level_type[0]+'</span>\
+            		<span class="is211">'+level_type[1]+'</span>\
+            		<span class="is985">'+level_type[2]+'</span>\
+            </p>\
+            <p class="diffcult">\
+                 <span>'+item_title+'</span>\
+                 <span class="area">'+area_city+'</span>\
+            </p>\
+      </div> \
+   </div> \
+   <div class="clear"></div>\
+     </li>';
+     $('.rank_body').append(righthtml_li);	
+     //点击学校跳转
+     $('.item_0'+li_num).find('.collname').click(function(event){
+		 var college_id=$('.item_0'+li_num).find('.collname').attr('nameid');
+		 window.open("school.html?name=" + college_id, "_blank");
+		 console.log(college_id);
+		   
+	   });
+     $('.item_0'+li_num).find('.sch_logo').click(function(event){
+		 var college_id=$('.item_0'+li_num).find('.sch_logo').attr('nameid');
+		 window.open("school.html?name=" + college_id, "_blank");
+		 console.log(college_id);
+		   
+	   });
+    
 }
 //循环插入li函数	   
 function loop_insert()
 {
 for(i=0;i<10;i++)
 {
-if(data_array[i+w]%2!==0)
+if((i+w+1)%2!==0)
 {
-     if((i+w)<=data_array.length-1){
-     left_insert(data_array[i+w]);	
-     //每个li下面插入专业
-     for(j=1;j<=3;j++)
-     {
-    	 $('.item_0'+(i+w+1)).find('.diffcult').append(major_html); 
-     }
-     
+     if((i+w+1)<=data_array.length){
+    	 //每个li的学校名
+     coll_name=data_array[i+w].college;
+     //每个li的校徽
+    img_num=data_array[i+w].logo;
+    //每个学校的id
+    college_id=data_array[i+w].collegeId;
+    //所属城市
+    area_city=data_array[i+w].city;
+    rank_num=data_array[i+w].rank;
+    console.log(rank_num);
+//    每个li的院校层次
+    level_type=data_array[i+w].typeInfo;
+    level_type=level_type.split("/");
+//     major_n=data_array[i+w].majorList;
+//    插入左边li
+     left_insert((i+w+1));
+
      }	
 }else{
           if((i+w)<=data_array.length-1){
-           right_insert(data_array[i+w]);	
+        	coll_name=data_array[i+w].college;
+           img_num=data_array[i+w].logo;
+         //每个学校的id
+           college_id=data_array[i+w].collegeId;
+           area_city=data_array[i+w].city;
+           rank_num=data_array[i+w].rank;
+//         每个li的院校层次
+         level_type=data_array[i+w].typeInfo;
+         level_type=level_type.split("/");
+           major_n=data_array[i+w].majorList;
+           right_insert((i+w+1));
+           
            }
 	
        }
 }
-w+=10;
 
 }
 
@@ -143,12 +328,15 @@ $(window).scroll(function() {
 		var main_height = $(document).height();//区域总高度
 		var bottom_h = main_height- s_height - w_height;
 		if(bottom_h<100 ){
+			w+=10;
 		loop_insert();
 		page_url();
+		console.log(123);
 		}
 	});	
+console.log(w);
 }
-bottom_insert();
+
 
 
 
@@ -160,51 +348,37 @@ function page_url()
 {
 //专业排名
 if(str_texting.test(str_major))
-{
-	// 先插入10个li
-	loop_insert();
+{$('.diffcult').remove();
+	major_ajax();
+
 var back_color='#FEBC80';
 page_style(back_color);
 
 }
 //院校全国排名
 else if(str_texting2.test(str_major)){
-	// 先插入10个li
-	loop_insert();
+	
+	college_ajax();
 var back_color='#5DB9E3';
 page_style(back_color);
 }
 //院校省内
 else{
+	collegelocal_ajax();
 var back_color='#B2D155';
 page_style(back_color);
 }	
 }
 page_url();
 
-$.ajax({
-	url: 'api/rank/major',
-	type: 'post',
-	dataType: 'html',
-	data: {'mid': mid},
-	success:function(msg)
-	{
-	var data = eval('msg=' + msg);
-	if (data.status == 0)
-	   {
-		
-	   }else
-	   {
-		 //404错误页面
-		var err_msg=data.errMessage;
-		if(err_msg!=='请先登录！')
-		{
-		$.cookie("err_msg",err_msg, {path : "/"});
-			location.href="error.html";
-		}else{console.log(err_msg);}   
-	   }
-	}
-});
+
+
+
+
+
+
+
+
 
 //字体样式
 $('.collname,.span_name').mouseenter(function(event){
