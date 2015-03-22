@@ -123,9 +123,6 @@ public class MajorInfoController {
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int majorId = EnDeCode.decodePara(majorIdStr);
 		
-//		String code = request.getParameter(CODE);
-//		if(code == null)
-//			throw NotLoginException.getInstance();
 		String code = majorInfoService.getSubjectCodeByMajorId(majorId);
 		String subjectCode = code.substring(0, 4);
 		String retJson = majorInfoService.getMajorRank(subjectCode);

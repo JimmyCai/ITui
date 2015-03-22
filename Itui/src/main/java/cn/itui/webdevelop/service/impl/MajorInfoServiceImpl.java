@@ -310,7 +310,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 		while (j < majorAllInfos.size()) {
 			HashMap<String, Object> resultItem = new HashMap<String, Object>();
 			resultItem.put("college", majorAllInfos.get(j).get("college"));
-			resultItem.put("collegeId", majorAllInfos.get(j).get("collegeId"));
+			resultItem.put("collegeId", EnDeCode.encodePara((Integer)majorAllInfos.get(j).get("collegeId")));
 			resultItem.put("logo", majorAllInfos.get(j).get("logo"));
 			resultItem.put("rank", majorAllInfos.get(j).get("rank"));
 			resultItem.put("school", majorAllInfos.get(j).get("school"));

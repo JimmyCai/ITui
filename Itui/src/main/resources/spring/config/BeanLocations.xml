@@ -55,6 +55,9 @@
  				<value>resetPassword</value>
  				
  				<value>getMajorRank</value>
+ 				
+ 				<value>getCollegeRank</value>
+ 				<value>getCollegeLocalRank</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>

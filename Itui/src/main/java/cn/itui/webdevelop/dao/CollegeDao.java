@@ -21,4 +21,10 @@ public interface CollegeDao {
 
 	public int getTotal(String condition, String area, String is211,
 			String is34, String is985);
+	/*
+	 * add
+	 * */
+
+	public List<HashMap<String, Object>> getCollegeRankInfos();
+	public List<HashMap<String, Object>> getCollegeLocalRankInfos(int collegeId);
 }
