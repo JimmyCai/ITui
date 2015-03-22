@@ -136,6 +136,50 @@
 		FROM
 			college join city on college.city_id = city.id
 		WHERE
-			college.id = #{collegeId};
+			college.id = #{collegeId}
+	</select>
+	
+	<!-- add -->
+	<select id="getCollegeRankInfos" resultType="java.util.HashMap">
+		SELECT
+             college.id as collegeId,
+             college.name as college,
+             college.logo as logo,
+             college.is_211 as is211,
+             college.is_985 as is985,
+             college.is_34 as is34,
+             college.rank as rank,
+             city.name as city
+        FROM
+             college ,city
+        WHERE
+             college.city_id = city.id
+        ORDER BY college.rank 
+	</select>
+	<!-- 获取省内排名 滤除localRank值为-1学校的记录 -->
+	<select id="getCollegeLocalRankInfos" parameterType="int" resultType="java.util.HashMap">
+		SELECT  
+		     college.id as collegeId,
+             college.name as college ,
+             college.logo as logo ,
+             college.is_211 as is211,
+             college.is_985 as is985 ,
+             college.is_34 as is34,
+             college.local_rank as localRank,
+             city
+       FROM
+             college JOIN (SELECT city.id as cityId, city.name as city 
+       FROM 
+             city 
+       WHERE 
+             city.area_id =
+             (SELECT city.area_id FROM city WHERE city.id = 
+             (SELECT college.city_id 
+             FROM 
+                 college 
+             WHERE 
+                 college.id=#{collegeId}))) as b 
+                 ON college.city_id = b.cityId and local_rank &gt; 0 
+       ORDER BY local_rank
 	</select>
 </mapper>

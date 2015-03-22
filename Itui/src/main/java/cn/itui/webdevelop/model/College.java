@@ -1,5 +1,7 @@
 package cn.itui.webdevelop.model;
 
+import org.apache.velocity.runtime.directive.Break;
+
 /**
  * College entity. @author MyEclipse Persistence Tools
  */
@@ -117,6 +119,13 @@ public class College implements java.io.Serializable {
 		else
 			type="null";
 		return type;
+	}
+	
+	public static int getRankValue(int rank){
+		if(1<=rank && rank<=550)//数据库中全国排名只排到519 省内排名43
+		return rank;
+		else 
+		return -1;/*超出范围 不参与排名*/
 	}
 	
 	public Integer getId() {

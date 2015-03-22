@@ -117,4 +117,43 @@ public class CollegeController {
 	public void setFollowService(FollowService followService) {
 		this.followService = followService;
 	}
+	
+	/*
+	 *  add
+	 * */
+	@RequestMapping(URLConstants.API_RANK_COLLEGE)
+	public String getCollegeRank(HttpServletRequest request, HttpServletResponse response) throws Exception{
+//		if (request.getParameter(CODE) == null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE); 
+		if (request.getParameter(COLLEGEID) ==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		int collegeId = 1;
+		String code="";
+		try{
+			String collegeIdStr = request.getParameter(COLLEGEID);
+			code = request.getParameter(CODE);
+			collegeId = EnDeCode.decodePara(collegeIdStr);
+			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
+			rRLogger.info(requestStr);
+		}catch (Exception e){
+			throw MyNumberFormatException.getInstance();
+		}
+		return collegeService.getCollegeRank(collegeId);
+	}
+	
+	@RequestMapping(URLConstants.API_RANK_LOCALRANK_COLLEGE)
+	public String getCollegeLocalRank(HttpServletRequest request, HttpServletResponse response) throws Exception{
+//		if (request.getParameter(CODE) == null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE); 
+		if (request.getParameter(COLLEGEID) ==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		int collegeId = 1;
+		String code="";
+		try{
+			String collegeIdStr = request.getParameter(COLLEGEID);
+			code = request.getParameter(CODE);
+			collegeId = EnDeCode.decodePara(collegeIdStr);
+			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
+			rRLogger.info(requestStr);
+		}catch (Exception e){
+			throw MyNumberFormatException.getInstance();
+		}
+		return collegeService.getCollegeLocalRank(collegeId);
+	}
 }

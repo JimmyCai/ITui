@@ -8,6 +8,7 @@ import java.util.Map;
 
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.FollowCollegeDao;
+import cn.itui.webdevelop.model.College;
 import cn.itui.webdevelop.service.CollegeService;
 import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.EnDeCode;
@@ -158,6 +159,77 @@ public class CollegeServiceImpl implements CollegeService {
 
 	public void setLimit(int limit) {
 		this.limit = limit;
+	}
+	
+	/*
+	 * add
+	 * */
+
+	public String getCollegeRank(int collegeId) throws Exception {
+		List<HashMap<String, Object>> collegesInfos = collegeDao.getCollegeRankInfos();
+		if (collegesInfos == null)
+			throw DatabaseException.getInstance();
+		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
+		int i = 0;
+		while(i<(collegesInfos.size()/2)){
+			HashMap<String, Object> resultItem = new HashMap<String, Object>();
+			resultItem.put("college", collegesInfos.get(i).get("college"));
+			resultItem.put("collegeId", EnDeCode.encodePara((Integer)collegesInfos.get(i).get("collegeId")));
+			resultItem.put("logo", collegesInfos.get(i).get("logo"));
+			resultItem.put("rank", College.getRankValue((Integer)collegesInfos.get(i).get("rank")));
+			resultItem.put("city", collegesInfos.get(i).get("city"));
+			resultItem.put("typeInfo", College.getRankTypeString(
+					(Integer) collegesInfos.get(i).get("is34"),
+					(Integer) collegesInfos.get(i).get("is985"),
+					(Integer) collegesInfos.get(i).get("is211")));
+			
+			resultList.add(resultItem);
+			i++;
+		}
+		// build json string
+				String jsonResult = buildCollegeRankJson(resultList);
+				return jsonResult;
+	}
+	private String buildCollegeRankJson(List<HashMap<String, Object>> resultList)
+			throws Exception {
+		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
+		jsonMap.put("collegeRankList", resultList);
+		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
+		return jsonStr;
+	}
+
+	public String getCollegeLocalRank(int collegeId) throws Exception {
+		
+		List<HashMap<String, Object>> collegesInfos = collegeDao.getCollegeLocalRankInfos(collegeId);
+		if (collegesInfos == null)
+			throw DatabaseException.getInstance();
+		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
+		int i = 0;
+		while(i<collegesInfos.size()){
+			HashMap<String, Object> resultItem = new HashMap<String, Object>();
+			resultItem.put("college", collegesInfos.get(i).get("college"));
+			resultItem.put("collegeId", EnDeCode.encodePara((Integer)collegesInfos.get(i).get("collegeId")));
+			resultItem.put("logo", collegesInfos.get(i).get("logo"));
+			resultItem.put("localRank", College.getRankValue((Integer)collegesInfos.get(i).get("localRank")));
+			resultItem.put("city", collegesInfos.get(i).get("city"));
+			resultItem.put("typeInfo", College.getRankTypeString(
+					(Integer) collegesInfos.get(i).get("is34"),
+					(Integer) collegesInfos.get(i).get("is985"),
+					(Integer) collegesInfos.get(i).get("is211")));
+			
+			resultList.add(resultItem);
+			i++;
+		}
+		// build json string
+				String jsonResult = buildCollegeLocalRankJson(resultList);
+				return jsonResult;
+	}
+	private String buildCollegeLocalRankJson(List<HashMap<String, Object>> resultList)
+			throws Exception {
+		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
+		jsonMap.put("collegeLocalRankList", resultList);
+		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
+		return jsonStr;
 	}
 
 }
