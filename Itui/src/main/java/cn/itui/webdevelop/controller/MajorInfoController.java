@@ -29,6 +29,8 @@ public class MajorInfoController {
 	private MajorInfoService majorInfoService;
 	private FollowService followService;
 	
+
+	
 	@RequestMapping(value=URLConstants.GETMAJORINFO)
 	public String getMajorInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String majorIdStr = request.getParameter(MAJORID);
@@ -108,6 +110,22 @@ public class MajorInfoController {
 
 	public void setFollowService(FollowService followService) {
 		this.followService = followService;
+	}
+	
+	/**
+	 * add
+	 *
+	 */
+	@RequestMapping(value=URLConstants.API_RANK_MAJOR)
+	public String getMajorRank(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String majorIdStr = request.getParameter(MAJORID);
+		if(majorIdStr == null)
+			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
+		int majorId = EnDeCode.decodePara(majorIdStr);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
+		rRLogger.info(requestStr);
+		String retJson = majorInfoService.getMajorRank(majorId);
+		return retJson;
 	}
 
 }

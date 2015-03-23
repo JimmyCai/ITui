@@ -88,4 +88,19 @@ public class CollegeDaoImpl implements CollegeDao{
 		parameter.put("is985", is985);
 		return sqlSession.selectOne("cn.itui.webdevelop.dao.CollegeDao.getTotal", parameter);
 	}
+	
+	/*
+	 * add
+	 * */
+
+	public List<HashMap<String, Object>> getCollegeRankInfos() {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.getCollegeRankInfos");
+	}
+	
+	public List<HashMap<String, Object>> getCollegeLocalRankInfos(int collegeId) {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.getCollegeLocalRankInfos",collegeId);
+	}
+
+	
+	
 }

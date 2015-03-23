@@ -227,6 +227,18 @@ function index_submit_click(email, pasd) {
 	});
 
 }
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 
 // 首页注册ajax
 function index_register_ajax(email, pasd) {
@@ -270,6 +282,7 @@ function index_register_ajax(email, pasd) {
 				location.href = "error.html";
 			}
 		}
+		 
 	});
 
 }

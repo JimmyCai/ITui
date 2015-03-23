@@ -140,6 +140,18 @@ function getPar(par) {
 var collagename;
 var collagelevel;
 var collageid = getPar('name');
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 
 // ajax接收学校数据
 
@@ -165,6 +177,13 @@ function schoolList_ajax() {
 						'http://www.itui.cn/itui/images/' + img_src);
 				$('.cityp_2').text(city_coll);
 				$('.sch_info').find('h3').text(data.normalReturn.college);
+				//title标签
+				$('title').text(data.normalReturn.college+'研究生院--'+data.normalReturn.college+'研究生招生信息网--爱推院校库')
+				//关键字
+				$('meta[name="Keywords"]').attr('content',data.normalReturn.college+'研究生院--'+data.normalReturn.college+'bbs--'+data.normalReturn.college+'考研--'+data.normalReturn.college+'研招网');
+				//描述标签
+				$('meta[name="Description"]').attr('content','爱推-智慧选校为广大学子提供'+data.normalReturn.college+'专业设置、'+data.normalReturn.college+'考研信息、'+data.normalReturn.college+'考研分数线、'+data.normalReturn.college+'历年录取情况、就业情况。');
+				
 				if (data.normalReturn.is34 == 0 && data.normalReturn.is985 == 0
 						&& data.normalReturn.is211 == 0) {
 					$('.level01').find('p').text('普通');

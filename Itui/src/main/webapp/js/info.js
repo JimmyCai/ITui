@@ -211,19 +211,15 @@ $(function() {
 
 		console.log($.cookie("about_index"));
 	});	
+	console.log($('.sch_info h3').text());
 });
 // 页面加载函数结束
 
-// var year01='';
-// var year02='';
-// var year03='';
-// var year04='';
-// var score01='';
-// var score02='';
-// var score03='';
-// var score04='';
+
+
+//最低分最高分全局变量
 var score_min = '';
-var score_max = ';'
+var score_max = '';
 
 // 解析url参数
 function getPar(par) {
@@ -245,6 +241,42 @@ function getPar(par) {
 }
 var thisid = getPar('major');
 var followid = -1;
+var cid=null;
+var cid_name=null;
+//点击专业排名，跳转
+$('.Ranking li').eq(0).click(function(event){
+	if($('.Ranking li').eq(0).find('.rank_p').text()!='不参与排名'){
+		window.open("majorrank.html?major=" + thisid, "_blank");
+	}
+	
+	console.log($('.Ranking li').eq(0).find('.rank_p').text());
+});
+//点击院校全国排名跳转
+$('.Ranking li').eq(1).click(function(event){
+	if($('.Ranking li').eq(1).find('.rank_p').text()!='不参与排名'){
+		window.open("collegerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
+	}
+	
+});
+//点击院校省内排名跳转
+$('.Ranking li').eq(2).click(function(event){
+	if($('.Ranking li').eq(2).find('.rank_p').text()!='不参与排名'){
+		window.open("provincerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");	
+	}
+	
+});
+//设置全局的404错误跳转页面
+$.ajaxSetup({
+    statusCode: {
+        404: function () {
+        	var err_msg = data.errMessage;
+			$.cookie("err_msg", err_msg, {
+				path : "/"
+			});
+			location.href = "error.html";
+        }
+    }
+});
 
 // 接收数据
 function major_ajax() {
@@ -264,11 +296,17 @@ function major_ajax() {
 						data = data.normalReturn;
 						var baseInfo = data.baseInfo;
 						$('.coll_1').append(data.baseInfo.college + '/');
-//						$('.sch0').text(data.baseInfo.college);
+						cid_name=data.baseInfo.college;
 						// 获得followid
 						followid = baseInfo.followId;
 						console.log("获得"+followid);
 						Attention();
+						//改变title标签
+						$('title').text(baseInfo.majorName+'-'+baseInfo.school+'-'+data.baseInfo.college+'-爱推网-考研大数据');
+						//关键字
+						$('meta[name="Keywords"]').attr('content', '['+baseInfo.majorName+']'+'专业排名：'+data.rankInfo.majorRank+' ['+data.baseInfo.college+']'+'学校排名：'+data.rankInfo.collegeLocalRank+'   --'+data.baseInfo.college+'近年分数线平均分：'+data.scoreInfo.scoreAvg+'  --'+data.baseInfo.college+'报录比');
+						//描述标签
+						$('meta[name="Description"]').attr('content',data.baseInfo.college+'的'+baseInfo.majorName+'专业2016年考研信息，'+'提供'+data.baseInfo.college+'最新大学排名、'+baseInfo.majorName+'最新专业排名、近四年'+data.baseInfo.college+'考研分数线、'+baseInfo.majorName+'考研调剂，独家推出考研竞争分析指数直观反应市场报录情况。');
 						// 提取学校的三个类型
 						var str_type = baseInfo.typeInfo;
 						var arr_type = new Array();
@@ -282,6 +320,7 @@ function major_ajax() {
 						base_info(baseInfo.logo, baseInfo.majorName,
 								baseInfo.school, arr_type[0], arr_type[1],
 								arr_type[2], baseInfo.collegeId);
+						cid=baseInfo.collegeId;
 
 						// 插入学校综合评级
 						grade_charuA(data);
@@ -291,8 +330,11 @@ function major_ajax() {
 						four_Grade(data.gradeInfo.collegeGrade, tag03);
 						four_Grade(data.gradeInfo.cityGrade, tag04);
 						// 插入三个排名标签
+						
 						ranking_charu(data.rankInfo.majorRank, rank_tag1,
 								rank_item1);
+						console.log(data.rankInfo.majorRank);
+
 						ranking_charu(data.rankInfo.collegeRank, rank_tag2,
 								rank_item2);
 						ranking_charu(data.rankInfo.collegeLocalRank,
@@ -398,6 +440,7 @@ function major_ajax() {
 						}
 
 						// console.log(data.rankInfo.majorRank);
+						
 					}else
 					{
 //						404错误页面
@@ -412,6 +455,7 @@ function major_ajax() {
 			});
 }
 major_ajax();
+
 
 // nav01页面头信息
 function base_info(img_logo, majorname, schoolname, type_211, type_985,
@@ -517,14 +561,18 @@ var rank_item1 = '专业排名';
 var rank_item2 = '院校全国排名';
 var rank_item3 = '院校省内排名';
 function ranking_charu(rank_value, rank_tag, rank_item) {
+	if(rank_value==-1){
+		$('.rank_tp1 p ').css('font-size','20px');
+		rank_value='不参与排名';
+	}
 	var ranking = '<p class="rank_p">' + rank_value + '</p><p class="pai">'
 			+ rank_item + '</p>';
 	rank_tag.append(ranking);
 	var length0 = rank_tag.find('.rank_p').text().length;
-	if (length0 > 3) {
-		rank_tag.find('.rank_p').css('font-size', '60px');
-	} else {
-		rank_tag.find('.rank_p').css('font-size', '80px');
+	if (length0 > 4) {
+		rank_tag.find('.rank_p').css('font-size', '30px');
+	} else{
+		rank_tag.find('.rank_p').css('font-size', '70px');
 	}
 }
 var strA = null;
@@ -847,7 +895,6 @@ function cancel_atten() {
 }
 // 判断用户是否关注了当前院校
 function Attention() {
-	console.log("??" + followid);
 	if (followid == -1) {
 		atten();
 		console.log("未关注");
