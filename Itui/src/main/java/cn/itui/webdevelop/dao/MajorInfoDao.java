@@ -12,8 +12,6 @@ public interface MajorInfoDao {
 	/*
 	 * add
 	 */
-	public String findSubjectNameBySubjectCode(String subjectCode);
-	public List<HashMap<String, Object>> findMajorAllRankInfoBySubjectCode(String subjectCode);
-	public String getSubjectCode(int majorId);
+	public List<HashMap<String, Object>> findMajorAllRankInfoByMajorId(int majorId);
 
 }
