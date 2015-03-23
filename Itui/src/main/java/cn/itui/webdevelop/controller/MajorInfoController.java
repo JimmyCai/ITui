@@ -122,9 +122,13 @@ public class MajorInfoController {
 		if(majorIdStr == null)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int majorId = EnDeCode.decodePara(majorIdStr);
-		
-		String code = majorInfoService.getSubjectCodeByMajorId(majorId);
-		String subjectCode = code.substring(0, 4);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
+		rRLogger.info(requestStr);
+		String code = request.getParameter(CODE);
+		if(code == null)
+			throw NotLoginException.getInstance();
+		String majorCode = majorInfoService.getSubjectCodeByMajorId(majorId);
+		String subjectCode = majorCode.substring(0, 4);
 		String retJson = majorInfoService.getMajorRank(subjectCode);
 		return retJson;
 	}

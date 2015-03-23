@@ -210,7 +210,7 @@ public class CollegeServiceImpl implements CollegeService {
 			resultItem.put("college", collegesInfos.get(i).get("college"));
 			resultItem.put("collegeId", EnDeCode.encodePara((Integer)collegesInfos.get(i).get("collegeId")));
 			resultItem.put("logo", collegesInfos.get(i).get("logo"));
-			resultItem.put("localRank", College.getRankValue((Integer)collegesInfos.get(i).get("localRank")));
+			resultItem.put("rank", College.getRankValue((Integer)collegesInfos.get(i).get("localRank")));
 			resultItem.put("city", collegesInfos.get(i).get("city"));
 			resultItem.put("typeInfo", College.getRankTypeString(
 					(Integer) collegesInfos.get(i).get("is34"),
