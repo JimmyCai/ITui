@@ -87,7 +87,6 @@ function major_ajax(){
 			console.log(data.normalReturn.rankList);
 			var back_color='#FEBC80';
 			page_style(back_color);
-				
 		   }else
 		   {
 			 //404错误页面
@@ -414,12 +413,6 @@ if(str_texting.test(str_major))
  {
 	major_ajax();
 
-if(str_texting.test(str_major)){
-
-	major_ajax();
-
-
-
 }
 //院校全国排名
 else if(str_texting2.test(str_major)){
@@ -431,7 +424,6 @@ else if(str_texting2.test(str_major)){
 else{
 	collegelocal_ajax();
 	}	
- }
 }
 page_url();
 
