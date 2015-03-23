@@ -17,7 +17,6 @@ ul,ol,li{list-style:none}
 	margin:0 auto;
 }
 .header_h{
-border:1px solid red;
 overflow:hidden;
 max-width:30%;
 margin-left:auto;
@@ -80,7 +79,7 @@ position: relative;
 .item_l{margin-right: 49%;}
 
 .sch_logo{
-max-width: 110px;
+max-width: 130px;
 border: 2px solid #FEBC80;
 background-color: #fff;
 border-radius: 50%;
@@ -88,9 +87,9 @@ margin: 10px 0px;
 position: absolute;
 cursor:pointer;
 }
-.item_r .sch_logo{left: -54px;top: 0px;}
-.item_l .sch_logo{right: -54px;top: 0px;}
-.logo_tp{max-width: 90px;margin: 10px;}
+.item_r .sch_logo{left: -64px;top: 10px;}
+.item_l .sch_logo{right: -64px;top: 10px;}
+.logo_tp{max-width: 90px;margin: 18px;}
 .logo_tp img{
 max-width: 100%;
 height: 100%;
@@ -110,20 +109,42 @@ max-width:70%;
 .diffcult span{cursor:pointer;}
 @media (min-width: 1100px){
 .item_l .rank_area{
-margin-left: 80px;
-margin-right: 30px;
+margin-left: 30%;
+margin-right: 20px;
+margin-top:8%;
+margin-bottom:8%;
+}
+.item_r .rank_area{
+
+margin-right: 30%;
+margin-top:8%;
+margin-bottom:8%;
 }
 .rank_wenzi{max-width:80%;}	
 }
 @media (max-width: 1100px){
 .item_l .rank_area{
-margin-left: 60px;
+margin-left: 130px;
 margin-right: 30px;
 }
 }
+@media (max-width: 1083px){
+	.logo_tp {
+    max-width: 70px;
+    margin: 14px;
+}
+.item_l .sch_logo{
+	right: -52px;
+	top:0px;
+}
+.item_r .sch_logo{
+	left: -52px;
+	top:0px;
+}
+}
 @media (min-width: 1050px){
-
 .diffcult,.level{font-size: 150%;}
+
 }
 
 .item_r .rank_area{
@@ -139,7 +160,7 @@ margin: 10px;
 .collname{
 font-size: 180%;
 }
-.rank_0{float: left;font-size: 200%;margin-top: 7%;margin-left: 10px;}
+.rank_0{float: left;font-size: 200%;margin-top: 10%;margin-left: 10px;}
 @media (max-width: 1320px){
 .header_h{max-width:40%;}
 .rank_area{max-width: 80%;}
@@ -150,8 +171,8 @@ font-size: 180%;
 .item_l .rank_area{margin-left: 120px;}
 .item_r .rank_area{margin-left: 80px;}
 .rank_area{max-width: 80%;}
-.collname{font-size: 150%;}
-.rank_0{font-size: 150%;font-weight: 700;margin-top: 3%;}
+.collname{font-size: 180%;}
+.rank_0{font-size: 150%;font-weight: 700;margin-top: 10%;}
 .rank_wenzi span{font-size: 120%;}
 }
 @media (max-width: 1020px){
@@ -171,24 +192,36 @@ font-size: 180%;
 	.item_l .rank_area{margin-left: 50px;}
 }
 @media (max-width: 860px){
-	.item_l .rank_area{margin-left: 30px;}
+	.item_l .rank_area{margin-left: 25px;margin-right:0px;}
+	rank_area{width:220px;}
 }
 @media (max-width: 820px){
-	.item_l .rank_area{margin-left: 10px;}
+	.item_l .rank_area{margin-left: 14px;}
 }
-@media (max-width: 786px){
+@media (min-width: 800px){
+	.level{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.rank_area{width:300px;}
+}
+@media (max-width: 798px){
 	.logo{margin-left:5%;}
-	.item_l .rank_area{margin-left: 0px;}
+	.rank_area{width:220px;}
+	.item_l .rank_area{margin-left: 70px;}
+	.rank_wenzi p {margin-top:10px;margin-bottom:10px;}
 }
+
+
 @media (max-width: 730px){
 .pai p{font-size:150%;}
 .nav_rank{width: 100%;}	
 .nav_rank p{width:100%;border-radius:0px;}
-.sch_logo{width: 80px;height: 80px;}
-.logo_tp {margin:5px;}
-.logo_tp img{width: 70px;height: 70px;}
-.item_l .rank_area{margin-left: 0px;}
-.item_r .rank_area {margin-left:80px;}
+.sch_logo{width: 92px;height: 92px;}
+.logo_tp {margin:13px;}
+.logo_tp img{width: 66px;height: 66px;}
+.item_l .rank_area{margin-left: 55px;}
+.item_r .rank_area {margin-left:65px;}
 
 
 .rank_area{max-width: 80%;}
@@ -199,20 +232,26 @@ font-size: 180%;
 .item_l .sch_logo{right:-44px;top: 3px;}
 .rank_area{margin-top: 12px;margin-bottom: 12px;}
 }
+@media (max-width: 715px){
+.item_l .rank_area{margin-left: 55px;}
+.collname{font-size: 150%;}
+.rank_0{margin-top:14%;}
+}
 @media (max-width: 670px){
 .logo{max-width:200px;}
 .pai p {font-size:140%;lline-height:40px;}
+.item_l .rank_area{margin-left: 10px;}
 }
 @media (max-width: 600px){
 .nav_rank{width: 100%;}	
 .nav_rank p{width:100%;border-radius:0px;font-size:120%;}
 .sch_logo{width: 60px;height: 60px;}
-.logo_tp {margin:5px;}
-.logo_tp img{width: 50px;height: 50px;}
+.logo_tp {margin:10px;}
+.logo_tp img{width: 40px;height: 40px;}
 .item_l .rank_area{margin-left: 0px;}
-.item_r .sch_logo{left:-34px;top: 15px;}	
-.item_l .sch_logo{right:-34px;top: 15px;}
-.item_r .rank_area {margin-left:60px;}
+.item_r .sch_logo{left:-34px;top: 10px;}	
+.item_l .sch_logo{right:-34px;top: 10px;}
+.item_r .rank_area {margin-left:50px;}
 .header{height:60%;}
 .logo{max-width:160px;}
 .pai{height:100%;}
@@ -221,7 +260,8 @@ font-size: 180%;
 @media (max-width: 500px){
 .logo{max-width:120px;}
 .pai{height:100%;}
-.pai p {font-size:120%;line-height:30px;}	
+.pai p {font-size:120%;line-height:30px;}
+.item_r .rank_area{margin-left: 40px;}	
 }
 @media (max-width: 400px){
 .header_h{max-width:100%;}
@@ -233,18 +273,20 @@ font-size: 180%;
 .item_l .rank_area{margin-left: 30px;}
 .item_r{margin-left: 6%;}
 .item_r .rank_area{margin-left: 30px;}
-.item_r .sch_logo{left:-20px;top: 15px;}	
-.item_l .sch_logo{left:-20px;top: 15px;}
+.item_r .sch_logo{left:-20px;top: 25px;}	
+.item_l .sch_logo{left:-20px;top: 25px;}
 .item {margin-left: 6%;max-width: 100%;}
 /*左边样式*/
 .item_l{border-right:none;margin-right: 0px;}
 .logo{margin-left:15%;}
+.rank_0 {margin-top: 20%;}
 
 }
 
 /*-------------------bottom -------------------*/
-
-.is34{border:1px solid #5DB9E3;}
-.is985{border:1px solid #B2D155;}
-.is211{border:1px solid #BC06C8;}
+.level span{margin-right:10px;}
+.is211{border:1px solid #CD5DE3;padding:4px;border-radius:4px;}
+.is34{border:1px solid #5DB9E3;padding:4px;border-radius:4px;}
+.is985{border:1px solid #B2D155;padding:4px;border-radius:4px;}
+/*20150323*/
 
