@@ -290,20 +290,14 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	/*
 	 * add
 	 */
-	public String getSubjectCodeByMajorId(int majorId){
-		String code = majorInfoDao.getSubjectCode(majorId);
-		return code;
-		
-	}
-	public String getMajorRank(String subjectCode)
-			throws Exception {
-		// get subject name alone
-		String subjectName = majorInfoDao.findSubjectNameBySubjectCode(subjectCode);
+	public String getMajorRank(int majorId)throws Exception {
 		// get major main info, base info, college logo and rank info
 		List<HashMap<String, Object>> majorAllInfos = majorInfoDao
-				.findMajorAllRankInfoBySubjectCode(subjectCode);
+				.findMajorAllRankInfoByMajorId(majorId);
 			if (majorAllInfos == null)
 			throw DatabaseException.getInstance();
+		// get subject name
+		String subjectName = (String)majorAllInfos.get(1).get("subjectName");
 		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
 		int j = 0;
 		int i = 1;
@@ -315,9 +309,6 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 			resultItem.put("rank", majorAllInfos.get(j).get("rank"));
 			resultItem.put("school", majorAllInfos.get(j).get("school"));
 			resultItem.put("degree", majorAllInfos.get(j).get("degree"));
-			// resultItem.put("is985", majorAllInfos.get(j).get("is985"));
-			// resultItem.put("is211", majorAllInfos.get(j).get("is211"));
-			// resultItem.put("is34", majorAllInfos.get(j).get("is34"));
 			resultItem.put("typeInfo", College.getRankTypeString(
 					(Integer) majorAllInfos.get(j).get("is34"),
 					(Integer) majorAllInfos.get(j).get("is985"),
@@ -336,19 +327,17 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 					break;
 			}
 			i++;
-//			if (majorAllInfos.get(j) == null)
-//				break;
 			resultItem.put("majorList", majorInfoMap);
 
 			resultList.add(resultItem);
 		}
 
 		// build json string
-		String jsonResult = buildMajorRankJson(resultList, subjectName);
+		String jsonResult = buildMajorRankJson(resultList,subjectName);
 		return jsonResult;
 	}
 
-	private String buildMajorRankJson(List<HashMap<String, Object>> resultList, String subjectName)
+	private String buildMajorRankJson(List<HashMap<String, Object>> resultList,String subjectName)
 			throws Exception {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put("rankList", resultList);
@@ -356,5 +345,4 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
 		return jsonStr;
 	}
-
 }

@@ -94,37 +94,27 @@
 	</select>
 	
 	<!-- add -->
-	<select id="getSubjectCode" parameterType="int" resultType="String">
-		SELECT 
-		    major.code as majorCode
-		FROM
-		    major
-		WHERE major.id=#{majorId} 
-	</select>
-	
-	<select id="findSubjectNameBySubjectCode" parameterType="string" resultType="String">
-		SELECT 
-		    subject.name as subjectName
-		FROM
-		    subject
-		WHERE subject.code=#{subjectCode} 
-	</select>
-	
-	<select id="findMajorAllRankInfoBySubjectCode" parameterType="string" resultType="java.util.HashMap">
-		SELECT 
-		    major.major_rank as rank, 
-		    major.id as majorId,
-		    major.name as majorName,
-		    major.school as school,
-		    major.degree as degree,
-            college.name as college,
-            college.id as collegeId,
-            college.logo as logo,
-            college.is_985 as is985,
-            college.is_211 as is211,
-            college.is_34 as is34
-        FROM 
-            major join college on college.id = major.college_id 
-        WHERE major.major_rank &lt;1000 AND major.code like concat(#{subjectCode}, "%") order by rank
+	<select id="findMajorAllRankInfoByMajorId" parameterType="int" resultType="java.util.HashMap">
+		SELECT
+             major.major_rank AS rank,
+             major.id AS majorId,
+             major.name AS majorName,
+             major.school AS school,
+             major.degree AS degree,
+             major.subject_id AS subjectId,
+             college.name AS college,
+             college.id AS collegeId,
+             college.logo AS logo,
+             college.is_985 AS is985,
+             college.is_211 AS is211,
+             college.is_34 AS is34,
+             subject.name AS subjectName
+        FROM
+             major
+        JOIN college ON college.id = major.college_id
+        JOIN subject ON major.subject_id = subject.id
+        WHERE 
+             major.major_rank &lt;1000 AND major.subject_id = (SELECT major.subject_id FROM major WHERE major.id=#{majorId})
+        ORDER BY major.major_rank
 	</select>
 </mapper>
