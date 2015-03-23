@@ -245,15 +245,25 @@ var cid=null;
 var cid_name=null;
 //点击专业排名，跳转
 $('.Ranking li').eq(0).click(function(event){
-	window.open("majorrank.html?major=" + thisid, "_blank");
+	if($('.Ranking li').eq(0).find('.rank_p').text()!='不参与排名'){
+		window.open("majorrank.html?major=" + thisid, "_blank");
+	}
+	
+	console.log($('.Ranking li').eq(0).find('.rank_p').text());
 });
 //点击院校全国排名跳转
 $('.Ranking li').eq(1).click(function(event){
-	window.open("collegerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
+	if($('.Ranking li').eq(1).find('.rank_p').text()!='不参与排名'){
+		window.open("collegerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
+	}
+	
 });
 //点击院校省内排名跳转
 $('.Ranking li').eq(2).click(function(event){
-	window.open("provincerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
+	if($('.Ranking li').eq(2).find('.rank_p').text()!='不参与排名'){
+		window.open("provincerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");	
+	}
+	
 });
 //设置全局的404错误跳转页面
 $.ajaxSetup({
@@ -320,8 +330,11 @@ function major_ajax() {
 						four_Grade(data.gradeInfo.collegeGrade, tag03);
 						four_Grade(data.gradeInfo.cityGrade, tag04);
 						// 插入三个排名标签
+						
 						ranking_charu(data.rankInfo.majorRank, rank_tag1,
 								rank_item1);
+						console.log(data.rankInfo.majorRank);
+
 						ranking_charu(data.rankInfo.collegeRank, rank_tag2,
 								rank_item2);
 						ranking_charu(data.rankInfo.collegeLocalRank,
@@ -548,14 +561,18 @@ var rank_item1 = '专业排名';
 var rank_item2 = '院校全国排名';
 var rank_item3 = '院校省内排名';
 function ranking_charu(rank_value, rank_tag, rank_item) {
+	if(rank_value==-1){
+		$('.rank_tp1 p ').css('font-size','20px');
+		rank_value='不参与排名';
+	}
 	var ranking = '<p class="rank_p">' + rank_value + '</p><p class="pai">'
 			+ rank_item + '</p>';
 	rank_tag.append(ranking);
 	var length0 = rank_tag.find('.rank_p').text().length;
-	if (length0 > 3) {
-		rank_tag.find('.rank_p').css('font-size', '60px');
-	} else {
-		rank_tag.find('.rank_p').css('font-size', '80px');
+	if (length0 > 4) {
+		rank_tag.find('.rank_p').css('font-size', '30px');
+	} else{
+		rank_tag.find('.rank_p').css('font-size', '70px');
 	}
 }
 var strA = null;

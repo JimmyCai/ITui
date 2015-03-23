@@ -83,6 +83,7 @@ function major_ajax(){
 			{
 			data_array[i]=data.normalReturn.rankList[i];
 			}
+			
 			loop_insert();
 			bottom_insert();
 			console.log(data.normalReturn.rankList);
@@ -105,7 +106,7 @@ function major_ajax(){
 function college_ajax(){
 	$.ajax({
 		url: 'api/rank/college',
-		type: 'post',
+		type: 'get',
 		dataType: 'html',
 		data: {'cid': cid},
 		success:function(msg)
@@ -124,6 +125,9 @@ function college_ajax(){
 			loop_insert();
 			bottom_insert();
 			//console.log(data.normalReturn.rankList);
+			var back_color='#5DB9E3';
+			page_style(back_color);
+			$('.is34').css('border','1px solid #E3835D');
 				
 		   }else
 		   {
@@ -162,6 +166,9 @@ function collegelocal_ajax(){
 			loop_insert();
 			bottom_insert();
 			//console.log(data.normalReturn.rankList);
+			var back_color='#B2D155';
+			page_style(back_color);
+			$('.is985').css('border','1px solid #E3835D');
 				
 		   }else
 		   {
@@ -179,13 +186,7 @@ function collegelocal_ajax(){
 
 function left_insert(li_num)
 {  
-	if(level_type[0]== undefined){
-		$('.item_0'+li_num).find('.is34').remove();
-	}else if(level_type[1]== undefined){
-		$('.item_0'+li_num).find('.is211').remove();
-	}else if(level_type[2]== undefined){
-		$('.item_0'+li_num).find('.is985').remove();
-	}
+	
 var lefthtml_li='\
 	    <li class="item item_l item_0'+li_num+'">\
              <div class="sch_logo" nameid="'+college_id+'">\
@@ -196,9 +197,10 @@ var lefthtml_li='\
                 <div class="rank_wenzi">\
                       <p class="collname" nameid="'+college_id+'">'+coll_name+'</p>\
                       <p class="level">\
-                      		<span class="is34">'+level_type[0]+'</span>\
-                      		<span class="is211">'+level_type[1]+'</span>\
-                      		<span class="is985">'+level_type[2]+'</span>\
+                      <span class="is34">34所</span>\
+              		  <span class="is211">211</span>\
+              		  <span class="is985">985</span>\
+              		  <span class="isnormal">普通</span>\
                       </p>\
                       <p class="diffcult">\
                            <span>'+item_title+'</span>\
@@ -222,18 +224,12 @@ var lefthtml_li='\
 		 console.log(college_id);
 		   
 	   });
-    
+   
   
 }
 
 function right_insert(li_num){
-	if(level_type[0]== undefined){
-		$('.item_0'+li_num).find('.is34').remove();
-	}else if(level_type[1]== undefined){
-		$('.item_0'+li_num).find('.is211').remove();
-	}else if(level_type[2]== undefined){
-		$('.item_0'+li_num).find('.is985').remove();
-	}
+
 var righthtml_li='\
 	   <li class="item item_r item_0'+li_num+'">\
 	   <div class="sch_logo" nameid="'+college_id+'">\
@@ -244,9 +240,10 @@ var righthtml_li='\
       <div class="rank_wenzi">\
             <p class="collname" nameid="'+college_id+'">'+coll_name+'</p>\
             <p class="level">\
-            		<span class="is34">'+level_type[0]+'</span>\
-            		<span class="is211">'+level_type[1]+'</span>\
-            		<span class="is985">'+level_type[2]+'</span>\
+            		<span class="is34">34所</span>\
+            		<span class="is211">211</span>\
+            		<span class="is985">985</span>\
+            		<span class="isnormal">普通</span>\
             </p>\
             <p class="diffcult">\
                  <span>'+item_title+'</span>\
@@ -270,6 +267,7 @@ var righthtml_li='\
 		 console.log(college_id);
 		   
 	   });
+
     
 }
 //循环插入li函数	   
@@ -292,10 +290,28 @@ if((i+w+1)%2!==0)
     console.log(rank_num);
 //    每个li的院校层次
     level_type=data_array[i+w].typeInfo;
-    level_type=level_type.split("/");
+    var is_211=level_type.indexOf("211");
+    var is_34=level_type.indexOf("34");
+    var is_985=level_type.indexOf("985");
+    var is_normal=level_type.indexOf("普通");
+    console.log(is_normal);
+   
 //     major_n=data_array[i+w].majorList;
 //    插入左边li
      left_insert((i+w+1));
+     if(is_34< 0){
+      	 $('.item_0'+(i+w+1)).find('.is34').remove();
+    	}if(is_211< 0){
+    		$('.item_0'+(i+w+1)).find('.is211').remove();
+    	}if(is_985< 0){
+    		$('.item_0'+(i+w+1)).find('.is985').remove();
+    	}if(is_normal<0){
+    		$('.item_0'+(i+w+1)).find('.isnormal').remove();
+    	}
+    if( area_city== undefined){
+    	$('.diffcult').remove();
+    }
+     
 
      }	
 }else{
@@ -308,9 +324,23 @@ if((i+w+1)%2!==0)
            rank_num=data_array[i+w].rank;
 //         每个li的院校层次
          level_type=data_array[i+w].typeInfo;
-         level_type=level_type.split("/");
+         var is_211=level_type.indexOf("211");
+         var is_34=level_type.indexOf("34");
+         var is_985=level_type.indexOf("985");
+         var is_normal=level_type.indexOf("普通");
+      
+         //level_type=level_type.split("/");
            major_n=data_array[i+w].majorList;
            right_insert((i+w+1));
+           if(is_34< 0){
+          	 $('.item_0'+(i+w+1)).find('.is34').remove();
+        	}if(is_211< 0){
+        		$('.item_0'+(i+w+1)).find('.is211').remove();
+        	}if(is_985< 0){
+        		$('.item_0'+(i+w+1)).find('.is985').remove();
+        	}if(is_normal<0){
+        		$('.item_0'+(i+w+1)).find('.isnormal').remove();
+        	}
            
            }
 	
@@ -348,9 +378,8 @@ function page_url()
 {
 //专业排名
 if(str_texting.test(str_major))
-{$('.diffcult').remove();
+{
 	major_ajax();
-
 var back_color='#FEBC80';
 page_style(back_color);
 
@@ -359,14 +388,11 @@ page_style(back_color);
 else if(str_texting2.test(str_major)){
 	
 	college_ajax();
-var back_color='#5DB9E3';
-page_style(back_color);
+
 }
 //院校省内
 else{
 	collegelocal_ajax();
-var back_color='#B2D155';
-page_style(back_color);
 }	
 }
 page_url();
