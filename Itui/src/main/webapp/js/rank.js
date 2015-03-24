@@ -40,12 +40,12 @@ console.log(cid_name);
 console.log(cid);
 // 排名页变量定义
 var data_array=new Array();
-var title_name='土木工程挖掘机汽修电焊';
-var rank_num='345';
-var coll_name='中央美术学院中央美术学院学院';
+var title_name='';
+var rank_num='';
+var coll_name='';
 var item_title='城市：';
 area_city='北京';
-var item_value='9.65';
+var item_value='';
 var is_34='';
 var is_211='';
 var is_985='';
@@ -53,7 +53,7 @@ var img_num='defaultlogo.png';
 var college_id='';
 var w=0;
 var class_num=1;
-var major_n=new Array('手摇挖掘机专业1','手摇挖掘机专业2');
+var major_n=new Array('','');
 var level_type=new Array();
 
 function major_nInsert(j){
@@ -73,7 +73,7 @@ function major_ajax(){
 		var data = eval('msg=' + msg);
 		if (data.status == 0)
 		   {
-			title_name=data.normalReturn.subjectName;
+			title_name=data.normalReturn.subjectName+'('+data.normalReturn.rankList.length+'个)';
 			//科目名称
 			$('.itemname').text(title_name);
 			//把接收到的数据存进自定义数组
@@ -82,8 +82,8 @@ function major_ajax(){
 				data_array[i]=data.normalReturn.rankList[i];
 			}
 			loop_insert();
-			bottom_insert();
-			console.log(data.normalReturn.rankList.length);
+			
+			console.log(data.normalReturn.rankList);
 			var back_color='#FEBC80';
 			page_style(back_color);
 		   }else
@@ -112,7 +112,7 @@ function college_ajax(){
 		var data = eval('msg=' + msg);
 		if (data.status == 0)
 		   {
-			title_name='院校全国排名';
+			title_name='院校全国排名'+'('+data.normalReturn.collegeRankList.length+'所)';
 			//科目名称
 			$('.itemname').text(title_name);
 			//把接收到的数据存进自定义数组
@@ -121,8 +121,7 @@ function college_ajax(){
 			data_array[i]=data.normalReturn.collegeRankList[i];
 			}
 			loop_insert();
-			bottom_insert();
-			//console.log(data.normalReturn.rankList);
+			console.log(data.normalReturn.collegeRankList);
 			var back_color='#5DB9E3';
 			page_style(back_color);
 			$('.is34').css('border','1px solid #E3835D');
@@ -153,7 +152,7 @@ function collegelocal_ajax(){
 		var data = eval('msg=' + msg);
 		if (data.status == 0)
 		   {
-			title_name='院校省内排名';
+			title_name=data.normalReturn.area+'院校排名'+'('+data.normalReturn.collegeLocalRankList.length+'所)';
 			//科目名称
 			$('.itemname').text(title_name);
 			//把接收到的数据存进自定义数组
@@ -162,8 +161,7 @@ function collegelocal_ajax(){
 				data_array[i]=data.normalReturn.collegeLocalRankList[i];
 			}
 			loop_insert();
-			bottom_insert();
-			//console.log(data.normalReturn.rankList);
+			console.log(data.normalReturn.collegeLocalRankList);
 			var back_color='#B2D155';
 			page_style(back_color);
 			$('.is985').css('border','1px solid #E3835D');
@@ -346,7 +344,7 @@ if((i+w+1)%2!==0)
 
 
 //如果即将到达底部再插入10个
-function bottom_insert(){
+function bottom_insert(back_color){
 $(window).scroll(function() {
 		var w_height = $(window).height();//获得可视区域高度
 		var s_height = $(document).scrollTop();//获得已经滚动上去的高度
@@ -355,8 +353,8 @@ $(window).scroll(function() {
 		if(bottom_h<100&&w<data_array.length){
 			w+=10;
 		loop_insert();
-		page_url();
 		console.log(w);
+		page_style(back_color);
 		}
 	});	
 }
@@ -375,14 +373,21 @@ function page_url()
 if(str_texting.test(str_major))
  {
 	major_ajax();
+	var back_color='#FEBC80'; 
+	bottom_insert(back_color);
 }
 //院校全国排名
 else if(str_texting2.test(str_major)){
 	college_ajax();
+	var back_color='#5DB9E3';
+	bottom_insert(back_color);
+	
 }
 //院校省内
 else{
 	collegelocal_ajax();
+	var back_color='#B2D155';
+	bottom_insert(back_color);
 	}	
 }
 page_url();
