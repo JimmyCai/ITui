@@ -98,13 +98,32 @@ $(function() {
 	});
 });
 // 页面加载函数结束
+//登录按钮样式
+$('#load').css('background-color', '#cbcbcb');
+$('#load').attr('disabled', true);
+// 注册按钮样式
+$('#register').css('background-color', '#cbcbcb');
+$('#register').attr('disabled', true);
 
 // 创建注册对象
 var indexregs_obj = {
 	objemail : null,
 	objpasd : null
 };
+//判断注册对象是不是null
+function index_submit_judge() {
+	if ((indexregs_obj.objemail!= null&&indexregs_obj.objemail!="") && (indexregs_obj.objpasd!= null&&indexregs_obj.objpasd!="")&&(check_state==1)) {
+		$('#register').attr('disabled', false);
+		$('#register').css('background-color', '#357EBD');
+		// 调用点击函数
+		//index_submit_click(index_email, indexpasd3);
 
+	} else {
+		// 邮箱和密码若有一个错误择提交按钮可用
+		$('#register').attr('disabled', true);
+		$('#register').css('background-color', '#cbcbcb');
+	}
+}
 // 注册邮箱验证开始
 function regs_zhuce_email(){
 	var index_email = $('#input_mail2').val();
@@ -115,8 +134,7 @@ function regs_zhuce_email(){
 		// 将正确的邮箱存进注册对象
 		indexregs_obj.objemail = index_email;
 		// 判断是否两个输入框都合法
-		index_submit_judge(indexregs_obj.objemail,
-				indexregs_obj.objpasd);
+		index_submit_judge();
 	} else {
 
 		$('.zc_email').html('×邮箱不合法').css('color', 'red');
@@ -150,8 +168,7 @@ function regs_zhuce_pasd(){
 				// 将正确的密码存进注册对象
 				indexregs_obj.objpasd = indexpasd3;
 				// 判断是否两个输入框都合法
-				index_submit_judge(indexregs_obj.objemail,
-						indexregs_obj.objpasd);
+				index_submit_judge();
 
 			} else {
 				$('.ecqu').html('×两次密码输入必须一致').css('color',
@@ -183,50 +200,37 @@ $('#pasd2').keyup(function(event) {
 // 注册密码验证结束
 // 给用户协议添加点击函数
 var check_state = 1;
+function checkbox_agree() {
+	if ($('.agree_input').prop('checked') == true) {
+		console.log('true');
+		check_state = 1;
+		index_submit_judge();
+
+	} else {
+		console.log('false');
+		check_state = 0;
+		 $('#register').attr('disabled', true);
+		 $('#register').css('background-color', '#cbcbcb');
+	}
+}
+
 $('.agree_input').click(function(event) {
 	checkbox_agree();
 	console.log(check_state);
 
 });
 
-function checkbox_agree() {
-	if ($('.agree_input').prop('checked') == true) {
-		console.log('true');
-		check_state = 1;
-
-	} else {
-		console.log('false');
-		check_state = 0;
-	}
-}
-// 判断注册对象是不是null
-function index_submit_judge(index_email, indexpasd3) {
-	if ((index_email!= null&&index_email!="") && (indexpasd3!= null&&indexpasd3!="")) {
-		$('#register').attr('disabled', false);
-		$('#register').css('background-color', '#357EBD');
-		// 调用点击函数
-		index_submit_click(index_email, indexpasd3);
-		// $('#register').attr('disabled', false);
-		// $('#register').css('background-color', '#3276B1');
-	} else {
-		// 邮箱和密码若有一个错误择提交按钮可用
-		$('#register').attr('disabled', true);
-		$('#register').css('background-color', '#cbcbcb');
-	}
-}
-
 // 点击提交按钮函数
-function index_submit_click(email, pasd) {
 	$('#register').click(function(event) {
 		$('#register').attr('disabled', true);
 		$('#register').css('background-color', '#cbcbcb');
 		// 在用户名和密码都输入正确的情况下调用ajax
 		if (check_state == 1) {
-			index_register_ajax(email, pasd);
+			index_register_ajax(indexregs_obj.objemail, indexregs_obj.objpasd);
 		}
 	});
 
-}
+
 //设置全局的404错误跳转页面
 $.ajaxSetup({
     statusCode: {
@@ -257,17 +261,18 @@ function index_register_ajax(email, pasd) {
 				if (data.normalReturn.register == 'failure') {
 					$('.bt_p02').text(data.normalReturn.msg)
 							.css('color', 'red');
-
-					// $('#register').attr('disabled', true);
-					// $('#register').css('background-color', '#cbcbcb');
+					 $('#register').attr('disabled', true);
+					 $('#register').css('background-color', '#cbcbcb');
 					indexregs_obj.objemail = null;
 					indexregs_obj.objpasd = null;
-
+					regs_zhuce_email();
+					regs_zhuce_pasd();
+					
 					// 重置表单
-					$('#zhuce')[0].reset();
-					$('.zc_email').html('');
-					$('.pasd4').html('');
-					$('.ecqu').html('');
+//					$('#zhuce')[0].reset();
+//					$('.zc_email').html('');
+//					$('.pasd4').html('');
+//					$('.ecqu').html('');
 					$('#input_mail2').focus();
 				} else {
 					$('.bt_p02').text('先去邮箱查看邮件激活吧!').css('color', 'red');
@@ -295,6 +300,20 @@ var indexload_obj = {
 	objemail : null,
 	objpasd : null
 };
+//判断登录对像是否为空开始
+function index_load_judge() {
+	if ((indexload_obj.objemail!= null&&indexload_obj.objemail!="" )&& (indexload_obj.objpasd!= null&&indexload_obj.objpasd!="")) {
+		$('#load').attr('disabled', false);
+		$('#load').css('background-color', '#357EBD');
+
+		// 点击登录按钮
+	} else {
+		$('#load').attr('disabled', true);
+		$('#load').css('background-color', '#cbcbcb');
+	}
+}
+
+// 判断登录对像是否为空结束
 
 // 登录邮箱验证开始
 function load_denglu_email(){
@@ -311,7 +330,7 @@ function load_denglu_email(){
 	}
 	if (index_loademail == '') {
 		$('.maildiv01').html('×邮箱不能为空');
-	}	
+	}
 }
 load_denglu_email();
 $('#input_mail').keyup(function(event) {
@@ -333,32 +352,17 @@ $('#pasd').keyup(function(event) {
 	load_denglu_pasd();	
 });
 
-
 // 获取登录密码结束
 // 
-// 判断登录对像是否为空开始
-function index_load_judge() {
-	if ((indexload_obj.objemail!= null&&indexload_obj.objemail!="" )&& (indexload_obj.objpasd!= null&&indexload_obj.objpasd!="")) {
-		$('#load').attr('disabled', false);
-		$('#load').css('background-color', '#357EBD');
 
-		// 点击登录按钮
-		//index_loadsubmit(email, pasd);
-	} else {
-		$('#load').attr('disabled', true);
-		$('#load').css('background-color', '#cbcbcb');
-	}
-}
-// 判断登录对像是否为空结束
 //
 // 登录点击函数
-//function index_loadsubmit(email, pasd) {
 	$('#load').click(function(event) {
 		$('#load').attr('disabled', true);
 		$('#load').css('background-color', '#cbcbcb');
 		index_load_ajax(indexload_obj.objemail, indexload_obj.objpasd);
 	});
-//}
+
 // 首页登录ajax
 function index_load_ajax(email, pasd) {
 	$.ajax({
@@ -374,12 +378,15 @@ function index_load_ajax(email, pasd) {
 			data = eval('msg=' + msg);
 			if (data.status == 0) {
 				if (data.normalReturn.login == 'failure') {
-					$('#load').attr('disabled', false);
+					$('#load').attr('disabled', true);
+					$('#load').css('background-color', '#cbcbcb');
 					$('.bt_p01').text(data.normalReturn.msg + '请重新登录！').css(
 							'color', 'red');
 					$('#input_mail').focus();
 					indexload_obj.objemail = null;
 					indexload_obj.objpasd = null;
+					load_denglu_email();
+				    load_denglu_pasd();
 
 				} else {
 					$('#load').attr('disabled', true);
@@ -458,9 +465,4 @@ if ($.cookie('user') != undefined) {
 	});               
 }
 //console.log($.cookie("username"));
-// 登录按钮样式
-$('#load').css('background-color', '#cbcbcb');
-$('#load').attr('disabled', true);
-// 注册按钮样式
-$('#register').css('background-color', '#cbcbcb');
-$('#register').attr('disabled', true);
+
