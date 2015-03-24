@@ -510,6 +510,10 @@ $('.left li').click(function(event){
 	$('.li_tab0'+foot_index).siblings('li').css('display', 'none');
 	$('.s_li0'+foot_index).siblings('li').removeClass('blue_border');
 });
+//鼠标移出下拉框1秒后下拉框消失
+$('.dropdown-menu').mouseout(function(event){
+	setTimeout("$('.dropdown-menu').css('display', 'none')",20);
+});
 </script>
 
 

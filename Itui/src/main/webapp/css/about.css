@@ -935,6 +935,7 @@ border-top: 4px solid #f4b802;
 	float: right;
 	width: 60px;
 	height: 24px;
+	display:none;
 }
 .right{
 	width: 184px;

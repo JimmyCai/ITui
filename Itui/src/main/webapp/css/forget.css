@@ -79,7 +79,7 @@ ul,ol,li{list-style:none}
 .dropdown-menu{
 	display: none;
 	width: 71px;
-	height: 20px;
+	height: 34px;
 	background-color: #fff;
 	margin-left: 1px;
 }
@@ -87,7 +87,7 @@ ul,ol,li{list-style:none}
 	display: block;
 	width: 71px;
 	height: 20px;
-	line-height: 20px;
+	line-height: 34px;
 	text-align: center;
 	color: #E67917;
 }
@@ -992,9 +992,11 @@ top: 40px;
     position: absolute;
     left: 50%;
     top: 25px;
+    display:none;
 }
 #cnzz_stat_icon_3967155 a {
 color: #428bca;
+ display:none;
 }
 .foot{
 	position: relative;
