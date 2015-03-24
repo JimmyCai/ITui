@@ -119,7 +119,6 @@ public class CollegeServiceImpl implements CollegeService {
 		try {
 			schools = collegeDao.findSchoolsByCollegeId(collegeId);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		result.put("school", schools);
@@ -171,7 +170,7 @@ public class CollegeServiceImpl implements CollegeService {
 			throw DatabaseException.getInstance();
 		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
 		int i = 0;
-		while(i<(collegesInfos.size()/2)){
+		while(i<(collegesInfos.size())){
 			HashMap<String, Object> resultItem = new HashMap<String, Object>();
 			resultItem.put("college", collegesInfos.get(i).get("college"));
 			resultItem.put("collegeId", EnDeCode.encodePara((Integer)collegesInfos.get(i).get("collegeId")));
@@ -203,6 +202,7 @@ public class CollegeServiceImpl implements CollegeService {
 		List<HashMap<String, Object>> collegesInfos = collegeDao.getCollegeLocalRankInfos(collegeId);
 		if (collegesInfos == null)
 			throw DatabaseException.getInstance();
+		String area = (String) collegesInfos.get(1).get("area");
 		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
 		int i = 0;
 		while(i<collegesInfos.size()){
@@ -221,13 +221,14 @@ public class CollegeServiceImpl implements CollegeService {
 			i++;
 		}
 		// build json string
-				String jsonResult = buildCollegeLocalRankJson(resultList);
+				String jsonResult = buildCollegeLocalRankJson(resultList,area);
 				return jsonResult;
 	}
-	private String buildCollegeLocalRankJson(List<HashMap<String, Object>> resultList)
+	private String buildCollegeLocalRankJson(List<HashMap<String, Object>> resultList,String area)
 			throws Exception {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put("collegeLocalRankList", resultList);
+		jsonMap.put("area", area);
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
 		return jsonStr;
 	}

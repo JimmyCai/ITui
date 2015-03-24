@@ -166,7 +166,8 @@
              college.is_985 as is985 ,
              college.is_34 as is34,
              college.local_rank as localRank,
-             city
+             city,
+             area.name as area
        FROM
              college JOIN (SELECT city.id as cityId, city.name as city 
        FROM 
@@ -179,7 +180,10 @@
                  college 
              WHERE 
                  college.id=#{collegeId}))) as b 
-                 ON college.city_id = b.cityId and local_rank &gt; 0 
+                 ON college.city_id = b.cityId and local_rank &gt; 0 ,
+                 area 
+             WHERE area.id=(SELECT city.area_id FROM city WHERE city.id=
+             (SELECT college.city_id FROM college WHERE college.id=#{collegeId}))
        ORDER BY local_rank
 	</select>
 </mapper>
