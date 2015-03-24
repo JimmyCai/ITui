@@ -7,7 +7,6 @@ public interface MajorInfoService {
 	/*
 	 * add
 	 * */
-	public String getMajorRank(String subjectCode) throws Exception;
-	public String getSubjectCodeByMajorId(int majorId);
+	public String getMajorRank(int majorId) throws Exception;
 
 }
