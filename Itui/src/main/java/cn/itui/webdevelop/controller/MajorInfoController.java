@@ -124,9 +124,6 @@ public class MajorInfoController {
 		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
-		String code = request.getParameter(CODE);
-		if(code == null)
-			throw NotLoginException.getInstance();
 		String majorCode = majorInfoService.getSubjectCodeByMajorId(majorId);
 		String subjectCode = majorCode.substring(0, 4);
 		String retJson = majorInfoService.getMajorRank(subjectCode);
