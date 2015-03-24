@@ -290,55 +290,63 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	/*
 	 * add
 	 */
-	public String getMajorRank(int majorId)throws Exception {
+	public String getMajorRank(int majorId) throws Exception {
 		// get major main info, base info, college logo and rank info
 		List<HashMap<String, Object>> majorAllInfos = majorInfoDao
 				.findMajorAllRankInfoByMajorId(majorId);
-			if (majorAllInfos == null)
+		if (majorAllInfos == null)
 			throw DatabaseException.getInstance();
 		// get subject name
-		String subjectName = (String)majorAllInfos.get(1).get("subjectName");
+		String subjectName = (String) majorAllInfos.get(1).get("subjectName");
 		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
 		int j = 0;
 		int i = 1;
 		while (j < majorAllInfos.size()) {
-			HashMap<String, Object> resultItem = new HashMap<String, Object>();
-			resultItem.put("college", majorAllInfos.get(j).get("college"));
-			resultItem.put("collegeId", EnDeCode.encodePara((Integer)majorAllInfos.get(j).get("collegeId")));
-			resultItem.put("logo", majorAllInfos.get(j).get("logo"));
-			resultItem.put("rank", majorAllInfos.get(j).get("rank"));
-			resultItem.put("school", majorAllInfos.get(j).get("school"));
-			resultItem.put("degree", majorAllInfos.get(j).get("degree"));
-			resultItem.put("typeInfo", College.getRankTypeString(
-					(Integer) majorAllInfos.get(j).get("is34"),
-					(Integer) majorAllInfos.get(j).get("is985"),
-					(Integer) majorAllInfos.get(j).get("is211")));
+			if (i == (Integer) majorAllInfos.get(j).get("rank")) {
+				HashMap<String, Object> resultItem = new HashMap<String, Object>();
+				resultItem.put("college", majorAllInfos.get(j).get("college"));
+				resultItem.put(
+						"collegeId",
+						EnDeCode.encodePara((Integer) majorAllInfos.get(j).get(
+								"collegeId")));
+				resultItem.put("logo", majorAllInfos.get(j).get("logo"));
+				resultItem.put("rank", majorAllInfos.get(j).get("rank"));
+				resultItem.put("school", majorAllInfos.get(j).get("school"));
+				resultItem.put("degree", majorAllInfos.get(j).get("degree"));
+				resultItem.put("typeInfo", College.getRankTypeString(
+						(Integer) majorAllInfos.get(j).get("is34"),
+						(Integer) majorAllInfos.get(j).get("is985"),
+						(Integer) majorAllInfos.get(j).get("is211")));
 
-			List<HashMap<String, Object>> majorInfoMap = new ArrayList<HashMap<String, Object>>();
+				List<HashMap<String, Object>> majorInfoMap = new ArrayList<HashMap<String, Object>>();
 
-			while ((Integer) majorAllInfos.get(j).get("rank") == i) {
-				HashMap<String, Object> majorItem = new HashMap<String, Object>();
-				majorItem.put("majorName", majorAllInfos.get(j)
-						.get("majorName"));
-				majorItem.put("majorId", EnDeCode.encodePara((Integer)majorAllInfos.get(j).get("majorId")));
-				majorInfoMap.add(majorItem);
-				j++;
-				if (j >= majorAllInfos.size())
-					break;
+				while ((Integer) majorAllInfos.get(j).get("rank") == i) {
+					HashMap<String, Object> majorItem = new HashMap<String, Object>();
+					majorItem.put("majorName",
+							majorAllInfos.get(j).get("majorName"));
+					majorItem.put("majorId", EnDeCode
+							.encodePara((Integer) majorAllInfos.get(j).get(
+									"majorId")));
+					majorInfoMap.add(majorItem);
+					j++;
+					if (j >= majorAllInfos.size())
+						break;
+				}
+				resultItem.put("majorList", majorInfoMap);
+
+				resultList.add(resultItem);
 			}
 			i++;
-			resultItem.put("majorList", majorInfoMap);
 
-			resultList.add(resultItem);
 		}
 
 		// build json string
-		String jsonResult = buildMajorRankJson(resultList,subjectName);
+		String jsonResult = buildMajorRankJson(resultList, subjectName);
 		return jsonResult;
 	}
 
-	private String buildMajorRankJson(List<HashMap<String, Object>> resultList,String subjectName)
-			throws Exception {
+	private String buildMajorRankJson(List<HashMap<String, Object>> resultList,
+			String subjectName) throws Exception {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put("rankList", resultList);
 		jsonMap.put("subjectName", subjectName);
