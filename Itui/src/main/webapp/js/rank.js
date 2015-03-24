@@ -83,7 +83,7 @@ function major_ajax(){
 			}
 			loop_insert();
 			bottom_insert();
-			//console.log(data.normalReturn.rankList);
+			console.log(data.normalReturn.rankList.length);
 			var back_color='#FEBC80';
 			page_style(back_color);
 		   }else
@@ -112,7 +112,7 @@ function college_ajax(){
 		var data = eval('msg=' + msg);
 		if (data.status == 0)
 		   {
-			title_name=cid_name;
+			title_name='院校全国排名';
 			//科目名称
 			$('.itemname').text(title_name);
 			//把接收到的数据存进自定义数组
@@ -153,7 +153,7 @@ function collegelocal_ajax(){
 		var data = eval('msg=' + msg);
 		if (data.status == 0)
 		   {
-			title_name=cid_name;
+			title_name='院校省内排名';
 			//科目名称
 			$('.itemname').text(title_name);
 			//把接收到的数据存进自定义数组
@@ -352,7 +352,7 @@ $(window).scroll(function() {
 		var s_height = $(document).scrollTop();//获得已经滚动上去的高度
 		var main_height = $(document).height();//区域总高度
 		var bottom_h = main_height- s_height - w_height;
-		if(bottom_h<100&&w<=data_array.length){
+		if(bottom_h<100&&w<data_array.length){
 			w+=10;
 		loop_insert();
 		page_url();
