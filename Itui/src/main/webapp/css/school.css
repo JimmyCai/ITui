@@ -829,6 +829,7 @@ color: #666;
 	cursor: pointer;
 	float: left;
 	margin-left: 46px;
+	border:none;
 }
 .reset_load
 {
@@ -1171,9 +1172,11 @@ border-top: 4px solid #f4b802;
     position: absolute;
     left: 50%;
     top: 25px;
+    display:none;
 }
 #cnzz_stat_icon_3967155 a {
 color: #428bca;
+ display:none;
 }
 /*同意条款*/
 .agree_file
