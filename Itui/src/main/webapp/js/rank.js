@@ -65,7 +65,7 @@ function major_nInsert(j){
 function major_ajax(){
 	$.ajax({
 		url: 'api/rank/major',
-		type: 'post',
+		type: 'get',
 		dataType: 'html',
 		data: {'mid': mid},
 		success:function(msg)
@@ -79,12 +79,11 @@ function major_ajax(){
 			//把接收到的数据存进自定义数组
 			for(var i=0;i<data.normalReturn.rankList.length;i++)
 			{
-			data_array[i]=data.normalReturn.rankList[i];
+				data_array[i]=data.normalReturn.rankList[i];
 			}
-			
 			loop_insert();
 			bottom_insert();
-			console.log(data.normalReturn.rankList);
+			//console.log(data.normalReturn.rankList);
 			var back_color='#FEBC80';
 			page_style(back_color);
 		   }else
@@ -146,7 +145,7 @@ function college_ajax(){
 function collegelocal_ajax(){
 	$.ajax({
 		url: 'api/rank/localrank/college',
-		type: 'post',
+		type: 'get',
 		dataType: 'html',
 		data: {'cid': cid},
 		success:function(msg)
@@ -160,7 +159,7 @@ function collegelocal_ajax(){
 			//把接收到的数据存进自定义数组
 			for(var i=0;i<data.normalReturn.collegeLocalRankList.length;i++)
 			{
-			data_array[i]=data.normalReturn.collegeLocalRankList[i];
+				data_array[i]=data.normalReturn.collegeLocalRankList[i];
 			}
 			loop_insert();
 			bottom_insert();
@@ -286,32 +285,8 @@ if((i+w+1)%2!==0)
     //所属城市
     area_city=data_array[i+w].city;
     rank_num=data_array[i+w].rank;
-    console.log(rank_num);
 //    每个li的院校层次
-    level_type=data_array[i+w].typeInfo;
-
-    var is_211=level_type.indexOf("211");
-    var is_34=level_type.indexOf("34");
-    var is_985=level_type.indexOf("985");
-    var is_normal=level_type.indexOf("普通");
-    console.log(is_normal);
-   
-//     major_n=data_array[i+w].majorList;
-//    插入左边li
-     left_insert((i+w+1));
-     if(is_34< 0){
-      	 $('.item_0'+(i+w+1)).find('.is34').remove();
-    	}if(is_211< 0){
-    		$('.item_0'+(i+w+1)).find('.is211').remove();
-    	}if(is_985< 0){
-    		$('.item_0'+(i+w+1)).find('.is985').remove();
-    	}if(is_normal<0){
-    		$('.item_0'+(i+w+1)).find('.isnormal').remove();
-    	}
-    if( area_city== undefined){
-    	$('.diffcult').remove();
-    }
-     
+    level_type=data_array[i+w].typeInfo;    
     var is_34=level_type.indexOf('34');
     var is_211=level_type.indexOf('211');
     var is_985=level_type.indexOf('985');
@@ -348,10 +323,9 @@ if((i+w+1)%2!==0)
          var is_985=level_type.indexOf("985");
          var is_normal=level_type.indexOf("普通");
       
-         //level_type=level_type.split("/");
            major_n=data_array[i+w].majorList;
            right_insert((i+w+1));
-
+           if(area_city== undefined){$('.diffcult').remove();}
            if(is_34< 0){
           	 $('.item_0'+(i+w+1)).find('.is34').remove();
         	}if(is_211< 0){
@@ -361,16 +335,6 @@ if((i+w+1)%2!==0)
         	}if(is_normal<0){
         		$('.item_0'+(i+w+1)).find('.isnormal').remove();
         	}
-
-           if(is_34<0){
-          	 $('.item_0'+(i+w+1)).find('.is34').remove();
-            }if(is_211<0){
-          	  $('.item_0'+(i+w+1)).find('.is211').remove(); 
-            }if(is_985<0){
-          	  $('.item_0'+(i+w+1)).find('.is985').remove();
-            }if(is_normal<0){
-          	  $('.item_0'+(i+w+1)).find('.isnormal').remove();
-            }
 
            
            }
@@ -388,14 +352,13 @@ $(window).scroll(function() {
 		var s_height = $(document).scrollTop();//获得已经滚动上去的高度
 		var main_height = $(document).height();//区域总高度
 		var bottom_h = main_height- s_height - w_height;
-		if(bottom_h<100 ){
+		if(bottom_h<100&&w<=data_array.length){
 			w+=10;
 		loop_insert();
 		page_url();
-		console.log(123);
+		console.log(w);
 		}
 	});	
-console.log(w);
 }
 
 
@@ -412,13 +375,10 @@ function page_url()
 if(str_texting.test(str_major))
  {
 	major_ajax();
-
 }
 //院校全国排名
 else if(str_texting2.test(str_major)){
-	
 	college_ajax();
-
 }
 //院校省内
 else{

@@ -124,6 +124,7 @@ public class MajorInfoController {
 		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
+
 		String retJson = majorInfoService.getMajorRank(majorId);
 		return retJson;
 	}
