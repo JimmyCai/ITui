@@ -2049,7 +2049,6 @@ color: #666;
 	cursor: pointer;
 	float: left;
 	margin-left: 40px;
-	border:none;
 
 }
 .reset_regs{
@@ -2078,8 +2077,11 @@ color: #666;
 	margin-top: 20px;
 	cursor: pointer;
 	float: left;
-	margin-left: 46px;
+	margin-left:46px;
+
+
 }
+
 .reset_load
 {
 	width:100px;
@@ -2096,6 +2098,7 @@ color: #666;
 	margin-left: 46px;
 
 }
+
 
 /*用户中心头像显示*/
 /*已经登录*/

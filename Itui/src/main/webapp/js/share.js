@@ -48,7 +48,7 @@ $(function() {
 	}
 	modal_visiblity();
 	$('.ew_ma').hide();
-	console.log('code+'+$.cookie("user"));
+	//console.log('code+'+$.cookie("user"));
 	var user_value = $.cookie("user");
 	if (user_value == undefined) {
 		
@@ -58,13 +58,10 @@ $(function() {
 		// 判断当前页面是否是信息页
 		var str_info = window.location.pathname;
 		var str_texting = new RegExp('info');
-		console.log(str_info);
+		//console.log(str_info);
 		if (str_texting.test(str_info)) {
-			console.log('info');
 			Infolodal_close();
 		} else {
-
-			console.log('no');
 			 lodal_close();
 			$('body').css('overflow-x', 'visible');
 			$('#modal_load').hide();
@@ -129,7 +126,6 @@ $(function() {
 				var major = $('.nr_js').text();
 				var value = $('#scbar_txt').val();
 				search_jump(major, value);
-				console.log('focus');
 			}
 		}
 	});
@@ -138,7 +134,7 @@ $(function() {
 		document.onkeydown = function(e) {
 			var ev = document.all ? window.event : e;
 			if (ev.keyCode == 13) {
-				console.log('blur');
+				//console.log('blur');
 			}
 		}
 	});
@@ -176,128 +172,26 @@ $(function() {
 	});
 
 
-function regs_zuce_email() 
-{
-	var email02 = $('.regs_mail').val();
-	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-	if (reg.test(email02)) 
-	{
-		$('.errregs').html('√邮箱合法').css('color', '#6fd415');
-		// 将正确的邮箱存进注册对象
-		regs_obj.objemail = email02;
-		// 判断是否两个输入框都合法
-		submit_judge(regs_obj.objemail, regs_obj.objpasd);
-	} else 
-	{
-		$('.errregs').html('×邮箱不合法').css('color', 'red');
-		regs_obj.objemail = null;
-	}
-	if (email02 == '') 
-	{
-		$('.errregs').html('×邮箱不能为空').css('color', 'red');
-		regs_obj.objemail = null;
-	 }
-}
-regs_zuce_email() ;
-$('.regs_mail').keyup(function(event){
-	regs_zuce_email() ;
-});
-
-	function regs_zuce_pasd(){
-		var pasd2 = $('.regs_pasd').val();
-		var reg = /^[A-Za-z]\w{5,15}$/;
-		if (reg.test(pasd2)) {
-			$('.pasd_p').html('√密码合法').css('color', '#6fd415');
-			// 注册确认密码
-			function regs_same_pasd(){
-				var pasd3 = $('.same_pasd').val();
-				if (pasd2 == pasd3) {
-					$('.same').html('√密码一致').css('color', '#6fd415');
-					// 将正确的密码存进注册对象
-					regs_obj.objpasd = pasd3;
-					// 判断是否两个输入框都合法
-					submit_judge(regs_obj.objemail, regs_obj.objpasd);
-
-				} else {
-					$('.same').html('×两次密码输入必须一致').css('color', 'red');
-					regs_obj.objpasd = null;
-
-				}
-			}
-			regs_same_pasd();
-			$('.same_pasd').keyup(function(event) {
-				regs_same_pasd();
-			});
-
-		} else {
-			$('.pasd_p').html('×输入6-15位以字母开头含有字母数字的密码').css('color', 'red');
-			regs_obj.objpasd = null;
-
-		}
-		if (pasd2 == '') {
-			$('.pasd_p').html('×密码不能为空').css('color', 'red');
-			regs_obj.objpasd = null;
-		}
-	}
-	regs_zuce_pasd();
-	$('.regs_pasd').keyup(function(event){
-		regs_zuce_pasd();
-	});
-
 	$('.tab').css({
 		position : 'absolute',
 		left : (wind_w - mod_w) / 2,
 		top : (wind_h - mod_h) / 2
 	});
 
-	// 注册按钮点击事件
+	// 注册按钮点击事件样式
 	$('.regsitem').click(function(event) {
 		$('.regspage').css('display', 'block');
 		$('.loadpage').css('display', 'none');
 		$('.regsitem').css('border-bottom', '2px solid #FF7F27');
 		$('.loaditem').css('border', 'none');
 	});
-	// 登录按钮点击事件
+	// 登录按钮点击事件样式
 	$('.loaditem').click(function(event) {
 		$('.regspage').css('display', 'none');
 		$('.loadpage').css('display', 'block');
 		$('.regsitem').css('border', 'none');
 		$('.loaditem').css('border-bottom', '2px solid #428BCA');
 	});
-	// 登录邮箱正则验证
-					function load_denglu_email(){
-						var email01 = $('.mail_inp').val();
-						//console.log(load_obj.objemail);
-						var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-						if (reg.test(email01)) {
-							$('.errmsg').html('√邮箱合法').css('color', '#6fd415');
-							// 将登录邮箱存进登录对象中
-							load_obj.objemail = email01;
-							load_judge(load_obj.objemail, load_obj.objpasd);
-							//console.log('存储'+load_obj.objemail);
-							
-						} else {
-							$('.errmsg').html('×邮箱不合法').css('color','red');
-						}
-						if (email01 == '') {
-							$('.errmsg').html('×邮箱不能为空').css('color','red');
-						}
-					}
-					load_denglu_email();
-	$('.mail_inp').keyup(function(event){
-		load_denglu_email();
-	});
-	// 获得登录密码
-		function load_denglu_pasd(){
-		var pasd1 = $('.pasd_inp').val();
-		// 将登录密码存进登录对象
-		load_obj.objpasd = pasd1;
-		load_judge(load_obj.objemail, load_obj.objpasd);
-	}
-load_denglu_pasd();
-$('.pasd_inp').keyup(function(event){
-	load_denglu_pasd();
-});
 
 	// 重置注册表单
 	$('.reset_regs').click(function(event) {
@@ -324,9 +218,9 @@ $('.pasd_inp').keyup(function(event){
 		var pasd = $('.same_pasd').val();
 		if(check_state==1)
 		{
-			$('.button_regs').attr('disabled', true);
-			$('.button_regs').css('background-color', '#cbcbcb');
-			register_ajax(email, pasd);	
+			//$('.button_regs').attr('disabled', true);
+			//$('.button_regs').css('background-color', '#cbcbcb');
+			register_ajax(regs_obj.objemail,regs_obj.objpasd);	
 		}
 	});
 
@@ -368,6 +262,110 @@ var load_obj = {
 		objemail : null,
 		objpasd : null
 	};
+//注册邮箱正则验证
+function regs_zuce_email() 
+{
+	var email02 = $('.regs_mail').val();
+	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	if (reg.test(email02)) 
+	{
+		$('.errregs').html('√邮箱合法').css('color', '#6fd415');
+		// 将正确的邮箱存进注册对象
+		regs_obj.objemail = email02;
+		// 判断是否两个输入框都合法
+		submit_judge();
+	} else 
+	{
+		$('.errregs').html('×邮箱不合法').css('color', 'red');
+		regs_obj.objemail = null;
+	}
+	if (email02 == '') 
+	{
+		$('.errregs').html('×邮箱不能为空').css('color', 'red');
+		regs_obj.objemail = null;
+	 }
+}
+regs_zuce_email() ;
+$('.regs_mail').keyup(function(event){
+	regs_zuce_email() ;
+});
+//注册邮箱正则验证结束
+//注册密码正则验证
+	function regs_zuce_pasd(){
+		var pasd2 = $('.regs_pasd').val();
+		var reg = /^[A-Za-z]\w{5,15}$/;
+		if (reg.test(pasd2)) {
+			$('.pasd_p').html('√密码合法').css('color', '#6fd415');
+			// 注册确认密码
+			function regs_same_pasd(){
+				var pasd3 = $('.same_pasd').val();
+				if (pasd2 == pasd3) {
+					$('.same').html('√密码一致').css('color', '#6fd415');
+					// 将正确的密码存进注册对象
+					regs_obj.objpasd = pasd3;
+					// 判断是否两个输入框都合法
+					submit_judge();
+
+				} else {
+					$('.same').html('×两次密码输入必须一致').css('color', 'red');
+					regs_obj.objpasd = null;
+
+				}
+			}
+			regs_same_pasd();
+			$('.same_pasd').keyup(function(event) {
+				regs_same_pasd();
+			});
+
+		} else {
+			$('.pasd_p').html('×输入6-15位以字母开头含有字母数字的密码').css('color', 'red');
+			regs_obj.objpasd = null;
+
+		}
+		if (pasd2 == '') {
+			$('.pasd_p').html('×密码不能为空').css('color', 'red');
+			regs_obj.objpasd = null;
+		}
+	}
+	regs_zuce_pasd();
+	$('.regs_pasd').keyup(function(event){
+		regs_zuce_pasd();
+	});
+	//注册密码正则验证结束
+	// 登录邮箱正则验证
+	function load_denglu_email(){
+		var email01 = $('.mail_inp').val();
+		var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+		if (reg.test(email01)) {
+			$('.errmsg').html('√邮箱合法').css('color', '#6fd415');
+			// 将登录邮箱存进登录对象中
+			load_obj.objemail = email01;
+			load_judge();
+			//console.log('存储'+load_obj.objemail);
+			
+		} else {
+			$('.errmsg').html('×邮箱不合法').css('color','red');
+		}
+		if (email01 == '') {
+			$('.errmsg').html('×邮箱不能为空').css('color','red');
+		}
+	}
+load_denglu_email();
+$('.mail_inp').keyup(function(event){
+load_denglu_email();
+});
+//登录密码正则验证开始
+function load_denglu_pasd(){
+var pasd1 = $('.pasd_inp').val();
+// 将登录密码存进登录对象
+load_obj.objpasd = pasd1;
+load_judge();
+}
+load_denglu_pasd();
+$('.pasd_inp').keyup(function(event){
+load_denglu_pasd();
+});
+//登录密码正则验证结束
 	
 $('.prompt').text("登录后相关数据才能显示！");
 $('.header .prompt').css("color","#428BCA");
@@ -387,11 +385,14 @@ function checkbox_agree()
 	{
 		console.log('true');
 		check_state=1;
+		submit_judge();
 		
 	}else
 	{
 		console.log('false');
 		check_state=0;
+		$('.button_regs').attr('disabled', true);
+		$('.button_regs').css('background-color', '#cbcbcb');
 	}
 }
 
@@ -406,12 +407,12 @@ function search_jump(major, value) {
 }
 
 //登录注册对象验证函数
-function submit_judge(email,pasd)
+function submit_judge()
 {
-	if((email!=null&&email!="")&&(pasd!=null&&pasd!="")){
+	if((regs_obj.objemail!=null&&regs_obj.objemail!="")&&(regs_obj.objpasd!=null&&regs_obj.objpasd!="")&&(check_state==1)){
 		$('.button_regs').attr('disabled', false);
 		$('.button_regs').css('background-color', '#FF7F27');
-//		submit_click(email,pasd);
+
 	}else{
 		// 邮箱和密码若有一个错误择提交按钮不可用\
 		$('.button_regs').attr('disabled', true);
@@ -421,15 +422,15 @@ function submit_judge(email,pasd)
 	}
 }
 
-function load_judge(email,pasd)
+function load_judge()
 {
-	if((email!=null&&email!="")&&(pasd!=null&&pasd!=""))
+	if((load_obj.objemail!=null&&load_obj.objemail!="")&&(load_obj.objpasd!=null&&load_obj.objpasd!=""))
 	{
 		$('.button_load').attr('disabled', false);
 		$('.button_load').css('background-color', '#428BCA');
 		
 		// 点击登录按钮
-//		load_submit(email,pasd);
+
 	}else{
 		$('.button_load').attr('disabled', true);
 		$('.button_load').css('background-color', '#cbcbcb');
@@ -460,6 +461,8 @@ function register_ajax(email, pasd){
 					//$('.button_regs').css('background-color', '#cbcbcb');
 					regs_obj.objemai=null;
 					regs_obj.objpasd=null;
+					regs_zuce_email(); 
+					regs_zuce_pasd();
 
 				} else {
 					// 若注册成功则向用户显示登录窗口
@@ -500,13 +503,12 @@ function load_ajax(email, pasd) {
 			if (data.status == 0) {
 				if (data.normalReturn.login == 'failure') {
 					$('.prompt').text('邮箱或密码错误').css('color','red');
-					//如果登录不成功清空表单
-					$('#loadform')[0].reset();
-					$('.errmsg').html('');
 					$('.button_load').attr('disabled', true);
 					$('.button_load').css('background-color', '#cbcbcb');
 					regs_obj.objemai=null;
 					regs_obj.objpasd=null;
+					load_denglu_pasd(); 
+					load_denglu_email();
 					
 				} else {
 					$.cookie("user", data.normalReturn.code, {
