@@ -73,7 +73,12 @@ function major_ajax(){
 		var data = eval('msg=' + msg);
 		if (data.status == 0)
 		   {
-			title_name=data.normalReturn.subjectName+'('+data.normalReturn.rankList.length+'个)';
+			title_name=data.normalReturn.subjectName+'(前'+data.normalReturn.rankList.length+'名)';
+			var subname=data.normalReturn.subjectName;
+			//title标签，keyword，discription
+			$('title').text(subname+'专业考研--爱推网--考研大数据');
+			$('meta[name="Keywords"]').attr('content',subname+'考研--'+subname+'专业大学排名--'+subname+'专业排行榜--'+subname+'专业排名--'+subname+'研究生教育排行榜--'+subname+'大学本科教育排行榜');
+			$('meta[name="Description"]').attr('content',subname+'专业排行榜综合考虑2012年教育部学位中心学科评估，武书连2014中国大学学科专业等的排名，拟合高校就业情况、社会声誉、生源质量生成爱推专业排行榜。');
 			//科目名称
 			$('.itemname').text(title_name);
 			//把接收到的数据存进自定义数组
@@ -86,6 +91,12 @@ function major_ajax(){
 			console.log(data.normalReturn.rankList);
 			var back_color='#FEBC80';
 			page_style(back_color);
+			if($(window).width>600){
+				$('.rank_0').css('margin-top','5%');
+			}else{
+				$('.rank_0').css('margin-top','9%');
+			}
+			
 		   }else
 		   {
 			 //404错误页面
@@ -115,6 +126,10 @@ function college_ajax(){
 			title_name='院校全国排名'+'('+data.normalReturn.collegeRankList.length+'所)';
 			//科目名称
 			$('.itemname').text(title_name);
+			//title标签，keyword，discription
+			$('title').text('中国大学排行榜--爱推网--考研大数据');
+			$('meta[name="Keywords"]').attr('content','中国考研--中国大学排行榜--中国大学排名--爱推|考研大数据。');
+			$('meta[name="Description"]').attr('content','中国大学排行榜综合考虑2014中国校友会网高校排行榜，武书连2014中国大学排行榜，拟合高校就业情况、社会声誉、生源质量生成爱推专业排行榜。');
 			//把接收到的数据存进自定义数组
 			for(var i=0;i<data.normalReturn.collegeRankList.length;i++)
 			{
@@ -153,9 +168,14 @@ function collegelocal_ajax(){
 		if (data.status == 0)
 		   {
 			title_name=data.normalReturn.area+'院校排名'+'('+data.normalReturn.collegeLocalRankList.length+'所)';
+			areaname=data.normalReturn.area;
 			//科目名称
 			$('.itemname').text(title_name);
 			//把接收到的数据存进自定义数组
+			//title标签，keyword，discription
+			$('title').text(areaname+'大学排行榜--爱推网--考研大数据');
+			$('meta[name="Keywords"]').attr('content',areaname+'考研--'+areaname+'大学排行榜--'+areaname+'大学排名--爱推|考研大数据。');
+			$('meta[name="Description"]').attr('content',areaname+'大学排行榜综合考虑2014中国校友会网高校排行榜，武书连2014中国大学排行榜，拟合高校就业情况、社会声誉、生源质量生成爱推专业排行榜。');
 			for(var i=0;i<data.normalReturn.collegeLocalRankList.length;i++)
 			{
 				data_array[i]=data.normalReturn.collegeLocalRankList[i];
@@ -373,8 +393,11 @@ function page_url()
 if(str_texting.test(str_major))
  {
 	major_ajax();
+	
 	var back_color='#FEBC80'; 
 	bottom_insert(back_color);
+
+	
 }
 //院校全国排名
 else if(str_texting2.test(str_major)){

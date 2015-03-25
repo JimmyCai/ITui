@@ -164,24 +164,27 @@ margin: 10px;
 .collname{
 font-size: 180%;
 }
-.rank_0{float: left;font-size: 200%;margin-top: 6%;margin-left: 10px;width:54px;height:54px;border:1px solid red;text-align:center;line-height:54px;}
+.level span{margin-right:10px;}
+.rank_0{float: left;font-size: 200%;margin-top: 10%;margin-left: 10px;width:54px;height:54px;text-align:center;line-height:54px;font-weight:700;}
 @media (max-width: 1320px){
 .header_h{max-width:50%;}
 .rank_area{max-width: 80%;}
 }
 @media (max-width: 1050px){
 .header_h{max-width:50%;}
-.logo{max-width:240px;margin-left:20%;}
+.logo{max-width:240px;height:64px;margin-left:20%;}
 .item_l .rank_area{margin-left: 120px;}
 .item_r .rank_area{margin-left: 80px;}
 .rank_area{max-width: 80%;}
 .collname{font-size: 180%;}
-.rank_0{font-size: 150%;font-weight: 700;margin-top: 5%;}
+.rank_0{font-size: 150%;font-weight: 700;margin-top: 11%;}
 .rank_wenzi span{font-size: 120%;}
 .pai p{font-size:150%;}
 }
 @media (max-width: 1020px){
-.item_l .rank_area{margin-left: 95px;}	
+.item_l .rank_area{margin-left: 95px;}
+.rank_0{font-size: 150%;font-weight: 700;margin-top: 8%;}
+	
 }
 @media (max-width: 950px){
 .logo{margin-left:10%;}
@@ -210,13 +213,14 @@ font-size: 180%;
 	margin-bottom:10px;
 }
 .rank_area{width:300px;}
-.rank_0{font-size: 150%;font-weight: 700;margin-top: 3%;}
+
 }
 @media (max-width: 798px){
 	.logo{margin-left:5%;}
-	.rank_area{width:220px;}
-	.item_l .rank_area{margin-left: 70px;}
+	.rank_area{width:250px;}
+	.item_l .rank_area{margin-left: 40px;}
 	.rank_wenzi p {margin-top:10px;margin-bottom:10px;}
+	.rank_0{font-size: 150%;font-weight: 700;margin-top: 14%;}
 	
 }
 
@@ -228,29 +232,30 @@ font-size: 180%;
 .sch_logo{width: 92px;height: 92px;}
 .logo_tp {margin:13px;}
 .logo_tp img{width: 66px;height: 66px;}
-.item_l .rank_area{margin-left: 55px;}
+.item_l .rank_area{margin-left: 20px;}
 .item_r .rank_area {margin-left:65px;}
 
 
 .rank_area{max-width: 80%;}
 .collname{font-size: 120%;}
-.rank_0{font-size: 120%;font-weight: 700;margin-top: 3%;}
+.rank_0{font-size: 180%;font-weight: 700;margin-top: 12%;}
 .rank_wenzi span{font-size: 100%;}
 .item_r .sch_logo{left:-44px;top:3px;}
 .item_l .sch_logo{right:-44px;top: 3px;}
 .rank_area{margin-top: 12px;margin-bottom: 12px;}
 }
 @media (max-width: 715px){
-.item_l .rank_area{margin-left: 55px;}
+.item_l .rank_area{margin-left: 15px;}
 .collname{font-size: 150%;}
-.rank_0{margin-top:7%;}
+.rank_0{margin-top:7%;font-size:180%;}
 }
 @media (max-width: 670px){
-.logo{max-width:200px;}
+.logo{max-width:200px;height:67px;}
 .pai p {font-size:140%;lline-height:40px;}
-.item_l .rank_area{margin-left: 10px;}
+.item_l .rank_area{margin-left: 0px;}
+.rank_0{font-size: 180%;font-weight: 700;margin-top: 13%;}
 }
-@media (max-width: 600px){
+@media (max-width: 610px){
 .nav_rank{width: 100%;}	
 .nav_rank p{width:100%;border-radius:0px;font-size:120%;}
 .sch_logo{width: 60px;height: 60px;}
@@ -259,19 +264,21 @@ font-size: 180%;
 .item_l .rank_area{margin-left: 0px;}
 .item_r .sch_logo{left:-34px;top: 10px;}	
 .item_l .sch_logo{right:-34px;top: 10px;}
-.item_r .rank_area {margin-left:50px;}
+.item_r .rank_area {margin-left:55px;}
 .header{height:60%;}
-.logo{max-width:160px;}
+.logo{max-width:160px;height:43px;}
 .pai{height:100%;}
 .pai p {font-size:140%;line-height:40px;}
+.rank_0{width:44px;height:44px;line-height:44px;font-size: 150%;font-weight: 700;margin-top: 13%;}
 }
 @media (max-width: 500px){
-.logo{max-width:120px;}
+.logo{max-width:120px;height:32px;}
 .pai{height:100%;}
 .pai p {font-size:120%;line-height:30px;}
 .item_r .rank_area{margin-left: 40px;}	
+.level span{margin-right:4px;}
 }
-@media (max-width: 400px){
+@media (max-width: 410px){
 .header_h{max-width:100%;}
 .nav_rank{width: 100%;}	
 .nav_rank p{width:100%;}
@@ -287,14 +294,20 @@ font-size: 180%;
 /*左边样式*/
 .item_l{border-right:none;margin-right: 0px;}
 .logo{margin-left:15%;}
-.rank_0 {margin-top: 20%;}
+.rank_0 {margin-top: 15%;}
+.rank_wenzi p{overflow:hidden;}
+.level span{float:left;}
+
 
 }
 
 /*-------------------bottom -------------------*/
-.level span{margin-right:10px;}
+
 .is211{border:1px solid #CD5DE3;padding:4px;border-radius:4px;}
 .is34{border:1px solid #5DB9E3;padding:4px;border-radius:4px;}
 .is985{border:1px solid #B2D155;padding:4px;border-radius:4px;}
-/*20150323*/
-
+/*20150325*/
+#cnzz_stat_icon_3967155 {
+   display:none;
+    
+}
