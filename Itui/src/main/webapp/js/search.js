@@ -670,9 +670,10 @@ function click_charu(){
 			{
 				charu(i);
 				if (type0 == "college") collage_hide();
-				jump_info();
+				
 				
 			}//点击插入标签结束
+			jump_info();
 		}
 
 
@@ -714,9 +715,9 @@ function click_charu(){
 //			   					console.log(i);
 			   					charu(i);
 			   					if (type0 == "college") collage_hide();
-			   					jump_info();
+			   					
 			   				}
-
+			   			jump_info();
 						 }else
 						 {
 //								404错误页面
