@@ -84,7 +84,6 @@ $(function() {
 			path : "/"
 		});
 
-		console.log($.cookie("about_index"));
 	});
 
 	// 给用户协议添加点击跳转函数
@@ -94,14 +93,13 @@ $(function() {
 			path : "/"
 		});
 		window.open("about.html");
-		console.log($.cookie("about_index"));
 	});
 	
 });
 // 页面加载函数结束
 //登录按钮样式
-$('#load').css('background-color', '#cbcbcb');
-$('#load').attr('disabled', true);
+//$('#load').css('background-color', '#cbcbcb');
+//$('#load').attr('disabled', true);
 // 注册按钮样式
 $('#register').css('background-color', '#cbcbcb');
 $('#register').attr('disabled', true);
@@ -202,12 +200,10 @@ $('#pasd2').keyup(function(event) {
 var check_state = 1;
 function checkbox_agree() {
 	if ($('.agree_input').prop('checked') == true) {
-		console.log('true');
 		check_state = 1;
 		index_submit_judge();
 
 	} else {
-		console.log('false');
 		check_state = 0;
 		 $('#register').attr('disabled', true);
 		 $('#register').css('background-color', '#cbcbcb');
@@ -216,7 +212,6 @@ function checkbox_agree() {
 
 $('.agree_input').click(function(event) {
 	checkbox_agree();
-	console.log(check_state);
 
 });
 
@@ -345,7 +340,7 @@ function load_denglu_pasd(){
 	var index_loadpasd1 = $('#pasd').val();
 	// 将登录密码存进登录对象
 	indexload_obj.objpasd = index_loadpasd1;
-	//index_load_judge();
+
 }
 
 
@@ -365,7 +360,7 @@ $('#pasd').keyup(function(event) {
 		load_denglu_pasd();
 		index_load_judge();
 		
-		
+
 	});
 
 // 首页登录ajax
@@ -379,12 +374,15 @@ function index_load_ajax(email, pasd) {
 			email : email,
 			password : pasd
 		},
+		before:function(){
+		$('.bt_p1 .bt_p01').text('正在登录……');	
+		},
 		success : function(msg) {
 			data = eval('msg=' + msg);
 			if (data.status == 0) {
 				if (data.normalReturn.login == 'failure') {
-					$('#load').attr('disabled', true);
-					$('#load').css('background-color', '#cbcbcb');
+					//$('#load').attr('disabled', true);
+					//$('#load').css('background-color', '#cbcbcb');
 					$('.bt_p01').text(data.normalReturn.msg + '请重新登录！').css(
 							'color', 'red');
 					$('#input_mail').focus();
@@ -394,8 +392,8 @@ function index_load_ajax(email, pasd) {
 				    load_denglu_pasd();
 
 				} else {
-					$('#load').attr('disabled', true);
-					$('#load').css('background-color', '#cbcbcb');
+					//$('#load').attr('disabled', true);
+					//$('#load').css('background-color', '#cbcbcb');
 					$('.bt_p01').text('恭喜你登录成功了！').css('color', 'red');
 					$.cookie('user', data.normalReturn.code, {
 						path : '/'
@@ -407,7 +405,6 @@ function index_load_ajax(email, pasd) {
 					}, 1500);
 					// 登录成功后改变登录状态显示
 					$('.load2 p').text("已登录");
-					console.log($.cookie('user'));
 					$('.load1').hide();
 					$('.load2').hide();
 					$('.logged').show();
@@ -460,7 +457,6 @@ function no_email_ajax() {
 // 判断用户是否登录
 if ($.cookie('user') != undefined) {
 	$('.load2 p').text("已登录");
-	console.log($.cookie('user'));
 	$('.load1').hide();
 	$('.load2').hide();
 	$('.logged').show();
