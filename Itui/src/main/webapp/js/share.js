@@ -646,7 +646,3 @@ $('.button_load').css({border:'none'});
 $('.agree_file').css('border','none');
 $('.errregs').css('text-align','center');
 $('#scbar_txt').css('padding-left','6px');
-//0326回顶部按钮样式
-$('.back_top').css('cursor','pointer');
-$('.ew_01').css('cursor','pointer');
-$('.dh li').eq(1).css('cursor','pointer');
