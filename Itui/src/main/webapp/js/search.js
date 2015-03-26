@@ -516,7 +516,7 @@ function jump_info(){
 				//location.href="info.html?major="+thisid_para;	
 				window.open("info.html?major="+thisid_para,"_blank");
 			}else {
-				window.open("info.html?major="+thisid_para,"_blank");
+				window.open("school.html?name="+thisid_para,"_blank");
 			}
 				
 		});	
