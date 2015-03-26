@@ -438,8 +438,9 @@ $(function(){
 function ajax_01 (data){
 	// 将接收到的数据存储进自定义对象内
 	$('.item_total').text(data.normalReturn.total);
+	console.log(data);
 	if(data.normalReturn.total==0)
-		{
+		{console.log('sddffg');
 		$('.total_0').css('display','block');
 		}else{
 			$('.total_0').css('display','none');	
