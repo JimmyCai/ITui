@@ -60,7 +60,7 @@ ul,ol,li{list-style:none}
 	padding-left: 4px;
 	float: left;
 }
-.head_top{float: left;/*max-height: 130px;*/}
+.head_top{float: left;margin-left:4px;}
 .head_top img{max-width: 100%;}
 .head_button{float: right;margin-top: 16px;}
 .container1{
