@@ -466,3 +466,18 @@ if ($.cookie('user') != undefined) {
 }
 //console.log($.cookie("username"));
 
+	$.ajax({
+		url : 'api/index',
+		type : 'get',
+		dataType : 'html',
+		success : function(msg) {
+			data = eval('msg=' + msg);
+			if (data.status == 0) {
+				console.log(data);
+			} else {
+
+			}
+		}
+	});
+
+
