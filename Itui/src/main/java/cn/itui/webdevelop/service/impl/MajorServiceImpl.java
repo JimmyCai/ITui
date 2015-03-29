@@ -7,6 +7,8 @@ import java.util.List;
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.dao.MajorInfoDao;
+import cn.itui.webdevelop.dao.StatsDao;
+import cn.itui.webdevelop.model.Stats;
 import cn.itui.webdevelop.service.MajorService;
 import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.EnDeCode;
@@ -16,6 +18,7 @@ public class MajorServiceImpl implements MajorService {
 	private MajorDao majorDao;
 	private MajorInfoDao majorInfoDao;
 	private CollegeDao collegeDao;
+	private StatsDao statsDao;
 	private int limit;
 	
 	/**
@@ -23,6 +26,7 @@ public class MajorServiceImpl implements MajorService {
 	 */
 	public String searchMajorsList(String condition, String category,
 			String subject, String major_type, String college_type, String area, int from) {
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
 
 		String is985 = "";
 		String is34 = "";
@@ -152,5 +156,12 @@ public class MajorServiceImpl implements MajorService {
 
 	public void setCollegeDao(CollegeDao collegeDao) {
 		this.collegeDao = collegeDao;
+	}
+	public StatsDao getStatsDao() {
+		return statsDao;
+	}
+
+	public void setStatsDao(StatsDao statsDao) {
+		this.statsDao = statsDao;
 	}
 }

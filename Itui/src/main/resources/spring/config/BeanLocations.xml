@@ -58,6 +58,8 @@
  				
  				<value>getCollegeRank</value>
  				<value>getCollegeLocalRank</value>
+ 				
+ 				<value>getPVStats</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>
@@ -70,6 +72,7 @@
  				<value>searchController</value>
  				<value>collegeController</value>
  				<value>userController</value>
+ 				<value>statsController</value>
  			</list>
  		</property>
  		<property name="interceptorNames">

@@ -7,8 +7,8 @@ package cn.itui.webdevelop.controller;
  */
 public class URLConstants {
 	
-	public static final String ROOT="/";
-	public static final String INDEX="/index";
+//	public static final String ROOT="/";
+//	public static final String INDEX="/index";
 	
 	public static final String GETMAJORINFO = "/getmajorinfo";
 	public static final String SEARCH="/back/search";
@@ -32,10 +32,9 @@ public class URLConstants {
 	public static final String SEND_RESET_EMAIL="/sendResetEmail";
 	public static final String RESEND_EMAIL="/resend_email";
 	
-	/*
-	 * add by liuzhidong
-	 * */
+
 	public static final String API_RANK_MAJOR="/api/rank/major";
 	public static final String API_RANK_COLLEGE="/api/rank/college";
 	public static final String API_RANK_LOCALRANK_COLLEGE="/api/rank/localrank/college";
+	public static final String API_INDEX="/api/index";
 }
