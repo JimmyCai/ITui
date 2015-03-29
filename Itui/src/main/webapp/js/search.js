@@ -438,8 +438,9 @@ $(function(){
 function ajax_01 (data){
 	// 将接收到的数据存储进自定义对象内
 	$('.item_total').text(data.normalReturn.total);
+	console.log(data);
 	if(data.normalReturn.total==0)
-		{
+		{console.log('sddffg');
 		$('.total_0').css('display','block');
 		}else{
 			$('.total_0').css('display','none');	
@@ -516,7 +517,7 @@ function jump_info(){
 				//location.href="info.html?major="+thisid_para;	
 				window.open("info.html?major="+thisid_para,"_blank");
 			}else {
-				window.open("info.html?major="+thisid_para,"_blank");
+				window.open("school.html?name="+thisid_para,"_blank");
 			}
 				
 		});	
@@ -670,9 +671,10 @@ function click_charu(){
 			{
 				charu(i);
 				if (type0 == "college") collage_hide();
-				jump_info();
+				
 				
 			}//点击插入标签结束
+			jump_info();
 		}
 
 
@@ -714,9 +716,9 @@ function click_charu(){
 //			   					console.log(i);
 			   					charu(i);
 			   					if (type0 == "college") collage_hide();
-			   					jump_info();
+			   					
 			   				}
-
+			   			jump_info();
 						 }else
 						 {
 //								404错误页面

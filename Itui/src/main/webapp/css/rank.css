@@ -150,7 +150,8 @@ margin-right: 30px;
 .diffcult,.level{font-size: 150%;}
 
 }
-
+.level span{font-size:80%;}
+.diffcult span{font-size:80%;}
 .item_r .rank_area{
 margin-left: 80px;
 }

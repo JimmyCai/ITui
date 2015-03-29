@@ -562,7 +562,7 @@ var rank_item2 = '院校全国排名';
 var rank_item3 = '院校省内排名';
 function ranking_charu(rank_value, rank_tag, rank_item) {
 	if(rank_value==-1){
-		$('.rank_tp1 p ').css('font-size','20px');
+		$('.rank_tp1 .rank_p').css('font-size','30px');
 		rank_value='不参与排名';
 	}
 	var ranking = '<p class="rank_p">' + rank_value + '</p><p class="pai">'
