@@ -10,8 +10,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import cn.itui.webdevelop.dao.StatsDao;
 import cn.itui.webdevelop.dao.UserDao;
 import cn.itui.webdevelop.dao.UserInfoDao;
+import cn.itui.webdevelop.model.Stats;
 import cn.itui.webdevelop.service.UserService;
 import cn.itui.webdevelop.utils.ResponseUtil;
 
@@ -21,6 +23,7 @@ public class UserServiceImpl implements UserService {
 	public static final String RESET_SUBJECT = "爱推帐户密码重置";
 	private UserDao userDao;
 	private UserInfoDao userInfoDao;
+//	private StatsDao statsDao;
 	public static String HTMLTEXT = "http://www.itui.cn/sure.html";
 	public static String RESETURL = "http://www.itui.cn/reset.html";
 	private JavaMailSender javaMailSender;
@@ -28,6 +31,9 @@ public class UserServiceImpl implements UserService {
 	private String systemEmail;
 
 	public String doLogin(String email, String password) throws Exception {
+		
+//		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		HashMap<String, Object> usermap = userDao.match(email, password);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (usermap != null) {
@@ -55,6 +61,9 @@ public class UserServiceImpl implements UserService {
 	 */
 	public String doRegister(String email, String password, String code,
 			int type) throws Exception {
+		
+//		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		HashMap<String, Object> matchmap = userDao.match(email, null);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (matchmap == null) {
@@ -225,7 +234,6 @@ public class UserServiceImpl implements UserService {
 
 	public String sendResetEmail(String email, String password)
 			throws Exception {
-		// TODO Auto-generated method stub
 		HashMap<String, Object> match = userDao.match(email, null);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		if (match != null) {

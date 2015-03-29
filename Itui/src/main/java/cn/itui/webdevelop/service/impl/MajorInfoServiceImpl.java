@@ -11,9 +11,11 @@ import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.dao.MajorInfoDao;
 import cn.itui.webdevelop.dao.RetestDao;
 import cn.itui.webdevelop.dao.ScoreDao;
+import cn.itui.webdevelop.dao.StatsDao;
 import cn.itui.webdevelop.model.College;
 import cn.itui.webdevelop.model.MajorInfo;
 import cn.itui.webdevelop.model.Retest;
+import cn.itui.webdevelop.model.Stats;
 import cn.itui.webdevelop.service.MajorInfoService;
 import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.ResponseUtil;
@@ -31,10 +33,15 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	private ScoreDao scoreDao;
 	private RetestDao retestDao;
 	private FollowMajorDao followMajorDao;
+	private StatsDao statsDao;
 	private MajorRecommendFilter majorRecommendFilter;// 对数据库查询得到的major数据进行过滤
 	private CollegeRecommendFilter collegeRecommendFilter;// 对数据库查询得到的college数据进行过滤
 
+
 	public String getMajorInfo(String userCode, int majorId) throws Exception {
+		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		// get major main info, base info, college logo and rank info
 		HashMap<String, Object> majorAllInfos = majorInfoDao
 				.findMajorAllInfoByMajorId(majorId);
@@ -79,6 +86,9 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	}
 
 	public String getRetestInfo(int majorId) throws Exception {
+		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		try {
 			Retest retest = retestDao.findRetestByMajorId(majorId);
 			String jsonResult = ResponseUtil.wrapNormalReturn(retest);
@@ -93,6 +103,9 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 			MajorRecommendResult recommendMajors,
 			List<HashMap<String, Object>> candidateMajors, int collegeId,
 			int majorId, String code) throws Exception {
+		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		int needCount = SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT
 				- recommendMajors.getMajors().size();
 		List<HashMap<String, Object>> allMajors = majorDao
@@ -286,11 +299,22 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	public void setFollowMajorDao(FollowMajorDao followMajorDao) {
 		this.followMajorDao = followMajorDao;
 	}
+	
+	public StatsDao getstatsDao() {
+		return statsDao;
+	}
+
+	public void setStatsDao(StatsDao statsDao) {
+		this.statsDao = statsDao;
+	}
 
 	/*
 	 * add
 	 */
 	public String getMajorRank(int majorId) throws Exception {
+		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		// get major main info, base info, college logo and rank info
 		List<HashMap<String, Object>> majorAllInfos = majorInfoDao
 				.findMajorAllRankInfoByMajorId(majorId);

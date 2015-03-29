@@ -466,3 +466,37 @@ if ($.cookie('user') != undefined) {
 }
 //console.log($.cookie("username"));
 
+function total_Insert(span_str){
+	var one_span;
+	var two_span;
+	two_span= span_str.substring(1, span_str.length); 
+	one_span=span_str[0];
+
+	var total_insert='<span class="one">'+one_span+'</span> <span class="two">'+two_span+'</span>';
+	return total_insert;
+}
+//首页搜索总数统计
+	$.ajax({
+		url : 'api/index',
+		type : 'get',
+		dataType : 'html',
+		success : function(msg) {
+			data = eval('msg=' + msg);
+			if (data.status == 0) {			  	
+				$('.total_ul li').eq(0).find('.total_p01').append(total_Insert(data.normalReturn.statsInfo.total.toString()));
+				$('.total_ul li').eq(1).find('.total_p01').append(total_Insert(data.normalReturn.statsInfo.today.toString()));
+				$('.total_ul li').eq(2).find('.total_p01').append(total_Insert(data.normalReturn.statsInfo.user_num.toString()));
+				console.log(data);
+				
+			} else {
+				// 404错误页面
+				var err_msg = data.errMessage;
+				$.cookie("err_msg", err_msg, {
+					path : "/"
+				});
+				location.href = "error.html";
+			}
+		}
+	});
+
+
