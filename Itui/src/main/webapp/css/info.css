@@ -2077,11 +2077,15 @@ color: #666;
 	margin-top: 20px;
 	cursor: pointer;
 	float: left;
-	margin-left:46px;
-
+	margin-left: -46px
+	
 
 }
 
+@-moz-document url-prefix() { .button_load { margin-left:46px; } }
+
+@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) { head~body .button_load { margin-left:46px; } }
+@media all and (min-width:0px){ .button_load {margin-left:46px;} }
 .reset_load
 {
 	width:100px;

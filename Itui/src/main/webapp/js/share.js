@@ -158,7 +158,7 @@ $(function() {
 		});
 	});
 	$('.drop_menu').mouseleave(function(event) {
-		$('.drop_menu').css('display', '#fff 2px 2px 2px');
+		$('.drop_menu').css('display', 'none');
 	});
 
 	$('.collect').mouseenter(function(event) {
@@ -206,8 +206,8 @@ $(function() {
 	$('.reset_load').click(function(event){
 		$('#loadform')[0].reset();
 		$('.errmsg').html('');
-		$('.button_load').attr('disabled', true);
-		$('.button_load').css('background-color', '#cbcbcb');
+		//$('.button_load').attr('disabled', true);
+		//$('.button_load').css('background-color', '#cbcbcb');
 	});
 
 	$('.button_regs').click(function(event){
@@ -218,8 +218,6 @@ $(function() {
 		var pasd = $('.same_pasd').val();
 		if(check_state==1)
 		{
-			//$('.button_regs').attr('disabled', true);
-			//$('.button_regs').css('background-color', '#cbcbcb');
 			register_ajax(regs_obj.objemail,regs_obj.objpasd);	
 		}
 	});
@@ -227,9 +225,11 @@ $(function() {
 	$('.button_load').click(function(event) {
 			//如果验证争取则登录按钮可点
 			event.preventDefault();
-			$('.button_load').attr('disabled', true);
-			$('.button_load').css('background-color', '#cbcbcb');
-			load_ajax(load_obj.objemail, load_obj.objpasd);
+			//$('.button_load').attr('disabled', true);
+			//$('.button_load').css('background-color', '#cbcbcb');
+			load_denglu_email();  load_denglu_pasd();
+			load_judge();
+			//load_ajax(load_obj.objemail, load_obj.objpasd);
 	});
 	//点击用户协议跳转
 	$('.agree_p').click(function(event){
@@ -340,7 +340,7 @@ $('.regs_mail').keyup(function(event){
 			$('.errmsg').html('√邮箱合法').css('color', '#6fd415');
 			// 将登录邮箱存进登录对象中
 			load_obj.objemail = email01;
-			load_judge();
+			//load_judge();
 			//console.log('存储'+load_obj.objemail);
 			
 		} else {
@@ -350,7 +350,7 @@ $('.regs_mail').keyup(function(event){
 			$('.errmsg').html('×邮箱不能为空').css('color','red');
 		}
 	}
-load_denglu_email();
+//load_denglu_email();
 $('.mail_inp').keyup(function(event){
 load_denglu_email();
 });
@@ -359,9 +359,9 @@ function load_denglu_pasd(){
 var pasd1 = $('.pasd_inp').val();
 // 将登录密码存进登录对象
 load_obj.objpasd = pasd1;
-load_judge();
+//load_judge();
 }
-load_denglu_pasd();
+//load_denglu_pasd();
 $('.pasd_inp').keyup(function(event){
 load_denglu_pasd();
 });
@@ -428,12 +428,12 @@ function load_judge()
 	{
 		$('.button_load').attr('disabled', false);
 		$('.button_load').css('background-color', '#428BCA');
-		
+		load_ajax(load_obj.objemail, load_obj.objpasd);
 		// 点击登录按钮
 
 	}else{
-		$('.button_load').attr('disabled', true);
-		$('.button_load').css('background-color', '#cbcbcb');
+		//$('.button_load').attr('disabled', true);
+		//$('.button_load').css('background-color', '#cbcbcb');
 	}
 }
 
@@ -498,13 +498,17 @@ function load_ajax(email, pasd) {
 			"email" : email,
 			"password" : pasd
 		},
+		complete:function(){
+			$('.button_load').attr('disabled', false);
+			$('.button_load').css('background-color', '#428BCA');
+		},
 		success : function(msg) {
 			data = eval('msg=' + msg);
 			if (data.status == 0) {
 				if (data.normalReturn.login == 'failure') {
 					$('.prompt').text('邮箱或密码错误').css('color','red');
-					$('.button_load').attr('disabled', true);
-					$('.button_load').css('background-color', '#cbcbcb');
+					//$('.button_load').attr('disabled', true);
+					//$('.button_load').css('background-color', '#cbcbcb');
 					regs_obj.objemai=null;
 					regs_obj.objpasd=null;
 					load_denglu_pasd(); 
@@ -635,10 +639,14 @@ $('.button_regs').attr('disabled', true);
 $('.button_regs').css('background-color', '#cbcbcb');
 $('.button_regs').css({border:'none'});
 //登录按钮样式
-$('.button_load').attr('disabled', true);
-$('.button_load').css('background-color', '#cbcbcb');
+//$('.button_load').attr('disabled', true);
+//$('.button_load').css('background-color', '#cbcbcb');
 $('.button_load').css({border:'none'});
 //注册重置按钮样式
 $('.agree_file').css('border','none');
 $('.errregs').css('text-align','center');
 $('#scbar_txt').css('padding-left','6px');
+//0326回顶部按钮样式
+$('.back_top').css('cursor','pointer');
+$('.ew_01').css('cursor','pointer');
+$('.dh li').eq(1).css('cursor','pointer');
