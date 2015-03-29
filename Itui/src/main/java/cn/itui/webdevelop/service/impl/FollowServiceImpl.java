@@ -9,6 +9,8 @@ import java.util.Set;
 
 import cn.itui.webdevelop.dao.FollowCollegeDao;
 import cn.itui.webdevelop.dao.FollowMajorDao;
+import cn.itui.webdevelop.dao.StatsDao;
+import cn.itui.webdevelop.model.Stats;
 import cn.itui.webdevelop.service.FollowService;
 import cn.itui.webdevelop.utils.EnDeCode;
 import cn.itui.webdevelop.utils.ResponseUtil;
@@ -22,6 +24,7 @@ public class FollowServiceImpl implements FollowService{
 	public static final String DISFOLLOWMAJOR_SUCCESS = "取消关注专业成功！";
 	private FollowCollegeDao followCollegeDao;
 	private FollowMajorDao followMajorDao;
+
 	
 	private final static int MD5LENGTH = 32;
 
@@ -48,7 +51,7 @@ public class FollowServiceImpl implements FollowService{
 		int imr = followMajorDao.insertFollowMajor(code, majorId);
 		if(imr != 1)
 			throw DatabaseException.getInstance();
-		followCollegeDao.insertFollowCollegeWithMajorId(code, majorId);		
+		followCollegeDao.insertFollowCollegeWithMajorId(code, majorId);	
 		return ResponseUtil.wrapNormalReturn(FOLLOWMAJOR_SUCCESS);
 	}
 
