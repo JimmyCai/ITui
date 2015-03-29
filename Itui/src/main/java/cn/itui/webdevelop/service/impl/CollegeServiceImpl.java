@@ -8,7 +8,9 @@ import java.util.Map;
 
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.FollowCollegeDao;
+import cn.itui.webdevelop.dao.StatsDao;
 import cn.itui.webdevelop.model.College;
+import cn.itui.webdevelop.model.Stats;
 import cn.itui.webdevelop.service.CollegeService;
 import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.EnDeCode;
@@ -21,6 +23,7 @@ import cn.itui.webdevelop.utils.exception.DatabaseException;
 public class CollegeServiceImpl implements CollegeService {
 	private CollegeDao collegeDao;
 	private FollowCollegeDao followCollegeDao;
+	private StatsDao statsDao;
 	private int limit;
 
 	/**
@@ -31,6 +34,9 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @return 搜索结果的json
 	 */
 	public String searchCollegeList(String condition, String area, String collegeType, int from) {
+		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		/*****分词*****/
 		condition = WordParticiple.participle(condition);
 		System.out.println(condition);
@@ -114,6 +120,9 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @throws DatabaseException 
 	 */
 	public String findSchoolsById(String code, int collegeId) throws DatabaseException {
+		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		HashMap<String, Object> result = collegeDao.getCollegeInfo(collegeId);
 		List<String> schools=null;
 		try {
@@ -135,6 +144,9 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @author warrior
 	 */
 	public String findMajorsBySchool(int collegeId, String school) {
+		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		List<HashMap<String, Object>> majors = collegeDao.findMajorsBySchool(collegeId,school);
 		for(HashMap<String, Object> curList : majors) {
 			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
@@ -165,6 +177,9 @@ public class CollegeServiceImpl implements CollegeService {
 	 * */
 
 	public String getCollegeRank(int collegeId) throws Exception {
+		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		List<HashMap<String, Object>> collegesInfos = collegeDao.getCollegeRankInfos();
 		if (collegesInfos == null)
 			throw DatabaseException.getInstance();
@@ -199,6 +214,8 @@ public class CollegeServiceImpl implements CollegeService {
 
 	public String getCollegeLocalRank(int collegeId) throws Exception {
 		
+		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		
 		List<HashMap<String, Object>> collegesInfos = collegeDao.getCollegeLocalRankInfos(collegeId);
 		if (collegesInfos == null)
 			throw DatabaseException.getInstance();
@@ -231,6 +248,13 @@ public class CollegeServiceImpl implements CollegeService {
 		jsonMap.put("area", area);
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
 		return jsonStr;
+	}
+	public StatsDao getStatsDao() {
+		return statsDao;
+	}
+
+	public void setStatsDao(StatsDao statsDao) {
+		this.statsDao = statsDao;
 	}
 
 }
