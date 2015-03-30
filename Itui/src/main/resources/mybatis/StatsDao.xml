@@ -26,7 +26,7 @@
 	<insert id="creatNewRecord" parameterType="string">
 	    INSERT INTO
 	          pv_stats
-	    VALUES(#{date},1)    
+	    VALUES(#{date},1,1)    
 	</insert>
 	
 	<select id="getTodayStatsInfo" parameterType="string" resultType="java.util.HashMap">

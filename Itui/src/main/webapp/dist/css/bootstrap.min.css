@@ -116,3 +116,7 @@ label{
 .no_email p{
 	text-align:center;
 }
+@media (max-width: 600px){
+.btn{padding:0px;}	
+}
+
