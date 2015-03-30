@@ -1,6 +1,5 @@
 package cn.itui.webdevelop.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,12 +21,14 @@ public class StatsServiceImpl implements StatsService {
 	}
 
 	public String getPVStats() throws Exception {
-		//get user num
-		int user_num = statsDao.getUserNum();
+		//get user num,set the user num basic value is 567
+		int user_num = statsDao.getUserNum()+567;
 		//get last record date,if not exists creat a new one record
 		if(!(Stats.getDate().equals(statsDao.getLastRecordDate()))){
 			statsDao.creatNewRecord(Stats.getDate());
 		}
+		
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		List<HashMap<String, Object>> todayStatsInfo = statsDao.getTodayStatsInfo(Stats.getDate());
 		if (todayStatsInfo == null)

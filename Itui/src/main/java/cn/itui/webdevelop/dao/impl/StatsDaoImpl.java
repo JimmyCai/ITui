@@ -10,8 +10,11 @@ import cn.itui.webdevelop.dao.StatsDao;
 public class StatsDaoImpl implements StatsDao {
 	private SqlSession sqlSession;
 
-	public void refreshStats(String date) {
-	    sqlSession.update("cn.itui.webdevelop.dao.StatsDao.refreshStats", date);	
+	public void refreshStats(String date, int randomNum) {
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("date", date);
+		parameterMap.put("randomNum", randomNum);
+	    sqlSession.update("cn.itui.webdevelop.dao.StatsDao.refreshStats", parameterMap);	
 	}
 
 	public List<HashMap<String, Object>> getTodayStatsInfo(String date) {
