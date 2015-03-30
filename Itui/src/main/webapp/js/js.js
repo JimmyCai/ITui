@@ -95,6 +95,9 @@ $(function() {
 		window.open("about.html");
 	});
 	
+	
+	
+	
 });
 // 页面加载函数结束
 //登录按钮样式
@@ -270,7 +273,23 @@ function index_register_ajax(email, pasd) {
 //					$('.ecqu').html('');
 					$('#input_mail2').focus();
 				} else {
-					$('.bt_p02').text('先去邮箱查看邮件激活吧!').css('color', 'red');
+					//$('.bt_p02').text('先去邮箱查看邮件激活吧!').css('color', 'red');
+					$('.modal-footer').html("");
+					$('.modal-body').css('height','100px');
+					var no_email='<div class="no_email"><p class="no_emP">没有收到邮件</p></div>';
+					$('.modal-body').append(no_email);
+					$('.no_email').css({
+						'width':'100%',
+						'margin-left': 'auto',
+						'margin-right':'auto',
+						'float':'none'
+					});
+					$('.bt_p02').css({
+						'float':'left',
+						'font-size':'20px',
+						'color':'red'
+						});
+					$('.bt_p02').text('先去邮箱查看邮件激活吧!');
 				}
 
 			} else {
@@ -499,4 +518,5 @@ function total_Insert(span_str){
 		}
 	});
 
-
+	
+	
