@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itui.webdevelop.dao.StatsDao">
-    <update id="refreshStats" parameterType="string">
+    <update id="refreshStats" parameterType="map">
 		UPDATE
 		      pv_stats 
-		SET times= times+1 
+		SET true_times= true_times+1 ,
+		    times=times+(#{randomNum})
 		WHERE date=#{date}
 	</update>
 	
@@ -26,7 +27,7 @@
 	<insert id="creatNewRecord" parameterType="string">
 	    INSERT INTO
 	          pv_stats
-	    VALUES(#{date},1)    
+	    VALUES(#{date},1,1)    
 	</insert>
 	
 	<select id="getTodayStatsInfo" parameterType="string" resultType="java.util.HashMap">

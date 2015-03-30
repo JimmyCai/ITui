@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	public static final String RESET_SUBJECT = "爱推帐户密码重置";
 	private UserDao userDao;
 	private UserInfoDao userInfoDao;
-//	private StatsDao statsDao;
+	private StatsDao statsDao;
 	public static String HTMLTEXT = "http://www.itui.cn/sure.html";
 	public static String RESETURL = "http://www.itui.cn/reset.html";
 	private JavaMailSender javaMailSender;
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 	public String doLogin(String email, String password) throws Exception {
 		
-//		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		HashMap<String, Object> usermap = userDao.match(email, password);
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 	public String doRegister(String email, String password, String code,
 			int type) throws Exception {
 		
-//		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		HashMap<String, Object> matchmap = userDao.match(email, null);
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -119,11 +119,20 @@ public class UserServiceImpl implements UserService {
 	public void setUserInfoDao(UserInfoDao userInfoDao) {
 		this.userInfoDao = userInfoDao;
 	}
+	
+	public StatsDao getStatsDao() {
+		return statsDao;
+	}
+
+	public void setStatsDao(StatsDao statsDao) {
+		this.statsDao = statsDao;
+	}
 
 	/**
 	 * @param code 激活码
 	 */
 	public String activate(String code) throws Exception {
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		int id = userDao.activate(code);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (id > 0) {
@@ -144,6 +153,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	public boolean sendMail(String to, String subject, String vmFile,
 			HashMap<String, Object> model) throws Exception {
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		try {
 			MimeMessage msg = javaMailSender.createMimeMessage();
 			MimeMessageHelper msgHelper = new MimeMessageHelper(msg);
@@ -184,6 +194,7 @@ public class UserServiceImpl implements UserService {
 	 * @param password 密码
 	 */
 	public String resetPassword(String email, String password) throws Exception {
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		int id = userDao.updatePassword(email, password);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		if (id > 0) {
@@ -202,6 +213,7 @@ public class UserServiceImpl implements UserService {
 	 * @param email邮箱地址
 	 */
 	public String resendEmail(String email) throws Exception {
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		HashMap<String, Object> match = userDao.match(email, null);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		if (match != null) {
@@ -234,6 +246,7 @@ public class UserServiceImpl implements UserService {
 
 	public String sendResetEmail(String email, String password)
 			throws Exception {
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		HashMap<String, Object> match = userDao.match(email, null);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		if (match != null) {

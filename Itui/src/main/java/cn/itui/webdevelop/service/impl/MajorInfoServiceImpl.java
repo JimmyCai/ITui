@@ -40,7 +40,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 
 	public String getMajorInfo(String userCode, int majorId) throws Exception {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		// get major main info, base info, college logo and rank info
 		HashMap<String, Object> majorAllInfos = majorInfoDao
@@ -87,7 +87,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 
 	public String getRetestInfo(int majorId) throws Exception {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		try {
 			Retest retest = retestDao.findRetestByMajorId(majorId);
@@ -104,7 +104,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 			List<HashMap<String, Object>> candidateMajors, int collegeId,
 			int majorId, String code) throws Exception {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		int needCount = SimilarMajorRecommendFilter.SAMECOLLEGE_MAJORCOUNT
 				- recommendMajors.getMajors().size();
@@ -313,7 +313,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	 */
 	public String getMajorRank(int majorId) throws Exception {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		// get major main info, base info, college logo and rank info
 		List<HashMap<String, Object>> majorAllInfos = majorInfoDao

@@ -24,6 +24,7 @@ public class FollowServiceImpl implements FollowService{
 	public static final String DISFOLLOWMAJOR_SUCCESS = "取消关注专业成功！";
 	private FollowCollegeDao followCollegeDao;
 	private FollowMajorDao followMajorDao;
+	private StatsDao statsDao;
 
 	
 	private final static int MD5LENGTH = 32;
@@ -59,6 +60,7 @@ public class FollowServiceImpl implements FollowService{
 	 * 获取用户关注的学校，参数为用户code
 	 */
 	public String getFollowColleges(String code) throws ParameterErrorException {
+		statsDao.refreshStats(Stats.getDate(), (int)(Math.random()*(5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		if(code.length() != MD5LENGTH)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
 		List<HashMap<String, Object>> result = followCollegeDao.findFollowCollegeByUserCode(code);
@@ -69,6 +71,7 @@ public class FollowServiceImpl implements FollowService{
 	 * 获取用户关注的专业，参数为用户code，其中包含了关注的学校
 	 */
 	public String getFollowMajors(String code) throws ParameterErrorException {
+		statsDao.refreshStats(Stats.getDate(), (int)(Math.random()*(5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		if(code.length() != MD5LENGTH)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ERROR_MESSAGE);
 		List<HashMap<String, Object>> followMajors = followMajorDao.findFollowMajorByUserCode(code);
@@ -183,6 +186,14 @@ public class FollowServiceImpl implements FollowService{
 
 	public void setFollowMajorDao(FollowMajorDao followMajorDao) {
 		this.followMajorDao = followMajorDao;
+	}
+	
+	public void setStatsDao(StatsDao statsDao){
+		this.statsDao = statsDao;
+	}
+	
+	public StatsDao getsStatsDao(){
+		return statsDao;
 	}
 
 }

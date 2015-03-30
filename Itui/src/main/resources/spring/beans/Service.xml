@@ -50,6 +50,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="followService" class="cn.itui.webdevelop.service.impl.FollowServiceImpl">
 		<property name="followCollegeDao" ref="followCollegeDao"></property>	
 		<property name="followMajorDao" ref="followMajorDao"></property>
+		<property name="statsDao" ref="statsDao"></property>
 	</bean>
 	
 	<!-- 邮件发送配置 -->
@@ -72,6 +73,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		<property name="javaMailSender" ref="javaMailSender"></property>
 		<property name="systemEmail" value="${email.systemEmail}"></property>
 		<property name="velocityEngine" ref="velocityEngine"></property>
+		<property name="statsDao" ref="statsDao"></property>
 	</bean>
 	
 	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">

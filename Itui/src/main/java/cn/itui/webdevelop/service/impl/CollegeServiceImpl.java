@@ -35,7 +35,7 @@ public class CollegeServiceImpl implements CollegeService {
 	 */
 	public String searchCollegeList(String condition, String area, String collegeType, int from) {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		/*****分词*****/
 		condition = WordParticiple.participle(condition);
@@ -121,7 +121,7 @@ public class CollegeServiceImpl implements CollegeService {
 	 */
 	public String findSchoolsById(String code, int collegeId) throws DatabaseException {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		HashMap<String, Object> result = collegeDao.getCollegeInfo(collegeId);
 		List<String> schools=null;
@@ -145,7 +145,7 @@ public class CollegeServiceImpl implements CollegeService {
 	 */
 	public String findMajorsBySchool(int collegeId, String school) {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		List<HashMap<String, Object>> majors = collegeDao.findMajorsBySchool(collegeId,school);
 		for(HashMap<String, Object> curList : majors) {
@@ -178,7 +178,7 @@ public class CollegeServiceImpl implements CollegeService {
 
 	public String getCollegeRank(int collegeId) throws Exception {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		List<HashMap<String, Object>> collegesInfos = collegeDao.getCollegeRankInfos();
 		if (collegesInfos == null)
@@ -214,7 +214,7 @@ public class CollegeServiceImpl implements CollegeService {
 
 	public String getCollegeLocalRank(int collegeId) throws Exception {
 		
-		statsDao.refreshStats(Stats.getDate());//增加一次浏览量
+		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		List<HashMap<String, Object>> collegesInfos = collegeDao.getCollegeLocalRankInfos(collegeId);
 		if (collegesInfos == null)
