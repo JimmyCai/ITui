@@ -244,11 +244,11 @@ function schoolList_ajax() {
 schoolList_ajax();
 
 
-var collage_text = "你发额巨份给你发333";
+var collage_text = "";
 // var school_obj={name:''};
 // console.log(school_obj.name);
 var school_name = '';
-var majorname = '发额巨份给你发333';
+var majorname = '';
 var major_htmlcode = '';
 
 // 专业标签插入函数

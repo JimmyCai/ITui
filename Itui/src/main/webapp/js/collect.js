@@ -29,13 +29,13 @@ $.ajaxSetup({
 });
 // 收藏列表学校插入自定义函数开始
 
-var coll_name = "北京大学";
-var follow_count = 8;
-var major_name = "计算机及应用";
+var coll_name = "";
+var follow_count;
+var major_name = "";
 
 function listsch_insert(id_ul, coll_name, follow_count, collage_id) {
 
-	major_name = "计算机及应用";
+	major_name = "";
 	var listsch_htmlcode = '<div class="sch_part sch_part0'
 			+ id_ul
 			+ '">\
