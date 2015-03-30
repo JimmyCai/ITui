@@ -999,3 +999,13 @@ $('.bar0').mouseenter(function(event) {
 	$('.tip_p0' + index).css('display', 'none');
 	console.log(index);
 });
+
+//2015/03/30编辑
+//$('.li_trip').css('display','none');
+$('.Ranking li').mouseenter(function(){
+	$(this).children('.li_trip').css('display','block');
+	$(this).siblings('li').children('.li_trip').css('display','none');
+	
+}).mouseleave(function(){
+	$(this).children('.li_trip').css('display','none');
+});
