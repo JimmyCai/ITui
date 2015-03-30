@@ -2622,3 +2622,20 @@ margin-right:auto;
 	line-height: 20px;
 	color:#428BCA;
 }
+.rank{
+	position:relative;
+}
+.li_trip{
+	filter:alpha(opacity=60); 
+	-moz-opacity:0.6; 
+	opacity:0.6;
+	background-color: #000;
+    border-radius: 4px;
+    height: 30px;
+    left: 84px;
+    position: absolute;
+    top: 240px;
+    width: 150px;
+    display:none;
+	}
+.li_trip p{font-size:16px;color:#fff;line-height:30px;text-align:center;}
