@@ -37,7 +37,8 @@ public class SearchController{
 		String condition = request.getParameter("c");
 		if (condition==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		condition = condition.replace(" ", "");
-
+		System.out.println(new String(condition.getBytes("iso-8859-1"), "utf-8"));
+		
 		String area = request.getParameter("a");
 
 		if (area==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);

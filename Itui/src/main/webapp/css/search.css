@@ -465,6 +465,7 @@ display:none;
 	cursor: pointer;
 	position:relative;
 	margin-top:16px;
+	display:none;
 	
 }
 .cond span{

@@ -326,6 +326,7 @@ function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 //页面加载函数结束
 //设置全局的404错误跳转页面
 $.ajaxSetup({
+	//contentType: "application/x-www-form-urlencoded",
     statusCode: {
         404: function () {
         	var err_msg = data.errMessage;
@@ -340,11 +341,12 @@ $.ajaxSetup({
 function getPar(par){
     //获取当前URL
     var local_url =decodeURI(document.location.href) ; 
+    console.log(document.location.href);
     //获取要取得的get参数位置
     var get = local_url.indexOf(par +"=");
     if(get == -1){
         return false;   
-    }   
+    }  
     //截取字符串
     var get_par = local_url.slice(par.length + get + 1);    
     //判断截取后的字符串是否还有其他get参数
@@ -405,9 +407,10 @@ var type0=null;
 var l=num_0;
 
 $(function(){
+	console.log(xueke5);
 //从信息页跳转过来第一次ajax
 	$.ajax({
-	 	url: 'back/search.html?t='+t1+'&c='+xueke5,
+	 	url: 'back/search.html?t='+t1+'&c='+encodeURIComponent(xueke5),
 		 type: 'post',
 		 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,l:num_0},
 		 beforeSend:function()
@@ -436,6 +439,7 @@ $(function(){
 });
 
 function ajax_01 (data){
+	console.log('ajax');
 	// 将接收到的数据存储进自定义对象内
 	$('.item_total').text(data.normalReturn.total);
 	console.log(data);
@@ -573,7 +577,8 @@ function charu(i){
 		</li>';
 						
 	$('.main_ul').append(htmlcode01);
-}//封装插入标签函数结束
+}
+//封装插入标签函数结束
 
 var pageText = 15;
 function pageShow(ThisPage,PageCount){
