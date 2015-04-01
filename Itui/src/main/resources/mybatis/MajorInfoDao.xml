@@ -64,6 +64,7 @@
 			major_info.math as math,
 			college.id as collegeId,
 			college.name as college,
+			college.code as collegeCode,
 			college.logo as logo,
 			college.is_211 as is211,
 			college.is_985 as is985,
@@ -72,7 +73,7 @@
 			college.local_rank as localRank,
 			major.id as majorId,
 			major.name as name,
-			major.code as code,
+			major.code as majorCode,
 			major.school as school,
 			major.subject_id as subjectId,
 			major.type as type

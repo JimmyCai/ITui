@@ -50,7 +50,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 
 		int followId = followMajorDao.isUserFollowMajor(userCode, majorId);
 
-		String code = (String) majorAllInfos.get("code");
+		String code = (String) majorAllInfos.get("majorCode");
 		int collegeId = (Integer) majorAllInfos.get("collegeId");
 
 		// get year-score infos
@@ -134,6 +134,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 				EnDeCode.encodePara((Integer) majorAllInfos.get("majorId")));
 		baseInfoMap.put("logo", majorAllInfos.get("logo"));
 		baseInfoMap.put("majorName", majorAllInfos.get("name"));
+		baseInfoMap.put("majorCode", majorAllInfos.get("majorCode"));
 		baseInfoMap.put("typeInfo", College.getTypeString(
 				(Integer) majorAllInfos.get("is211"),
 				(Integer) majorAllInfos.get("is985"),
@@ -141,6 +142,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 		baseInfoMap.put("school", majorAllInfos.get("school"));
 		baseInfoMap.put("collegeId",
 				EnDeCode.encodePara((Integer) majorAllInfos.get("collegeId")));
+		baseInfoMap.put("collegeCode", majorAllInfos.get("collegeCode"));
 		baseInfoMap.put("followId", followId);
 		baseInfoMap.put("college", majorAllInfos.get("college"));
 

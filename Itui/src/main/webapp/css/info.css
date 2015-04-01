@@ -2639,3 +2639,5 @@ margin-right:auto;
     display:none;
 	}
 .li_trip p{font-size:16px;color:#fff;line-height:30px;text-align:center;}
+.schcode,.majorcode{margin-left:12px;font-size:14px;color:#777;}
+.schcode,.majorcode span{font-size:14px;color:#777;}

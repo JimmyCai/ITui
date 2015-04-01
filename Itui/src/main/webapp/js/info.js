@@ -294,7 +294,13 @@ function major_ajax() {
 					var data = eval('msg=' + msg);
 					if (data.status == 0) 
 					{
+						
 						data = data.normalReturn;
+						console.log(data);
+						console.log(data.baseInfo.majorCode);
+						//学校编码
+						$('.sch_code').text(data.baseInfo.collegeCode);
+						$('.major_code').text(data.baseInfo.majorCode);
 						var baseInfo = data.baseInfo;
 						$('.coll_1').append(data.baseInfo.college + '/');
 						cid_name=data.baseInfo.college;
