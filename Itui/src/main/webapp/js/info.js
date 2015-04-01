@@ -261,7 +261,8 @@ $('.Ranking li').eq(1).click(function(event){
 //点击院校省内排名跳转
 $('.Ranking li').eq(2).click(function(event){
 	if($('.Ranking li').eq(2).find('.rank_p').text()!='不参与排名'){
-		window.open("provincerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");	
+		window.open("provincerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
+		
 	}
 	
 });

@@ -18,11 +18,12 @@ $(function() {
 	function search_jump(major, value) {
 		if (major == "专业") {
 			major = 1;
-			window.open("search.html?t=" + major + "&c=" + value + "&#.");
+			window.open("search.html?t=" + major + "&c=" + encodeURIComponent(value) + "&#.");
+			console.log(encodeURIComponent(value));
 		} else {
 			major = 2;
 			window
-					.open("search_school.html?t=" + major + "&c=" + value
+					.open("search_school.html?t=" + major + "&c=" + encodeURIComponent(value)
 							+ "&#.");
 		}
 	}

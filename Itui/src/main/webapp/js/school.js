@@ -396,7 +396,7 @@ function load_modal(wind_w, wind_h, mod_w, mod_h) {
 		top : (wind_h - mod_h) / 2
 	});
 
-	
+
 
 	// 关闭登录模态框
 	$('.close').click(function(event) {
