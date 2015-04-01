@@ -275,7 +275,7 @@ function page_search(xueke0,xueke1,xueke2,xueke3,xueke4,xueke5,t1,num_0){
 			 $('.load_wait').css('display','none');
 		 },
 		 success: function(msg) {
-		location.href="search.html?t="+t1+"&c="+xueke5+"&#.";
+		location.href="search.html?t="+t1+"&c="+encodeURIComponent(xueke5)+"&#.";s
 		 var data=eval("msg="+msg);			 
 		  if(data.status=='0'){
 			  $(".main_ul").html('');
@@ -407,8 +407,9 @@ var l=num_0;
 $(function(){
 //从信息页跳转过来第一次ajax
 	$.ajax({
-	 	url: 'back/search.html?t='+t1+'&c='+xueke5,
+	 	url: 'back/search.html?t='+t1+'&c='+encodeURIComponent(xueke5),
 		 type: 'post',
+		 datatype:'html',
 		 data: {cg:xueke0,sj:xueke1,mt:xueke3,ct:xueke2,a:xueke4,l:num_0},
 		 beforeSend:function()
 		 {
