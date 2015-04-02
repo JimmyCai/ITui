@@ -385,7 +385,8 @@ function majorList_ajax(course_trim) {
 
 // 点击专业出发ajax
 function major_jump(mid) {
-	location.href = "info.html?major=" + mid;
+	//location.href = "info.html?major=" + mid;
+	window.open("info.html?major="+mid,"_blank");
 }
 // 登录模态框
 function load_modal(wind_w, wind_h, mod_w, mod_h) {
