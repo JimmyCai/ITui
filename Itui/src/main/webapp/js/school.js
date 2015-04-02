@@ -72,7 +72,6 @@ $(function() {
 			path : "/"
 		});
 
-		console.log($.cookie("about_index"));
 	});	
 
 });
@@ -167,7 +166,7 @@ function schoolList_ajax() {
 		},
 		success : function(msg) {
 			var data = eval('msg=' + msg);
-			console.log(data);
+			
 			if (data.status == 0) {
 				
 				// 获得学校的logo和所属城市
@@ -221,7 +220,7 @@ function schoolList_ajax() {
 				var nav02_H=$('#nav02').height()+30;
 				$('#nav02').css('height',nav02_H+'px');
 				
-				console.log($('#nav02').height());
+				
 			}else
 			{
 			//404错误页面
@@ -446,7 +445,6 @@ function attention_ajax() {
 		},
 		success : function(msg) {
 			var data = eval('msg=' + msg);
-			console.log("status:" + data.status);
 			if (data.status == 0) {
 				cancel_atten();
 			} else 
@@ -457,7 +455,6 @@ function attention_ajax() {
 					{
 					$.cookie("err_msg",err_msg, {path : "/"});
 					location.href="error.html";
-					console.log('参数2');
 					}else
 					{
 						console.log('参数0');
@@ -489,7 +486,7 @@ function cancelattention_ajax() {
 					{
 					$.cookie("err_msg",err_msg, {path : "/"});
 					location.href="error.html";
-					console.log('参数2');
+					
 					}else
 					{
 						console.log('参数0');

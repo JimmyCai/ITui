@@ -209,9 +209,9 @@ $(function() {
 			path : "/"
 		});
 
-		console.log($.cookie("about_index"));
+		
 	});	
-	console.log($('.sch_info h3').text());
+	
 });
 // 页面加载函数结束
 
@@ -249,7 +249,7 @@ $('.Ranking li').eq(0).click(function(event){
 		window.open("majorrank.html?major=" + thisid, "_blank");
 	}
 	
-	console.log($('.Ranking li').eq(0).find('.rank_p').text());
+	
 });
 //点击院校全国排名跳转
 $('.Ranking li').eq(1).click(function(event){
@@ -296,8 +296,7 @@ function major_ajax() {
 					{
 						
 						data = data.normalReturn;
-						console.log(data);
-						console.log(data.baseInfo.majorCode);
+					
 						//学校编码
 						$('.sch_code').text(data.baseInfo.collegeCode);
 						$('.major_code').text(data.baseInfo.majorCode);
@@ -306,7 +305,7 @@ function major_ajax() {
 						cid_name=data.baseInfo.college;
 						// 获得followid
 						followid = baseInfo.followId;
-						console.log("获得"+followid);
+						
 						Attention();
 						//改变title标签
 						$('title').text(baseInfo.majorName+'-'+baseInfo.school+'-'+data.baseInfo.college+'-爱推网-考研大数据');
@@ -340,7 +339,7 @@ function major_ajax() {
 						
 						ranking_charu(data.rankInfo.majorRank, rank_tag1,
 								rank_item1);
-						console.log(data.rankInfo.majorRank);
+						
 
 						ranking_charu(data.rankInfo.collegeRank, rank_tag2,
 								rank_item2);
@@ -422,7 +421,6 @@ function major_ajax() {
 									maininfo[i].majorName, maininfo[i].color,
 									maininfo[i].schoolName);
 						}
-						// console.log(maininfo[0].schoolName);
 						// 插入柱状图的四个标签
 						bar_tag(1, data.majorRecommendInfo.similarCount);
 						bar_tag(2, data.majorRecommendInfo.nearCount);
@@ -446,7 +444,6 @@ function major_ajax() {
 									maininfo_collage[i].collegeId);
 						}
 
-						// console.log(data.rankInfo.majorRank);
 						
 					}else
 					{
@@ -467,7 +464,7 @@ major_ajax();
 // nav01页面头信息
 function base_info(img_logo, majorname, schoolname, type_211, type_985,
 		type_34, collageid) {
-	console.log(img_logo);
+	
 	$('.sch_name').find('img').attr('src',
 			'http://www.itui.cn/itui/images/' + img_logo);
 	$('.sch_info').find('h3').text(majorname);
@@ -525,7 +522,7 @@ function grade_charuA(data) {
 	charu_A();
 	for (i = 0; i < arr_grade.length; i++) {
 		if (arr_grade[i] == A_A) {
-			console.log("S+" + strA);
+			
 			$('.grade').eq(i).find('span').css('color', '#FFAF68');
 		}
 	}
@@ -836,7 +833,7 @@ function cookie_click(bar_index, majorname, schoolname) {
 	// var href_id=$.cookie("href_id");
 	// var href_majnam=$.cookie("majorname");
 	// var href_schnam=$.cookie("schoolname");
-	console.log('新的' + thisid);
+	
 
 }
 
@@ -904,7 +901,7 @@ function cancel_atten() {
 function Attention() {
 	if (followid == -1) {
 		atten();
-		console.log("未关注");
+		
 	} else {
 		cancel_atten();
 	}
@@ -1004,7 +1001,7 @@ $('.bar0').mouseenter(function(event) {
 }).mouseleave(function(event) {
 	var index = $(this).index();
 	$('.tip_p0' + index).css('display', 'none');
-	console.log(index);
+	
 });
 
 //2015/03/30编辑
