@@ -155,8 +155,7 @@ public class CollegeController {
 		}catch (Exception e){
 			throw MyNumberFormatException.getInstance();
 		}
-		String result = collegeService.getCollegeLocalRank(collegeId);
-		return result;
+		return collegeService.getCollegeLocalRank(collegeId);
 		
 	}
 }

@@ -37,4 +37,5 @@ public class URLConstants {
 	public static final String API_RANK_COLLEGE="/api/rank/college";
 	public static final String API_RANK_LOCALRANK_COLLEGE="/api/rank/localrank/college";
 	public static final String API_INDEX="/api/index";
+	public static final String API_COURSE="/api/course";
 }
