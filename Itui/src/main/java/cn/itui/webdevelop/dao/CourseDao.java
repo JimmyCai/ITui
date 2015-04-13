@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface CourseDao {
 
-	public List<HashMap<String, Object>> getCourseInfo();
+	public List<HashMap<String, Object>> getAllCourseInfo();
 
 }

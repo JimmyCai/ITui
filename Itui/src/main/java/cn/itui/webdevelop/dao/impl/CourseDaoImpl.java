@@ -18,8 +18,8 @@ public class CourseDaoImpl implements CourseDao {
 		this.sqlSession = sqlSession;
 	}
 
-	public List<HashMap<String, Object>> getCourseInfo() {
-		return sqlSession.selectList("cn.itui.webdevelop.dao.CourseDao.getCourseInfo");
+	public List<HashMap<String, Object>> getAllCourseInfo() {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.CourseDao.getAllCourseInfo");
 	}
 
 }

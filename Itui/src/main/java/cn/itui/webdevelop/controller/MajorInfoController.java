@@ -125,8 +125,7 @@ public class MajorInfoController {
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
 
-		String retJson = majorInfoService.getMajorRank(majorId);
-		return retJson;
+		return majorInfoService.getMajorRank(majorId);
 	}
 
 }

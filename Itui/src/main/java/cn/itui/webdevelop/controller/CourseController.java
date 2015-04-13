@@ -27,8 +27,7 @@ public class CourseController {
 		String code = request.getParameter(CODE);
 		if(code == null)
 			throw NotLoginException.getInstance();
-		String retJson = courseService.getAllCourseInfo();
-		return retJson;
+		return courseService.getAllCourse();
 	}
 
 }

@@ -14,5 +14,13 @@ public class Stats {
 	    String date = format.format(new Date()); 
 		return date;
 	}
+	/*
+	 * 获取以HHmm24小时制格式的时间
+	 * */
+	public static String getTime(){
+		java.text.DateFormat format = new java.text.SimpleDateFormat("HHmm"); 
+	    String time = format.format(new Date()); 
+		return time;
+	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import cn.itui.webdevelop.dao.CourseDao;
 import cn.itui.webdevelop.dao.StatsDao;
+import cn.itui.webdevelop.model.Course;
 import cn.itui.webdevelop.model.Stats;
 import cn.itui.webdevelop.service.CourseService;
 import cn.itui.webdevelop.utils.EnDeCode;
@@ -32,11 +33,11 @@ public class CourseServiceImpl implements CourseService {
 		this.statsDao = statsDao;
 	}
 
-	public String getAllCourseInfo() throws Exception {
+	public String getAllCourse() throws Exception {
 		statsDao.refreshStats(Stats.getDate(), (int) ((Math.random() * 5) + 1));// 实际增加一次浏览量，生成（1-5）的随机浏览量
 
 		List<HashMap<String, Object>> allCourseInfo = courseDao
-				.getCourseInfo();
+				.getAllCourseInfo();
 		if (allCourseInfo == null)
 			throw DatabaseException.getInstance();
 		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String,Object>>();
@@ -51,11 +52,7 @@ public class CourseServiceImpl implements CourseService {
 			teacherInfo.put("orgWeb", allCourseInfo.get(i).get("orgWeb"));
 			
 			HashMap<String, Object> courseInfo = new HashMap<String, Object>();
-//			courseInfo.put("teacherId", EnDeCode.encodePara((Integer) allCourseInfo.get(i).get("teacherId")));
-//			courseInfo.put("teacherName", allCourseInfo.get(i).get("teacherName"));
-//			courseInfo.put("photo", allCourseInfo.get(i).get("photo"));
-//			courseInfo.put("orgName", allCourseInfo.get(i).get("orgName"));
-//			courseInfo.put("orgWeb", allCourseInfo.get(i).get("orgWeb"));
+			courseInfo.put("dateType", Course.getDateType(allCourseInfo.get(i).get("startDay"), allCourseInfo.get(i).get("endDay")));
 			courseInfo.put("summary", allCourseInfo.get(i).get("summary"));
 			courseInfo.put("startDay", allCourseInfo.get(i).get("startDay"));
 			courseInfo.put("startTime", allCourseInfo.get(i).get("startTime"));
