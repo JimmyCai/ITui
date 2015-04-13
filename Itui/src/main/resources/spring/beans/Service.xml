@@ -22,6 +22,9 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="statsController" class="cn.itui.webdevelop.controller.StatsController">
 		<property name="statsService" ref="statsService"></property>
 	</bean>
+	<bean id="courseController" class="cn.itui.webdevelop.controller.CourseController">
+	    <property name="courseService" ref="courseService"></property>
+	</bean>
 
 	<bean id="majorInfoService" class="cn.itui.webdevelop.service.impl.MajorInfoServiceImpl">
 		<property name="collegeDao" ref="collegeDao"></property>
@@ -91,6 +94,11 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	
 	<bean id="statsService" class="cn.itui.webdevelop.service.impl.StatsServiceImpl">
 		<property name="statsDao" ref="statsDao"></property>
+	</bean>
+	
+	<bean id="courseService" class="cn.itui.webdevelop.service.impl.CourseServiceImpl">
+	    <property name="courseDao" ref="courseDao"></property>
+	    <property name="statsDao" ref="statsDao"></property>
 	</bean>
 	
 </beans>

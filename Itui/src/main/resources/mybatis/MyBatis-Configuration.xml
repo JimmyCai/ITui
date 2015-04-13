@@ -16,5 +16,6 @@
         <mapper resource="./mybatis/FollowCollegeDao.xml"/>
         <mapper resource="./mybatis/FollowMajorDao.xml"/>
         <mapper resource="./mybatis/StatsDao.xml"/>
+        <mapper resource="./mybatis/CourseDao.xml"/>
     </mappers>
 </configuration>
