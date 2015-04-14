@@ -186,7 +186,7 @@ var li_html='\
 
 function card_ajax(){
 	$.ajax({
-		url: '02.php',
+		url: 'api/course',
 		type: 'post',
 		dataType: 'html',
 		success:function(msg){

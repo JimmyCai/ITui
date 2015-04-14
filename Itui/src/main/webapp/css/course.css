@@ -27,7 +27,7 @@ body{
 	font-family: "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 14px;
 	background-color: #fff;
-	margin-top: 14px;
+	margin-top: 34px;
 
 }
 .nav_item{
@@ -182,6 +182,7 @@ padding-left: 16px;
 	float: right;
 	margin-right: 3%;
 	margin-top: 23px;
+	cursor: pointer;
 }
 .go-btn{
 	background-color: #F87466;
@@ -204,6 +205,11 @@ padding-left: 16px;
 	color: #fff;
 	float: left;
 	padding-left: 4px;
+	
+}
+.go-on a:hover{
+text-decoration: none;
+color: #fff;	
 }
 .p-tag{
 	margin-left: 12%;
@@ -217,8 +223,7 @@ padding-left: 16px;
 .mian-nav{
 	width: 1024px;
 	margin: 0 auto;
-	overflow: hidden;
-	background-color: pink;
+	/*overflow: hidden;*/
 
 }
 #scbar_form{
