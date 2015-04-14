@@ -1,0 +1,375 @@
+@charset "utf-8";
+/* CSS Document */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, button, p, blockquote, th, td {padding:0;font-family:"Microsoft Yahei", verdana, helvetica, clean, sans-serif;outline: 0;word-break:break-all;word-wrap:break-word;}
+
+h1,h2,h3,h4,h5,h6,button,input,select,textarea{margin: 0px;padding: 0px;}
+body{
+	background-color:#eee;
+	webkit-text-size-adjust:none;
+
+}
+a{
+	text-decoration: none;
+}
+ul{
+	list-style: none;
+}
+body{
+	background-color:#eee;
+}
+
+.container{
+	background-color: red;
+	margin-top: 0px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	box-shadow: #CCC -6px 0px 6px -6px, #CCC 6px 0px 6px -6px;
+	font-family: "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	background-color: #fff;
+	margin-top: 14px;
+
+}
+.nav_item{
+	border-bottom:1px solid #cbcbcb;
+}
+.nav_item div{
+background-color: #fff;
+text-align: center;
+}
+.nav-top{
+	width: 100%;
+	height: 60px;
+	background-color: #fff;
+	margin:0 auto;
+	border-bottom: 1px solid #cbcbcb
+
+
+}
+.nav_item{
+
+	background-color: #cbcbcb;
+}
+
+.nav_item .item_icon01{
+	background-color: #fff;
+	font-size: 20px;
+	color: #666;
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 10px;
+}
+.item_icon01 .img-icon{
+	max-width: 60px;
+	max-height: 60px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.card{
+	margin:0 auto;
+	max-width: 80%;
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+.card-li{
+	border: 1px solid #cbcbcb;
+	overflow: hidden;
+	margin-top: 20px;
+	border-radius: 4px;
+}
+.li-img{
+	width: 842px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.div-item{
+	background-color: #ffaf67;
+	font-size: 26px;
+	text-align: center;
+	font-weight: 400;
+	color: #fff;
+	line-height: 60px;
+	border-radius: 4px;
+}
+.tech{
+	overflow: hidden;
+}
+.techer-logo{
+	max-width: 74px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	background-color: red;
+	overflow: hidden;
+	float: left;
+	margin-left: 18px;
+}
+.tech p{
+	font-size: 32px;
+	color: #666;
+	float: left;
+	line-height: 74px;
+	margin-left: 18px;
+}
+.price-p span{
+	font-size: 48px;
+	color:#ffaf67;
+	
+	
+}
+.tech .price-p{
+margin-right: 2%;
+	float: right;
+}
+.message{
+	font-size: 32px;
+	color: #848480;
+	text-align: left;
+	padding-left: 8%;
+}
+.start{
+	margin-left: 6%;
+}
+.course_s img{
+	max-width: 30px;
+	max-height: 30px;
+	margin-top: -4px;
+}
+.course_s{
+	float: left;
+}
+.course_s span{
+	font-size: 18px;
+}
+.start-s{
+	color: #9bcd3f;
+	padding-left: 10px;
+}
+.course_s{
+padding-left: 16px;
+}
+.course-01{
+	overflow: hidden;
+	margin-top: 20px;
+}
+.course_s .span-p{
+	margin-left: 10px;
+}
+.stop_time{
+	margin-right: 10px;
+}
+.span-p{
+	color: #666;
+}
+.sch img{
+	max-width: 30px;
+	max-height: 30px;
+}
+.sch-left{
+	float: left;
+	margin-left: 8%;
+}
+.sch span{
+	font-size: 18px;
+	color: #666;
+	margin-left: 10px;
+}
+.sch-plat{
+	margin-top: 20px;
+}
+.gouon{
+	float: right;
+	margin-right: 3%;
+	margin-top: 23px;
+}
+.go-btn{
+	background-color: #F87466;
+	border-radius: 6px;
+	width: 150px;
+	height: 60px;
+	padding-top: 12px;
+}
+#trianle{
+	width: 0;
+    height: 0;
+    border-top: 16px solid transparent;
+    border-left: 32px solid #fff;
+    border-bottom: 16px solid transparent;
+    margin-left: 10px;
+    float: left;
+}
+.go-on a{
+	font-size: 24px;
+	color: #fff;
+	float: left;
+	padding-left: 4px;
+}
+.p-tag{
+	margin-left: 12%;
+	margin-bottom: 40px;
+}
+.span-tag{
+	font-size: 16px;
+	color: #fb8f2d;
+	padding-left: 10px;
+}
+.mian-nav{
+	width: 1024px;
+	margin: 0 auto;
+	overflow: hidden;
+	background-color: pink;
+
+}
+#scbar_form{
+	float: right;
+	margin-top: 10px;
+}
+/*搜索框开始*/
+.form-search-site{
+width: 45%;	
+/*background-color: pink;*/
+}
+.input01{
+/*max-width: 100%;*/
+margin-left: auto;
+margin-right: auto;	
+height: 60px;
+
+}
+.dropdown{
+	max-width: 15%;
+border:1px solid #cbcbcb;
+	float: left;
+	border-radius: 4px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+
+}
+#scbar_txt{
+	width: 60%;
+	border-right:none;
+}
+.d_down,.sou,.search_input{
+	float: left;
+}
+.dropdown-menu{
+	width: 100%;
+}
+.form-control{
+	border-left: none;
+}
+#sou{
+	border: 1px solid #cbcbcb;
+}
+/*搜索框结束*/
+@media (max-width:1100px){
+.message {
+	font-size: 24px;
+}
+}
+@media (max-width:1024px){
+	.mian-nav{
+		width: 100%;
+	}
+}
+@media (max-width:990px){
+.stop{
+	margin-left: 4%;
+	margin-top: 10px;
+}
+.form-search-site {
+    width: 50%;
+}
+}
+@media (max-width:1024px){
+
+}
+@media (max-width:768px){
+.form-search-site {
+    width: 65%;
+}
+}
+@media (max-width:768px){
+	.nav_item{display: none;}
+	.item_icon01 .img-icon{
+	max-width: 40px;
+	max-height: 40px;
+}
+.nav_item .item_icon01{
+	font-size: 16px;
+}
+}
+@media (max-width: 520px){
+	.form-search-site {
+    width: 90%;
+}
+.div-item {
+	line-height: 40px;
+}
+.go-btn{
+	width: 100px;
+height: 40px;}
+#trianle {
+    width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-left: 20px solid #FFF;
+    border-bottom: 10px solid transparent;
+    margin-left: 5px;
+    float: left;
+}
+.go-on a{
+	font-size: 16px;
+	line-height: 16px;
+}
+.p-tag{
+margin-bottom: 20px;	
+}
+.message{
+	font-size: 18px;
+	text-align: left;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+}
+@media (max-width:460px){
+	.gouon{
+		float: left;
+		margin-left: 15%;
+	}
+	.price-p span{
+		font-size: 24px;
+		line-height: 56px;
+	}
+
+}
+@media (max-width: 455px){
+	
+}
+@media (max-width:435px){
+	.card {
+		max-width: 80%;
+	}
+	.techer-logo{
+		max-width: 56px;
+		height: 56px;
+	}
+	.tech p{
+		font-size: 24px;
+		line-height: 56px;
+	}
+	.price-p span{
+		font-size: 24px;
+		line-height: 56px;
+	}
+	.course_s span {
+		font-size: 14px;
+	}
+}
+@media (min-width: 200px) and (max-width: 768px) {
+
+}
+
+	
