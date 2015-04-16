@@ -5,7 +5,11 @@ import java.util.Date;
 /**
  * 每访问一次页面，增加一次页面访问量
  * */
-public class Stats {
+public class Stats implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -672144559396137460L;
 	/*
 	 * 获取以yyyyMMdd格式的日期
 	 * */
