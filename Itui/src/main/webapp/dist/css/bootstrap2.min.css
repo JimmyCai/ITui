@@ -17,7 +17,7 @@ padding-left: 0px;
 padding-right: 0px;
 }
 .dropdown-menu{
-	min-width: 100%;
+	min-width: 60px;
 }
 .form-control{
 	border-left: none;
@@ -31,4 +31,13 @@ padding-right: 0px;
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
 	
+}
+@media (max-width:460px){
+	.dropdown-men{
+	min-width:140%;
+	}
+	.dropdown-menu > li > a {
+	padding-left:14px;
+	}
+
 }

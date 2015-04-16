@@ -72,7 +72,11 @@ function li_insert(index){
 	orgsrc=cards[index].teacherInfo.orgWeb;
 	platsrc=cards[index].courseInfo.platformWeb;
 	livesrc=cards[index].courseInfo.liveSrc;
-
+	console.log(typeof(cards[index].courseInfo.price));
+	if(cards[index].courseInfo.price==0||cards[index].courseInfo.price==''){
+		price=='免费';
+		$('.price-p span').css('color', '#9BCD3F');
+	}
 	if(cards[index].courseInfo.dateType==0){
 		datetype='今天';
 	}
@@ -122,7 +126,7 @@ var li_html='\
 						<div class="course-01">\
 							<div class="tech">\
 								<div class="techer-logo">\
-									<img src="images/'+techerlogo+'" alt="" class="img-responsive">\
+									<img src="http://www.itui.cn/itui/images/teachers/'+techerlogo+'" alt="" class="img-responsive">\
 								</div>\
 								<p>'+techername+'</p>\
 								<p class="price-p">\
@@ -161,12 +165,14 @@ var li_html='\
 								</div>\
 							</div>\
 							<div class="gouon">\
+							<a target="_blank" href="'+livesrc+'">\
 								<div class="go-btn">\
 									<div id="trianle"></div>\
 									<span class="go-on">\
-										<a target="_blank" href="'+livesrc+'">前往观看</a>\
+										前往观看\
 									</span>\
 								</div>\
+							</a>\
 							</div>\
 						</div>\
 						<div class="course-01">\
@@ -185,20 +191,22 @@ var li_html='\
 
 
 function card_ajax(){
+	
 	$.ajax({
 		url: 'api/course',
-		type: 'post',
+		type: 'get',
 		dataType: 'html',
 		success:function(msg){
 		var data = eval('msg='+msg);
 		if (data.status == 0){
+			console.log(123);
 			var cardslength=data.normalReturn.courseList.length;
 			// 将接收数据赋值给自定义数组
 			for(w=0;w<cardslength;w++)
 			{
 				cards[w]=data.normalReturn.courseList[w];
 			}
-			console.log(cards[3]);
+			//console.log(cards[3]);
 			//根据数组长度插入名片
 				if(cards.length<=3)
 				{

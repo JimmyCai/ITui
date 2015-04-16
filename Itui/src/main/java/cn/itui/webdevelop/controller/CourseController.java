@@ -24,9 +24,9 @@ public class CourseController {
 
 	@RequestMapping(value=URLConstants.API_COURSE)
 	public String getCourseInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String code = request.getParameter(CODE);
-		if(code == null)
-			throw NotLoginException.getInstance();
+//		String code = request.getParameter(CODE);
+//		if(code == null)
+//			throw NotLoginException.getInstance();
 		return courseService.getAllCourse();
 	}
 
