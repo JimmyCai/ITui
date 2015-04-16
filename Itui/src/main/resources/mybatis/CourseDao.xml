@@ -25,5 +25,46 @@
         WHERE concat(course.end_day,course.end_time)&gt;= date_format(now(6),'%Y%m%d%H:%m')
         ORDER BY CONCAT(course.start_day,course.start_time) ASC 
     </select>
+    
+    <insert id="insertTeacherInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+	    INSERT INTO
+	          teacher(name,photo,organization,organization_web)
+	    VALUES(#{teacherName},#{photoName},#{org},#{orgWeb},)  
+	</insert>
+	
+	<insert id="insertCourseInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+	    INSERT INTO
+	          course(start_day,start_time,end_day,end_time,teacher_id,lesson,summary,price,platform,platform_web,live_src,tag)
+	    VALUES(#{startDay},#{startTime},#{endDay},#{endTime},#{teacherId},#{lesson},#{summary},#{price},#{platform},#{platformWeb},#{liveSrc},#{tag})  
+	</insert>
+	
+	<!-- 判断是否存在管理员权限的code -->
+	<select id="verifyPermissionByCode" parameterType="string" resultType="int">
+	    SELECT count(id)
+	    FROM administrator
+	    WHERE code=#{code}
+	</select>
+	
+	<select id="getLastId" resultType="int">
+	    SELECT MAX(id)
+	    FROM course
+	</select>
+	
+	 <insert id="insertTeacherPhoto" parameterType="string" useGeneratedKeys="true" keyProperty="id">
+	    INSERT INTO
+	          teacher(photo)
+	    VALUES(#{photoName})  
+	</insert>
+	
+	<update id="updateTeacherInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+		UPDATE 
+				teacher
+			SET
+				name=#{teacherName},
+				organization=#{org},
+				organization_web=#{orgWeb}
+			where
+				id = #{teacherId}
+	</update>
 
 </mapper>

@@ -31,6 +31,10 @@
 	<import resource="../beans/Service.xml"/>
 	
  	<bean id="requestResponseAdvice" class="cn.itui.webdevelop.controller.RequestResponseAdvice"></bean>
+ 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+	    <property name="maxUploadSize" value="800000"/>
+	</bean>
+	
  	<!--  value="getMajorInfo"-->
  	<bean id="rrAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
  		<property name="mappedNames">
@@ -63,11 +67,14 @@
  				<value>getPVStats</value>
  				
  				<value>getCourseInfo</value>
+ 				<value>verifyPermission</value>
+ 				<value>addCourseInfo</value>
+ 				<value>uploadTeacherPhoto</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>
  	</bean>
- 	
+ 	  
  	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
  		<property name="beanNames">
  			<list>

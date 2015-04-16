@@ -38,4 +38,7 @@ public class URLConstants {
 	public static final String API_RANK_LOCALRANK_COLLEGE="/api/rank/localrank/college";
 	public static final String API_INDEX="/api/index";
 	public static final String API_COURSE="/api/course";
+	public static final String API_COURSE_VERIFY="/api/course/verify";
+	public static final String API_COURSE_RELEASE="/api/course/release";
+	public static final String API_COURSE_RELEASE_UPLOADPHOTO="/api/course/release/uploadphoto";
 }
