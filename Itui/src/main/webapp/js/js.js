@@ -492,9 +492,11 @@ if ($.cookie('user') != undefined) {
 		data : {"code" : $.cookie('user')},
 		success : function(msg) {
 			data = eval('msg=' + msg);
-			if (data.status == 0) {			  	
-				
-				console.log(data);
+			if (data.status == 0) {
+				if(data=='0')
+				{
+					console.log('有权限');
+				}
 				
 			} else {
 				// 404错误页面
