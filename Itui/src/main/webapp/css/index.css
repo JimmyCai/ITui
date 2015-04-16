@@ -61,8 +61,8 @@ ul,ol,li{list-style:none}
 	float: left;
 }
 .head_top{float: left;margin-left:4px;}
-.head_top img{max-width: 100%;}
-.head_button{float: right;margin-top: 16px;}
+.head_top img{max-width: 220px;}
+.head_button{float: right;margin-top: 10px;}
 .container1{
 	position: relative;
 	

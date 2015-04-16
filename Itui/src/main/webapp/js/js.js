@@ -435,7 +435,7 @@ function index_load_ajax(email, pasd) {
 					$.cookie("username", indexload_obj.objemail, {
 						path : "/"
 					});
-					//console.log($.cookie("username"));
+					console.log($.cookie("user"));
 				}
 
 			} else {
@@ -482,10 +482,34 @@ if ($.cookie('user') != undefined) {
 	$('.logged').show();
 	$('.logged').click(function(event) {
 		window.open("collect.html", "_blank");
-	});               
+	});   
+	
+	//判断是否有权限发布课程信息
+	$.ajax({
+		url : 'api/course/verify',
+		type : 'get',
+		dataType : 'html',
+		data : {"code" : $.cookie('user')},
+		success : function(msg) {
+			data = eval('msg=' + msg);
+			if (data.status == 0) {			  	
+				
+				console.log(data);
+				
+			} else {
+				// 404错误页面
+				var err_msg = data.errMessage;
+				$.cookie("err_msg", err_msg, {
+					path : "/"
+				});
+				location.href = "error.html";
+			}
+		}
+	});
+	
 }
-//console.log($.cookie("username"));
 
+console.log($.cookie("user"));
 function total_Insert(span_str){
 	var one_span;
 	var two_span;
