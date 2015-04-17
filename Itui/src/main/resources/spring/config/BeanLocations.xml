@@ -32,7 +32,7 @@
 	
  	<bean id="requestResponseAdvice" class="cn.itui.webdevelop.controller.RequestResponseAdvice"></bean>
  	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
-	    <property name="maxUploadSize" value="800000"/>
+	    <property name="maxUploadSize" value="800000"/><!--max upload file size  -->
 	</bean>
 	
  	<!--  value="getMajorInfo"-->

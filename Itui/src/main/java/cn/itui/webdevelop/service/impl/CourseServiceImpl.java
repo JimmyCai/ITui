@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.naming.java.javaURLContextFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -108,10 +109,9 @@ public class CourseServiceImpl implements CourseService {
 	 */
 	public String addNewCourse(String courseInfo) throws Exception {
 		HashMap<String, Object> teacherInfo = new HashMap<String, Object>();
-//		teacherInfo.put("photoName", resolveCourseJson(courseInfo).getPhotoName());
+//		teacherInfo.put("photoName", resolveCourseJson(courseInfo).getPhoto());
 
 		teacherInfo.put("photoName", "789.png");
-		System.out.println(parseCourseJson(courseInfo).getTeacherName());
 
 		teacherInfo.put("teacherName", parseCourseJson(courseInfo).getTeacherName());
 		teacherInfo.put("org", parseCourseJson(courseInfo).getOrg());
@@ -133,12 +133,13 @@ public class CourseServiceImpl implements CourseService {
 		courseInfos.put("platformWeb", parseCourseJson(courseInfo).getPlatformWeb());
 		courseInfos.put("liveSrc", parseCourseJson(courseInfo).getLiveSrc());
 		courseInfos.put("tag", parseCourseJson(courseInfo).getTag());
+//		courseInfos.put("teacherId", courseDao.getLastId());
 //		int courseId = courseDao.insertCourseInfo(courseInfos);
 		
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		//不添加老师头像，使用默认头像
 		if(teacherId>0){
-			courseInfos.put("teacherId", teacherId);
+			courseInfos.put("teacherId", courseDao.getLastId());
 			int courseId = courseDao.insertCourseInfo(courseInfos);
 			if(courseId>0){
 				System.out.println("NEW TEACHER ID : "+teacherId);

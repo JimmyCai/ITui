@@ -1,5 +1,7 @@
 package cn.itui.webdevelop.controller;
 
+import java.util.Iterator;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
 import cn.itui.webdevelop.service.CourseService;
 import cn.itui.webdevelop.utils.RequestUtil;
 import cn.itui.webdevelop.utils.exception.NotLoginException;
@@ -67,30 +73,29 @@ public class CourseController {
 		
 	}
 	
+	
 	@RequestMapping(value=URLConstants.API_COURSE_RELEASE_UPLOADPHOTO,method=RequestMethod.POST)
-	public String uploadTeacherPhoto(@RequestParam(value="teacherPhoto",required=false) MultipartFile photo) throws Exception{
-		if (photo.isEmpty()) {
-			throw FileUploadException.getInstance();
-		}
-		return courseService.uploadPhoto(photo);
-		}
-//	@RequestMapping(value=URLConstants.API_COURSE_RELEASE_UPLOADPHOTO,method=RequestMethod.POST)
-//	public String uploadTeacherPhoto(HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException{
+	public String uploadTeacherPhoto(HttpServletRequest request,HttpServletResponse response) throws Exception {
 	//创建一个通用的多部分解析器
-//		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+		String result = null;
 	//判断request是否有文件上传
-//		if(multipartResolver.isMultipart(request)){
-//			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-//			Iterator<String> iter = multiRequest.getFileNames();  
-//            while(iter.hasNext()){  
-//                MultipartFile file = multiRequest.getFile(iter.next());  
+		if(multipartResolver.isMultipart(request)){
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+			Iterator<String> iter = multiRequest.getFileNames();  
+            while(iter.hasNext()){  
+                MultipartFile photo = multiRequest.getFile(iter.next()); 
+                if(photo.isEmpty()){
+                	throw FileUploadException.getInstance();
+                }
+                result = courseService.uploadPhoto(photo);
 //                String fileName = "demoUpload" +file.getOriginalFilename();  
 //                String path ="F:/" +fileName;  
 //                File localFile = new File(path);  
 //                file.transferTo(localFile);  
-//		}			
-//	}
-////		return courseService.uploadPhoto();
-//		return "success";
-//	}
+		}			
+	}
+//		return courseService.uploadPhoto();
+		return result;
+	}
 }
