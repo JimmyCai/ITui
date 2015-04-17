@@ -1,5 +1,7 @@
 package cn.itui.webdevelop.utils;
 
+import java.io.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class RequestUtil {
@@ -13,6 +15,25 @@ public class RequestUtil {
 		userInfoBuffer.append("QUERY STRING:" + request.getQueryString() + "\t");
 		userInfoBuffer.append("METHOD:" + request.getMethod() + "\t");
 		return userInfoBuffer.toString();
+	}
+	
+	/*
+	 * 
+	 * */
+	public static String getJsonArray(HttpServletRequest request){
+		StringBuffer json = new StringBuffer();
+        String line = null;
+        try {
+            BufferedReader reader = request.getReader();
+            while((line = reader.readLine()) != null) {
+                json.append(line);
+            }
+        }
+            catch(Exception e) {
+                System.out.println(e.toString());
+            }
+        return json.toString();
+        
 	}
 
 }

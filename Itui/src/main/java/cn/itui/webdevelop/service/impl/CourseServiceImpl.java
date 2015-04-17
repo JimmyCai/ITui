@@ -19,7 +19,6 @@ import cn.itui.webdevelop.utils.ResponseUtil;
 import cn.itui.webdevelop.utils.SaveFile;
 import cn.itui.webdevelop.utils.ValidateFile;
 import cn.itui.webdevelop.utils.exception.DatabaseException;
-import cn.itui.webdevelop.utils.exception.FileUploadException;
 
 public class CourseServiceImpl implements CourseService {
 	private CourseDao courseDao;
@@ -111,6 +110,10 @@ public class CourseServiceImpl implements CourseService {
 		System.out.println(courseInfo);
 		HashMap<String, Object> teacherInfo = new HashMap<String, Object>();
 //		teacherInfo.put("photoName", resolveCourseJson(courseInfo).getPhotoName());
+
+		teacherInfo.put("photoName", "789.png");
+		System.out.println(resolveCourseJson(courseInfo).getTeacherName());
+
 		teacherInfo.put("teacherName", resolveCourseJson(courseInfo).getTeacherName());
 		teacherInfo.put("org", resolveCourseJson(courseInfo).getOrg());
 		teacherInfo.put("orgWeb", resolveCourseJson(courseInfo).getOrgWeb());
