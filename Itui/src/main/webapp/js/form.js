@@ -13,23 +13,22 @@ var photoName=0;
 	//点击提交图片表单
 	$('#do').click(function(event){
 		  event.preventDefault(); 
-		  console.log('do');
-          var fd = new FormData();
-          fd.append("teacherPhoto", $(":file")[0].files[0]);
-          $('.successtrip').text('头像上传成功！');
-          photoName+=1;
-          
+		  
+          var teacherPhoto = new FormData();
+          teacherPhoto.append("teacherPhoto", $(":file")[0].files[0]);
+          console.log(teacherPhoto);
            $.ajax({
               type:"post",
               url:"api/course/release/uploadphoto",
-              data: fd,
+              data: teacherPhoto,
               cache: false,
               processData: false,
               contentType: false
           }).done(function(res){
               console.log(res);
               var data = eval('res=' + res);
-              //$('.successtrip').text(data.normalReturn.uploadInfo.upload).css('display','block');
+              $('.successtrip').text(data.normalReturn.uploadInfo.upload).css('display','block');
+              photoName=data.normalReturn.uploadInfo.photoName; 
           });
          
           return false;
@@ -41,7 +40,6 @@ $('.reset').click(function(event) {
 });
 //点击提交文字表单
 $('.submit').click(function(event) {
-	console.log(photoName);
 
 var flag=false;
 //获得用户输入的内容
@@ -73,24 +71,27 @@ var flag=false;
 	var startTime=starthour+starminute;
 	var endTime=endhour+endminute;
 	var tag=tag1+'/'+tag2+'/'+tag3+'/'+tag4;
-	var courseInfo={teacherName:techname,price:price,startDay:startDay,endDay:endDay,startTime:startTime,endTime:endTime,lesson:lesson,orgName:orgName,orgWeb:orgWeb,platform:platform,platformWeb:platformWeb,liveSrc:liveSrc,summary:summary,tag:tag};
+	var courseInfo={teacherName:techname,price:price,startDay:startDay,endDay:endDay,startTime:startTime,endTime:endTime,lesson:lesson,orgName:orgName,orgWeb:orgWeb,platform:platform,platformWeb:platformWeb,liveSrc:liveSrc,summary:summary,tag:tag,photo:photoName};
 
-
-	
-
-function formdata(){
+console.log(photoName);
+function formdata_ajax(){
 	$.ajax({
 		url: 'api/course/release',
 		type: 'post',
 		contentType:"application/json;charset=utf-8",
-		dataType: 'json',
+		dataType: 'html',
 		data: JSON.stringify(courseInfo),
+		 complete:function()
+		 {
+			 alert('提交成功继续添加表单！');
+			 $('.trip').text('');
+		 },
 		success:function(msg){
+			console.log(photoName);
 			console.log(courseInfo);
 			var data = eval('msg=' + msg);
 			console.log(data);
 			if(data.status == 0){
-				console.log(123);
 				$('.trip').text('提交成功');
 				$('.trip').css({
 					display: 'block',
@@ -99,16 +100,50 @@ function formdata(){
 				//提交成功后重置表单
 				$('.zhiboke')[0].reset();
 				$('#tech_pic')[0].reset();
-				console.log(courseInfo);
 				
+				$('.trip').css({display: 'block',color: 'green'});
+				$('#startDay').css('border','1px solid #cbcbcb');
+				$('#endDay').css('border','1px solid #cbcbcb');
+				$('#startHour').css('border','1px solid #cbcbcb');
+				$('#startminute').css('border','1px solid #cbcbcb');
+				$('#endHour').css('border','1px solid #cbcbcb');
+				$('#endminute').css('border','1px solid #cbcbcb');
+				console.log(courseInfo);		
 			}else{
 				
 			}
-		},
-		complete:function(){
-//			alert("继续添加表单！");
 		}
+		
 	});
+}
+
+function formdata(){
+	if(parseInt(endDay)<parseInt(startDay)){
+		$('.trip').text('日期错误请从新填写日期');
+		$('.trip').css({
+			display: 'block',
+			color: 'red'
+		});
+		$('#startDay').css('border','1px solid red');
+		$('#endDay').css('border','1px solid red');
+	}else{
+		if((parseInt(endDay)==parseInt(startDay))&&(parseInt(endTime)<parseInt(startTime)))
+			{
+			$('.trip').text('时间错误请从新填写时间');
+			$('.trip').css({display: 'block',color: 'red'});
+			$('#startHour').css('border','1px solid red');
+			$('#startminute').css('border','1px solid red');
+			$('#endHour').css('border','1px solid red');
+			$('#endminute').css('border','1px solid red');
+				
+			}else{
+				formdata_ajax();
+			}
+		
+	
+		
+	}
+
 	
 	
 }
