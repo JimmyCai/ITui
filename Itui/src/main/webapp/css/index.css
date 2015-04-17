@@ -65,6 +65,7 @@ ul,ol,li{list-style:none}
 .head_button{float: right;margin-top: 10px;}
 .container1{
 	position: relative;
+	z-index:10;
 	
 }
 .nav_top2{
@@ -515,15 +516,18 @@ margin-top:10px;
 }
 .logged{
 width: 100px;
-height: 60px;
 float: right;
 cursor: pointer;
 border: medium none;
 display:none;
+position:relative;
+
+
 }
+
 .logged p{
 font-size: 14px;
-line-height: 60px;
+line-height: 50px;
 padding-left: 4px;
 float: left;
 color:#0FCCCC;
@@ -553,6 +557,18 @@ color:#0FCCCC;
 .no_email p{
 	line-height:36px;
 	}
+/*登录下来菜单*/
+.drop_menu{
+	backbround-color:#fff;
+	border:1px solid #cbcbcb;
+	position:absolute;
+	left:0px;
+	top:30px;
+	background-color:#fff;
+	
+	
+}
+
 @media (min-width: 1100px) and (max-width: 1200px){}
 @media (min-width: 1600px) {
 	.container0{
@@ -631,7 +647,11 @@ color:#0FCCCC;
 
 }
 }
+.nav_top{
+	position:relative;
+	z-index:9999;
 
+	}
 @media (max-width: 1600px) {
 	.container0{
 	width: 100%;
@@ -647,6 +667,7 @@ color:#0FCCCC;
 	height: auto;
 	float: left;
 	background-color: #fff;
+	
 	}
 	.nav_top2{
 	width: 100%;
@@ -885,7 +906,7 @@ color:#0FCCCC;
 	.head_top{width: 200px;height:44px; }
 	.head_button{margin-top: 6px;}
 		
-.logged{height:44px;} 
+.logged{} 
 .logged p{line-height:44px;}
 
 }
