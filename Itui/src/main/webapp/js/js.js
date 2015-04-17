@@ -491,6 +491,7 @@ if ($.cookie('user') != undefined) {
 		dataType : 'html',
 		data : {"code" : $.cookie('user')},
 		success : function(msg) {
+			console.log(msg);
 			data = eval('msg=' + msg);
 			if (data.status == 0) {
 				if(data=='0')
@@ -500,11 +501,11 @@ if ($.cookie('user') != undefined) {
 				
 			} else {
 				// 404错误页面
-				var err_msg = data.errMessage;
-				$.cookie("err_msg", err_msg, {
-					path : "/"
-				});
-				location.href = "error.html";
+//				var err_msg = data.errMessage;
+//				$.cookie("err_msg", err_msg, {
+//					path : "/"
+//				});
+//				location.href = "error.html";
 			}
 		}
 	});

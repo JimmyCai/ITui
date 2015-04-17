@@ -9,12 +9,16 @@
 //		} 
 //		return fileName; 
 //		} 
-	
+var photoName=0;
+	//点击提交图片表单
 	$('#do').click(function(event){
 		  event.preventDefault(); 
 		  console.log('do');
           var fd = new FormData();
           fd.append("teacherPhoto", $(":file")[0].files[0]);
+          $('.successtrip').text('头像上传成功！');
+          photoName+=1;
+          
            $.ajax({
               type:"post",
               url:"api/course/release/uploadphoto",
@@ -24,6 +28,8 @@
               contentType: false
           }).done(function(res){
               console.log(res);
+              var data = eval('res=' + res);
+              //$('.successtrip').text(data.normalReturn.uploadInfo.upload).css('display','block');
           });
          
           return false;
@@ -33,8 +39,10 @@ $('.reset').click(function(event) {
 	$('.zhiboke')[0].reset();
 	$('#tech_pic')[0].reset();
 });
+//点击提交文字表单
 $('.submit').click(function(event) {
-//	console.log(getFileName());
+	console.log(photoName);
+
 var flag=false;
 //获得用户输入的内容
 
@@ -52,6 +60,7 @@ var flag=false;
 	var platform=$('#platform').val();
 	var platformWeb=$('#platformWeb').val();
 	var liveSrc=$('#liveSrc').val();
+	var summary=$('#summary').val();
 	var tag1=$('#tag1').val();
 	var tag2=$('#tag2').val();
 	var tag3=$('#tag3').val();
@@ -63,9 +72,13 @@ var flag=false;
 	var endDay=endday_arr[0]+endday_arr[1]+endday_arr[2];
 	var startTime=starthour+starminute;
 	var endTime=endhour+endminute;
-	var summary=tag1+'/'+tag2+'/'+tag3+'/'+tag4;
+	var tag=tag1+'/'+tag2+'/'+tag3+'/'+tag4;
 
+<<<<<<< HEAD
 	var courseInfo={"teacherName":techname,"price":price,"startDay":startDay,"endDay":endDay,"startTime":startTime,"endTime":endTime,"lesson":lesson,"orgName":orgName,"orgWeb":orgWeb,"platform":platform,"platformWeb":platformWeb,"liveSrc":liveSrc,"summary":summary};
+=======
+	var courseInfo={teacherName:techname,price:price,startDay:startDay,endDay:endDay,startTime:startTime,endTime:endTime,lesson:lesson,orgName:orgName,orgWeb:orgWeb,platform:platform,platformWeb:platformWeb,liveSrc:liveSrc,summary:summary,tag:tag};
+>>>>>>> origin/master
 
 	
 
