@@ -29,7 +29,7 @@
     <insert id="insertTeacherInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
 	    INSERT INTO
 	          teacher(name,photo,organization,organization_web)
-	    VALUES(#{teacherName},#{photoName},#{org},#{orgWeb},)  
+	    VALUES(#{teacherName},#{photoName},#{org},#{orgWeb})  
 	</insert>
 	
 	<insert id="insertCourseInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">

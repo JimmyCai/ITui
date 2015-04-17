@@ -20,6 +20,7 @@ import cn.itui.webdevelop.utils.exception.FileUploadException;
 public class CourseController {
 	public static final String CODE = "code";
 	public static final String COURSE_INFO ="courseInfo";
+	public static final String TEACHER_NAME ="teacherName";
 	private CourseService courseService;
 	
 	public CourseService getCourseService() {
@@ -60,7 +61,7 @@ public class CourseController {
 //			throw NotLoginException.getInstance();
 //		if(code != ADMIN_CODE)
 //			throw PermissionDeniedException.getInstance();
-		String courseInfo = RequestUtil.getJsonArray(request);
+		String courseInfo = RequestUtil.getJsonString(request);
 		System.out.println("json is :"+courseInfo);
 		return courseService.addNewCourse(courseInfo);
 		

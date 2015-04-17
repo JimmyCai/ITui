@@ -74,7 +74,11 @@ var flag=false;
 	var endTime=endhour+endminute;
 	var tag=tag1+'/'+tag2+'/'+tag3+'/'+tag4;
 
+<<<<<<< HEAD
+	var courseInfo={"teacherName":techname,"price":price,"startDay":startDay,"endDay":endDay,"startTime":startTime,"endTime":endTime,"lesson":lesson,"orgName":orgName,"orgWeb":orgWeb,"platform":platform,"platformWeb":platformWeb,"liveSrc":liveSrc,"summary":summary};
+=======
 	var courseInfo={teacherName:techname,price:price,startDay:startDay,endDay:endDay,startTime:startTime,endTime:endTime,lesson:lesson,orgName:orgName,orgWeb:orgWeb,platform:platform,platformWeb:platformWeb,liveSrc:liveSrc,summary:summary,tag:tag};
+>>>>>>> origin/master
 
 	
 
@@ -82,8 +86,9 @@ function formdata(){
 	$.ajax({
 		url: 'api/course/release',
 		type: 'post',
-		dataType: 'html',
-		data: courseInfo,
+		contentType:"application/json;charset=utf-8",
+		dataType: 'json',
+		data: JSON.stringify(courseInfo),
 		success:function(msg){
 			console.log(courseInfo);
 			var data = eval('msg=' + msg);
