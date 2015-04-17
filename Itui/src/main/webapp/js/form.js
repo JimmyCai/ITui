@@ -1,11 +1,43 @@
 ﻿$(function(){
+//	function getFileName(){ 
+//		var fileName=""; 
+//		 
+//		if(typeof(fileName) != "undefined") 
+//		{ 
+//		    fileName = $('#file').val(); 
+////		    fileName=fileName.substring(0, fileName.lastIndexOf(".")); 
+//		} 
+//		return fileName; 
+//		} 
+	
+	$('#do').click(function(event){
+		  event.preventDefault(); 
+		  console.log('do');
+          var fd = new FormData();
+          fd.append("teacherPhoto", $(":file")[0].files[0]);
+           $.ajax({
+              type:"post",
+              url:"api/course/release/uploadphoto",
+              data: fd,
+              cache: false,
+              processData: false,
+              contentType: false
+          }).done(function(res){
+              console.log(res);
+          });
+         
+          return false;
+		
+	});
 $('.reset').click(function(event) {
 	$('.zhiboke')[0].reset();
 	$('#tech_pic')[0].reset();
 });
 $('.submit').click(function(event) {
+//	console.log(getFileName());
 var flag=false;
 //获得用户输入的内容
+
 	var techname=$('#teacherName').val();
 	var price=$('#price').val();
 	var startday=$('#startDay').val();
@@ -35,17 +67,20 @@ var flag=false;
 
 	var courseInfo={teacherName:techname,price:price,startDay:startDay,endDay:endDay,startTime:startTime,endTime:endTime,lesson:lesson,orgName:orgName,orgWeb:orgWeb,platform:platform,platformWeb:platformWeb,liveSrc:liveSrc,summary:summary};
 
-	console.log(courseInfo.summary);
+	
 
 function formdata(){
 	$.ajax({
 		url: 'api/course/release',
 		type: 'post',
-		dataType: 'JSON',
-		data: {courseInfo: courseInfo},
+		dataType: 'html',
+		data: courseInfo,
 		success:function(msg){
-			var data = eval('msg='+msg);
+			console.log(courseInfo);
+			var data = eval('msg=' + msg);
+			console.log(data);
 			if(data.status == 0){
+				console.log(123);
 				$('.trip').text('提交成功');
 				$('.trip').css({
 					display: 'block',
@@ -54,12 +89,14 @@ function formdata(){
 				//提交成功后重置表单
 				$('.zhiboke')[0].reset();
 				$('#tech_pic')[0].reset();
+				console.log(courseInfo);
+				
 			}else{
 				
 			}
 		},
 		complete:function(){
-			alert("继续添加表单！");
+//			alert("继续添加表单！");
 		}
 	});
 	
