@@ -107,31 +107,32 @@ public class CourseServiceImpl implements CourseService {
 	 * @param courseInfo
 	 */
 	public String addNewCourse(String courseInfo) throws Exception {
-		System.out.println(courseInfo);
 		HashMap<String, Object> teacherInfo = new HashMap<String, Object>();
 //		teacherInfo.put("photoName", resolveCourseJson(courseInfo).getPhotoName());
 
 		teacherInfo.put("photoName", "789.png");
-		System.out.println(resolveCourseJson(courseInfo).getTeacherName());
+		System.out.println(parseCourseJson(courseInfo).getTeacherName());
 
-		teacherInfo.put("teacherName", resolveCourseJson(courseInfo).getTeacherName());
-		teacherInfo.put("org", resolveCourseJson(courseInfo).getOrg());
-		teacherInfo.put("orgWeb", resolveCourseJson(courseInfo).getOrgWeb());
+		teacherInfo.put("teacherName", parseCourseJson(courseInfo).getTeacherName());
+		teacherInfo.put("org", parseCourseJson(courseInfo).getOrg());
+		System.out.println( parseCourseJson(courseInfo).getOrg());
+		teacherInfo.put("orgWeb", parseCourseJson(courseInfo).getOrgWeb());
 		//将teacher信息添加到teacher表中
 		int teacherId = courseDao.insertTeacherInfo(teacherInfo);
+		System.out.println(teacherId);
 		
 		HashMap<String, Object> courseInfos = new HashMap<String, Object>();
-		courseInfos.put("summary", resolveCourseJson(courseInfo).getSummary());
-		courseInfos.put("price", resolveCourseJson(courseInfo).getPrice());
-		courseInfos.put("startDay", resolveCourseJson(courseInfo).getStartDay());
-		courseInfos.put("startTime", resolveCourseJson(courseInfo).getStartTime());
-		courseInfos.put("endDay", resolveCourseJson(courseInfo).getEndDay());
-		courseInfos.put("endTime", resolveCourseJson(courseInfo).getEndTime());
-		courseInfos.put("lesson", resolveCourseJson(courseInfo).getLesson());
-		courseInfos.put("platform", resolveCourseJson(courseInfo).getPlatform());
-		courseInfos.put("platformWeb", resolveCourseJson(courseInfo).getPlatformWeb());
-		courseInfos.put("liveSrc", resolveCourseJson(courseInfo).getLiveSrc());
-		courseInfos.put("tag", resolveCourseJson(courseInfo).getTag());
+		courseInfos.put("summary", parseCourseJson(courseInfo).getSummary());
+		courseInfos.put("price", parseCourseJson(courseInfo).getPrice());
+		courseInfos.put("startDay", parseCourseJson(courseInfo).getStartDay());
+		courseInfos.put("startTime", parseCourseJson(courseInfo).getStartTime());
+		courseInfos.put("endDay", parseCourseJson(courseInfo).getEndDay());
+		courseInfos.put("endTime", parseCourseJson(courseInfo).getEndTime());
+		courseInfos.put("lesson", parseCourseJson(courseInfo).getLesson());
+		courseInfos.put("platform", parseCourseJson(courseInfo).getPlatform());
+		courseInfos.put("platformWeb", parseCourseJson(courseInfo).getPlatformWeb());
+		courseInfos.put("liveSrc", parseCourseJson(courseInfo).getLiveSrc());
+		courseInfos.put("tag", parseCourseJson(courseInfo).getTag());
 //		int courseId = courseDao.insertCourseInfo(courseInfos);
 		
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -170,7 +171,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 	
 	//Gson解析Json格式数据
-	private Course resolveCourseJson(String courseInfo){
+	private Course parseCourseJson(String courseInfo){
 		Gson gson = new Gson();
 		Course course = gson.fromJson(courseInfo, new TypeToken<Course>(){}.getType());
 		return course;
