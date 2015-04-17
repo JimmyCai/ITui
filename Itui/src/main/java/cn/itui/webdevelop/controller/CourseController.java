@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import cn.itui.webdevelop.service.CourseService;
+import cn.itui.webdevelop.utils.RequestUtil;
 import cn.itui.webdevelop.utils.exception.NotLoginException;
 import cn.itui.webdevelop.utils.exception.PermissionDeniedException;
 import cn.itui.webdevelop.utils.exception.FileUploadException;
@@ -59,7 +60,8 @@ public class CourseController {
 //			throw NotLoginException.getInstance();
 //		if(code != ADMIN_CODE)
 //			throw PermissionDeniedException.getInstance();
-		String courseInfo = request.getParameter(COURSE_INFO);
+		String courseInfo = RequestUtil.getJsonArray(request);
+		System.out.println("json is :"+courseInfo);
 		return courseService.addNewCourse(courseInfo);
 		
 	}
