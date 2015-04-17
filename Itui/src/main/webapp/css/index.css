@@ -24,7 +24,7 @@ ul,ol,li{list-style:none}
 .cl{clear:both}
 /*nav*/
 /*main*/
-.nav_top{margin:0 auto;overflow: hidden;background-color: #fff;}
+.nav_top{margin:0 auto;background-color: #fff;}
 .erwei0{
 	position: absolute;
 	right: 0px;
@@ -527,10 +527,10 @@ position:relative;
 
 .logged p{
 font-size: 14px;
-line-height: 50px;
 padding-left: 4px;
 float: left;
 color:#0FCCCC;
+margin-top:14px;
 }
 .total{
 	width: 60%;
@@ -563,10 +563,25 @@ color:#0FCCCC;
 	border:1px solid #cbcbcb;
 	position:absolute;
 	left:0px;
-	top:30px;
+	top:40px;
 	background-color:#fff;
-	
-	
+	border-radius:4px;
+	display:none;
+}
+.drop_menu li{
+	padding:4px 6px;
+}
+.drop_menu li a{
+	padding:4px 6px;
+	color:#666;
+}
+.drop_menu li a:hover{
+	text-decoration:none;
+	color:#0FCCCC;
+	background-color:#f6f6f6;
+}
+.coll01{
+	display:none;
 }
 
 @media (min-width: 1100px) and (max-width: 1200px){}
@@ -650,7 +665,6 @@ color:#0FCCCC;
 .nav_top{
 	position:relative;
 	z-index:9999;
-
 	}
 @media (max-width: 1600px) {
 	.container0{
