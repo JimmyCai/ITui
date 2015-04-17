@@ -108,8 +108,9 @@ public class CourseServiceImpl implements CourseService {
 	 * @param courseInfo
 	 */
 	public String addNewCourse(String courseInfo) throws Exception {
+		System.out.println(courseInfo);
 		HashMap<String, Object> teacherInfo = new HashMap<String, Object>();
-		teacherInfo.put("photoName", resolveCourseJson(courseInfo).getPhotoName());
+//		teacherInfo.put("photoName", resolveCourseJson(courseInfo).getPhotoName());
 		teacherInfo.put("teacherName", resolveCourseJson(courseInfo).getTeacherName());
 		teacherInfo.put("org", resolveCourseJson(courseInfo).getOrg());
 		teacherInfo.put("orgWeb", resolveCourseJson(courseInfo).getOrgWeb());
