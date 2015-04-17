@@ -95,12 +95,69 @@ $(function() {
 		});
 		window.open("about.html");
 	});
-	
-	
-	
-	
+		
 });
+
 // 页面加载函数结束
+//判断是否有权限发布课程信息
+function ituidata(){
+	$.ajax({
+		url : 'api/course/verify',
+		type : 'get',
+		dataType : 'html',
+		data : {"code" : $.cookie('user')},
+		success : function(msg) {
+			console.log(msg);
+			data = eval('msg=' + msg);
+			if (data == '0') {
+				$('.coll01').css('display','block');
+				
+			} else {
+				$('.coll01').css('display','none');
+				console.log('no');
+			}
+		}
+	});
+	}
+function is_load(){
+// 判断用户是否登录
+if ($.cookie('user') != undefined) {
+	console.log('lallala');
+	$('.load2 p').text("已登录");
+	$('.load1').hide();
+	$('.load2').hide();
+	$('.logged').show();
+	ituidata();
+	$('.logged').mouseenter(function(){
+		$('.drop_menu').css('display','block');
+		
+	}).mouseleave(function(){
+		$('.drop_menu').css('display','none');
+	});
+	$('.coll00').click(function(event) {
+		window.open("collect.html", "_blank");
+	});
+	$('.coll01').click(function(event) {
+		window.open("form.html", "_blank");
+	});  
+	
+	// 点击退出登录
+	$('.coll02').click(function(event) {
+		$('.logged').hide();
+		$('.load1').show();
+		$('.load2').show();
+		console.log($.cookie('user'));
+		$.removeCookie('user', {
+			path : '/'
+		});
+		$.removeCookie('username', {
+			path : '/'
+		});
+		window.location.reload();
+	});
+  }
+}
+is_load();
 //登录按钮样式
 //$('#load').css('background-color', '#cbcbcb');
 //$('#load').attr('disabled', true);
@@ -424,14 +481,14 @@ function index_load_ajax(email, pasd) {
 						$('.modal-backdrop').hide();
 					}, 1500);
 					// 登录成功后改变登录状态显示
-					$('.load2 p').text("已登录");
-					$('.load1').hide();
-					$('.load2').hide();
-					$('.logged').show();
-					$('.logged').click(function(event) {
-						window.open("collect.html", "_blank");
-					});
-					//console.log(indexload_obj.objemail);
+//					$('.load2 p').text("已登录");
+//					$('.load1').hide();
+//					$('.load2').hide();
+//					$('.logged').show();
+//					$('.logged').click(function(event) {
+//						window.open("collect.html", "_blank");
+//					});
+					is_load();
 					$.cookie("username", indexload_obj.objemail, {
 						path : "/"
 					});
@@ -473,43 +530,6 @@ function no_email_ajax() {
 			}
 		}
 	});
-}
-// 判断用户是否登录
-if ($.cookie('user') != undefined) {
-	$('.load2 p').text("已登录");
-	$('.load1').hide();
-	$('.load2').hide();
-	$('.logged').show();
-	$('.logged').click(function(event) {
-		window.open("collect.html", "_blank");
-	});   
-	
-	//判断是否有权限发布课程信息
-	$.ajax({
-		url : 'api/course/verify',
-		type : 'get',
-		dataType : 'html',
-		data : {"code" : $.cookie('user')},
-		success : function(msg) {
-			console.log(msg);
-			data = eval('msg=' + msg);
-			if (data.status == 0) {
-				if(data=='0')
-				{
-					console.log('有权限');
-				}
-				
-			} else {
-				// 404错误页面
-//				var err_msg = data.errMessage;
-//				$.cookie("err_msg", err_msg, {
-//					path : "/"
-//				});
-//				location.href = "error.html";
-			}
-		}
-	});
-	
 }
 
 console.log($.cookie("user"));
