@@ -698,7 +698,7 @@ float: left;
 }
 .nav_top{
 	position:relative;
-	z-index:9999;
+	z-index:120;
 	}
 @media (max-width: 1600px) {
 	.container0{
