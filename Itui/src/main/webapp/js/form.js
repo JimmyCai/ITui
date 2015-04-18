@@ -28,8 +28,8 @@ var photoName=0;
               console.log(res);
               var data = eval('res=' + res);
               $('.successtrip').text(data.normalReturn.uploadInfo.upload).css('display','block');
-              //photoName=data.normalReturn.uploadInfo.photoName;
-              photoName="lalala";
+              photoName=data.normalReturn.uploadInfo.photoName;
+            
           });
          
           return false;
@@ -41,6 +41,9 @@ $('.reset').click(function(event) {
 });
 // 点击提交文字表单
 $('.submit').click(function(event) {
+	if(photoName==0){
+		photoName="default.png";
+	}
 	console.log(photoName);
 
 var flag=false;
