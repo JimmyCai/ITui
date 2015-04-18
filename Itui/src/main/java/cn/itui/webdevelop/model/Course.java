@@ -11,6 +11,7 @@ public class Course implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7979981260171276786L;
+	private int id;
 	private String photo;
 	private String teacherName;
 	private String orgName;
@@ -39,6 +40,14 @@ public class Course implements java.io.Serializable{
 		return 2;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getPhotoName() {
 		return photo;
 	}

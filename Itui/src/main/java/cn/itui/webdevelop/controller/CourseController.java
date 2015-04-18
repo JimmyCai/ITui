@@ -8,12 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import cn.itui.webdevelop.service.CourseService;
@@ -39,10 +35,6 @@ public class CourseController {
 
 	@RequestMapping(value=URLConstants.API_COURSE)
 	public String getCourseInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		//不需要登录即可查看课程信息
-//		String code = request.getParameter(CODE);
-//		if(code == null)
-//			throw NotLoginException.getInstance();
 		return courseService.getAllCourse();
 	}
 	
@@ -62,11 +54,6 @@ public class CourseController {
 	
 	@RequestMapping(value=URLConstants.API_COURSE_RELEASE,method=RequestMethod.POST)
 	public String addCourseInfo(HttpServletRequest request,HttpServletResponse response) throws Exception{
-//		String code = request.getParameter(CODE);
-//		if(code == null)
-//			throw NotLoginException.getInstance();
-//		if(code != ADMIN_CODE)
-//			throw PermissionDeniedException.getInstance();
 		String courseInfo = RequestUtil.getJsonString(request);
 		System.out.println("json is :"+courseInfo);
 		return courseService.addNewCourse(courseInfo);
@@ -88,14 +75,9 @@ public class CourseController {
                 if(photo.isEmpty()){
                 	throw FileUploadException.getInstance();
                 }
-                result = courseService.uploadPhoto(photo);
-//                String fileName = "demoUpload" +file.getOriginalFilename();  
-//                String path ="F:/" +fileName;  
-//                File localFile = new File(path);  
-//                file.transferTo(localFile);  
+                result = courseService.uploadPhoto(photo); 
 		}			
 	}
-//		return courseService.uploadPhoto();
 		return result;
 	}
 }

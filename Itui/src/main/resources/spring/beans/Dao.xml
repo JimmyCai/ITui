@@ -31,7 +31,9 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="statsDao" class="cn.itui.webdevelop.dao.impl.StatsDaoImpl">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
+	<bean id="teacher" class="cn.itui.webdevelop.model.Teacher"></bean>
 	<bean id="courseDao" class="cn.itui.webdevelop.dao.impl.CourseDaoImpl">
 	    <property name="sqlSession" ref="sqlSession"></property>
+	    <property name="teacher" ref="teacher"></property>
 	</bean>
 </beans>
