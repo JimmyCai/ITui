@@ -31,15 +31,17 @@ ul,ol,li{list-style:none}
 	bottom: 0px;
 }
 .load{
-	width: 100px;
+	width: 80px;
 	height: 34px;
 	float: right;
 	cursor: pointer;
 	border: none;
 	background-color: #fff;
 }
-.load2{
-	margin-right: 10px;
+.load2 p{
+	/*margin-right: 10px;*/
+	width:100%;
+	text-algin:center;
 }
 .load_tp{
 	width: 23px;
@@ -49,10 +51,10 @@ ul,ol,li{list-style:none}
 }
 .load1_tp{
 	
-	background: url(../images/03.png) no-repeat;
+	/*background: url(../images/03.png) no-repeat;*/
 }
 .load2_tp{
-	background: url(../images/04.png) no-repeat;
+	/*background: url(../images/04.png) no-repeat;*/
 }
 .load p{
 	font-size: 14px;
