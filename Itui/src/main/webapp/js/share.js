@@ -266,7 +266,8 @@ var load_obj = {
 function regs_zuce_email() 
 {
 	var email02 = $('.regs_mail').val();
-	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	//var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	var reg = /^[-_A-Za-z0-9\.]+@([-_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,10}$/;
 	if (reg.test(email02)) 
 	{
 		$('.errregs').html('√邮箱合法').css('color', '#6fd415');
@@ -335,7 +336,8 @@ $('.regs_mail').keyup(function(event){
 	// 登录邮箱正则验证
 	function load_denglu_email(){
 		var email01 = $('.mail_inp').val();
-		var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+		//var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+		var reg = /^[-_A-Za-z0-9\.]+@([-_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,10}$/;
 		if (reg.test(email01)) {
 			$('.errmsg').html('√邮箱合法').css('color', '#6fd415');
 			// 将登录邮箱存进登录对象中

@@ -186,7 +186,8 @@ function index_submit_judge() {
 // 注册邮箱验证开始
 function regs_zhuce_email(){
 	var index_email = $('#input_mail2').val();
-	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	//var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	var reg = /^[-_A-Za-z0-9\.]+@([-_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,10}$/;
 	if (reg.test(index_email)) {
 		$('.zc_email').html('√邮箱合法')
 				.css('color', '#6fd415');
@@ -310,6 +311,9 @@ function index_register_ajax(email, pasd) {
 			email : email,
 			password : pasd
 		},
+		before:function(){
+			$('.bt_p02').text('正在登陆……').css('color', '#6FD415');
+		},
 		success : function(msg) {
 			data = eval('msg=' + msg);
 			if (data.status == 0) {
@@ -356,7 +360,9 @@ function index_register_ajax(email, pasd) {
 				$.cookie("err_msg", err_msg, {
 					path : "/"
 				});
-				location.href = "error.html";
+				//location.href = "error.html";
+				window.open("error.html","_blank");
+				console.log(data.status);
 			}
 		}
 		 
@@ -391,7 +397,8 @@ function index_load_judge() {
 // 登录邮箱验证开始
 function load_denglu_email(){
 	var index_loademail = $('#input_mail').val();
-	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	//var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	var reg = /^[-_A-Za-z0-9\.]+@([-_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,10}$/;
 	if (reg.test(index_loademail)) {
 		$('.maildiv01').html('√邮箱合法').css('color',
 				'#6fd415');
