@@ -40,6 +40,7 @@ $('.reset').click(function(event) {
 });
 // 点击提交文字表单
 $('.submit').click(function(event) {
+	console.log(123456);
 
 var flag=false;
 // 获得用户输入的内容
@@ -75,7 +76,7 @@ var flag=false;
 
 	
 
-function formdata(){
+
 	console.log(photoName);
 	function formdata_ajax(){
 		$.ajax({
@@ -167,7 +168,7 @@ function formdata(){
 	}else{
 		formdata();
 	}
-}
+
 });
 
 
