@@ -11,7 +11,8 @@ public class Course implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7979981260171276786L;
-//	private String photoName;
+	private int id;
+	private String photo;
 	private String teacherName;
 	private String orgName;
 	private String orgWeb;
@@ -39,13 +40,21 @@ public class Course implements java.io.Serializable{
 		return 2;
 	}
 	
-//	public String getPhotoName() {
-//		return photoName;
-//	}
-//
-//	public void setPhotoName(String photoName) {
-//		this.photoName = photoName;
-//	}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getPhotoName() {
+		return photo;
+	}
+
+	public void setPhotoName(String photoName) {
+		this.photo = photoName;
+	}
 
 	public String getTeacherName() {
 		return teacherName;

@@ -4,12 +4,23 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.dao.DuplicateKeyException;
 
 import cn.itui.webdevelop.dao.CourseDao;
+import cn.itui.webdevelop.model.Teacher;
 
 public class CourseDaoImpl implements CourseDao {
 	private SqlSession sqlSession;
+	private Teacher teacher;
 	
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
 	public SqlSession getSqlSession() {
 		return sqlSession;
 	}
@@ -22,13 +33,21 @@ public class CourseDaoImpl implements CourseDao {
 		return sqlSession.selectList("cn.itui.webdevelop.dao.CourseDao.getAllCourseInfo");
 	}
 
-	public int insertTeacherInfo(HashMap<String, Object> teacherInfo) {
-		return sqlSession.insert("cn.itui.webdevelop.dao.CourseDao.insertTeacherInfo", teacherInfo);
-		
-	}
-
 	public int insertCourseInfo(HashMap<String, Object> courseInfos) {
-		return sqlSession.insert("cn.itui.webdevelop.dao.CourseDao.insertCourseInfo", courseInfos);
+		int courseId = -2;
+		try {
+			courseId = sqlSession.insert("cn.itui.webdevelop.dao.CourseDao.insertCourseInfo", courseInfos);
+		} 
+		catch(DuplicateKeyException dke){
+			dke.printStackTrace();
+			return -1;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return -2;
+		}
+		return courseId;
+		 
 	}
 
 	public int verifyPermissionByCode(String code) {
@@ -39,12 +58,26 @@ public class CourseDaoImpl implements CourseDao {
 		return sqlSession.selectOne("cn.itui.webdevelop.dao.CourseDao.getLastId");
 	}
 
-	public int insertTeacherPhoto(String photoName) {
-		return sqlSession.insert("cn.itui.webdevelop.dao.CourseDao.insertTeacherPhoto",photoName);	
-	}
-
-	public int updateTeacherInfo(HashMap<String, Object> teacherInfo) {
-		return sqlSession.update("cn.itui.webdevelop.dao.CourseDao.updateTeacherInfo", teacherInfo);
+	public int insertTeacherInfo(String teacherName, String photoName,
+			String org, String orgWeb, String code) {
+		System.out.println(teacherName);
+		teacher.setName(teacherName);
+		teacher.setPhoto(photoName);
+		teacher.setOrgName(org);
+		teacher.setOrgWeb(orgWeb);
+		teacher.setCode(code);
+		try {
+			sqlSession.insert("cn.itui.webdevelop.dao.CourseDao.insertTeacherInfo", teacher);
+		}catch (DuplicateKeyException dke){
+			dke.printStackTrace();
+			return -1;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return -2;
+		}
+	    
+		return teacher.getId();
 	}
 
 }

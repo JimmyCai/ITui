@@ -26,16 +26,16 @@
         ORDER BY CONCAT(course.start_day,course.start_time) ASC 
     </select>
     
-    <insert id="insertTeacherInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertTeacherInfo" parameterType="cn.itui.webdevelop.model.Teacher" useGeneratedKeys="true" keyProperty="id">
 	    INSERT INTO
-	          teacher(name,photo,organization,organization_web)
-	    VALUES(#{teacherName},#{photoName},#{org},#{orgWeb})  
+	          teacher(name,photo,organization,organization_web,code)
+	    VALUES(#{name},#{photo},#{orgName},#{orgWeb},#{code})  
 	</insert>
 	
 	<insert id="insertCourseInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
 	    INSERT INTO
-	          course(start_day,start_time,end_day,end_time,teacher_id,lesson,summary,price,platform,platform_web,live_src,tag)
-	    VALUES(#{startDay},#{startTime},#{endDay},#{endTime},#{teacherId},#{lesson},#{summary},#{price},#{platform},#{platformWeb},#{liveSrc},#{tag})  
+	          course(start_day,start_time,end_day,end_time,teacher_id,lesson,summary,price,platform,platform_web,live_src,tag,code)
+	    VALUES(#{startDay},#{startTime},#{endDay},#{endTime},#{teacherId},#{lesson},#{summary},#{price},#{platform},#{platformWeb},#{liveSrc},#{tag},#{code})  
 	</insert>
 	
 	<!-- 判断是否存在管理员权限的code -->
@@ -47,24 +47,7 @@
 	
 	<select id="getLastId" resultType="int">
 	    SELECT MAX(id)
-	    FROM course
+	    FROM teacher
 	</select>
-	
-	 <insert id="insertTeacherPhoto" parameterType="string" useGeneratedKeys="true" keyProperty="id">
-	    INSERT INTO
-	          teacher(photo)
-	    VALUES(#{photoName})  
-	</insert>
-	
-	<update id="updateTeacherInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
-		UPDATE 
-				teacher
-			SET
-				name=#{teacherName},
-				organization=#{org},
-				organization_web=#{orgWeb}
-			where
-				id = #{teacherId}
-	</update>
 
 </mapper>

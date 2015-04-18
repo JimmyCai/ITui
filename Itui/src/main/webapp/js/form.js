@@ -1,16 +1,16 @@
 ﻿$(function(){
-//	function getFileName(){ 
-//		var fileName=""; 
+// function getFileName(){
+// var fileName="";
 //		 
-//		if(typeof(fileName) != "undefined") 
-//		{ 
-//		    fileName = $('#file').val(); 
-////		    fileName=fileName.substring(0, fileName.lastIndexOf(".")); 
-//		} 
-//		return fileName; 
-//		} 
+// if(typeof(fileName) != "undefined")
+// {
+// fileName = $('#file').val();
+// // fileName=fileName.substring(0, fileName.lastIndexOf("."));
+// }
+// return fileName;
+// }
 var photoName=0;
-	//点击提交图片表单
+	// 点击提交图片表单
 	$('#do').click(function(event){
 		  event.preventDefault(); 
 		  
@@ -38,11 +38,11 @@ $('.reset').click(function(event) {
 	$('.zhiboke')[0].reset();
 	$('#tech_pic')[0].reset();
 });
-//点击提交文字表单
+// 点击提交文字表单
 $('.submit').click(function(event) {
 
 var flag=false;
-//获得用户输入的内容
+// 获得用户输入的内容
 
 	var techname=$('#teacherName').val();
 	var price=$('#price').val();
@@ -73,105 +73,101 @@ var flag=false;
 	var tag=tag1+'/'+tag2+'/'+tag3+'/'+tag4;
 	var courseInfo={teacherName:techname,price:price,startDay:startDay,endDay:endDay,startTime:startTime,endTime:endTime,lesson:lesson,orgName:orgName,orgWeb:orgWeb,platform:platform,platformWeb:platformWeb,liveSrc:liveSrc,summary:summary,tag:tag,photo:photoName};
 
-console.log(photoName);
-function formdata_ajax(){
-	$.ajax({
-		url: 'api/course/release',
-		type: 'post',
-		contentType:"application/json;charset=utf-8",
-		dataType: 'html',
-		data: JSON.stringify(courseInfo),
-		 complete:function()
-		 {
-			 alert('提交成功继续添加表单！');
-			 $('.trip').text('');
-		 },
-		success:function(msg){
-			console.log(photoName);
-			console.log(courseInfo);
-			var data = eval('msg=' + msg);
-			console.log(data);
-			if(data.status == 0){
-				$('.trip').text('提交成功');
-				$('.trip').css({
-					display: 'block',
-					color: 'green'
-				});
-				//提交成功后重置表单
-				$('.zhiboke')[0].reset();
-				$('#tech_pic')[0].reset();
-				
-				$('.trip').css({display: 'block',color: 'green'});
-				$('#startDay').css('border','1px solid #cbcbcb');
-				$('#endDay').css('border','1px solid #cbcbcb');
-				$('#startHour').css('border','1px solid #cbcbcb');
-				$('#startminute').css('border','1px solid #cbcbcb');
-				$('#endHour').css('border','1px solid #cbcbcb');
-				$('#endminute').css('border','1px solid #cbcbcb');
-				console.log(courseInfo);		
-			}else{
-				
-			}
-		}
-		
-	});
-}
+	
 
 function formdata(){
-	if(parseInt(endDay)<parseInt(startDay)){
-		$('.trip').text('日期错误请从新填写日期');
-		$('.trip').css({
-			display: 'block',
-			color: 'red'
-		});
-		$('#startDay').css('border','1px solid red');
-		$('#endDay').css('border','1px solid red');
-	}else{
-		if((parseInt(endDay)==parseInt(startDay))&&(parseInt(endTime)<parseInt(startTime)))
+	console.log(photoName);
+	function formdata_ajax(){
+		$.ajax({
+			url: 'api/course/release',
+			type: 'post',
+			contentType:"application/json;charset=utf-8",
+			dataType: 'html',
+			data: JSON.stringify(courseInfo),
+			complete:function()
 			{
-			$('.trip').text('时间错误请从新填写时间');
-			$('.trip').css({display: 'block',color: 'red'});
-			$('#startHour').css('border','1px solid red');
-			$('#startminute').css('border','1px solid red');
-			$('#endHour').css('border','1px solid red');
-			$('#endminute').css('border','1px solid red');
+				alert('提交成功继续添加表单！');
+				$('.trip').text('');
+			},
+			success:function(msg){
+				console.log(photoName);
+				console.log(courseInfo);
+				var data = eval('msg=' + msg);
+				console.log(data);
+				if(data.status == 0){
+					$('.trip').text('提交成功');
+					$('.trip').css({
+						display: 'block',
+						color: 'green'
+					});
+				// 提交成功后重置表单
+					$('.zhiboke')[0].reset();
+					$('#tech_pic')[0].reset();
 				
-			}else{
-				formdata_ajax();
+					$('.trip').css({display: 'block',color: 'green'});
+					$('#startDay').css('border','1px solid #cbcbcb');
+					$('#endDay').css('border','1px solid #cbcbcb');
+					$('#startHour').css('border','1px solid #cbcbcb');
+					$('#startminute').css('border','1px solid #cbcbcb');
+					$('#endHour').css('border','1px solid #cbcbcb');
+					$('#endminute').css('border','1px solid #cbcbcb');
+					console.log(courseInfo);		
+				}else{
+				
+				}
 			}
 		
-	
-		
+		});
 	}
 
-	
-	
-}
-	
-function pass_01(){
-		$('.zhiboke').find('.element').each(function() {
-		if($(this).val() == "")
-		{
-			$(this).css('border', '1px solid red');
-			flag=true;return;
-		}else{
-			$(this).css('border', '1px solid #cbcbcb');
-		}
-		
-	});		
-}
-	 pass_01();
-	 if(flag==true){
-	 	
-			$('.trip').text('红色线框部分不能为空');
+	function formdata(){
+		if(parseInt(endDay)<parseInt(startDay)){
+			$('.trip').text('日期错误请从新填写日期');
 			$('.trip').css({
 				display: 'block',
 				color: 'red'
 			});
+			$('#startDay').css('border','1px solid red');
+			$('#endDay').css('border','1px solid red');
 		}else{
-			
-			formdata();
+			if((parseInt(endDay)==parseInt(startDay))&&(parseInt(endTime)<parseInt(startTime)))
+			{
+				$('.trip').text('时间错误请从新填写时间');
+				$('.trip').css({display: 'block',color: 'red'});
+				$('#startHour').css('border','1px solid red');
+				$('#startminute').css('border','1px solid red');
+				$('#endHour').css('border','1px solid red');
+				$('#endminute').css('border','1px solid red');
+				
+			}else{
+				formdata_ajax();
+			}		
 		}
+	}
+	
+	function pass_01(){
+		$('.zhiboke').find('.element').each(function() {
+			if($(this).val() == "")
+			{
+				$(this).css('border', '1px solid red');
+				flag=true;return;
+			}else{
+				$(this).css('border', '1px solid #cbcbcb');
+			}
+		
+		});		
+	}
+	pass_01();
+	if(flag==true){
+	 	$('.trip').text('红色线框部分不能为空');
+		$('.trip').css({
+				display: 'block',
+				color: 'red'
+			});
+	}else{
+		formdata();
+	}
+}
 });
 
 
