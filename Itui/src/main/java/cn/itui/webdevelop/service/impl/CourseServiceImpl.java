@@ -175,12 +175,12 @@ public class CourseServiceImpl implements CourseService {
 			if (newCourseId > 0) {
 				resultMap.put("release", "课程信息添加成功！");
 			} else if(newCourseId == -1){
-				resultMap.put("release", "课程信息已添加！");
+				resultMap.put("release", "课程信息已存在，请勿重复添加！");
 			}else if(newCourseId == -2) {
 				resultMap.put("release", "课程信息添加失败！异常！");
 			}
 		}else if(newTeacherId == -1) {
-			resultMap.put("release", "课程信息已添加！");
+			resultMap.put("release", "课程信息已存在，请勿重复添加！");
 		}else if(newTeacherId == -2){
 			resultMap.put("release", "课程信息添加失败！异常！");
 		}
