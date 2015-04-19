@@ -13,6 +13,7 @@ var photoName=0;
 	// 点击提交图片表单
 	$('#do').click(function(event){
 		  event.preventDefault(); 
+		  $('.successtrip').text('正在提交……');
 		  
           var teacherPhoto = new FormData();
           teacherPhoto.append("teacherPhoto", $(":file")[0].files[0]);
@@ -27,8 +28,12 @@ var photoName=0;
           }).done(function(res){
               console.log(res);
               var data = eval('res=' + res);
-              $('.successtrip').text(data.normalReturn.uploadInfo.upload).css('display','block');
-              photoName=data.normalReturn.uploadInfo.photoName;
+              if(data.status==0){
+              $('.successtrip').text(data.normalReturn.uploadInfo.upload);
+              photoName=data.normalReturn.uploadInfo.photoName;}
+              else{
+            	  $('.successtrip').text('提交失败，请从新提交！');
+              }
             
           });
          
@@ -108,7 +113,7 @@ var flag=false;
 				// 提交成功后重置表单
 					$('.zhiboke')[0].reset();
 					$('#tech_pic')[0].reset();
-				
+					$('.successtrip').text('');
 					$('.trip').css({display: 'block',color: 'green'});
 					$('#startDay').css('border','1px solid #cbcbcb');
 					$('#endDay').css('border','1px solid #cbcbcb');
