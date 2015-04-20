@@ -72,7 +72,8 @@ function li_insert(index){
 	orgsrc=cards[index].teacherInfo.orgWeb;
 	platsrc=cards[index].courseInfo.platformWeb;
 	livesrc=cards[index].courseInfo.liveSrc;
-	console.log(typeof(cards[index].courseInfo.price));
+
+	
 	if(cards[index].courseInfo.price==0||cards[index].courseInfo.price==''){
 		price=='免费';
 		$('.price-p span').css('color', '#9BCD3F');
@@ -145,7 +146,7 @@ var li_html='\
 								<span class="start-s statr_time">'+s_hour+':'+s_minute+'</span>\
 							</div>\
 							<div class="course_s stop">\
-								<span class="start-s stop_date">'+e_year+'-'+e_month+'-'+e_minute+'</span>\
+								<span class="start-s stop_date">'+e_year+'-'+e_month+'-'+e_date+'</span>\
 								<span class="start-s stop_time">'+e_hour+':'+e_minute+'</span>\
 								<img src="images/c-6.png" alt="">\
 								<span class="span-p">'+lesson+' 课时</span>\
@@ -156,16 +157,16 @@ var li_html='\
 								<div class="sch">\
 									<img src="images/c-4.png" alt="">\
 									<span class="sch-s">开课机构：</span>\
-									<span class="sch-name"><a href="'+orgsrc+'" target="_blank">'+orgname+'</a></span>\
+									<span class="sch-name"><a href="http://'+orgsrc+'" target="_blank">'+orgname+'</a></span>\
 								</div>\
 								<div class="sch sch-plat">\
 									<img src="images/c-5.png" alt="">\
 									<span class="sch-p">直播平台：</span>\
-									<span class="sch-p-name"><a href="'+platsrc+'" target="_blank">'+platname+'</a></span>\
+									<span class="sch-p-name"><a href="http://'+platsrc+'" target="_blank">'+platname+'</a></span>\
 								</div>\
 							</div>\
 							<div class="gouon">\
-							<a target="_blank" href="'+livesrc+'">\
+							<a target="_blank" href="http://'+livesrc+'">\
 								<div class="go-btn">\
 									<div id="trianle"></div>\
 									<span class="go-on">\
@@ -199,7 +200,7 @@ function card_ajax(){
 		success:function(msg){
 		var data = eval('msg='+msg);
 		if (data.status == 0){
-			console.log(123);
+			
 			var cardslength=data.normalReturn.courseList.length;
 			// 将接收数据赋值给自定义数组
 			for(w=0;w<cardslength;w++)
