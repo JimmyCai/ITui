@@ -157,16 +157,16 @@ var li_html='\
 								<div class="sch">\
 									<img src="images/c-4.png" alt="">\
 									<span class="sch-s">开课机构：</span>\
-									<span class="sch-name"><a href="'+orgsrc+'" target="_blank">'+orgname+'</a></span>\
+									<span class="sch-name"><a href="http://'+orgsrc+'" target="_blank">'+orgname+'</a></span>\
 								</div>\
 								<div class="sch sch-plat">\
 									<img src="images/c-5.png" alt="">\
 									<span class="sch-p">直播平台：</span>\
-									<span class="sch-p-name"><a href="'+platsrc+'" target="_blank">'+platname+'</a></span>\
+									<span class="sch-p-name"><a href="http://'+platsrc+'" target="_blank">'+platname+'</a></span>\
 								</div>\
 							</div>\
 							<div class="gouon">\
-							<a target="_blank" href="'+livesrc+'">\
+							<a target="_blank" href="http://'+livesrc+'">\
 								<div class="go-btn">\
 									<div id="trianle"></div>\
 									<span class="go-on">\
