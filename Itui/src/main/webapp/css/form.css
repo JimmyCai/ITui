@@ -24,6 +24,7 @@ body{
 	border:1px solid #cbcbcb;
 	background-color: #f6f6f6;
 	margin: 0 auto;
+	display:none;
 }
 .no_code p{
 	font-size:30px;
