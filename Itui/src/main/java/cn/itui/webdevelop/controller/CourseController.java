@@ -38,7 +38,6 @@ public class CourseController {
 		return courseService.getAllCourse();
 	}
 	
-	//验证是否有管理员权限
 	@RequestMapping(value=URLConstants.API_COURSE_VERIFY)
 	public String verifyPermission(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		String code = request.getParameter(CODE);
@@ -46,8 +45,10 @@ public class CourseController {
 			throw NotLoginException.getInstance();
 		}
 		int adminId = courseService.verifyPermissionByCode(code);
-		if(adminId<=0){
+		if(adminId<0){
 			throw PermissionDeniedException.getInstance();
+		}else if (adminId == 0){
+			return "-1";
 		}
 		return "0";
 	}
@@ -63,10 +64,10 @@ public class CourseController {
 	
 	@RequestMapping(value=URLConstants.API_COURSE_RELEASE_UPLOADPHOTO,method=RequestMethod.POST)
 	public String uploadTeacherPhoto(HttpServletRequest request,HttpServletResponse response) throws Exception {
-	//创建一个通用的多部分解析器
+
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 		String result = null;
-	//判断request是否有文件上传
+
 		if(multipartResolver.isMultipart(request)){
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			Iterator<String> iter = multiRequest.getFileNames();  
