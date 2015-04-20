@@ -72,7 +72,8 @@ function li_insert(index){
 	orgsrc=cards[index].teacherInfo.orgWeb;
 	platsrc=cards[index].courseInfo.platformWeb;
 	livesrc=cards[index].courseInfo.liveSrc;
-	console.log(typeof(cards[index].courseInfo.price));
+
+	
 	if(cards[index].courseInfo.price==0||cards[index].courseInfo.price==''){
 		price=='免费';
 		$('.price-p span').css('color', '#9BCD3F');
@@ -145,7 +146,7 @@ var li_html='\
 								<span class="start-s statr_time">'+s_hour+':'+s_minute+'</span>\
 							</div>\
 							<div class="course_s stop">\
-								<span class="start-s stop_date">'+e_year+'-'+e_month+'-'+e_minute+'</span>\
+								<span class="start-s stop_date">'+e_year+'-'+e_month+'-'+e_date+'</span>\
 								<span class="start-s stop_time">'+e_hour+':'+e_minute+'</span>\
 								<img src="images/c-6.png" alt="">\
 								<span class="span-p">'+lesson+' 课时</span>\
@@ -199,7 +200,7 @@ function card_ajax(){
 		success:function(msg){
 		var data = eval('msg='+msg);
 		if (data.status == 0){
-			console.log(123);
+			
 			var cardslength=data.normalReturn.courseList.length;
 			// 将接收数据赋值给自定义数组
 			for(w=0;w<cardslength;w++)
