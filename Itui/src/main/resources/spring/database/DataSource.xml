@@ -10,6 +10,7 @@ class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<value>WEB-INF/classes/properties/database.properties</value>
 		<value>WEB-INF/classes/properties/email.properties</value>
 		<value>WEB-INF/classes/properties/recaptcha.properties</value>
+		<value>WEB-INF/classes/properties/path.properties</value>
 	</list>
 	</property>
 </bean>

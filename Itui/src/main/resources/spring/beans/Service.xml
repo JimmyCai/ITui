@@ -101,4 +101,8 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	    <property name="statsDao" ref="statsDao"></property>
 	</bean>
 	
+	<!-- 存储文件配置 -->
+	<bean id="saveFile" class="cn.itui.webdevelop.utils.SaveFile">
+	    <property name="TEACHER_LOGO_PATH" value="${teacher_logo_path}"></property>
+	</bean>
 </beans>

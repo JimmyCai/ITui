@@ -64,10 +64,10 @@ public class CourseController {
 	
 	@RequestMapping(value=URLConstants.API_COURSE_RELEASE_UPLOADPHOTO,method=RequestMethod.POST)
 	public String uploadTeacherPhoto(HttpServletRequest request,HttpServletResponse response) throws Exception {
-
+        //创建一个通用的多部分解析器
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 		String result = null;
-
+       //判断request是否有文件上传
 		if(multipartResolver.isMultipart(request)){
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			Iterator<String> iter = multiRequest.getFileNames();  
