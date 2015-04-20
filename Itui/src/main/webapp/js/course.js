@@ -2,11 +2,6 @@
 
 $(function(){
 	card_ajax();
-
-
-
-
-
 });
 //页面加载函数结束
 
@@ -26,6 +21,9 @@ function round_insert(){
 	{
 	if((i+j)<cards.length){
 		li_insert(i+j);
+		if(cards[i+j].courseInfo.price==0||cards[i+j].courseInfo.price==''){
+			$('.price-p'+(i+j)).find('span').css('color', '#9BCD3F');
+		}
 	  }
 	}
 }
@@ -40,7 +38,6 @@ $(window).scroll(function() {
 			if(bottom_h<20&&j<(cards.length)-3){
 				j+=3;
 				round_insert();
-				console.log(j);
 			}
 	});	
 }
@@ -75,9 +72,9 @@ function li_insert(index){
 
 	
 	if(cards[index].courseInfo.price==0||cards[index].courseInfo.price==''){
-		price=='免费';
-		$('.price-p span').css('color', '#9BCD3F');
+		price='免费';
 	}
+
 	if(cards[index].courseInfo.dateType==0){
 		datetype='今天';
 	}
@@ -100,7 +97,6 @@ function li_insert(index){
 		tags4="";
 	}else{
 		var tag=(cards[index].courseInfo.tag).split("/");
-		console.log(tag.length);
 
 	if(tag[2]==undefined){
 			tag[2]="";
@@ -113,8 +109,6 @@ function li_insert(index){
 		tags2=tag[1];
 		tags3=tag[2];
 		tags4=tag[3];
-		
-
 	}
 	
 
@@ -130,7 +124,7 @@ var li_html='\
 									<img src="http://www.itui.cn/itui/images/teachers/'+techerlogo+'" alt="" class="img-responsive">\
 								</div>\
 								<p>'+techername+'</p>\
-								<p class="price-p">\
+								<p class="price-p price-p'+index+'">\
 									<span>￥</span><span class="price-s">'+price+'</span>\
 								</p>\
 							</div>\

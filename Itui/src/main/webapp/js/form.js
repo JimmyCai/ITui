@@ -1,14 +1,41 @@
-﻿$(function(){
-// function getFileName(){
-// var fileName="";
-//		 
-// if(typeof(fileName) != "undefined")
-// {
-// fileName = $('#file').val();
-// // fileName=fileName.substring(0, fileName.lastIndexOf("."));
-// }
-// return fileName;
-// }
+﻿//判断是否有权限发布课程信息
+function ituidata(){
+	$.ajax({
+		url : 'api/course/verify',
+		type : 'get',
+		dataType : 'html',
+		data : {"code" : $.cookie('user')},
+		success : function(msg) {
+			data = eval('msg=' + msg);
+			if (data == '0') {
+				$('.content').css("display","block");
+				$('.no_code').css("display","none");
+				
+			} else {
+				$('.content').css("display","none");
+				$('.no_code').css("display","block");
+				$('.code_p').text('您没有权限查看此页面,三秒后跳转回首页');
+				setTimeout(function(){window.location="index.html";},3000);
+				
+			}
+		}
+	});
+	}
+function is_load(){
+// 判断用户是否登录
+	if ($.cookie('user') != undefined) {
+		ituidata();
+    }else{
+		$('.content').css("display","none");
+		$('.no_code').css("display","block");
+		setTimeout(function(){window.location="index.html";},3000);
+    }
+}
+is_load();
+
+
+$(function(){
+
 var photoName=0;
 	// 点击提交图片表单
 	$('#do').click(function(event){
@@ -17,7 +44,6 @@ var photoName=0;
 		  
           var teacherPhoto = new FormData();
           teacherPhoto.append("teacherPhoto", $(":file")[0].files[0]);
-          console.log(teacherPhoto);
            $.ajax({
               type:"post",
               url:"api/course/release/uploadphoto",
@@ -26,7 +52,6 @@ var photoName=0;
               processData: false,
               contentType: false
           }).done(function(res){
-              console.log(res);
               var data = eval('res=' + res);
               if(data.status==0){
               $('.successtrip').text(data.normalReturn.uploadInfo.upload);
@@ -51,7 +76,6 @@ $('.submit').click(function(event) {
 	if(photoName==0){
 		photoName="default.png";
 	}
-	console.log(photoName);
 
 var flag=false;
 // 获得用户输入的内容
@@ -86,9 +110,6 @@ var flag=false;
 	var courseInfo={teacherName:techname,price:price,startDay:startDay,endDay:endDay,startTime:startTime,endTime:endTime,lesson:lesson,orgName:orgName,orgWeb:orgWeb,platform:platform,platformWeb:platformWeb,liveSrc:liveSrc,summary:summary,tag:tag,photo:photoName};
 
 	
-
-
-	console.log(photoName);
 	function formdata_ajax(){
 		$.ajax({
 			url: 'api/course/release',
@@ -103,10 +124,7 @@ var flag=false;
 				$('.trip').text('');
 			},
 			success:function(msg){
-				console.log(photoName);
-				console.log(courseInfo);
 				var data = eval('msg=' + msg);
-				console.log(data);
 				if(data.status == 0){
 					$('.trip').text('提交成功');
 					$('.trip').css({
@@ -124,8 +142,7 @@ var flag=false;
 					$('#startminute').css('border','1px solid #cbcbcb');
 					$('#endHour').css('border','1px solid #cbcbcb');
 					$('#endminute').css('border','1px solid #cbcbcb');
-					alert(data.normalReturn.releaseInfo.release);
-					console.log(courseInfo);		
+					alert(data.normalReturn.releaseInfo.release);		
 				}else{
 					alert('表单格式填写有误请检查！');
 				}
@@ -174,10 +191,7 @@ var flag=false;
 	pass_01();
 	if(flag==true){
 	 	$('.trip').text('红色线框部分不能为空');
-		$('.trip').css({
-				display: 'block',
-				color: 'red'
-			});
+		$('.trip').css({display: 'block',color: 'red'});
 	}else{
 		formdata();
 	}

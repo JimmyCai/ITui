@@ -18,7 +18,21 @@ body{
 	background-color:#eee;
 	color:#444;
 }
+.no_code{
+	width: 1024px;
+	height: 500px;
+	border:1px solid #cbcbcb;
+	background-color: #f6f6f6;
+	margin: 0 auto;
+}
+.no_code p{
+	font-size:30px;
+	text-align:center;
+	color:#666;
+	padding-top:100px;
+}
 .content{
+	display:none;
 	width: 1024px;
 	height: 800px;
 	border:1px solid #cbcbcb;

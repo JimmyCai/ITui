@@ -9,7 +9,9 @@
 </head>
 
 <body>
-
+	<div class="no_code">
+	<p class="code_p">请先登录，三秒后跳转到首页</p>
+	</div>
 	<div class="content">
 		<div class="item">
 			<span>爱推管理员数据提交页面</span> <span class="trip">红色线框部分不能为空</span>
@@ -46,6 +48,7 @@
 				</div>
 				<div class="col01">
 					<select name="startHour" id="startHour" class="element">
+						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
 						<option value="03">03</option>
@@ -69,9 +72,9 @@
 						<option value="21">21</option>
 						<option value="22">22</option>
 						<option value="23">23</option>
-						<option value="24">24</option>
 					</select> <span>:</span> <select name="startminute" id="startminute"
 						class="element">
+						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
 						<option value="03">03</option>
@@ -140,7 +143,7 @@
 						<option value="57">57</option>
 						<option value="58">58</option>
 						<option value="59">59</option>
-						<option value="60">60</option>
+						
 					</select>
 				</div>
 				<div class="col01">
@@ -149,6 +152,7 @@
 				</div>
 				<div class="col01">
 					<select name="endHour" id="endHour" class="element">
+						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
 						<option value="03">03</option>
@@ -172,9 +176,10 @@
 						<option value="21">21</option>
 						<option value="22">22</option>
 						<option value="23">23</option>
-						<option value="24">24</option>
+						
 					</select> <span>:</span> <select name="endminute" id="endminute"
 						class="element">
+						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
 						<option value="03">03</option>
@@ -243,7 +248,7 @@
 						<option value="57">57</option>
 						<option value="58">58</option>
 						<option value="59">59</option>
-						<option value="60">60</option>
+					
 					</select>
 				</div>
 				<!-- <div class="col01">
@@ -323,6 +328,7 @@
 
 
 	<script src="dist/js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
 	<script src="js/form.js"></script>
 
 
