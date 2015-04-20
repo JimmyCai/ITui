@@ -96,7 +96,8 @@ var flag=false;
 			data: JSON.stringify(courseInfo),
 			complete:function()
 			{
-				alert('提交成功继续添加表单！');
+				
+				
 				$('.trip').text('');
 			},
 			success:function(msg){
@@ -121,9 +122,10 @@ var flag=false;
 					$('#startminute').css('border','1px solid #cbcbcb');
 					$('#endHour').css('border','1px solid #cbcbcb');
 					$('#endminute').css('border','1px solid #cbcbcb');
+					alert(data.normalReturn.releaseInfo.release);
 					console.log(courseInfo);		
 				}else{
-				
+					alert('表单格式填写有误请检查！');
 				}
 			}
 		
