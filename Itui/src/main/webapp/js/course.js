@@ -162,10 +162,9 @@ var li_html='\
 							<div class="gouon">\
 							<a target="_blank" href="http://'+livesrc+'">\
 								<div class="go-btn">\
-									<div id="trianle"></div>\
-									<span class="go-on">\
+									<p class="go-on">\
 										前往观看\
-									</span>\
+									</p>\
 								</div>\
 							</a>\
 							</div>\

@@ -41,3 +41,9 @@ padding-right: 0px;
 	}
 
 }
+@media (min-width:800px){
+	.container{
+	width:800px;
+	}
+
+}

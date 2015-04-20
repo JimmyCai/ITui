@@ -19,14 +19,9 @@ body{
 }
 
 .container{
-	background-color: red;
 	margin-top: 0px;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	box-shadow: #CCC -6px 0px 6px -6px, #CCC 6px 0px 6px -6px;
 	font-family: "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 14px;
-	background-color: #fff;
 	margin-top: 34px;
 
 }
@@ -61,22 +56,25 @@ text-align: center;
 	margin-top: 10px;
 }
 .item_icon01 .img-icon{
-	max-width: 60px;
-	max-height: 60px;
+	max-width: 40px;
+	max-height: 40px;
 	margin-left: auto;
 	margin-right: auto;
 }
 .card{
 	margin:0 auto;
-	max-width: 80%;
+	max-width: 100%;
 	border-radius: 4px;
 	margin-bottom: 20px;
+	
 }
 .card-li{
 	border: 1px solid #cbcbcb;
 	overflow: hidden;
 	margin-top: 20px;
 	border-radius: 4px;
+	background-color:#fff;
+	box-shadow: #CCC -6px 0px 6px -6px, #CCC 6px 0px 6px -6px;
 }
 .li-img{
 	width: 842px;
@@ -89,7 +87,7 @@ text-align: center;
 	text-align: center;
 	font-weight: 400;
 	color: #fff;
-	line-height: 60px;
+	line-height: 40px;
 	border-radius: 4px;
 }
 .tech{
@@ -123,7 +121,7 @@ margin-right: 2%;
 	float: right;
 }
 .message{
-	font-size: 32px;
+	font-size: 28px;
 	color: #848480;
 	text-align: left;
 	padding-left: 8%;
@@ -191,24 +189,25 @@ padding-left: 16px;
 .go-btn{
 	background-color: #F87466;
 	border-radius: 6px;
-	width: 150px;
-	height: 60px;
+	width: 120px;
+	height: 50px;
 	padding-top: 12px;
 }
 #trianle{
 	width: 0;
     height: 0;
-    border-top: 16px solid transparent;
-    border-left: 32px solid #fff;
-    border-bottom: 16px solid transparent;
+    border-top: 10px solid transparent;
+    border-left: 20px solid #fff;
+    border-bottom: 10px solid transparent;
     margin-left: 10px;
     float: left;
 }
 .go-on{
-	font-size: 24px;
+	font-size: 20px;
 	color: #fff;
-	float: left;
+	
 	padding-left: 4px;
+	text-align: center;
 	
 }
 .go-on a:hover{
@@ -280,6 +279,7 @@ border:1px solid #cbcbcb;
 	padding-left:20px;
 	
 }
+
 @media (max-width:1100px){
 .message {
 	font-size: 24px;
@@ -299,8 +299,8 @@ border:1px solid #cbcbcb;
     width: 50%;
 }
 }
-@media (max-width:1024px){
-
+@media (max-width:800px){
+.card{max-width:80%;}
 }
 @media (max-width:768px){
 .form-search-site {
@@ -330,6 +330,8 @@ border:1px solid #cbcbcb;
 }
 .go-btn{
 	width: 100px;
+	
+	
 height: 40px;}
 #trianle {
     width: 0px;
