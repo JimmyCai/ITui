@@ -32,9 +32,11 @@ var photoName=0;
               $('.successtrip').text(data.normalReturn.uploadInfo.upload);
               photoName=data.normalReturn.uploadInfo.photoName;}
               else{
-            	  $('.successtrip').text('提交失败，请从新提交！');
+            	  $('.successtrip').text('提交失败，请校验格式是否为jpg、png、jpeg并保证图片大小在800k以内！');
               }
             
+          }).fail(function(){
+        	  $('.successtrip').text('提交失败，请校验格式是否为jpg、png、jpeg并保证图片大小在800k以内！');
           });
          
           return false;
