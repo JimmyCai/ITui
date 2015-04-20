@@ -19,7 +19,7 @@ public class RequestUtil {
 	}
 
 	/*
-	 * 获取前端课程json信息
+	 * 获取前端表单提交的json信息
 	 * */
 	public static String getJsonString(HttpServletRequest request) {
 		StringBuffer json = new StringBuffer();
