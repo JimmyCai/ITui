@@ -102,7 +102,6 @@ function li_insert(index){
 			tag[2]="";
 		}
     if(tag[3]==undefined){
-			console.log("kong");
 			tag[3]="";
 		}
 		tags1=tag[0];
@@ -143,7 +142,7 @@ var li_html='\
 								<span class="start-s stop_date">'+e_year+'-'+e_month+'-'+e_date+'</span>\
 								<span class="start-s stop_time">'+e_hour+':'+e_minute+'</span>\
 								<img src="images/c-6.png" alt="">\
-								<span class="span-p">'+lesson+' 课时</span>\
+								<span class="span-p">全程'+lesson+'课时</span>\
 							</div>\
 						</div>\
 						<div class="course-01">\
@@ -200,13 +199,14 @@ function card_ajax(){
 			{
 				cards[w]=data.normalReturn.courseList[w];
 			}
-			//console.log(cards[3]);
+	
 			//根据数组长度插入名片
 				if(cards.length<=3)
 				{
 					for(i=0;i<cards.length;i++)
 					{
 						li_insert(i+j);
+						$('.price-p'+(i+j)).find('span').css('color', '#9BCD3F');
 					}
 				}else{
 						round_insert();

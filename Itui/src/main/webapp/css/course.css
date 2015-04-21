@@ -92,6 +92,7 @@ text-align: center;
 }
 .tech{
 	overflow: hidden;
+	max-height:84px;
 }
 .techer-logo{
 	max-width: 74px;
@@ -107,7 +108,7 @@ text-align: center;
 	font-size: 32px;
 	color: #666;
 	float: left;
-	line-height: 74px;
+	line-height: 68px;
 	margin-left: 18px;
 }
 .price-p span{
@@ -149,7 +150,6 @@ padding-left: 16px;
 }
 .course-01{
 	overflow: hidden;
-	margin-top: 20px;
 }
 .course_s .span-p{
 	margin-left: 10px;
@@ -173,8 +173,11 @@ padding-left: 16px;
 	color: #666;
 	margin-left: 10px;
 }
+.sch{
+	margin-top: 6px;
+}
 .sch-plat{
-	margin-top: 20px;
+	
 }
 .gouon{
 	float: right;
@@ -185,6 +188,9 @@ padding-left: 16px;
 .gouon a{
 	display:block;
 	max-width:100%;
+}
+.gouon a:hover{
+text-decoration: none;
 }
 .go-btn{
 	background-color: #F87466;
@@ -217,6 +223,7 @@ color: #fff;
 .p-tag{
 	margin-left: 12%;
 	margin-bottom: 40px;
+	margin-top:2%;
 }
 .span-tag{
 	font-size: 16px;
@@ -396,6 +403,9 @@ margin-bottom: 20px;
 }
 @media (min-width: 200px) and (max-width: 768px) {
 
+}
+#cnzz_stat_icon_3967155{
+	display:none;
 }
 
 
