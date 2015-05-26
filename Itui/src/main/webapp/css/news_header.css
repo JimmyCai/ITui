@@ -1,0 +1,157 @@
+.auto {
+  margin: 0 auto;
+}
+.m_auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: #ffffff;
+}
+.nav > .itui-topic-li > .dropdown > button:hover {
+  background-color: #ffffff;
+}
+.nav > .itui-topic-li > .dropdown > button:focus {
+  background-color: #ffffff;
+}
+.nav > .itui-topic-li > .dropdown.open {
+  background-color: #ffffff;
+}
+.dropdown-toggle.btn-default {
+  background-color: #ffffff;
+  border: none;
+}
+.aw-top-menu-wrap {
+  width: 100%;
+}
+.aw-top-menu-wrap .aw-logo {
+  float: left;
+  padding-top: 8px;
+}
+.aw-top-menu-wrap .container {
+  max-width: 1000px;
+  border: 1px solid #ff0000;
+  margin: 0 auto;
+}
+.aw-top-menu-wrap .container .itui-news-navbar-nav-ul {
+  float: left;
+  max-width: 40%;
+}
+.aw-top-menu-wrap .container .itui-news-navbar-nav-ul li {
+  float: left;
+}
+.aw-top-menu-wrap .container .itui-news-navbar-nav-ul li .dropdown {
+  position: relative;
+  background-color: #ffffff;
+}
+.aw-top-menu-wrap .container .itui-news-navbar-nav-ul li a {
+  color: #428BCA;
+  font-size: 1.8rem;
+}
+.aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown button {
+  color: #428BCA;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 1.8rem;
+  line-height: 20px;
+}
+.aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news {
+  min-width: 480px;
+  background-color: #ffffff;
+}
+.aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news li {
+  width: 25%;
+}
+.aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news li a {
+  font-size: 1.4rem;
+  padding-bottom: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs {
+  float: right;
+  border: 1px solid #008000;
+  position: relative;
+  margin-top: 6px;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .btn-normal {
+  color: #333;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .btn-normal:hover {
+  color: #333;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .itui-nav-user-userlogo {
+  float: left;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .itui-nav-user-userlogo img {
+  max-width: 36px;
+  -moz-border-radius: 50%;
+  -khtml-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .itui-username {
+  float: left;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 100;
+  width: 100%;
+  border-top: none;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .gai_hide {
+  width: 100%;
+  height: 44px;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list {
+  background-color: #ffffff;
+  border: 1px solid #cbcbcb;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list a {
+  line-height: 28px;
+  width: 100%;
+  color: #555;
+  display: block;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list a:hover {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list a i {
+  padding-left: 1em;
+  padding-right: 8px;
+  font-size: #555;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list a .glyphicon:empty {
+  width: 2em;
+}
+.navbar-nav .open .dropdown-menu {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  float: left;
+  border: 1px solid #cbcbcb;
+  height: auto;
+}
+@media (max-width: 990px) {
+  .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .aw-top-menu-wrap .container {
+    float: left;
+    width: 70%;
+  }
+}
+@media (max-width: 400px) {
+  .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news {
+    min-width: 260px;
+  }
+}
