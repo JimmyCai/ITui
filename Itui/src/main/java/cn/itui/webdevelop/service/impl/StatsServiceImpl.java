@@ -1,5 +1,6 @@
 package cn.itui.webdevelop.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +12,9 @@ import cn.itui.webdevelop.utils.exception.DatabaseException;
 
 public class StatsServiceImpl implements StatsService {
 	private StatsDao statsDao;
+	private static String PERSON_HOMEPAGE;
+	private static String NEWS_SQUARE_URL;
+	private static String TOPIC_URL;
 	
 	public StatsDao getStatsDao() {
 		return statsDao;
@@ -18,6 +22,31 @@ public class StatsServiceImpl implements StatsService {
 
 	public void setStatsDao(StatsDao statsDao) {
 		this.statsDao = statsDao;
+	}
+	
+
+	public static String getPERSON_HOMEPAGE() {
+		return PERSON_HOMEPAGE;
+	}
+
+	public static void setPERSON_HOMEPAGE(String pERSON_HOMEPAGE) {
+		PERSON_HOMEPAGE = pERSON_HOMEPAGE;
+	}
+	
+	public static String getNEWS_SQUARE_URL() {
+		return NEWS_SQUARE_URL;
+	}
+
+	public static void setNEWS_SQUARE_URL(String nEWS_SQUARE_URL) {
+		NEWS_SQUARE_URL = nEWS_SQUARE_URL;
+	}
+
+	public static String getTOPIC_URL() {
+		return TOPIC_URL;
+	}
+
+	public static void setTOPIC_URL(String tOPIC_URL) {
+		TOPIC_URL = tOPIC_URL;
 	}
 
 	public String getPVStats() throws Exception {
@@ -31,9 +60,9 @@ public class StatsServiceImpl implements StatsService {
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
 		List<HashMap<String, Object>> todayStatsInfo = statsDao.getTodayStatsInfo(Stats.getDate());
-		if (todayStatsInfo == null)
+		if (todayStatsInfo == null){
 			throw DatabaseException.getInstance();
-		
+		}
 		//get total pv
 		int total = statsDao.getTotalPV();
 		HashMap<String, Object> resultItem = new HashMap<String, Object>();
@@ -50,6 +79,69 @@ public class StatsServiceImpl implements StatsService {
 			throws Exception {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put("statsInfo", resultItem);
+		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
+		return jsonStr;
+	}
+
+	public String getIndexInfo() throws DatabaseException {
+		List<HashMap<String, Object>> topicInfo = statsDao.getTopicInfo();
+		List<HashMap<String, Object>> personInfo = statsDao.getPersonInfo();
+		List<HashMap<String, Object>> newsInfo = statsDao.getNewsInfo();
+		if(topicInfo == null || personInfo == null || newsInfo == null){
+			throw DatabaseException.getInstance();
+		}
+		List<HashMap<String, Object>> resultItem = new ArrayList<HashMap<String, Object>>();
+		int k = 0;
+		while(k<topicInfo.size()){
+			HashMap<String, Object> topicResultMap = new HashMap<String, Object>();
+			HashMap<String, Object> topicItem = new HashMap<String, Object>();
+			topicItem.put("topicId", topicInfo.get(k).get("topicId"));
+			topicItem.put("topic", topicInfo.get(k).get("topic"));
+			topicItem.put("topicPage", TOPIC_URL+topicInfo.get(k).get("topic"));
+			
+			topicResultMap.put("topicInfo", topicItem);
+			resultItem.add(topicResultMap);
+			k++;
+		}
+		
+		int i = 0;
+		while(i<personInfo.size()){
+			HashMap<String, Object> personResultMap = new HashMap<String, Object>();
+			HashMap<String, Object> personItem = new HashMap<String, Object>();
+			personItem.put("userName", personInfo.get(i).get("userName"));
+			personItem.put("userPhoto", personInfo.get(i).get("userPhoto"));
+			personItem.put("sex", personInfo.get(i).get("sex"));
+			personItem.put("province", personInfo.get(i).get("province"));
+			personItem.put("city", personInfo.get(i).get("city"));
+			personItem.put("signature", personInfo.get(i).get("signature"));
+			personItem.put("homePage", PERSON_HOMEPAGE+personInfo.get(i).get("userName"));
+			
+		    personResultMap.put("personInfo", personItem);
+		    resultItem.add(personResultMap);
+			i++;
+		}
+		
+		int j = 0;
+		while(j<newsInfo.size()){
+			HashMap<String, Object> newsResultMap = new HashMap<String, Object>();
+			HashMap<String, Object> newsItem = new HashMap<String, Object>();
+			newsItem.put("newsId", newsInfo.get(j).get("newsId"));
+			newsItem.put("title", newsInfo.get(j).get("title"));
+			newsItem.put("newsPhoto", newsInfo.get(j).get("newsPhoto"));
+			newsItem.put("summary", newsInfo.get(j).get("summary"));
+			newsItem.put("newsPage", NEWS_SQUARE_URL+newsInfo.get(j).get("newsId"));
+			
+			newsResultMap.put("newsInfo", newsItem);
+			resultItem.add(newsResultMap);
+			j++;
+		}
+		String jsonResult = buildIndexInfoJson(resultItem);
+		return jsonResult;
+	}
+
+	private String buildIndexInfoJson(List<HashMap<String,Object>> resultItem) {
+		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
+		jsonMap.put("indexInfo", resultItem);
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
 		return jsonStr;
 	}

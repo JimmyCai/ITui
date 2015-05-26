@@ -53,6 +53,8 @@
  				<value>getFollowMajors</value>
  
   				<value>login</value>
+  				<value>loginWeibo</value>
+  				<value>loginWeiboAction</value>
  				<value>register</value>				
  				<value>activate</value>
  				<value>resendEmail</value>
@@ -65,11 +67,15 @@
  				<value>getCollegeLocalRank</value>
  				
  				<value>getPVStats</value>
+ 				<value>getIndexInfo</value>
  				
- 				<value>getCourseInfo</value>
+ 				<value>getAliveCourseInfo</value>
  				<value>verifyPermission</value>
  				<value>addCourseInfo</value>
  				<value>uploadTeacherPhoto</value>
+ 				<value>getAllCourse</value>
+ 				<value>getAllAliveCourse</value>
+ 				<value>getAllEndedCourse</value>
  			</list>
  		</property>
  		<property name="advice" ref="requestResponseAdvice"></property>
@@ -84,6 +90,7 @@
  				<value>userController</value>
  				<value>statsController</value>
  				<value>courseController</value>
+ 				<value>captchaController</value>
  			</list>
  		</property>
  		<property name="interceptorNames">

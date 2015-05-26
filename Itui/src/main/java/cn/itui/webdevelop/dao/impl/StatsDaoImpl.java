@@ -44,4 +44,16 @@ public class StatsDaoImpl implements StatsDao {
 		this.sqlSession = sqlSession;
 	}
 
+	public List<HashMap<String, Object>> getPersonInfo() {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.StatsDao.getPersonInfo");
+	}
+
+	public List<HashMap<String, Object>> getNewsInfo() {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.StatsDao.getNewsInfo");
+	}
+
+	public List<HashMap<String, Object>> getTopicInfo() {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.StatsDao.getTopicInfo");
+	}
+
 }

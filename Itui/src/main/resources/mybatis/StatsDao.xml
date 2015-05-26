@@ -46,4 +46,42 @@
 	    FROM
 	          pv_stats
 	</select>
+	
+	<select id="getPersonInfo" resultType="java.util.HashMap">
+	    SELECT
+	          a.user_name AS userName,
+	          a.avatar_file AS userPhoto,
+	          a.sex AS sex,
+	          a.province AS province,
+	          a.city AS city,
+	          b.signature AS signature
+	    FROM
+	          aws_itui_users a
+	    JOIN  aws_itui_users_attrib b ON a.uid=b.uid
+	    WHERE a.is_recommend=1
+	</select>
+	
+	<select id="getNewsInfo" resultType="java.util.HashMap">
+	    SELECT
+	          a.id AS newsId,
+	          a.title AS title,
+	          substring(a.message,1,50) AS summary,
+	          max(b.file_location) AS newsPhoto
+	    FROM
+	          aws_itui_article a
+	    JOIN  aws_itui_attach b ON a.id = b.item_id
+	    WHERE a.is_headline=1
+	    GROUP BY b.item_id
+	    ORDER BY a.add_time DESC          
+	</select>
+	
+	<select id="getTopicInfo" resultType="java.util.HashMap">
+	    SELECT
+	          a.topic_id AS topicId,
+	          a.topic_title AS topic
+	    FROM
+	          aws_itui_topic a
+	    WHERE a.is_recommend=1  
+	    LIMIT 12        
+	</select>
 </mapper>
