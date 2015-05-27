@@ -90,23 +90,23 @@ public class StatsServiceImpl implements StatsService {
 		if(topicInfo == null || personInfo == null || newsInfo == null){
 			throw DatabaseException.getInstance();
 		}
-		List<HashMap<String, Object>> resultItem = new ArrayList<HashMap<String, Object>>();
+		List<ArrayList<HashMap<String, Object>>> resultItem = new ArrayList<ArrayList<HashMap<String, Object>>>();
+		ArrayList<HashMap<String, Object>> topicResultList = new ArrayList<HashMap<String,Object>>();
 		int k = 0;
 		while(k<topicInfo.size()){
-			HashMap<String, Object> topicResultMap = new HashMap<String, Object>();
 			HashMap<String, Object> topicItem = new HashMap<String, Object>();
 			topicItem.put("topicId", topicInfo.get(k).get("topicId"));
 			topicItem.put("topic", topicInfo.get(k).get("topic"));
 			topicItem.put("topicPage", TOPIC_URL+topicInfo.get(k).get("topic"));
 			
-			topicResultMap.put("topicInfo", topicItem);
-			resultItem.add(topicResultMap);
+			topicResultList.add(k, topicItem);
 			k++;
 		}
+		resultItem.add(topicResultList);
 		
+		ArrayList<HashMap<String, Object>> personResultList = new ArrayList<HashMap<String,Object>>();
 		int i = 0;
 		while(i<personInfo.size()){
-			HashMap<String, Object> personResultMap = new HashMap<String, Object>();
 			HashMap<String, Object> personItem = new HashMap<String, Object>();
 			personItem.put("userName", personInfo.get(i).get("userName"));
 			personItem.put("userPhoto", personInfo.get(i).get("userPhoto"));
@@ -116,14 +116,14 @@ public class StatsServiceImpl implements StatsService {
 			personItem.put("signature", personInfo.get(i).get("signature"));
 			personItem.put("homePage", PERSON_HOMEPAGE+personInfo.get(i).get("userName"));
 			
-		    personResultMap.put("personInfo", personItem);
-		    resultItem.add(personResultMap);
+			personResultList.add(i, personItem);
 			i++;
 		}
+		resultItem.add(personResultList);
 		
+		ArrayList<HashMap<String, Object>> newsResultList = new ArrayList<HashMap<String,Object>>();
 		int j = 0;
 		while(j<newsInfo.size()){
-			HashMap<String, Object> newsResultMap = new HashMap<String, Object>();
 			HashMap<String, Object> newsItem = new HashMap<String, Object>();
 			newsItem.put("newsId", newsInfo.get(j).get("newsId"));
 			newsItem.put("title", newsInfo.get(j).get("title"));
@@ -131,15 +131,15 @@ public class StatsServiceImpl implements StatsService {
 			newsItem.put("summary", newsInfo.get(j).get("summary"));
 			newsItem.put("newsPage", NEWS_SQUARE_URL+newsInfo.get(j).get("newsId"));
 			
-			newsResultMap.put("newsInfo", newsItem);
-			resultItem.add(newsResultMap);
+			newsResultList.add(j,newsItem);
 			j++;
 		}
+		resultItem.add(personResultList);
 		String jsonResult = buildIndexInfoJson(resultItem);
 		return jsonResult;
 	}
 
-	private String buildIndexInfoJson(List<HashMap<String,Object>> resultItem) {
+	private String buildIndexInfoJson(List<ArrayList<HashMap<String, Object>>> resultItem) {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put("indexInfo", resultItem);
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
