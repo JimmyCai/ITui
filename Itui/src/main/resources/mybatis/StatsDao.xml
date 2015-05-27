@@ -65,7 +65,8 @@
 	    SELECT
 	          a.id AS newsId,
 	          a.title AS title,
-	          substring(a.message,1,50) AS summary,
+	          a.add_time AS unixTime,
+	          substring(a.message,1,80) AS summary,
 	          max(b.file_location) AS newsPhoto
 	    FROM
 	          aws_itui_article a
