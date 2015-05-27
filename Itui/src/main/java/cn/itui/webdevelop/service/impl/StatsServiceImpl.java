@@ -127,9 +127,12 @@ public class StatsServiceImpl implements StatsService {
 		int i = 0;
 		while (i < personInfo.size()) {
 			HashMap<String, Object> personItem = new HashMap<String, Object>();
+			long userId = (long) personInfo.get(i).get("userId");
+			String userSchool;
+			personItem.put("userSchool",(String)statsDao.getUserSchool(userId));
 			personItem.put("userName", personInfo.get(i).get("userName"));
 			personItem.put("userPhoto",
-					USER_LOGO_URL + personInfo.get(i).get("userPhoto"));
+					USER_LOGO_URL + ((String)personInfo.get(i).get("userPhoto")).replace("min", "mid"));
 			personItem.put("sex", personInfo.get(i).get("sex"));
 			personItem.put("province", personInfo.get(i).get("province"));
 			personItem.put("city", personInfo.get(i).get("city"));
