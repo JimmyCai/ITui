@@ -609,62 +609,25 @@ function total_Insert(span_str){
 		}
 	});
 
-	
-	// 名片瀑布流
-	// var w=0;
-	// var person_card=new Array();
-	// 	for(j=0;j<28;j++)
-	// {
-	// 	person_card[j]=j;
-	// }
-	// function li_html(li_num){
-	// 	var card_li='<li class="card_li0'+li_num+'"></li>';
-	// 	$('.card-ul').append(card_li);
-	// }
-
-	// function round_get_li(){
-
-	// 	for(i=w+0;i<w+6;i++)
-	// 	{
-	// 		if((i)<person_card.length){
-	// 			li_html(i);
-	// 			$('.card_li0'+(i)).text(i);
-	// 			console.log(i+'+'+w+'='+(i+w));
-	// 		}else{
-
-	// 			console.log('none'+i+'+'+w+'='+(i+w));
-	// 			$('.get-more').text('没有更多');
-	// 		}
-			
-	// 	}
-	// 	console.log(i);
-	// }
-	// function less_get_li(less_num){
-	// 	for(i=(0+w);i<w+less_num;i++)
-	// 	{
-	// 		li_html(i);
-	// 		$('.card_li0'+(i)).text(i);
-	// 	}
-	// }
-
-	
-	// if(person_card.length>=6){
-	// 	round_get_li();
-	// }else{
-	// 	var new_num=person_card.length;
-	// 	less_get_li(new_num);
-	// 	console.log(new_num);
-	// }
-	// $('.get-more').click(function(event) {
-	// 	if(person_card.length>=6){
-	// 		w+=6;
-	// 		round_get_li();
-	// 	}else{
-	// 		$('.get-more').text('没有更多');
-	// 	}
-		
-	// });
-
+//20150526新首页ajax
+	function news_ajax(){
+	$.ajax({
+		url : 'api/index',
+		type : 'get',
+		dataType : 'html',
+		success : function(msg) {
+			data = eval('msg=' + msg);
+			if (data.status == '0') {
+				console.log(data.normalReturn.indexInfo);
+				
+			} else {
+				
+				console.log('no');
+			}
+		}
+	});
+}
+	news_ajax();
 //导航区域
 $('.itui-news-login-regs').mouseenter(function(event) {
 	$('.dropdown-list').removeClass('hide');
@@ -673,40 +636,41 @@ $('.dropdown-list').mouseleave(function(event) {
 	$('.dropdown-list').addClass('hide');
 });
 // 六个名片
-var card_name='',card_pic='',card_follow_href='',card_des='';
-var arr_cards=new Array(
-				{
-					cardName:'王一',cardPic:'images/01_avatar_max.jpg.png',
-					cardFollowHref:'http://www.baidu.com',
-					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~1'
-				},
-				{
-					cardName:'王二',cardPic:'images/01_avatar_max.jpg.png',
-					cardFollowHref:'http://www.baidu.com',
-					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~2'
-				},
-				{
-					cardName:'王三',cardPic:'images/01_avatar_max.jpg.png',
-					cardFollowHref:'http://www.baidu.com',
-					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~3'
-				},
-				{
-					cardName:'王四',cardPic:'images/01_avatar_max.jpg.png',
-					cardFollowHref:'http:www.baidu.com',
-					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~4'
-				},
-				{
-					cardName:'王五',cardPic:'images/01_avatar_max.jpg.png',
-					cardFollowHref:'http:www.baidu.com',
-					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~5'
-				},
-				{
-					cardName:'王六',cardPic:'images/01_avatar_max.jpg.png',
-					cardFollowHref:'http:www.baidu.com',
-					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~6'
-				}
-			  );
-console.log(arr_cards[5]);
+var list_array=new Array();
+//var card_name='',card_pic='',card_follow_href='',card_des='';
+//var arr_cards=new Array(
+//				{
+//					cardName:'王一',cardPic:'images/01_avatar_max.jpg.png',
+//					cardFollowHref:'http://www.baidu.com',
+//					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~1'
+//				},
+//				{
+//					cardName:'王二',cardPic:'images/01_avatar_max.jpg.png',
+//					cardFollowHref:'http://www.baidu.com',
+//					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~2'
+//				},
+//				{
+//					cardName:'王三',cardPic:'images/01_avatar_max.jpg.png',
+//					cardFollowHref:'http://www.baidu.com',
+//					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~3'
+//				},
+//				{
+//					cardName:'王四',cardPic:'images/01_avatar_max.jpg.png',
+//					cardFollowHref:'http:www.baidu.com',
+//					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~4'
+//				},
+//				{
+//					cardName:'王五',cardPic:'images/01_avatar_max.jpg.png',
+//					cardFollowHref:'http:www.baidu.com',
+//					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~5'
+//				},
+//				{
+//					cardName:'王六',cardPic:'images/01_avatar_max.jpg.png',
+//					cardFollowHref:'http:www.baidu.com',
+//					cardDes:'代表月亮消灭你我爱吃章鱼烧啦啦啦啦~6'
+//				}
+//			  );
+//console.log(arr_cards[5]);
 for(i=0;i<arr_cards.length;i++)
 {
 	$('.li_img0'+i).attr('src', arr_cards[i].cardPic);
@@ -758,3 +722,5 @@ for(i=0;i<arr_news.length;i++)
 	$('.news_item0'+i).text(arr_news[i].news_item);
 	$('.news_a0'+i).attr('href', arr_news[i].news_href);
 }
+//$.cookie('news_index', 'value', {expires: 7, path: '/', domain: 'http://localhost:8080/Itui', secure: true});
+
