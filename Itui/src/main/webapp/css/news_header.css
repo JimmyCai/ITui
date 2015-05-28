@@ -31,7 +31,6 @@
 }
 .aw-top-menu-wrap .container {
   max-width: 1000px;
-  border: 1px solid #ff0000;
   margin: 0 auto;
 }
 .aw-top-menu-wrap .container .itui-news-navbar-nav-ul {
@@ -66,12 +65,11 @@
 .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news li a {
   font-size: 1.4rem;
   padding-bottom: 6px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .aw-top-menu-wrap .container .itui-news-login-regs {
   float: right;
-  border: 1px solid #008000;
   position: relative;
   margin-top: 6px;
 }
