@@ -41,7 +41,10 @@ $('.dropdown-menu-news').append(topic_html);
 					$('.li_img0'+i).attr('src','http://'+person_list[i].userPhoto);
 					$('.personal_des0'+i).text(person_list[i].signature);
 					$('.card_name0'+i).text(person_list[i].userName);
-					$('.card_follow0'+i).attr('href', person_list[i].homePage);
+					$('.card_follow0'+i).children('a').attr('href', 'http://'+person_list[i].homePage);
+					$('.card-ul li').eq(i).children('.card_head').find('a').attr('href', 'http://'+person_list[i].homePage);
+					$('.card_sch0'+i).text(person_list[i].userSchool);
+					
 				}
 				for(i=0;i<data.normalReturn.indexInfo[2].length;i++){
 					news_list[i]=data.normalReturn.indexInfo[2][i];
@@ -50,7 +53,7 @@ $('.dropdown-menu-news').append(topic_html);
 					$('.news_img0'+i).attr('src', 'http://'+news_list[i].newsPhoto);
 					$('.news_intr0'+i).text(news_list[i].summary);
 					$('.news_item0'+i).text(news_list[i].title);
-					$('.news_a0'+i).attr('href', news_list[i].newsPage);
+					$('.news_a0'+i).attr('href', 'http://'+news_list[i].newsPage);
 				}
 				
 			} else {
