@@ -10,4 +10,8 @@ public interface StatsDao {
 	public String getLastRecordDate();
 	public void creatNewRecord(String date);
 	public int getTotalPV();
+	public List<HashMap<String, Object>> getPersonInfo();
+	public List<HashMap<String, Object>> getNewsInfo();
+	public List<HashMap<String, Object>> getTopicInfo();
+	public String getUserSchool(long userId);
 }

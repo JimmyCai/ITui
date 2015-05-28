@@ -3,16 +3,16 @@ $(function() {
 
 	// 搜索框
 
-	$('.zhuanye  a ').click(function(event) {
-		var neirong = $(this).html();
-		var neirong2 = $('.nr_js').html();
-		$('.nr_js').html(neirong);
-		$('.zhuanye  a ').html(neirong2);
-	});
+	// $('.zhuanye  a ').click(function(event) {
+	// 	var neirong = $(this).html();
+	// 	var neirong2 = $('.nr_js').html();
+	// 	$('.nr_js').html(neirong);
+	// 	$('.zhuanye  a ').html(neirong2);
+	// });
 	// 鼠标移出下拉框1秒后下拉框消失
-	$('.dropdown-menu').mouseout(function(event) {
-		setTimeout("$('.dropdown').removeClass('open')", 1000);
-	});
+	// $('.dropdown-menu').mouseout(function(event) {
+	// 	setTimeout("$('.dropdown').removeClass('open')", 1000);
+	// });
 
 	// 搜索跳转
 	function search_jump(major, value) {
@@ -20,19 +20,52 @@ $(function() {
 			major = 1;
 			window.open("search.html?t=" + major + "&c=" + encodeURIComponent(value) + "&#.");
 			console.log(encodeURIComponent(value));
-		} else {
+		} if(major == "学院") {
 			major = 2;
-			window
-					.open("search_school.html?t=" + major + "&c=" + encodeURIComponent(value)
+			window.open("search_school.html?t=" + major + "&c=" + encodeURIComponent(value)
 							+ "&#.");
+		}if(major == "达人"){
+			console.log('达人跳转');
 		}
 	}
 	
+	// 20150515新搜索框
+	var major_sou='专业';
+	$('.btn-major').click(function(event) {
+		event.preventDefault();
+		major_sou=$('.btn-major').text();
+		$(this).removeClass('btn-border').siblings('.btn-new-tab').addClass('btn-border');
+		$(this).css('color', '#E67917').siblings('.btn-new-tab').css('color', '#fff');
+		console.log(major_sou);
+	});
+	$('.btn-collage').click(function(event) {
+		event.preventDefault();
+		major_sou=$('.btn-collage').text();
+		$(this).removeClass('btn-border').siblings('.btn-new-tab').addClass('btn-border');
+		$(this).css('color', '#0CB9E3').siblings('.btn-new-tab').css('color', '#fff');
+		console.log(major_sou);
+	});
+	$('.btn-people').click(function(event) {
+		event.preventDefault();
+		major_sou=$('.btn-people').text();
+		$(this).removeClass('btn-border').siblings('.btn-new-tab').addClass('btn-border');
+		$(this).css('color', '#73B403').siblings('.btn-new-tab').css('color', '#fff');;
+		console.log(major_sou);
+	});
+	//移入
+	$('.btn-new-tab').mousemove(function(event) {
+		$(this).removeClass('btn-border').siblings('.btn-new-tab').addClass('btn-border');
+	});
+	//end20150515新搜索框
+
+
+	
 	// 搜索框ajax提交
 	$('#sou').click(function(event) {
-		var major = $('.nr_js').text();
+		// var major = $('.nr_js').text();
 		var value = $('#scbar_txt').val();
-		search_jump(major, value);
+		search_jump(major_sou, value);
+		console.log(value);
 	});
 
 	// 获得焦点时按下回车调用跳转函数至信息页
@@ -41,9 +74,9 @@ $(function() {
 		document.onkeydown = function(e) {
 			var ev = document.all ? window.event : e;
 			if (ev.keyCode == 13) {
-				var major = $('.nr_js').text();
+				// var major = $('.nr_js').text();
 				var value = $('#scbar_txt').val();
-				search_jump(major, value);
+				search_jump(major_sou, value);
 				return false;
 			}
 		}
@@ -53,6 +86,9 @@ $(function() {
 		document.onkeydown = function(e) {
 			var ev = document.all ? window.event : e;
 			if (ev.keyCode == 13) {
+				var value = $('#scbar_txt').val();
+				search_jump(major_sou, value);
+				return false;
 			}
 		}
 	});
@@ -573,5 +609,9 @@ function total_Insert(span_str){
 		}
 	});
 
-	
-	
+//20150526新首页ajax
+
+
+
+//$.cookie('news_index', 'value', {expires: 7, path: '/', domain: 'http://localhost:8080/Itui', secure: true});
+
