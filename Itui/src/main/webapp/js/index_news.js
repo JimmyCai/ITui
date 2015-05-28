@@ -12,7 +12,7 @@ var topic_list=new Array(),person_list=new Array(),news_list=new Array();
 
 function topic(topic_li,topic_href,topic_content){
 var topic_html='<li role="presentation" class="topic0'+topic_li+'">\
-					<a role="menuitem" tabindex="-1" href="http://'+topic_href+'" target="_blank">'+topic_content+'</a>\
+					<a role="menuitem" tabindex="-1" href="'+topic_href+'" target="_blank">'+topic_content+'</a>\
 				</li>';
 $('.dropdown-menu-news').append(topic_html);
 }
@@ -25,6 +25,7 @@ $('.dropdown-menu-news').append(topic_html);
 		dataType : 'html',
 		success : function(msg) {
 			data = eval('msg=' + msg);
+			console.log(data);
 			if (data.status == '0') {
 //				精选话题
 				for(i=0;i<data.normalReturn.indexInfo[0].length;i++){
@@ -38,11 +39,11 @@ $('.dropdown-menu-news').append(topic_html);
 					person_list[i]=data.normalReturn.indexInfo[1][i];
 					}
 				for(i=0;i<person_list.length;i++){
-					$('.li_img0'+i).attr('src','http://'+person_list[i].userPhoto);
+					$('.li_img0'+i).attr('src',person_list[i].userPhoto);
 					$('.personal_des0'+i).text(person_list[i].signature);
 					$('.card_name0'+i).text(person_list[i].userName);
-					$('.card_follow0'+i).children('a').attr('href', 'http://'+person_list[i].homePage);
-					$('.card-ul li').eq(i).children('.card_head').find('a').attr('href', 'http://'+person_list[i].homePage);
+					$('.card_follow0'+i).children('a').attr('href', person_list[i].homePage);
+					$('.card-ul li').eq(i).children('.card_head').find('a').attr('href', person_list[i].homePage);
 					$('.card_sch0'+i).text(person_list[i].userSchool);
 					
 				}
@@ -50,10 +51,10 @@ $('.dropdown-menu-news').append(topic_html);
 					news_list[i]=data.normalReturn.indexInfo[2][i];
 				}
 				for(i=0;i<news_list.length;i++){
-					$('.news_img0'+i).attr('src', 'http://'+news_list[i].newsPhoto);
+					$('.news_img0'+i).attr('src', news_list[i].newsPhoto);
 					$('.news_intr0'+i).text(news_list[i].summary);
 					$('.news_item0'+i).text(news_list[i].title);
-					$('.news_a0'+i).attr('href', 'http://'+news_list[i].newsPage);
+					$('.news_a0'+i).attr('href', news_list[i].newsPage);
 				}
 				
 			} else {

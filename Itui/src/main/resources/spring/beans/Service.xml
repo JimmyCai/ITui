@@ -145,6 +145,8 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		<property name="PERSON_HOMEPAGE" value="${person_homepage}"></property>
 		<property name="NEWS_SQUARE_URL" value="${news_square_url}"></property>
 		<property name="TOPIC_URL" value="${topic_url}"></property>
+		<property name="TOPIC_IMAGE_URL" value="${topic_image_url}"></property>
+		<property name="USER_LOGO_URL" value="${user_logo_url}"></property>
 	</bean>
 	<bean id="course" class="cn.itui.webdevelop.model.Course"></bean>
 	<bean id="gson" class="com.google.gson.Gson"></bean>
