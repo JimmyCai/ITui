@@ -72,7 +72,9 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	</bean>
 	
 	<!-- 微博第三方登录配置 -->
-	<!-- <bean id="weibo" class="com.belerweb.social.weibo.api.Weibo">
+
+	<!-- 
+	<bean id="weibo" class="com.belerweb.social.weibo.api.Weibo">
 	    <constructor-arg index="0" value="${weibo_client_ID}"></constructor-arg>
 	    <constructor-arg index="1" value="${weibo_client_SERCRET}"></constructor-arg>
 	    <constructor-arg index="2" value="${weibo_redirect_URI}"></constructor-arg>
@@ -85,8 +87,10 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	    <constructor-arg ref="wbUser"></constructor-arg>
 	</bean> -->
 	
+	
 	<!-- qq第三方登录配置 -->
 	<!--  <bean id="qq" class="com.belerweb.social.qq.connect.api.QQConnect">
+
 	    <constructor-arg index="0" value="${qq_client_ID}"></constructor-arg>
 	    <constructor-arg index="1" value="${qq_client_SERCRET}"></constructor-arg>
 	    <constructor-arg index="2" value="${qq_client_SERCRET}"></constructor-arg>
@@ -98,9 +102,10 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="qqUser" class="com.belerweb.social.bean.Result">
 	    <constructor-arg ref="qUser"></constructor-arg>
 	</bean>-->
+
 	
 	<!-- 微信第三方登录配置 -->
-	<!--  <bean id="weixin" class="com.belerweb.social.weixin.api.Weixin">
+<!--  	<bean id="weixin" class="com.belerweb.social.weixin.api.Weixin">
 	    <constructor-arg index="0" value="${weixin_client_ID}"></constructor-arg>
 	    <constructor-arg index="1" value="${weixin_client_SERCRET}"></constructor-arg>
 	    <constructor-arg index="2" value="${weixin_client_SERCRET}"></constructor-arg>
@@ -110,8 +115,9 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	</bean>
 	<bean id="wxUser" class="com.belerweb.social.weixin.bean.User"></bean>
 	<bean id="weixinUser" class="com.belerweb.social.bean.Result">
-	    <constructor-arg ref="wxUser"></constructor-arg>
+
 	</bean>-->
+
 	<bean id="userService" class="cn.itui.webdevelop.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 		<property name="userInfoDao" ref="userInfoDao"></property>
@@ -139,16 +145,14 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		<property name="PERSON_HOMEPAGE" value="${person_homepage}"></property>
 		<property name="NEWS_SQUARE_URL" value="${news_square_url}"></property>
 		<property name="TOPIC_URL" value="${topic_url}"></property>
-		<property name="TOPIC_IMAGE_URL" value="${topic_image_url}"></property>
-		<property name="USER_LOGO_URL" value="${user_logo_url}"></property>
 	</bean>
 	<bean id="course" class="cn.itui.webdevelop.model.Course"></bean>
 	<bean id="gson" class="com.google.gson.Gson"></bean>
 	<bean id="courseService" class="cn.itui.webdevelop.service.impl.CourseServiceImpl">
 	    <property name="courseDao" ref="courseDao"></property>
 	    <property name="statsDao" ref="statsDao"></property>
-<!--	    <property name="course" ref="course"></property>  
-	    <property name="gson" ref="gson"></property>-->
+	    <property name="course" ref="course"></property>
+	    <property name="gson" ref="gson"></property>
 	</bean>
 	
 	<!-- 存储文件配置 -->
@@ -157,9 +161,11 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	</bean>
 	
 	<!-- 验证码配置 -->
+
 	<!-- <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">  
+
             <property name="config">  
-                    <bean class="com.google.code.kaptcha.util.Config">   -->
+                    <bean class="com.google.code.kaptcha.util.Config">  --> 
                             <!--通过构造函数注入属性值 -->  
                            <!--  <constructor-arg type="java.util.Properties">  
                                     <props>  --> 
@@ -187,6 +193,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
                                        <!--  <prop key="kaptcha.noise.color">blue</prop>   --> 
                                         <!-- 验证码文本字符间距 -->  
                                        <!--  <prop key="kaptcha.textproducer.char.space">3</prop>  
+
                                        </props>  
                             </constructor-arg>  
                     </bean>  
@@ -194,6 +201,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
      </bean>  
      <bean id="captchaController" class="cn.itui.webdevelop.controller.CaptchaController">
 		<property name="captchaProducer" ref="captchaProducer"></property>
+
 	</bean> -->
 
 </beans>
