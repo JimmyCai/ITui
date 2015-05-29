@@ -10,8 +10,8 @@
 			major = 2;
 			window.open("search_school.html?t=" + major + "&c=" + encodeURIComponent(value)
 							+ "&#.");
-		}if(major == "达人"){
-			console.log('达人跳转');
+		}if(major == "榜样"){
+			window.open("http://dada.itui.cn/?/search/q-"+btoa(unescape(encodeURIComponent(value)))+"#users");			
 		}
 	}
 	
