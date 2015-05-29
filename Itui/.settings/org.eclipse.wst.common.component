@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="mpsdk4j-1.a.20.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/mpsdk4j/mpsdk4j">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Itui"/>
         <property name="java-output-path" value="/Itui/target/classes"/>
     </wb-module>

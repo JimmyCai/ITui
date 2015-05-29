@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
+
 import cn.itui.webdevelop.dao.StatsDao;
 import cn.itui.webdevelop.model.Stats;
 import cn.itui.webdevelop.service.StatsService;
@@ -89,14 +91,15 @@ public class StatsServiceImpl implements StatsService {
 		resultItem.put("date", todayStatsInfo.get(0).get("date"));
 		resultItem.put("today", todayStatsInfo.get(0).get("today"));
 		// build json string
-		String jsonResult = buildStatsJson(resultItem);
+		String returnName = "statsInfo";
+		String jsonResult = buildStatsJson(resultItem,returnName);
 		return jsonResult;
 	}
 
-	private String buildStatsJson(HashMap<String, Object> resultItem)
+	private String buildStatsJson(HashMap<String, Object> resultItem,String returnName)
 			throws Exception {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
-		jsonMap.put("statsInfo", resultItem);
+		jsonMap.put(returnName, resultItem);
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
 		return jsonStr;
 	}
@@ -127,12 +130,16 @@ public class StatsServiceImpl implements StatsService {
 		int i = 0;
 		while (i < personInfo.size()) {
 			HashMap<String, Object> personItem = new HashMap<String, Object>();
-			long userId =  (Long) personInfo.get(i).get("userId");
-			String userSchool;
-			personItem.put("userSchool",(String)statsDao.getUserSchool(userId));
+			long userId = (Long) personInfo.get(i).get("userId");
+			// String userSchool;
+			personItem.put("userSchool",
+					(String) statsDao.getUserSchool(userId));
 			personItem.put("userName", personInfo.get(i).get("userName"));
-			personItem.put("userPhoto",
-					USER_LOGO_URL + ((String)personInfo.get(i).get("userPhoto")).replace("min", "mid"));
+			personItem.put(
+					"userPhoto",
+					USER_LOGO_URL
+							+ ((String) personInfo.get(i).get("userPhoto"))
+									.replace("min", "mid"));
 			personItem.put("sex", personInfo.get(i).get("sex"));
 			personItem.put("province", personInfo.get(i).get("province"));
 			personItem.put("city", personInfo.get(i).get("city"));
@@ -157,9 +164,11 @@ public class StatsServiceImpl implements StatsService {
 							+ Stats.unixTimeStamp2Date(String.valueOf((newsInfo
 									.get(j).get("unixTime"))), "yyyyMMdd/")
 							+ newsInfo.get(j).get("newsPhoto"));
-			newsItem.put("summary", Stats.stringFilter(
-					newsInfo.get(j).get("summary") + "…",
-					".attach.*./attach.|.size.*./size."));
+			newsItem.put(
+					"summary",
+					Stats.stringFilter(
+							newsInfo.get(j).get("summary") + "…",
+							".attach.*./attach.|.size.*./size.|.quote.|./quote.|.list.|./list.|.b.|.i.|./b.|./i.|.code.*./code.|..\\*.|.\\*."));
 			newsItem.put("newsPage",
 					NEWS_SQUARE_URL + newsInfo.get(j).get("newsId"));
 
@@ -177,6 +186,55 @@ public class StatsServiceImpl implements StatsService {
 		jsonMap.put("indexInfo", resultItem);
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
 		return jsonStr;
+	}
+
+	public String getUserInfo(String hashString, String authHashKey)
+			throws Exception {
+		HashMap<String, Object> userInfoResult = new HashMap<String, Object>();
+		if (hashString == "") {
+			userInfoResult.put("user", "null");
+		} else {
+			String tHashString = hashString.replace("-", "+");
+			tHashString = tHashString.replace("_", "/");
+			tHashString = tHashString.replace(".", "=");
+			String decodeHashString = new String(
+					Base64.decodeBase64(tHashString.getBytes()));
+			StringBuffer sBuffer = new StringBuffer();
+			for (int i = 1; i <= decodeHashString.length(); i++) {
+				String string = decodeHashString.substring(i - 1, i);
+				String keyString = authHashKey.substring(
+						(i % authHashKey.length()) - 2,
+						(i % authHashKey.length()) - 1);
+				char tmpString = (char) string.compareTo(keyString);
+				sBuffer.append(tmpString);
+			}
+			String[] strArray = sBuffer.toString().split("!;-");
+			HashMap<String, Object> hashData = new HashMap<String, Object>();
+			for (int j = 0; j < strArray.length; j++) {
+				String[] subStrArray = strArray[j].split("^]+");
+				if (subStrArray[0] != null) {
+					hashData.put(subStrArray[0], subStrArray[1]);
+				}
+			}
+			String userName = (String) hashData.get("user_name");
+			int userId = (Integer) hashData.get("uid");
+			String password = (String) hashData.get("password");
+			HashMap<String, Object> userInfo = new HashMap<String, Object>();
+
+			userInfo = statsDao.getUserInfo(userName, userId, password);
+			if (userInfo == null) {
+				userInfoResult.put("user", "null");
+			} else {
+				userInfoResult.put("userName", userInfo.get("userName"));
+				userInfoResult.put("userPhoto",
+						USER_LOGO_URL + userInfo.get("userPhoto"));
+				userInfoResult.put("userPage",
+						PERSON_HOMEPAGE + userInfo.get("userName"));
+			}
+		}
+        String returnName = "userInfo";
+		String jsonResult = buildStatsJson(userInfoResult,returnName);
+		return jsonResult;
 	}
 
 }

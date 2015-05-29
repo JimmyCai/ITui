@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itui.webdevelop.dao.CourseDao">
-    <select id="getAllCourseInfo" resultType="java.util.HashMap">
+    <select id="getAllAliveCourseInfo" resultType="java.util.HashMap">
         SELECT
              teacher.id AS teacherId,
              teacher.name AS teacherName,
              teacher.photo AS photo,
              teacher.organization AS orgName,
              teacher.organization_web AS orgWeb,
+             teacher.code AS teacherCode,
+             course.id AS courseId,
              course.start_day AS startDay,
              course.start_time AS startTime,
              course.end_day AS endDay,
@@ -18,7 +20,8 @@
              course.platform AS platform,
              course.platform_web AS platformWeb,
              course.live_src AS liveSrc,
-             course.tag AS tag
+             course.tag AS tag,
+             course.code AS courseCode
         FROM
              teacher JOIN course 
           ON course.teacher_id = teacher.id
@@ -49,5 +52,65 @@
 	    SELECT MAX(id)
 	    FROM teacher
 	</select>
+	
+	<select id="getAllCourseInfo" resultType="java.util.HashMap">
+        SELECT
+             teacher.id AS teacherId,
+             teacher.name AS teacherName,
+             teacher.photo AS photo,
+             teacher.organization AS orgName,
+             teacher.organization_web AS orgWeb,
+             teacher.code AS teacherCode,
+             course.id AS courseId,
+             course.start_day AS startDay,
+             course.start_time AS startTime,
+             course.end_day AS endDay,
+             course.end_time AS endTime,
+             course.lesson AS lesson,
+             course.summary AS summary,
+             course.price AS price,
+             course.platform AS platform,
+             course.platform_web AS platformWeb,
+             course.live_src AS liveSrc,
+             course.tag AS tag,
+             course.code AS courseCode
+        FROM
+             teacher JOIN course 
+          ON course.teacher_id = teacher.id
+        ORDER BY CONCAT(course.start_day,course.start_time) ASC 
+    </select>
+    
+    <select id="getAllEndedCourseInfo" resultType="java.util.HashMap">
+        SELECT
+             teacher.id AS teacherId,
+             teacher.name AS teacherName,
+             teacher.photo AS photo,
+             teacher.organization AS orgName,
+             teacher.organization_web AS orgWeb,
+             teacher.code AS teacherCode,
+             course.id AS courseId,
+             course.start_day AS startDay,
+             course.start_time AS startTime,
+             course.end_day AS endDay,
+             course.end_time AS endTime,
+             course.lesson AS lesson,
+             course.summary AS summary,
+             course.price AS price,
+             course.platform AS platform,
+             course.platform_web AS platformWeb,
+             course.live_src AS liveSrc,
+             course.tag AS tag,
+             course.code AS courseCode
+        FROM
+             teacher JOIN course 
+          ON course.teacher_id = teacher.id
+        WHERE concat(course.end_day,course.end_time)&lt;= date_format(now(6),'%Y%m%d%H:%m')
+        ORDER BY CONCAT(course.start_day,course.start_time) ASC 
+    </select>
+    
+    <delete id="removeCourse" parameterType="string">
+        DELETE FROM course
+       WHERE code=#{courseCode}
+    </delete>
 
 </mapper>

@@ -53,8 +53,6 @@
  				<value>getFollowMajors</value>
  
   				<value>login</value>
-  				<value>loginWeibo</value>
-  				<value>loginWeiboAction</value>
  				<value>register</value>				
  				<value>activate</value>
  				<value>resendEmail</value>
@@ -68,6 +66,7 @@
  				
  				<value>getPVStats</value>
  				<value>getIndexInfo</value>
+ 				<value>getUserInfo</value>
  				
  				<value>getAliveCourseInfo</value>
  				<value>verifyPermission</value>
@@ -90,7 +89,6 @@
  				<value>userController</value>
  				<value>statsController</value>
  				<value>courseController</value>
- 				<value>captchaController</value>
  			</list>
  		</property>
  		<property name="interceptorNames">

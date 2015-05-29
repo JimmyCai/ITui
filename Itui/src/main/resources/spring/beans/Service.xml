@@ -70,54 +70,6 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 			</props>
 		</property>
 	</bean>
-	
-	<!-- 微博第三方登录配置 -->
-
-	<!-- 
-	<bean id="weibo" class="com.belerweb.social.weibo.api.Weibo">
-	    <constructor-arg index="0" value="${weibo_client_ID}"></constructor-arg>
-	    <constructor-arg index="1" value="${weibo_client_SERCRET}"></constructor-arg>
-	    <constructor-arg index="2" value="${weibo_redirect_URI}"></constructor-arg>
-	</bean>
-	<bean id="weiboUsers" class="com.belerweb.social.weibo.api.User">
-	    <constructor-arg ref="weibo"></constructor-arg>
-	</bean>
-	<bean id="wbUser" class="com.belerweb.social.weibo.bean.User"></bean>
-	<bean id="weiboUser" class="com.belerweb.social.bean.Result">
-	    <constructor-arg ref="wbUser"></constructor-arg>
-	</bean> -->
-	
-	
-	<!-- qq第三方登录配置 -->
-	<!--  <bean id="qq" class="com.belerweb.social.qq.connect.api.QQConnect">
-
-	    <constructor-arg index="0" value="${qq_client_ID}"></constructor-arg>
-	    <constructor-arg index="1" value="${qq_client_SERCRET}"></constructor-arg>
-	    <constructor-arg index="2" value="${qq_client_SERCRET}"></constructor-arg>
-	</bean>
-	<bean id="qqUsers" class="com.belerweb.social.qq.connect.api.User">
-	    <constructor-arg ref="qq"></constructor-arg>
-	</bean>
-	<bean id="qUser" class="com.belerweb.social.qq.connect.bean.User"></bean>
-	<bean id="qqUser" class="com.belerweb.social.bean.Result">
-	    <constructor-arg ref="qUser"></constructor-arg>
-	</bean>-->
-
-	
-	<!-- 微信第三方登录配置 -->
-<!--  	<bean id="weixin" class="com.belerweb.social.weixin.api.Weixin">
-	    <constructor-arg index="0" value="${weixin_client_ID}"></constructor-arg>
-	    <constructor-arg index="1" value="${weixin_client_SERCRET}"></constructor-arg>
-	    <constructor-arg index="2" value="${weixin_client_SERCRET}"></constructor-arg>
-	</bean>
-	<bean id="weixinUsers" class="com.belerweb.social.weixin.api.User">
-	    <constructor-arg ref="weixin"></constructor-arg>
-	</bean>
-	<bean id="wxUser" class="com.belerweb.social.weixin.bean.User"></bean>
-	<bean id="weixinUser" class="com.belerweb.social.bean.Result">
-
-	</bean>-->
-
 	<bean id="userService" class="cn.itui.webdevelop.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 		<property name="userInfoDao" ref="userInfoDao"></property>
@@ -153,57 +105,12 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="courseService" class="cn.itui.webdevelop.service.impl.CourseServiceImpl">
 	    <property name="courseDao" ref="courseDao"></property>
 	    <property name="statsDao" ref="statsDao"></property>
-<!--     <property name="course" ref="course"></property>
-	    <property name="gson" ref="gson"></property> -->	
+        <property name="course" ref="course"></property>
+	    <property name="gson" ref="gson"></property> 	
 	</bean>
 	
 	<!-- 存储文件配置 -->
 	<bean id="saveFile" class="cn.itui.webdevelop.utils.SaveFile">
 	    <property name="TEACHER_LOGO_PATH" value="${teacher_logo_path}"></property>
 	</bean>
-	
-	<!-- 验证码配置 -->
-
-	<!-- <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">  
-
-            <property name="config">  
-                    <bean class="com.google.code.kaptcha.util.Config">  --> 
-                            <!--通过构造函数注入属性值 -->  
-                           <!--  <constructor-arg type="java.util.Properties">  
-                                    <props>  --> 
-                                        <!-- 验证码宽度 -->  
-                                        <!-- <prop key="kaptcha.image.width">100</prop> -->    
-                                        <!-- 验证码高度 -->  
-                                       <!--  <prop key="kaptcha.image.height">40</prop>   --> 
-                                        <!-- 生成验证码内容范围 -->  
-                                        <!-- <prop key="kaptcha.textproducer.char.string">0123456789ABCDEFGHIJKLMNPQRSTUVWXYZ</prop>   --> 
-                                        <!-- 验证码个数 -->  
-                                        <!-- <prop key="kaptcha.textproducer.char.length">4</prop>   --> 
-                                        <!-- 是否有边框 -->  
-                                       <!--  <prop key="kaptcha.border">yes</prop>   --> 
-                                        <!-- 边框颜色 -->  
-                                       <!--  <prop key="kaptcha.border.color">105,179,90</prop>   --> 
-                                        <!-- 边框厚度 -->  
-                                       <!--  <prop key="kaptcha.border.thickness">1</prop>   --> 
-                                        <!-- 验证码字体颜色 -->  
-                                        <!-- <prop key="kaptcha.textproducer.font.color">red</prop>   --> 
-                                        <!-- 验证码字体大小 -->  
-                                       <!--  <prop key="kaptcha.textproducer.font.size">40</prop>   --> 
-                                        <!-- 验证码所属字体样式 -->  
-                                        <!-- <prop key="kaptcha.textproducer.font.names">BKamrnBd</prop>  -->  
-                                           <!-- 干扰线颜色 -->  
-                                       <!--  <prop key="kaptcha.noise.color">blue</prop>   --> 
-                                        <!-- 验证码文本字符间距 -->  
-                                       <!--  <prop key="kaptcha.textproducer.char.space">3</prop>  
-
-                                       </props>  
-                            </constructor-arg>  
-                    </bean>  
-            </property>  
-     </bean>  
-     <bean id="captchaController" class="cn.itui.webdevelop.controller.CaptchaController">
-		<property name="captchaProducer" ref="captchaProducer"></property>
-
-	</bean> -->
-
 </beans>

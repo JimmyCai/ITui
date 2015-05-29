@@ -14,4 +14,6 @@ public interface StatsDao {
 	public List<HashMap<String, Object>> getNewsInfo();
 	public List<HashMap<String, Object>> getTopicInfo();
 	public String getUserSchool(long userId);
+	public HashMap<String, Object> getUserInfo(String userName, int userId,
+			String password);
 }

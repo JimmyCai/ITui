@@ -6,4 +6,6 @@ public interface StatsService {
 	public String getPVStats() throws Exception;
 
 	public String getIndexInfo() throws DatabaseException;
+
+	public String getUserInfo(String hashString, String authHashKey) throws Exception;
 }
