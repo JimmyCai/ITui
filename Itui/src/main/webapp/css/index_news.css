@@ -146,6 +146,27 @@ li {
   left: 0px;
   bottom: 0px;
 }
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.home_splash_more{
+	position: absolute;
+  	left: 0px;
+  	bottom: 20px;
+	}
+	@media (max-width: 990px) {
+		.home_splash_more{
+		position: absolute;
+  		left: 0px;
+  		bottom: 3.4%;
+	}
+	}
+	@media (max-width: 820px) {
+	.home_splash_more{bottom: 3.0%;}
+	}
+	@media (max-width: 560px) {
+	.home_splash_more{bottom: 2.8%;}
+	}
+}
+
 .home_splash_more .home_splash_more_left {
   display: table-cell;
   background: #FFF none repeat scroll 0% 0%;
@@ -493,7 +514,6 @@ overflow:hidden;
 }
 .row_foot .foot-content .foot-div ul li a img {
   width: 100%;
-  max-height: 60px;
 }
 .row_foot .foot-content .cooperate {
   border: none;
