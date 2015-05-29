@@ -613,5 +613,3 @@ function total_Insert(span_str){
 
 
 
-//$.cookie('news_index', 'value', {expires: 7, path: '/', domain: 'http://localhost:8080/Itui', secure: true});
-
