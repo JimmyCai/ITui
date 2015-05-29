@@ -70,7 +70,6 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 			</props>
 		</property>
 	</bean>
-	
 	<bean id="userService" class="cn.itui.webdevelop.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 		<property name="userInfoDao" ref="userInfoDao"></property>
@@ -106,13 +105,12 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="courseService" class="cn.itui.webdevelop.service.impl.CourseServiceImpl">
 	    <property name="courseDao" ref="courseDao"></property>
 	    <property name="statsDao" ref="statsDao"></property>
-	    <property name="course" ref="course"></property>
-	    <property name="gson" ref="gson"></property>
+        <property name="course" ref="course"></property>
+	    <property name="gson" ref="gson"></property> 	
 	</bean>
 	
 	<!-- 存储文件配置 -->
 	<bean id="saveFile" class="cn.itui.webdevelop.utils.SaveFile">
 	    <property name="TEACHER_LOGO_PATH" value="${teacher_logo_path}"></property>
 	</bean>
- 
 </beans>

@@ -130,7 +130,7 @@ public class StatsServiceImpl implements StatsService {
 		int i = 0;
 		while (i < personInfo.size()) {
 			HashMap<String, Object> personItem = new HashMap<String, Object>();
-			long userId = (long) personInfo.get(i).get("userId");
+			long userId = (Long) personInfo.get(i).get("userId");
 			// String userSchool;
 			personItem.put("userSchool",
 					(String) statsDao.getUserSchool(userId));
@@ -217,7 +217,7 @@ public class StatsServiceImpl implements StatsService {
 				}
 			}
 			String userName = (String) hashData.get("user_name");
-			int userId = (int) hashData.get("uid");
+			int userId = (Integer) hashData.get("uid");
 			String password = (String) hashData.get("password");
 			HashMap<String, Object> userInfo = new HashMap<String, Object>();
 
