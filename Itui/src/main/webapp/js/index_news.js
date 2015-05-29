@@ -117,7 +117,7 @@ $('.dropdown-menu-news').append(topic_html);
 //20150526新首页ajax
 	function news_ajax(){
 	$.ajax({
-		url : 'api/index',
+		url : 'api/newindex',
 		type : 'get',
 		dataType : 'html',
 		success : function(msg) {
@@ -216,6 +216,7 @@ function login_style(){
 	$('.itui-username').removeClass('hide');
 	$('.itui-news-nav-login').addClass('hide');
 	$('.itui-news-nav-regs').addClass('hide');
+	$('.person_img').removeClass('hide');
 	$('.itui-news-login-regs').mouseenter(function(event) {
 		$('.dropdown-list').removeClass('hide');
 	});
@@ -227,6 +228,7 @@ function nonelogin_style(){
 	$('.itui-username').addClass('hide');
 	$('.itui-news-nav-login').removeClass('hide');
 	$('.itui-news-nav-regs').removeClass('hide');
+	$('.person_img').addClass('hide');
 
 }
 function news_user(){
