@@ -2,14 +2,12 @@ package cn.itui.webdevelop.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import cn.itui.webdevelop.service.UserService;
 import cn.itui.webdevelop.utils.RequestUtil;
 import cn.itui.webdevelop.utils.exception.ParameterErrorException;
@@ -22,7 +20,7 @@ public class UserController {
 	private UserService userService;
 	private static final String EMAIL="email";
 	private static final String CODE = "code";
-	//private static final String CHECK_ADDRESS="check_address";
+ 	//private static final String CHECK_ADDRESS="check_address";
 	//private static final String CHECK_KEY="check_key";
 
 	@RequestMapping(value=URLConstants.LOGIN, method=RequestMethod.POST)
@@ -34,8 +32,7 @@ public class UserController {
 		String requestStr = RequestUtil.getUserBaseInfo(request) + EMAIL + ":" + email + "\t" + PASSWORD + ":" + password;
 		rRLogger.info(requestStr);
 		return userService.doLogin(email, password);
-	}
-	
+	}		
 	@RequestMapping(value=URLConstants.REGISTER, method=RequestMethod.POST)
 	public String register(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String email = request.getParameter(EMAIL);
