@@ -1,5 +1,7 @@
 package cn.itui.webdevelop.service;
 
+import javax.servlet.http.Cookie;
+
 import cn.itui.webdevelop.utils.exception.DatabaseException;
 
 public interface StatsService {
@@ -7,5 +9,5 @@ public interface StatsService {
 
 	public String getIndexInfo() throws DatabaseException;
 
-	public String getUserInfo(String hashString, String authHashKey) throws Exception;
+	public String getUserInfo(Cookie[] cookies, String authHashKey) throws Exception;
 }

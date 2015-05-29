@@ -87,9 +87,10 @@
 	    LIMIT 12        
 	</select>
 	
-	<select id="getUserSchool" parameterType="long" resultType="string" >
+	<select id="getUserSchool" parameterType="long" resultType="map" >
 	    SELECT
-	          a.school_name 
+	          a.school_name AS userSchool,
+	          a.degree AS degree
 	    FROM
 	          aws_itui_education_experience a
 	    WHERE a.uid = #{userId}

@@ -56,7 +56,7 @@ public class StatsDaoImpl implements StatsDao {
 		return sqlSession.selectList("cn.itui.webdevelop.dao.StatsDao.getTopicInfo");
 	}
 
-	public String getUserSchool(long userId) {
+	public HashMap<String, Object> getUserEduInfo(long userId) {
 		return sqlSession.selectOne("cn.itui.webdevelop.dao.StatsDao.getUserSchool",userId);
 	}
 

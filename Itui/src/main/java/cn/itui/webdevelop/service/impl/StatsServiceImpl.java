@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+
 import org.apache.commons.codec.binary.Base64;
 
 import cn.itui.webdevelop.dao.StatsDao;
@@ -19,6 +21,7 @@ public class StatsServiceImpl implements StatsService {
 	private static String TOPIC_URL;
 	private static String tOPIC_IMAGE_URL;
 	private static String USER_LOGO_URL;
+	public static final String COOKIE_NAME = "tzg__user_login";
 
 	public StatsDao getStatsDao() {
 		return statsDao;
@@ -91,13 +94,13 @@ public class StatsServiceImpl implements StatsService {
 		resultItem.put("date", todayStatsInfo.get(0).get("date"));
 		resultItem.put("today", todayStatsInfo.get(0).get("today"));
 		// build json string
-		String returnName = "statsInfo";
-		String jsonResult = buildStatsJson(resultItem,returnName);
+		String returnJsonName = "statsInfo";
+		String jsonResult = buildStatsJson(resultItem, returnJsonName);
 		return jsonResult;
 	}
 
-	private String buildStatsJson(HashMap<String, Object> resultItem,String returnName)
-			throws Exception {
+	private String buildStatsJson(HashMap<String, Object> resultItem,
+			String returnName) throws Exception {
 		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put(returnName, resultItem);
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
@@ -130,16 +133,18 @@ public class StatsServiceImpl implements StatsService {
 		int i = 0;
 		while (i < personInfo.size()) {
 			HashMap<String, Object> personItem = new HashMap<String, Object>();
+			HashMap<String, Object> personEduInfo = new HashMap<String, Object>();
 			long userId = (Long) personInfo.get(i).get("userId");
+			personEduInfo = statsDao.getUserEduInfo(userId);
 			// String userSchool;
-			personItem.put("userSchool",
-					(String) statsDao.getUserSchool(userId));
+			personItem.put("userSchool", personEduInfo.get("userSchool"));
 			personItem.put("userName", personInfo.get(i).get("userName"));
 			personItem.put(
 					"userPhoto",
 					USER_LOGO_URL
 							+ ((String) personInfo.get(i).get("userPhoto"))
 									.replace("min", "mid"));
+			personItem.put("degree", personEduInfo.get("degree"));
 			personItem.put("sex", personInfo.get(i).get("sex"));
 			personItem.put("province", personInfo.get(i).get("province"));
 			personItem.put("city", personInfo.get(i).get("city"));
@@ -188,53 +193,67 @@ public class StatsServiceImpl implements StatsService {
 		return jsonStr;
 	}
 
-	public String getUserInfo(String hashString, String authHashKey)
+	public String getUserInfo(Cookie[] cookies, String authHashKey)
 			throws Exception {
 		HashMap<String, Object> userInfoResult = new HashMap<String, Object>();
-		if (hashString == "") {
+		String hashString = "";
+		String returnJsonName = "userInfo";
+		// cookies为空的话则返回
+		if (cookies == null) {
 			userInfoResult.put("user", "null");
+			return buildStatsJson(userInfoResult, returnJsonName);
 		} else {
-			String tHashString = hashString.replace("-", "+");
-			tHashString = tHashString.replace("_", "/");
-			tHashString = tHashString.replace(".", "=");
-			String decodeHashString = new String(
-					Base64.decodeBase64(tHashString.getBytes()));
-			StringBuffer sBuffer = new StringBuffer();
-			for (int i = 1; i <= decodeHashString.length(); i++) {
-				String string = decodeHashString.substring(i - 1, i);
-				String keyString = authHashKey.substring(
-						(i % authHashKey.length()) - 2,
-						(i % authHashKey.length()) - 1);
-				char tmpString = (char) string.compareTo(keyString);
-				sBuffer.append(tmpString);
-			}
-			String[] strArray = sBuffer.toString().split("!;-");
-			HashMap<String, Object> hashData = new HashMap<String, Object>();
-			for (int j = 0; j < strArray.length; j++) {
-				String[] subStrArray = strArray[j].split("^]+");
-				if (subStrArray[0] != null) {
-					hashData.put(subStrArray[0], subStrArray[1]);
+			for (int i = 0; i < cookies.length; i++) {
+				//获取对应cookie，进行解码
+				if (cookies[i].getName().equalsIgnoreCase(COOKIE_NAME)) {
+					hashString = cookies[i].getValue().toString();
+					String tHashString = hashString.replace("-", "+");
+					tHashString = tHashString.replace("_", "/");
+					tHashString = tHashString.replace(".", "=");
+					String decodeHashString = new String(
+							Base64.decodeBase64(tHashString.getBytes()));
+					StringBuffer sBuffer = new StringBuffer();
+					for (int t = 1; t <= decodeHashString.length(); t++) {
+						String string = decodeHashString.substring(t - 1, t);
+						String keyString = authHashKey.substring(
+								(t % authHashKey.length()) - 2,
+								(t % authHashKey.length()) - 1);
+						char tmpString = (char) string.compareTo(keyString);
+						sBuffer.append(tmpString);
+					}
+					String[] strArray = sBuffer.toString().split("!;-");
+					HashMap<String, Object> hashData = new HashMap<String, Object>();
+					for (int j = 0; j < strArray.length; j++) {
+						String[] subStrArray = strArray[j].split("^]+");
+						if (subStrArray[0] != null) {
+							hashData.put(subStrArray[0], subStrArray[1]);
+						}
+					}
+					String userName = (String) hashData.get("user_name");
+					int userId = (Integer) hashData.get("uid");
+					String password = (String) hashData.get("password");
+					HashMap<String, Object> userInfo = new HashMap<String, Object>();
+
+					userInfo = statsDao.getUserInfo(userName, userId, password);
+					// 数据库中没有匹配的用户则返回
+					if (userInfo == null) {
+						userInfoResult.put("user", "null");
+						return buildStatsJson(userInfoResult, returnJsonName);
+					} else {
+						userInfoResult
+								.put("userName", userInfo.get("userName"));
+						userInfoResult.put("userPhoto", USER_LOGO_URL
+								+ userInfo.get("userPhoto"));
+						userInfoResult.put("userPage", PERSON_HOMEPAGE
+								+ userInfo.get("userName"));
+						return buildStatsJson(userInfoResult, returnJsonName);
+					}
 				}
 			}
-			String userName = (String) hashData.get("user_name");
-			int userId = (Integer) hashData.get("uid");
-			String password = (String) hashData.get("password");
-			HashMap<String, Object> userInfo = new HashMap<String, Object>();
-
-			userInfo = statsDao.getUserInfo(userName, userId, password);
-			if (userInfo == null) {
-				userInfoResult.put("user", "null");
-			} else {
-				userInfoResult.put("userName", userInfo.get("userName"));
-				userInfoResult.put("userPhoto",
-						USER_LOGO_URL + userInfo.get("userPhoto"));
-				userInfoResult.put("userPage",
-						PERSON_HOMEPAGE + userInfo.get("userName"));
-			}
+			// cookies中不存在对应的cookie
+			userInfoResult.put("user", "null");
+			return buildStatsJson(userInfoResult, returnJsonName);
 		}
-        String returnName = "userInfo";
-		String jsonResult = buildStatsJson(userInfoResult,returnName);
-		return jsonResult;
 	}
 
 }
