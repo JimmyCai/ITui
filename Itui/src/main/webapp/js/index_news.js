@@ -1,11 +1,9 @@
 // JavaScript Document
 //导航区域
-$('.itui-news-login-regs').mouseenter(function(event) {
-	$('.dropdown-list').removeClass('hide');
-});
-$('.dropdown-list').mouseleave(function(event) {
-	$('.dropdown-list').addClass('hide');
-});
+
+$('.itui-username').addClass('hide');
+$('.itui-news-nav-login').removeClass('hide');
+$('.itui-news-nav-regs').removeClass('hide');
 //12个话题
 var topic_li=0,topic_href="www.baidu.com",topic_content="话题1";
 var topic_list=new Array(),person_list=new Array(),news_list=new Array();
@@ -67,13 +65,47 @@ $('.dropdown-menu-news').append(topic_html);
 	news_ajax();
 	
 //导航区域
-$('.itui-news-login-regs').mouseenter(function(event) {
-	$('.dropdown-list').removeClass('hide');
+function login_style(){
+	$('.itui-username').removeClass('hide');
+	$('.itui-news-nav-login').addClass('hide');
+	$('.itui-news-nav-regs').addClass('hide');
+	$('.itui-news-login-regs').mouseenter(function(event) {
+		$('.dropdown-list').removeClass('hide');
+	});
+	$('.dropdown-list').mouseleave(function(event) {
+		$('.dropdown-list').addClass('hide');
+	});
+}
+function nonelogin_style(){
+	$('.itui-username').addClass('hide');
+	$('.itui-news-nav-login').removeClass('hide');
+	$('.itui-news-nav-regs').removeClass('hide');
+
+}
+function news_user(){
+$.ajax({
+	url:'api/getuserinfo',
+	type:'get',
+	datatype:'html',
+	success:function(msg){
+		data = eval('msg=' + msg);
+		if(data.status==0){
+			console.log(data);
+			if(data.normalReturn.userInfo.user=="null"){
+				nonelogin_style();
+			}else{
+				login_style();
+				$('.person_page img').attr('src', data.normalReturn.userInfo.userPhoto);
+				$('.person_page').attr('href', data.normalReturn.userInfo.userPage);
+				$('.user_name').text(data.normalReturn.userInfo.userName);
+			}
+		}else{
+			console.log("error");
+		}
+	}
+	
 });
-$('.dropdown-list').mouseleave(function(event) {
-	$('.dropdown-list').addClass('hide');
+}
+$(function(){
+news_user();
 });
-
-
-
-
