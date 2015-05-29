@@ -31,8 +31,18 @@ public class URLConstants {
 	public static final String RESET_PASSWORD="/reset_password";
 	public static final String SEND_RESET_EMAIL="/sendResetEmail";
 	public static final String RESEND_EMAIL="/resend_email";
+	public static final String API_GET_USER_INFO="/api/getuserinfo";
+//	public static final String CAPTCHA="/captcha";
+	//第三方登录
+//	public static final String LOGIN_WEIBO="/login/weibo";
+//	public static final String LOGIN_WEIBO_DO="/login/weibo.do";
+//	public static final String LOGIN_WEIXIN="/login/weixin";
+//	public static final String LOGIN_WEIXIN_DO="/login/weixin.do";
+//	public static final String LOGIN_QQ="/login/qq";
+//	public static final String LOGIN_QQ_DO="/login/qq.do";
+//	public static final String LOGIN_DOUBAN="/login/douban";
+//	public static final String LOGIN_DOUBAN_DO="/login/douban.do";
 	
-
 	public static final String API_RANK_MAJOR="/api/rank/major";
 	public static final String API_RANK_COLLEGE="/api/rank/college";
 	public static final String API_RANK_LOCALRANK_COLLEGE="/api/rank/localrank/college";
@@ -41,4 +51,13 @@ public class URLConstants {
 	public static final String API_COURSE_VERIFY="/api/course/verify";
 	public static final String API_COURSE_RELEASE="/api/course/release";
 	public static final String API_COURSE_RELEASE_UPLOADPHOTO="/api/course/release/uploadphoto";
+	public static final String API_COURSE_MANAGEMENT="/api/course/management";
+	public static final String API_COURSE_MANAGEMENT_ALIVE="/api/course/management/alive";
+	public static final String API_COURSE_MANAGEMENT_ENDED="/api/course/management/ended";
+	public static final String API_COURSE_MANAGEMENT_DELETE="/api/course/management/delete";
+	public static final String API_COURSE_MANAGEMENT_UPDATE="/api/course/management/update"; 
+	public static final String API_COURSE_MANAGEMENT_UPDATEPHOTO="/api/course/management/updatephoto";
+	//微信公众号
+//	public static final String WEIXIN_MP="/weixin/mp";
+//	public static final String CORE="/core";
 }

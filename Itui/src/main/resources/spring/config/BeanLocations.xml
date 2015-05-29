@@ -68,6 +68,7 @@
  				
  				<value>getPVStats</value>
  				<value>getIndexInfo</value>
+ 				<value>getUserInfo</value>
  				
  				<value>getAliveCourseInfo</value>
  				<value>verifyPermission</value>

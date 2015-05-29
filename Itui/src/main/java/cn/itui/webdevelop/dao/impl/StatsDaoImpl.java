@@ -60,4 +60,13 @@ public class StatsDaoImpl implements StatsDao {
 		return sqlSession.selectOne("cn.itui.webdevelop.dao.StatsDao.getUserSchool",userId);
 	}
 
+	public HashMap<String, Object> getUserInfo(String userName, int userId,
+			String password) {
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("userName", userName);
+		parameterMap.put("userId", userId);
+		parameterMap.put("password", password);
+	    return sqlSession.selectOne("cn.itui.webdevelop.dao.StatsDao.getUserInfo", parameterMap);
+	}
+
 }
