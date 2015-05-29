@@ -204,12 +204,6 @@
     <version>0.0.5</version>
   </dependency>
   
-  <!-- 微信公众号SDK -->
-  <dependency>
-    <groupId>org.elkan1788.osc</groupId>
-    <artifactId>mpsdk4j</artifactId>
-    <version>1.a.20</version>
-  </dependency>
   </dependencies>
   <build>
     <finalName>Itui</finalName>
