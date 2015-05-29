@@ -148,8 +148,19 @@
     width: 70%;
   }
 }
+@media (max-width: 500px){
+	.aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news{
+		min-width: 380px;
+	}
+}
 @media (max-width: 400px) {
   .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news {
     min-width: 260px;
+  }
+  .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news li a{
+  padding-left:0px;padding-right:0px;
+  }
+  .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news li{
+  width:22%;
   }
 }

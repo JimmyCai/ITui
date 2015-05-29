@@ -25,7 +25,7 @@ $('.dropdown-menu-news').append(topic_html);
 		dataType : 'html',
 		success : function(msg) {
 			data = eval('msg=' + msg);
-			console.log(data);
+//			console.log(data);
 			if (data.status == '0') {
 //				精选话题
 				for(i=0;i<data.normalReturn.indexInfo[0].length;i++){
@@ -74,6 +74,6 @@ $('.dropdown-list').mouseleave(function(event) {
 	$('.dropdown-list').addClass('hide');
 });
 
-$(function(){
 
-});
+
+
