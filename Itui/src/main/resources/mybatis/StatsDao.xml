@@ -87,7 +87,7 @@
 	    LIMIT 12        
 	</select>
 	
-	<select id="getUserSchool" parameterType="long" resultType="map" >
+	<select id="getUserEduInfo" parameterType="long" resultType="map" >
 	    SELECT
 	          a.school_name AS userSchool,
 	          a.degree AS degree
