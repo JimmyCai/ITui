@@ -15,8 +15,7 @@ import cn.itui.webdevelop.utils.exception.DatabaseException;
 public class StatsController {
 	private StatsService statsService;
 	public static final String COOKIE_HASH_KEY = "oknrmwxigbrjvqn";
-	public static final String COOKIE_NAME = "tzg__user_login";
-	
+
 	public StatsService getStatsService() {
 		return statsService;
 	}
@@ -24,28 +23,38 @@ public class StatsController {
 	public void setStatsService(StatsService statsService) {
 		this.statsService = statsService;
 	}
-	
+
 	@RequestMapping(URLConstants.API_INDEX)
-//	public String getPVStats(HttpServletRequest request, HttpServletResponse response) throws Exception{
-//		return statsService.getPVStats();
-//	}
-	public String getIndexInfo(HttpServletRequest request,HttpServletResponse response) throws DatabaseException{
+	// public String getPVStats(HttpServletRequest request, HttpServletResponse
+	// response) throws Exception{
+	// return statsService.getPVStats();
+	// }
+	public String getIndexInfo(HttpServletRequest request,
+			HttpServletResponse response) throws DatabaseException {
 		return statsService.getIndexInfo();
 	}
-	
+
 	@RequestMapping(URLConstants.API_GET_USER_INFO)
-	public String getUserInfo(HttpServletRequest request,HttpServletResponse response) throws Exception{
+	public String getUserInfo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		String httpUserAgent = request.getHeader("User-Agent");
 		String httpAcceptLanguage = request.getHeader("Accept-Language");
-		String authHashKey = DigestUtils.md5DigestAsHex((COOKIE_HASH_KEY+httpUserAgent+httpAcceptLanguage).getBytes());
-		String hashString = "";
+		String authHashKey = DigestUtils.md5DigestAsHex((COOKIE_HASH_KEY
+				+ httpUserAgent + httpAcceptLanguage).getBytes());
+//		String hashString = "";
 		Cookie[] cookies = request.getCookies();
-		for(int i=0;i<cookies.length;i++){
-			if(cookies[i].getName().equalsIgnoreCase(COOKIE_NAME)){
-				hashString = cookies[i].getValue().toString();
-			}
-		}
-		return statsService.getUserInfo(hashString,authHashKey);
+		return statsService.getUserInfo(cookies, authHashKey);
+		//没有cookie和没有匹配的cookie时皆返回0
+//		if (cookies == null) {
+//			return "0";
+//		} else {
+//			for (int i = 0; i < cookies.length; i++) {
+//				if (cookies[i].getName().equalsIgnoreCase(COOKIE_NAME)) {
+//					hashString = cookies[i].getValue().toString();
+//					return statsService.getUserInfo(hashString, authHashKey);
+//				}				
+//			}
+//			return "0";
+//		}
 	}
-
 }
