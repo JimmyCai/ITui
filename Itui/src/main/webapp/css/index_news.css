@@ -434,6 +434,7 @@ overflow:hidden;
   left: 0px;
   top: 50px;
 }
+.deg_span{padding-left:10px;}
 .card-ul li .card_body {
   overflow: hidden;
 }

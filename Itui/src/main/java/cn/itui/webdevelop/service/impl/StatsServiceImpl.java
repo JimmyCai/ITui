@@ -145,7 +145,11 @@ public class StatsServiceImpl implements StatsService {
 			}else
 			{
 				personItem.put("userSchool", personEduInfo.get("userSchool"));
-				personItem.put("degree", personEduInfo.get("degree"));
+				if (personEduInfo.get("degree") != null){
+					personItem.put("degree", personEduInfo.get("degree"));
+				}else{
+					personItem.put("degree", "");
+				}
 			}
 			personItem.put("userName", personInfo.get(i).get("userName"));
 			personItem.put(

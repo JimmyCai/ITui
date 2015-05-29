@@ -1,6 +1,105 @@
 // JavaScript Document
 //导航区域
+	// 搜索跳转
+	function search_jump(major, value) {
+		if (major == "专业") {
+			major = 1;
+			window.open("search.html?t=" + major + "&c=" + encodeURIComponent(value) + "&#.");
+			console.log(encodeURIComponent(value));
+		} if(major == "院校") {
+			major = 2;
+			window.open("search_school.html?t=" + major + "&c=" + encodeURIComponent(value)
+							+ "&#.");
+		}if(major == "达人"){
+			console.log('达人跳转');
+		}
+	}
+	
+	// 20150515新搜索框
+	var major_sou='专业';
+	$('.btn-major').click(function(event) {
+	
+		major_sou=$('.btn-major').text();
+		$(this).removeClass('btn-border').siblings('.btn-new-tab').addClass('btn-border');
+		$(this).css('color', '#E67917').siblings('.btn-new-tab').css('color', '#fff');
+		console.log(major_sou);
+	});
+	$('.btn-collage').click(function(event) {
+	
+		major_sou=$('.btn-collage').text();
+		$(this).removeClass('btn-border').siblings('.btn-new-tab').addClass('btn-border');
+		$(this).css('color', '#0CB9E3').siblings('.btn-new-tab').css('color', '#fff');
+		console.log(major_sou);
+	});
+	$('.btn-people').click(function(event) {
+		
+		major_sou=$('.btn-people').text();
+		$(this).removeClass('btn-border').siblings('.btn-new-tab').addClass('btn-border');
+		$(this).css('color', '#73B403').siblings('.btn-new-tab').css('color', '#fff');;
+		console.log(major_sou);
+	});
+	//移入
+	$('.btn-new-tab').mousemove(function(event) {
+		$(this).removeClass('btn-border').siblings('.btn-new-tab').addClass('btn-border');
+	});
+	//end20150515新搜索框
 
+
+	
+	// 搜索框ajax提交
+	$('#sou').click(function(event) {
+		// var major = $('.nr_js').text();
+		var value = $('#scbar_txt').val();
+		search_jump(major_sou, value);
+		console.log(major_sou);
+	});
+
+	// 获得焦点时按下回车调用跳转函数至信息页
+
+	$('#scbar_txt').focus(function() {
+		document.onkeydown = function(e) {
+			var ev = document.all ? window.event : e;
+			if (ev.keyCode == 13) {
+				// var major = $('.nr_js').text();
+				var value = $('#scbar_txt').val();
+				search_jump(major_sou, value);
+				return false;
+			}
+		}
+	});
+	// 失去焦点时按下回车无反应
+	$('#scbar_txt').blur(function() {
+		document.onkeydown = function(e) {
+			var ev = document.all ? window.event : e;
+			if (ev.keyCode == 13) {
+				var value = $('#scbar_txt').val();
+				search_jump(major_sou, value);
+				return false;
+			}
+		}
+	});
+
+	// 确定二维码位置
+	var win_width = $(window).width();
+	$('.qr_code01').mouseenter(function(event) {
+		$('.erwei03').css('display', 'block');
+		$('.erwei04').css('display', 'none');
+	}).mouseleave(function(event) {
+		$('.erwei03').css('display', 'none');
+	});
+	$('.qr_code02').mouseenter(function(event) {
+		$('.erwei04').css('display', 'block');
+	})
+	$('.erwei04').mouseleave(function(event) {
+		$('.erwei04').css('display', 'none');
+	});
+	$('.erwei04').click(function(event) {
+		$('.erwei04').css('display', 'none');
+	});
+	setTimeout(function() {
+		$('.erwei04').hide();
+	}, 5000);
+	
 $('.itui-username').addClass('hide');
 $('.itui-news-nav-login').removeClass('hide');
 $('.itui-news-nav-regs').removeClass('hide');
@@ -37,22 +136,70 @@ $('.dropdown-menu-news').append(topic_html);
 					person_list[i]=data.normalReturn.indexInfo[1][i];
 					}
 				for(i=0;i<person_list.length;i++){
+					if(person_list[i].userPhoto==undefined){
+						person_list[i].userPhoto='';
+					}
 					$('.li_img0'+i).attr('src',person_list[i].userPhoto);
+					
+					if(person_list[i].signature==undefined){
+						person_list[i].signature='';
+					}
 					$('.personal_des0'+i).text(person_list[i].signature);
+					
+					if(person_list[i].userName==undefined){
+						person_list[i].userName='';
+					}
 					$('.card_name0'+i).text(person_list[i].userName);
+					
+					if(person_list[i].homePag==undefined){
+						person_list[i].homePag='';
+					}
 					$('.card_follow0'+i).children('a').attr('href', person_list[i].homePage);
+					
+					if(person_list[i].homePage==undefined){
+						person_list[i].homePage='';
+					}
 					$('.card-ul li').eq(i).children('.card_head').find('a').attr('href', person_list[i].homePage);
-					$('.card_sch0'+i).text(person_list[i].userSchool);
+					
+					if(person_list[i].userSchool==undefined){
+						person_list[i].userSchool='';
+					}
+					$('.card_sch0'+i).children('.sch_span').text(person_list[i].userSchool);
+					
+					if(person_list[i].degree==undefined){
+						person_list[i].degree='';
+					}
+					$('.card_sch0'+i).children('.deg_span').text(person_list[i].degree);
+					
+					
+					console.log(person_list[i].degree);
 					
 				}
 				for(i=0;i<data.normalReturn.indexInfo[2].length;i++){
 					news_list[i]=data.normalReturn.indexInfo[2][i];
 				}
 				for(i=0;i<news_list.length;i++){
+					if(news_list[i].newsPhoto==undefined){
+						news_list[i].newsPhoto='';
+					}
 					$('.news_img0'+i).attr('src', news_list[i].newsPhoto);
+					
+					if(news_list[i].summary==undefined){
+						news_list[i].summary='';
+					}
 					$('.news_intr0'+i).text(news_list[i].summary);
+					
+					if(news_list[i].title==undefined){
+						news_list[i].title='';
+					}
 					$('.news_item0'+i).text(news_list[i].title);
+					
+					if(news_list[i].newsPage==undefined){
+						news_list[i].newsPage='';
+					}
 					$('.news_a0'+i).attr('href', news_list[i].newsPage);
+					
+					
 				}
 				
 			} else {
