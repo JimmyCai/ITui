@@ -137,14 +137,19 @@ public class StatsServiceImpl implements StatsService {
 			long userId = (Long) personInfo.get(i).get("userId");
 			personEduInfo = statsDao.getUserEduInfo(userId);
 			// String userSchool;
-			personItem.put("userSchool", personEduInfo.get("userSchool"));
+			if(personEduInfo == null){
+				personItem.put("userSchool", "");
+				personItem.put("degree", "");
+			}else {
+				personItem.put("userSchool", personEduInfo.get("userSchool"));
+				personItem.put("degree", personEduInfo.get("degree"));
+			}
 			personItem.put("userName", personInfo.get(i).get("userName"));
 			personItem.put(
 					"userPhoto",
 					USER_LOGO_URL
 							+ ((String) personInfo.get(i).get("userPhoto"))
-									.replace("min", "mid"));
-			personItem.put("degree", personEduInfo.get("degree"));
+									.replace("min", "mid"));			
 			personItem.put("sex", personInfo.get(i).get("sex"));
 			personItem.put("province", personInfo.get(i).get("province"));
 			personItem.put("city", personInfo.get(i).get("city"));

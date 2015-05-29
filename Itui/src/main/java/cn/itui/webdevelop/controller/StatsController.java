@@ -25,10 +25,12 @@ public class StatsController {
 	}
 
 	@RequestMapping(URLConstants.API_INDEX)
-	// public String getPVStats(HttpServletRequest request, HttpServletResponse
-	// response) throws Exception{
-	// return statsService.getPVStats();
-	// }
+	 public String getPVStats(HttpServletRequest request, HttpServletResponse
+	 response) throws Exception{
+	 return statsService.getPVStats();
+	 }
+	
+	@RequestMapping(URLConstants.API_NEWINDEX)
 	public String getIndexInfo(HttpServletRequest request,
 			HttpServletResponse response) throws DatabaseException {
 		return statsService.getIndexInfo();
