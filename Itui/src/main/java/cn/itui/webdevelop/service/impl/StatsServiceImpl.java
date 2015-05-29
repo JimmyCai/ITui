@@ -150,6 +150,7 @@ public class StatsServiceImpl implements StatsService {
 				}else{
 					personItem.put("degree", "");
 				}
+
 			}
 			personItem.put("userName", personInfo.get(i).get("userName"));
 			personItem.put(
@@ -157,7 +158,7 @@ public class StatsServiceImpl implements StatsService {
 					USER_LOGO_URL
 							+ ((String) personInfo.get(i).get("userPhoto"))
 									.replace("min", "mid"));
-			
+
 			personItem.put("sex", personInfo.get(i).get("sex"));
 			personItem.put("province", personInfo.get(i).get("province"));
 			personItem.put("city", personInfo.get(i).get("city"));
