@@ -39,9 +39,13 @@ public class MajorInfoController {
 		int majorId = EnDeCode.decodePara(majorIdStr);
 		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
 		rRLogger.info(requestStr);
-		String code = request.getParameter(CODE);
-		if(code == null)
-			throw NotLoginException.getInstance();
+		String code ="";
+		
+//20150530 搜索不再需要登录 屏蔽code
+//		String code = request.getParameter(CODE);
+//		if(code == null)
+//			throw NotLoginException.getInstance();
+		
 		String retJson = majorInfoService.getMajorInfo(code, majorId);
 		return retJson;
 	}
