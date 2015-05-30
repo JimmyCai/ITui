@@ -41,24 +41,10 @@ public class StatsController {
 			HttpServletResponse response) throws Exception {
 		String httpUserAgent = request.getHeader("User-Agent");
 		String httpAcceptLanguage = request.getHeader("Accept-Language");
-		System.out.println("2cyVlJWNl4JvXaepltSV0pqlmsKVXWNoY2dta2xlbZik1KJkm9HOgm9dopek1a3Tq5yTwWNoZHGUaHBrbWdqnJyTlmtsm5bCa5OYb5PHZsWdbGycmw..");
 		String authHashKey = DigestUtils.md5DigestAsHex((COOKIE_HASH_KEY
 				+ httpUserAgent + httpAcceptLanguage).getBytes());
-//		String hashString = "";
 		System.out.println(authHashKey);
 		Cookie[] cookies = request.getCookies();
 		return statsService.getUserInfo(cookies, authHashKey);
-		//没有cookie和没有匹配的cookie时皆返回0
-//		if (cookies == null) {
-//			return "0";
-//		} else {
-//			for (int i = 0; i < cookies.length; i++) {
-//				if (cookies[i].getName().equalsIgnoreCase(COOKIE_NAME)) {
-//					hashString = cookies[i].getValue().toString();
-//					return statsService.getUserInfo(hashString, authHashKey);
-//				}				
-//			}
-//			return "0";
-//		}
 	}
 }

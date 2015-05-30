@@ -33,7 +33,10 @@ public class CollegeController {
 		String code="";
 		try{
 			String collegeIdStr = request.getParameter(COLLEGEID);
-			code = request.getParameter(CODE);
+			
+//20150530 搜索不再需要登录 屏蔽code
+//			code = request.getParameter(CODE);
+			
 			collegeId = EnDeCode.decodePara(collegeIdStr);
 			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
 			rRLogger.info(requestStr);
@@ -129,7 +132,10 @@ public class CollegeController {
 		String code="";
 		try{
 			String collegeIdStr = request.getParameter(COLLEGEID);
-			code = request.getParameter(CODE);
+			
+//20150530 搜索不再需要登录 屏蔽code
+//			code = request.getParameter(CODE);
+			
 			collegeId = EnDeCode.decodePara(collegeIdStr);
 			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
 			rRLogger.info(requestStr);
@@ -147,7 +153,10 @@ public class CollegeController {
 		String code="";
 		try{
 			String collegeIdStr = request.getParameter(COLLEGEID);
-			code = request.getParameter(CODE);
+			
+//20150530 搜索不再需要登录 屏蔽code
+//			code = request.getParameter(CODE);
+			
 			collegeId = EnDeCode.decodePara(collegeIdStr);
 			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
 			rRLogger.info(requestStr);

@@ -1,16 +1,10 @@
 package cn.itui.webdevelop.service.impl;
 
 import java.util.ArrayList;
-//import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
-
-import org.apache.commons.codec.binary.Base64;
-//import 
-
-
 
 import com.sun.mail.util.BASE64DecoderStream;
 
@@ -143,7 +137,6 @@ public class StatsServiceImpl implements StatsService {
 			long userId = (Long) personInfo.get(i).get("userId");
 			System.out.println("fdakjfe:"+userId);
 			personEduInfo = statsDao.getUserEduInfo(userId);
-			// String userSchool;
 			if (personEduInfo == null)
 			{
 				personItem.put("userSchool", "");
