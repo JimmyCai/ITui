@@ -126,7 +126,7 @@ li {
   padding-top: 2%;
   width: 100%;
   min-height: 500px;
-  background: url(../images/T.png);
+  background: url(../images/newtop8.png);
   background-position: center;
   background-attachment: scroll;
 }
@@ -273,13 +273,16 @@ li {
   margin-bottom: 2%;
 }
 .content0 #scbar_form .sou_div {
-  border: 1px solid #fff;
   overflow: hidden;
 }
 .content0 #scbar_form .sou_div input {
   float: left;
   color: #fff;
   background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+}
+.content0 #scbar_form .sou_div .form-control:focus{
+	border-color:#E67917;
+	box-shadow:none;
 }
 .content0 #scbar_form .sou_div button {
   float: left;
@@ -302,7 +305,8 @@ li {
 .content0 #scbar_form .tab-btn-group .btn-new-tab {
   font-size: 2rem;
   width: 20%;
-  margin-left: 12%;
+  margin-left: 6%;
+  margin-right: 6%;
   color: #fff;
 }
 .content0 #scbar_form .tab-btn-group .btn-major {
@@ -367,6 +371,7 @@ li {
 overflow:hidden;
   margin-bottom:0px;
   max-height:27px;
+  font-weight:700;
 }
 .news-ul .news_li .news_body .news_intr {
   padding-top: 4px;
@@ -383,13 +388,13 @@ overflow:hidden;
   margin: 0 auto;
 }
 .card-item p {
-  font-size: 1.6rem;
+  font-size: 2rem;
   line-height: 3rem;
   padding-left: 12px;
   text-align: center;
 }
 .card-item .p01 {
-  font-size: 2rem;
+  font-size: 3.6rem;
 }
 .card-ul {
   max-width: 1000px;
@@ -559,7 +564,10 @@ overflow:hidden;
 .row_foot .erwei {
   float: right;
   margin-bottom: 30px;
-  margin-top: -200px;
+  /*margin-top: -200px;*/
+  position:fixed;
+  right:0px;
+  bottom:200px;
 }
 .row_foot .erwei .erwei0 {
   float: right;
@@ -653,3 +661,22 @@ overflow:hidden;
 }
 /*-------------------bottom -------------------*/
 .advert_big img{border-top:8px solid black;}
+/*二维码*/
+.erwei {
+    width: 40px;
+    height: 120px;
+}
+.ew_0 {
+    width: 40px;
+    height: 40px;
+}
+.back_top {
+    background-color: #7E7E7E;
+    cursor:pointer;
+}
+.back_top p {
+    text-align: center;
+    font-size: 24px;
+    color: #FFF;
+}
+
