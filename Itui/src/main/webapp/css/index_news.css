@@ -126,7 +126,7 @@ li {
   padding-top: 2%;
   width: 100%;
   min-height: 500px;
-  background: url(../images/bj02.png);
+  background: url(../images/T.png);
   background-position: center;
   background-attachment: scroll;
 }
@@ -481,7 +481,6 @@ overflow:hidden;
 }
 .row_foot {
   background-color: #eaeaea;
-  border: 1px solid #0CB9E3;
   border-top: 16px solid #0CB9E3;
 }
 .row_foot .foot-content {
