@@ -105,6 +105,6 @@
 	          a.avatar_file AS userPhoto,
 	          a.url_token as urlToken
 	    FROM aws_itui_users a
-	    WHERE a.uid=#{userId} AND a.user_name=#{userName} AND a.password=#{password}          
+	    WHERE a.uid=#{userId} AND a.email=#{userName} AND a.password=#{password}          
 	</select>
 </mapper>
