@@ -1,12 +1,18 @@
 package cn.itui.webdevelop.service.impl;
 
 import java.util.ArrayList;
+//import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 
 import org.apache.commons.codec.binary.Base64;
+//import 
+
+
+
+import com.sun.mail.util.BASE64DecoderStream;
 
 import cn.itui.webdevelop.dao.StatsDao;
 import cn.itui.webdevelop.model.Stats;
@@ -221,30 +227,44 @@ public class StatsServiceImpl implements StatsService {
 				//获取对应cookie，进行解码
 				if (cookies[i].getName().equalsIgnoreCase(COOKIE_NAME)) {
 					hashString = cookies[i].getValue().toString();
+//					hashString = "2cyVlJWNkoJvXaepltSV0pqlmsKVXWVqa2ZsanFkcaXV1F-Zp8-CnGGgk6mk2aXWnZaSj2uUaW1lmGpvmpacnJucl2hvmMLFmWKUmWaYmp1vaW6U";
+					System.out.println("fhwe::"+hashString);
 					String tHashString = hashString.replace("-", "+");
 					tHashString = tHashString.replace("_", "/");
 					tHashString = tHashString.replace(".", "=");
+					System.out.println(tHashString);
 					String decodeHashString = new String(
-							Base64.decodeBase64(tHashString.getBytes()));
+							BASE64DecoderStream.decode((tHashString.getBytes())),"iso8859-1");
+					System.out.println(decodeHashString);
+					System.out.println(decodeHashString.length());
 					StringBuffer sBuffer = new StringBuffer();
 					for (int t = 1; t <= decodeHashString.length(); t++) {
 						String string = decodeHashString.substring(t - 1, t);
-						String keyString = authHashKey.substring(
-								(t % authHashKey.length()) - 2,
-								(t % authHashKey.length()) - 1);
+						System.out.println("char:"+string);
+						String ahkString = authHashKey + authHashKey;
+						int beginIndex = (t % authHashKey.length()) - 2;
+						if (beginIndex < 0) beginIndex += authHashKey.length();
+						String keyString = ahkString.substring(
+								beginIndex,
+								beginIndex + 1);
+						System.out.println("keychar:"+keyString);
 						char tmpString = (char) string.compareTo(keyString);
+						System.out.println(tmpString);
 						sBuffer.append(tmpString);
 					}
+					System.out.println(sBuffer);
 					String[] strArray = sBuffer.toString().split("!;-");
 					HashMap<String, Object> hashData = new HashMap<String, Object>();
 					for (int j = 0; j < strArray.length; j++) {
-						String[] subStrArray = strArray[j].split("^]+");
+						System.out.println(strArray[j]);
+						String[] subStrArray = strArray[j].split("\\^\\]\\+");
+						System.out.println(subStrArray[0]);
 						if (subStrArray[0] != null) {
 							hashData.put(subStrArray[0], subStrArray[1]);
 						}
 					}
 					String userName = (String) hashData.get("user_name");
-					int userId = (Integer) hashData.get("uid");
+					int userId = Integer.valueOf((String)hashData.get("uid"));
 					String password = (String) hashData.get("password");
 					HashMap<String, Object> userInfo = new HashMap<String, Object>();
 
