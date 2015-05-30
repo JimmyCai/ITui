@@ -68,10 +68,13 @@ public class CollegeController {
 	
 	@RequestMapping(value=URLConstants.FOLLOWCOLLEGE, method=RequestMethod.POST)
 	public String followCollege(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String code = request.getParameter(CODE);
+		
+//20150530 搜索不再需要登录 屏蔽code
+//		String code = request.getParameter(CODE);
+		String code = "";
 		String collegeIdStr = request.getParameter(COLLEGEID);
-		if(code == null)
-			throw NotLoginException.getInstance();
+//		if(code == null)
+//			throw NotLoginException.getInstance();
 		if(collegeIdStr == null)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int collegeId = EnDeCode.decodePara(collegeIdStr);
@@ -82,11 +85,14 @@ public class CollegeController {
 	
 	@RequestMapping(value=URLConstants.DISFOLLOWCOLLEGE, method=RequestMethod.POST)
 	public String disFollowCollege(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String code = request.getParameter(CODE);
+
+//20150530 搜索不再需要登录 屏蔽code
+//		String code = request.getParameter(CODE);
+		String code = "";
 		String collegeIdStr = request.getParameter(COLLEGEID);
 		System.out.println(collegeIdStr+"test");
-		if(code == null)
-			throw NotLoginException.getInstance();
+//		if(code == null)
+//			throw NotLoginException.getInstance();
 		if(collegeIdStr == null)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int collegeId = EnDeCode.decodePara(collegeIdStr);
@@ -97,11 +103,14 @@ public class CollegeController {
 	
 	@RequestMapping(value=URLConstants.GETFOLLOWCOLLEGE, method=RequestMethod.POST)
 	public String getFollowColleges(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String code = request.getParameter(CODE);
+		
+//20150530 搜索不再需要登录 屏蔽code
+//		String code = request.getParameter(CODE);
+		String code = "";
 		String requestStr = RequestUtil.getUserBaseInfo(request) + CODE + ":" + code;
 		rRLogger.info(requestStr);
-		if(code == null)
-			throw NotLoginException.getInstance();
+//		if(code == null)
+//			throw NotLoginException.getInstance();
 		return followService.getFollowColleges(code);
 	}
 
