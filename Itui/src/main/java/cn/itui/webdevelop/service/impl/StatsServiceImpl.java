@@ -283,7 +283,7 @@ public class StatsServiceImpl implements StatsService {
 						userInfoResult
 								.put("userName", userInfo.get("userName"));
 						userInfoResult.put("userPhoto", USER_LOGO_URL
-								+ userInfo.get("userPhoto"));
+								+ userInfo.get("userPhoto").toString().replace("min", "mid"));
 						userInfoResult.put("userPage", PERSON_HOMEPAGE
 								+ userInfo.get("userName"));
 						return buildStatsJson(userInfoResult, returnJsonName);
