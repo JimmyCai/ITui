@@ -55,11 +55,16 @@
 	          a.sex AS sex,
 	          a.province AS province,
 	          a.city AS city,
-	          b.signature AS signature
+	          b.signature AS signature,
+	          c.school_name AS school,
+	          c.degree AS degree,
+	          MAX(c.education_years) AS education_year
 	    FROM
 	          aws_itui_users a
-	    JOIN  aws_itui_users_attrib b ON a.uid=b.uid
+	    LEFT JOIN  aws_itui_users_attrib b ON a.uid=b.uid
+	    LEFT JOIN  aws_itui_education_experience c ON a.uid=c.uid
 	    WHERE a.is_recommend=1
+	    GROUP BY a.uid
 	</select>
 	
 	<select id="getNewsInfo" resultType="java.util.HashMap">
@@ -86,17 +91,6 @@
 	    WHERE a.is_recommend=1 
 	    ORDER BY a.add_time DESC 
 	    LIMIT 12        
-	</select>
-	
-	<select id="getUserEduInfo" parameterType="long" resultType="map" >
-	    SELECT
-	          a.school_name AS userSchool,
-	          a.degree AS degree
-	    FROM
-	          aws_itui_education_experience a
-	    WHERE a.uid = #{userId}
-	    ORDER BY a.education_years DESC
-	    LIMIT 1
 	</select>
 	
 	<select id="getUserInfo" parameterType="map" resultType="map">

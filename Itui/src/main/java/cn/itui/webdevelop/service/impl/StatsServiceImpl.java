@@ -1,16 +1,10 @@
 package cn.itui.webdevelop.service.impl;
 
 import java.util.ArrayList;
-//import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
-
-import org.apache.commons.codec.binary.Base64;
-//import 
-
-
 
 import com.sun.mail.util.BASE64DecoderStream;
 
@@ -139,25 +133,6 @@ public class StatsServiceImpl implements StatsService {
 		int i = 0;
 		while (i < personInfo.size()) {
 			HashMap<String, Object> personItem = new HashMap<String, Object>();
-			HashMap<String, Object> personEduInfo = new HashMap<String, Object>();
-			long userId = (Long) personInfo.get(i).get("userId");
-			System.out.println("fdakjfe:"+userId);
-			personEduInfo = statsDao.getUserEduInfo(userId);
-			// String userSchool;
-			if (personEduInfo == null)
-			{
-				personItem.put("userSchool", "");
-				personItem.put("degree", "");
-			}else
-			{
-				personItem.put("userSchool", personEduInfo.get("userSchool"));
-				if (personEduInfo.get("degree") != null){
-					personItem.put("degree", personEduInfo.get("degree"));
-				}else{
-					personItem.put("degree", "");
-				}
-
-			}
 			personItem.put("userName", personInfo.get(i).get("userName"));
 			personItem.put(
 					"userPhoto",
@@ -165,12 +140,26 @@ public class StatsServiceImpl implements StatsService {
 							+ ((String) personInfo.get(i).get("userPhoto"))
 									.replace("min", "mid"));
 
-			personItem.put("sex", personInfo.get(i).get("sex"));
-			personItem.put("province", personInfo.get(i).get("province"));
-			personItem.put("city", personInfo.get(i).get("city"));
-			personItem.put("signature", personInfo.get(i).get("signature"));
+//			personItem.put("sex", personInfo.get(i).get("sex"));
+//			personItem.put("province", personInfo.get(i).get("province"));
+//			personItem.put("city", personInfo.get(i).get("city"));			
 			personItem.put("homePage",
 					PERSON_HOMEPAGE + personInfo.get(i).get("userName"));
+			if(personInfo.get(i).get("signature") != null){
+				personItem.put("signature", personInfo.get(i).get("signature"));
+			}else {
+				personItem.put("signature", "");
+			}
+			if (personInfo.get(i).get("school") != null) {
+				personItem.put("userSchool", personInfo.get(i).get("school"));
+			} else {
+				personItem.put("userSchool", "");
+			}
+			if (personInfo.get(i).get("degree") != null) {
+				personItem.put("degree", personInfo.get(i).get("degree"));
+			} else {
+				personItem.put("degree", "");
+			}
 
 			personResultList.add(i, personItem);
 			i++;
@@ -224,30 +213,33 @@ public class StatsServiceImpl implements StatsService {
 			return buildStatsJson(userInfoResult, returnJsonName);
 		} else {
 			for (int i = 0; i < cookies.length; i++) {
-				//获取对应cookie，进行解码
+				// 获取对应cookie，进行解码
 				if (cookies[i].getName().equalsIgnoreCase(COOKIE_NAME)) {
 					hashString = cookies[i].getValue().toString();
-//					hashString = "2cyVlJWNkoJvXaepltSV0pqlmsKVXWVqa2ZsanFkcaXV1F-Zp8-CnGGgk6mk2aXWnZaSj2uUaW1lmGpvmpacnJucl2hvmMLFmWKUmWaYmp1vaW6U";
-					System.out.println("fhwe::"+hashString);
+					// hashString =
+					// "2cyVlJWNkoJvXaepltSV0pqlmsKVXWVqa2ZsanFkcaXV1F-Zp8-CnGGgk6mk2aXWnZaSj2uUaW1lmGpvmpacnJucl2hvmMLFmWKUmWaYmp1vaW6U";
+					System.out.println("fhwe::" + hashString);
 					String tHashString = hashString.replace("-", "+");
 					tHashString = tHashString.replace("_", "/");
 					tHashString = tHashString.replace(".", "=");
 					System.out.println(tHashString);
 					String decodeHashString = new String(
-							BASE64DecoderStream.decode((tHashString.getBytes())),"iso8859-1");
+							BASE64DecoderStream
+									.decode((tHashString.getBytes())),
+							"iso8859-1");
 					System.out.println(decodeHashString);
 					System.out.println(decodeHashString.length());
 					StringBuffer sBuffer = new StringBuffer();
 					for (int t = 1; t <= decodeHashString.length(); t++) {
 						String string = decodeHashString.substring(t - 1, t);
-						System.out.println("char:"+string);
+						System.out.println("char:" + string);
 						String ahkString = authHashKey + authHashKey;
 						int beginIndex = (t % authHashKey.length()) - 2;
-						if (beginIndex < 0) beginIndex += authHashKey.length();
-						String keyString = ahkString.substring(
-								beginIndex,
+						if (beginIndex < 0)
+							beginIndex += authHashKey.length();
+						String keyString = ahkString.substring(beginIndex,
 								beginIndex + 1);
-						System.out.println("keychar:"+keyString);
+						System.out.println("keychar:" + keyString);
 						char tmpString = (char) string.compareTo(keyString);
 						System.out.println(tmpString);
 						sBuffer.append(tmpString);
@@ -264,7 +256,7 @@ public class StatsServiceImpl implements StatsService {
 						}
 					}
 					String userName = (String) hashData.get("user_name");
-					int userId = Integer.valueOf((String)hashData.get("uid"));
+					int userId = Integer.valueOf((String) hashData.get("uid"));
 					String password = (String) hashData.get("password");
 					HashMap<String, Object> userInfo = new HashMap<String, Object>();
 
