@@ -108,6 +108,8 @@ public class StatsServiceImpl implements StatsService {
 	}
 
 	public String getIndexInfo() throws DatabaseException {
+//		long start = System.nanoTime();
+//		System.out.println(start);
 		List<HashMap<String, Object>> topicInfo = statsDao.getTopicInfo();
 		List<HashMap<String, Object>> personInfo = statsDao.getPersonInfo();
 		List<HashMap<String, Object>> newsInfo = statsDao.getNewsInfo();
@@ -130,9 +132,20 @@ public class StatsServiceImpl implements StatsService {
 		resultItem.add(topicResultList);
 
 		ArrayList<HashMap<String, Object>> personResultList = new ArrayList<HashMap<String, Object>>();
+		HashMap<String, Object> personIdMap = new HashMap<String, Object>();
+		List<HashMap<String, Object>> personEduResult = new ArrayList<HashMap<String,Object>>();
+//		long start = System.nanoTime();
+//		System.out.println(start);
 		int i = 0;
 		while (i < personInfo.size()) {
 			HashMap<String, Object> personItem = new HashMap<String, Object>();
+			long userId = (Long) personInfo.get(i).get("userId");
+			//cast userId from long to int
+			int uid = new Long(userId).intValue();
+			personIdMap.put("userId"+i, uid);
+			personItem.put("userId", uid);
+			personItem.put("userSchool", "");
+			personItem.put("degree", "");
 			personItem.put("userName", personInfo.get(i).get("userName"));
 			personItem.put(
 					"userPhoto",
@@ -140,31 +153,32 @@ public class StatsServiceImpl implements StatsService {
 							+ ((String) personInfo.get(i).get("userPhoto"))
 									.replace("min", "mid"));
 
-//			personItem.put("sex", personInfo.get(i).get("sex"));
-//			personItem.put("province", personInfo.get(i).get("province"));
-//			personItem.put("city", personInfo.get(i).get("city"));			
+			personItem.put("sex", personInfo.get(i).get("sex"));
+			personItem.put("province", personInfo.get(i).get("province"));
+			personItem.put("city", personInfo.get(i).get("city"));
+			personItem.put("signature", personInfo.get(i).get("signature"));
 			personItem.put("homePage",
 					PERSON_HOMEPAGE + personInfo.get(i).get("userName"));
-			if(personInfo.get(i).get("signature") != null){
-				personItem.put("signature", personInfo.get(i).get("signature"));
-			}else {
-				personItem.put("signature", "");
-			}
-			if (personInfo.get(i).get("school") != null) {
-				personItem.put("userSchool", personInfo.get(i).get("school"));
-			} else {
-				personItem.put("userSchool", "");
-			}
-			if (personInfo.get(i).get("degree") != null) {
-				personItem.put("degree", personInfo.get(i).get("degree"));
-			} else {
-				personItem.put("degree", "");
-			}
 
 			personResultList.add(i, personItem);
 			i++;
 		}
+		personEduResult = statsDao.getPersonEduInfo(personIdMap);
+		for(int m=0;m<personResultList.size();m++){
+			for(int n=0;n<personEduResult.size();n++){
+				if (personResultList.get(m).get("userId") == (personEduResult.get(n).get("userId"))) {
+					personResultList.get(m).put("userSchool", personEduResult.get(n).get("userSchool"));
+					personResultList.get(m).put("degree", personEduResult.get(n).get("degree"));
+					personEduResult.remove(n);
+					//匹配后将跳出当前循环
+					break;
+				}
+			}
+		}
 		resultItem.add(personResultList);
+//		long end = System.nanoTime();
+//		System.out.println(end);
+//		System.out.println("cost time:"+(end-start));
 
 		ArrayList<HashMap<String, Object>> newsResultList = new ArrayList<HashMap<String, Object>>();
 		int j = 0;
@@ -191,6 +205,9 @@ public class StatsServiceImpl implements StatsService {
 		}
 		resultItem.add(newsResultList);
 		String jsonResult = buildIndexInfoJson(resultItem);
+//		long end = System.nanoTime();
+//		System.out.println(end);
+//		System.out.println("cost time:"+(end-start));
 		return jsonResult;
 	}
 
@@ -213,33 +230,30 @@ public class StatsServiceImpl implements StatsService {
 			return buildStatsJson(userInfoResult, returnJsonName);
 		} else {
 			for (int i = 0; i < cookies.length; i++) {
-				// 获取对应cookie，进行解码
+				//获取对应cookie，进行解码
 				if (cookies[i].getName().equalsIgnoreCase(COOKIE_NAME)) {
 					hashString = cookies[i].getValue().toString();
-					// hashString =
-					// "2cyVlJWNkoJvXaepltSV0pqlmsKVXWVqa2ZsanFkcaXV1F-Zp8-CnGGgk6mk2aXWnZaSj2uUaW1lmGpvmpacnJucl2hvmMLFmWKUmWaYmp1vaW6U";
-					System.out.println("fhwe::" + hashString);
+//					hashString = "2cyVlJWNkoJvXaepltSV0pqlmsKVXWVqa2ZsanFkcaXV1F-Zp8-CnGGgk6mk2aXWnZaSj2uUaW1lmGpvmpacnJucl2hvmMLFmWKUmWaYmp1vaW6U";
+					System.out.println("fhwe::"+hashString);
 					String tHashString = hashString.replace("-", "+");
 					tHashString = tHashString.replace("_", "/");
 					tHashString = tHashString.replace(".", "=");
 					System.out.println(tHashString);
 					String decodeHashString = new String(
-							BASE64DecoderStream
-									.decode((tHashString.getBytes())),
-							"iso8859-1");
+							BASE64DecoderStream.decode((tHashString.getBytes())),"iso8859-1");
 					System.out.println(decodeHashString);
 					System.out.println(decodeHashString.length());
 					StringBuffer sBuffer = new StringBuffer();
 					for (int t = 1; t <= decodeHashString.length(); t++) {
 						String string = decodeHashString.substring(t - 1, t);
-						System.out.println("char:" + string);
+						System.out.println("char:"+string);
 						String ahkString = authHashKey + authHashKey;
 						int beginIndex = (t % authHashKey.length()) - 2;
-						if (beginIndex < 0)
-							beginIndex += authHashKey.length();
-						String keyString = ahkString.substring(beginIndex,
+						if (beginIndex < 0) beginIndex += authHashKey.length();
+						String keyString = ahkString.substring(
+								beginIndex,
 								beginIndex + 1);
-						System.out.println("keychar:" + keyString);
+						System.out.println("keychar:"+keyString);
 						char tmpString = (char) string.compareTo(keyString);
 						System.out.println(tmpString);
 						sBuffer.append(tmpString);
@@ -256,7 +270,7 @@ public class StatsServiceImpl implements StatsService {
 						}
 					}
 					String userName = (String) hashData.get("user_name");
-					int userId = Integer.valueOf((String) hashData.get("uid"));
+					int userId = Integer.valueOf((String)hashData.get("uid"));
 					String password = (String) hashData.get("password");
 					HashMap<String, Object> userInfo = new HashMap<String, Object>();
 
