@@ -83,7 +83,8 @@
 	          a.topic_title AS topic
 	    FROM
 	          aws_itui_topic a
-	    WHERE a.is_recommend=1  
+	    WHERE a.is_recommend=1 
+	    ORDER BY a.add_time DESC 
 	    LIMIT 12        
 	</select>
 	

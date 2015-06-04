@@ -10,7 +10,7 @@
 			major = 2;
 			window.open("search_school.html?t=" + major + "&c=" + encodeURIComponent(value)
 							+ "&#.");
-		}if(major == "榜样"){
+		}if(major == "大神"){
 			window.open("http://dada.itui.cn/?/search/q-"+btoa(unescape(encodeURIComponent(value)))+"#users");			
 		}
 	}
@@ -222,6 +222,7 @@ function login_style(){
 	$('.itui-news-login-regs').mouseenter(function(event) {
 		$('.dropdown-list').removeClass('hide');
 	});
+	$('.itui-news-login-regs').css('margin-top','7px');
 	$('.dropdown-list').mouseleave(function(event) {
 		$('.dropdown-list').addClass('hide');
 	});
