@@ -56,6 +56,10 @@ public class StatsDaoImpl implements StatsDao {
 		return sqlSession.selectList("cn.itui.webdevelop.dao.StatsDao.getTopicInfo");
 	}
 
+	public HashMap<String, Object> getUserEduInfo(long userId) {
+		return sqlSession.selectOne("cn.itui.webdevelop.dao.StatsDao.getUserEduInfo",userId);
+	}
+
 	public HashMap<String, Object> getUserInfo(String userName, int userId,
 			String password) {
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
@@ -63,6 +67,11 @@ public class StatsDaoImpl implements StatsDao {
 		parameterMap.put("userId", userId);
 		parameterMap.put("password", password);
 	    return sqlSession.selectOne("cn.itui.webdevelop.dao.StatsDao.getUserInfo", parameterMap);
+	}
+
+	public List<HashMap<String, Object>> getPersonEduInfo(
+			HashMap<String, Object> personIdMap) {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.StatsDao.getPersonEduInfo", personIdMap);
 	}
 
 }
