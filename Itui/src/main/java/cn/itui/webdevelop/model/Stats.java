@@ -1,6 +1,8 @@
 package cn.itui.webdevelop.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,5 +52,46 @@ public class Stats implements java.io.Serializable{
 		}
 		matcher.appendTail(sb);
 		return sb.toString();
+	}
+	
+	public static String bbcode2Text(String inputString){
+		Map<String,String> bbMap = new HashMap<String , String>();
+
+        bbMap.put("(\r\n|\r|\n|\n\r)", "");
+        bbMap.put("\\[b\\](.+?)\\[/b\\]", "$1");
+        bbMap.put("\\[i\\](.+?)\\[/i\\]", "$1");
+        bbMap.put("\\[\\*\\](.+?)\\[/\\*\\]", "$1");
+        bbMap.put("\\[code\\](.+?)\\[/code\\]", "$1");
+        bbMap.put("\\[attach\\]", "");
+        bbMap.put("\\[/attach\\]","");
+        bbMap.put("\\[list\\]", "");
+        bbMap.put("\\[/list\\]", "");
+        bbMap.put("\\[quote\\]", "");
+        bbMap.put("\\[/quote\\]", "");
+        bbMap.put("\\[u\\](.+?)\\[/u\\]", "$1");
+        bbMap.put("\\[h1\\](.+?)\\[/h1\\]", "$1");
+        bbMap.put("\\[h2\\](.+?)\\[/h2\\]", "$1");
+        bbMap.put("\\[h3\\](.+?)\\[/h3\\]", "$1");
+        bbMap.put("\\[h4\\](.+?)\\[/h4\\]", "$1");
+        bbMap.put("\\[h5\\](.+?)\\[/h5\\]", "$1");
+        bbMap.put("\\[h6\\](.+?)\\[/h6\\]", "$1");
+        bbMap.put("\\[p\\](.+?)\\[/p\\]", "$1");
+        bbMap.put("\\[p=(.+?),(.+?)\\](.+?)\\[/p\\]", "$3");
+        bbMap.put("\\[center\\](.+?)\\[/center\\]", "$1");
+        bbMap.put("\\[align=(.+?)\\](.+?)\\[/align\\]", "$2");
+        bbMap.put("\\[color=(.+?)\\](.+?)\\[/color\\]", "$2");
+        bbMap.put("\\[size\\](.+?)\\[/size\\]", "");
+        bbMap.put("\\[img\\](.+?)\\[/img\\]", "$1");
+        bbMap.put("\\[img=(.+?),(.+?)\\](.+?)\\[/img\\]", "<img width='$1' height='$2' src='$3' />");
+        bbMap.put("\\[email\\](.+?)\\[/email\\]", "$1");
+        bbMap.put("\\[email=(.+?)\\](.+?)\\[/email\\]", "$2");
+        bbMap.put("\\[url\\](.+?)\\[/url\\]", "$1");
+        bbMap.put("\\[url=(.+?)\\](.+?)\\[/url\\]", "$2");
+        bbMap.put("\\[video\\](.+?)\\[/video\\]", "<video src='$1' />");
+
+        for (Map.Entry entry: bbMap.entrySet()) {
+            inputString = inputString.replaceAll(entry.getKey().toString(), entry.getValue().toString());
+        }
+        return inputString;
 	}
 }
