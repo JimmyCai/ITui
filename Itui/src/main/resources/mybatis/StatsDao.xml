@@ -68,7 +68,7 @@
 	          a.title AS title,
 	          a.add_time AS unixTime,
 	          a.message AS message,
-	          MIN(b.file_location) AS newsPhoto
+	          MAX(b.file_location) AS newsPhoto
 	    FROM
 	          aws_itui_article a
 	    JOIN  aws_itui_attach b ON a.id = b.item_id
