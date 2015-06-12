@@ -67,14 +67,15 @@
 	          a.id AS newsId,
 	          a.title AS title,
 	          a.add_time AS unixTime,
-	          substring(a.message,1,80) AS summary,
-	          max(b.file_location) AS newsPhoto
+	          a.message AS message,
+	          MAX(b.file_location) AS newsPhoto
 	    FROM
 	          aws_itui_article a
 	    JOIN  aws_itui_attach b ON a.id = b.item_id
-	    WHERE a.is_headline=1
-	    GROUP BY b.item_id
-	    ORDER BY a.add_time DESC          
+<!--	WHERE a.is_headline=1 -->
+  	    GROUP BY b.item_id
+	    ORDER BY a.add_time DESC    
+	    LIMIT 6      
 	</select>
 	
 	<select id="getTopicInfo" resultType="java.util.HashMap">
@@ -83,20 +84,9 @@
 	          a.topic_title AS topic
 	    FROM
 	          aws_itui_topic a
-	    WHERE a.is_recommend=1  
-	    ORDER BY a.add_time DESC
+	    WHERE a.is_recommend=1 
+	    ORDER BY a.add_time DESC 
 	    LIMIT 12        
-	</select>
-	
-	<select id="getUserEduInfo" parameterType="long" resultType="map" >
-	    SELECT
-	          a.school_name AS userSchool,
-	          a.degree AS degree
-	    FROM
-	          aws_itui_education_experience a
-	    WHERE a.uid = #{userId}
-	    ORDER BY a.education_years DESC
-	    LIMIT 1
 	</select>
 	
 	<select id="getUserInfo" parameterType="map" resultType="map">
@@ -107,5 +97,18 @@
 	          a.url_token as urlToken
 	    FROM aws_itui_users a
 	    WHERE a.uid=#{userId} AND a.email=#{userName} AND a.password=#{password}          
+	</select>
+	
+	<select id="getPersonEduInfo" parameterType="map" resultType="map">
+	    SELECT
+	          a.uid AS userId,
+	          a.school_name AS userSchool,
+	          a.degree AS degree,
+	          MAX(a.education_years)
+	    FROM
+	          aws_itui_education_experience a
+	    WHERE a.uid IN(#{userId0},#{userId1},#{userId2},#{userId3},#{userId4},#{userId5})
+	    GROUP BY a.uid
+	    ORDER BY a.education_years DESC
 	</select>
 </mapper>

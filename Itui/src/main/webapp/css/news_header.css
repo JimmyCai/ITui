@@ -27,10 +27,14 @@
 }
 .aw-top-menu-wrap .aw-logo {
   float: left;
+  margin-top:8px;
 }
 .aw-top-menu-wrap .container {
   max-width: 1000px;
   margin: 0 auto;
+  padding-left:0px;
+  padding-right:0px;
+
 }
 .aw-top-menu-wrap .container .itui-news-navbar-nav-ul {
   float: left;
@@ -79,6 +83,7 @@ background-color:#fff;
 .aw-top-menu-wrap .container .itui-news-login-regs {
   float: right;
   position: relative;
+  /*margin-top:9px;*/
 
 }
 .aw-top-menu-wrap .container .itui-news-login-regs .btn-normal {
@@ -107,7 +112,7 @@ background-color:#fff;
 .aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list {
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: -5px;
   z-index: 100;
   width: 100%;
   border-top: none;
@@ -119,13 +124,25 @@ background-color:#fff;
 .aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list {
   background-color: #ffffff;
   border: 1px solid #cbcbcb;
+   -moz-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border-top:none;
+  borer-top-left-radius:none;
+   borer-top-right-radius:none;
+}
+.aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list li{
+	border-bottom:1px solid #f0f0f0;
 }
 .aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list a {
   line-height: 28px;
   width: 100%;
-  color: #555;
+  color: #666;
   display: block;
-  text-align:center;
+ /* text-align:center;*/
+  padding-top:4px;
+  padding-bottom:4px;
 }
 .aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list a:hover {
   text-decoration: none;
@@ -133,8 +150,11 @@ background-color:#fff;
 }
 .aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list a i {
 
-  padding-right: 8px;
-  font-size: #555;
+  padding-left:1rem;
+  padding-right: 5px;
+  font-size: 16px;
+  color:#666;
+  vertical-align:-2px;
 }
 .aw-top-menu-wrap .container .itui-news-login-regs .dropdown-list .aw-dropdown-list a .glyphicon:empty {
   width: 2em;
@@ -154,7 +174,15 @@ background-color:#fff;
   }
   .aw-top-menu-wrap .container {
     float: left;
-    width: 70%;
+    width: 84%;
+    padding-left:0px;
+    padding-right:0px;
+  }
+}
+@media (max-width: 768px){
+	  .aw-top-menu-wrap .container {
+    float: left;
+    width: 100%;
   }
 }
 @media (max-width: 600px) {
@@ -191,3 +219,5 @@ background-color:#fff;
 .itui-topic-li .open .dropdown-toggle.btn-default {
 	background-color:#fff;
 }
+
+
