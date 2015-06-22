@@ -126,7 +126,7 @@ li {
   padding-top: 2%;
   width: 100%;
   min-height: 500px;
-  background: url(../images/newtop8.png);
+  background: url(../images/newtop10.png);
   background-position: center;
   background-attachment: scroll;
 }
@@ -349,6 +349,7 @@ li {
 }
 .news-ul .news_li .news_a {
   color: #555;
+  text-decoration: none;
 }
 .news-ul .news_li .news_a:hover {
   text-decoration: none;
@@ -514,6 +515,7 @@ overflow:hidden;
 }
 .row_foot .foot-content .foot-div ul li a {
   font-size: 1.2em;
+  text-decoration: none;
 }
 .row_foot .foot-content .foot-div ul li a:hover {
   text-decoration: none;
@@ -634,7 +636,7 @@ overflow:hidden;
     display: none;
   }
   .content0 #scbar_form .tab-btn-group {
-    max-width: 80%;
+    max-width: 90%;
   }
   .content0 {
     margin-top: 15%;
@@ -680,4 +682,3 @@ overflow:hidden;
     font-size: 24px;
     color: #FFF;
 }
-
