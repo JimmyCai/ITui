@@ -72,7 +72,7 @@
 	    FROM
 	          aws_itui_article a
 	    JOIN  aws_itui_attach b ON a.id = b.item_id
-<!--	WHERE a.is_headline=1 -->
+     	WHERE a.is_recommend=2 
   	    GROUP BY b.item_id
 	    ORDER BY a.add_time DESC    
 	    LIMIT 6      
