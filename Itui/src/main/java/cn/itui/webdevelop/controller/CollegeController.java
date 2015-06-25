@@ -1,5 +1,7 @@
 package cn.itui.webdevelop.controller;
 
+import java.net.URLDecoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,19 +33,20 @@ public class CollegeController {
 		if (request.getParameter(COLLEGEID) ==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int collegeId = 1;
 		String code="";
+		String collegeName="";
 		try{
-			String collegeIdStr = request.getParameter(COLLEGEID);
-			
+//			String collegeIdStr = request.getParameter(COLLEGEID);
+			collegeName = request.getParameter(COLLEGEID);
 //20150530 搜索不再需要登录 屏蔽code
 //			code = request.getParameter(CODE);
 			
-			collegeId = EnDeCode.decodePara(collegeIdStr);
-			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
+//			collegeId = EnDeCode.decodePara(collegeIdStr);
+			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeName+", "+CODE+":"+code;
 			rRLogger.info(requestStr);
 		}catch (Exception e){
 			throw MyNumberFormatException.getInstance();
 		}
-		return collegeService.findSchoolsById(code, collegeId);
+		return collegeService.findSchoolsById(code, collegeName);
 	}
 	
 	@RequestMapping(URLConstants.SCHOOL)
@@ -52,18 +55,20 @@ public class CollegeController {
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		}
 		int collegeId = 1;
+		String collegeName = "";
 		try {
-			String collegeIdStr = request.getParameter(COLLEGEID);
-			collegeId = EnDeCode.decodePara(collegeIdStr);
+//			String collegeIdStr = request.getParameter(COLLEGEID);
+//			collegeId = EnDeCode.decodePara(collegeIdStr);
+			collegeName = request.getParameter(COLLEGEID);
 		} catch (Exception e) {
 			throw MyNumberFormatException.getInstance();
 		}
 		String school = request.getParameter("s");
-		String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId + "\ts:" + school;
+		String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeName + "\ts:" + school;
 		rRLogger.info(requestStr);
 		if (school==null) 
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		return collegeService.findMajorsBySchool(collegeId, school);
+		return collegeService.findMajorsBySchool(collegeName, school);
 	}
 	
 	@RequestMapping(value=URLConstants.FOLLOWCOLLEGE, method=RequestMethod.POST)
@@ -138,20 +143,21 @@ public class CollegeController {
 //		if (request.getParameter(CODE) == null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE); 
 		if (request.getParameter(COLLEGEID) ==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int collegeId = 1;
+		String collegeName = "";
 		String code="";
 		try{
-			String collegeIdStr = request.getParameter(COLLEGEID);
-			
+//			String collegeIdStr = request.getParameter(COLLEGEID);
+			collegeName = request.getParameter(COLLEGEID);
 //20150530 搜索不再需要登录 屏蔽code
 //			code = request.getParameter(CODE);
 			
-			collegeId = EnDeCode.decodePara(collegeIdStr);
-			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
+//			collegeId = EnDeCode.decodePara(collegeIdStr);
+			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeName+", "+CODE+":"+code;
 			rRLogger.info(requestStr);
 		}catch (Exception e){
 			throw MyNumberFormatException.getInstance();
 		}
-		return collegeService.getCollegeRank(collegeId);
+		return collegeService.getCollegeRank(collegeName);
 	}
 	
 	@RequestMapping(URLConstants.API_RANK_LOCALRANK_COLLEGE)
@@ -160,19 +166,20 @@ public class CollegeController {
 		if (request.getParameter(COLLEGEID) ==null) throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
 		int collegeId = 1;
 		String code="";
+		String collegeName = "";
 		try{
-			String collegeIdStr = request.getParameter(COLLEGEID);
-			
+//			String collegeIdStr = request.getParameter(COLLEGEID);
+			collegeName = URLDecoder.decode(request.getParameter(COLLEGEID),"utf-8");
 //20150530 搜索不再需要登录 屏蔽code
 //			code = request.getParameter(CODE);
 			
-			collegeId = EnDeCode.decodePara(collegeIdStr);
-			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeId+", "+CODE+":"+code;
+//			collegeId = EnDeCode.decodePara(collegeIdStr);
+			String requestStr = RequestUtil.getUserBaseInfo(request) + COLLEGEID + ":" + collegeName+", "+CODE+":"+code;
 			rRLogger.info(requestStr);
 		}catch (Exception e){
 			throw MyNumberFormatException.getInstance();
 		}
-		return collegeService.getCollegeLocalRank(collegeId);
+		return collegeService.getCollegeLocalRank(collegeName);
 		
 	}
 }

@@ -41,6 +41,10 @@ public class MajorInfoDaoImpl implements MajorInfoDao {
 		return resultList;
 	}
 
+	public int getMajorIdByFullname(String majorIdStr) {
+		return sqlSession.selectOne("cn.itui.webdevelop.dao.MajorInfoDao.getMajorIdByFullname", majorIdStr);
+	}
+
 	
 
 }

@@ -106,8 +106,8 @@ public class MajorServiceImpl implements MajorService {
 //					map.put("degree", rankAndDegrees.get(j).get("degree"));
 //				}
 //			}
-			map.put("id", EnDeCode.encodePara((Integer)map.get("id")));
-			
+//			map.put("id", EnDeCode.encodePara((Integer)map.get("id")));
+			map.put("id", map.get("fullname"));
 		}
 		String json = buildJson(majorList, total);
 		return json;

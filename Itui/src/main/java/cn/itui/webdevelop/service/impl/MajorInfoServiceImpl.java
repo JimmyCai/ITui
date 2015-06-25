@@ -38,10 +38,14 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	private CollegeRecommendFilter collegeRecommendFilter;// 对数据库查询得到的college数据进行过滤
 
 
-	public String getMajorInfo(String userCode, int majorId) throws Exception {
+	public String getMajorInfo(String userCode, String majorIdStr) throws Exception {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
+		int majorId = majorInfoDao.getMajorIdByFullname(majorIdStr);
+		if (!(majorId > 0)){
+			throw DatabaseException.getInstance();
+		}
 		// get major main info, base info, college logo and rank info
 		HashMap<String, Object> majorAllInfos = majorInfoDao
 				.findMajorAllInfoByMajorId(majorId);
@@ -132,6 +136,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 		LinkedHashMap<String, Object> baseInfoMap = new LinkedHashMap<String, Object>();
 		baseInfoMap.put("majorId",
 				EnDeCode.encodePara((Integer) majorAllInfos.get("majorId")));
+//		baseInfoMap.put("majorId", majorAllInfos.get("fullname"));
 		baseInfoMap.put("logo", majorAllInfos.get("logo"));
 		baseInfoMap.put("majorName", majorAllInfos.get("name"));
 		baseInfoMap.put("majorCode", majorAllInfos.get("majorCode"));
@@ -140,8 +145,9 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 				(Integer) majorAllInfos.get("is985"),
 				(Integer) majorAllInfos.get("is34")));
 		baseInfoMap.put("school", majorAllInfos.get("school"));
-		baseInfoMap.put("collegeId",
-				EnDeCode.encodePara((Integer) majorAllInfos.get("collegeId")));
+//		baseInfoMap.put("collegeId",
+//				EnDeCode.encodePara((Integer) majorAllInfos.get("collegeId")));
+		baseInfoMap.put("collegeId", majorAllInfos.get("college"));
 		baseInfoMap.put("collegeCode", majorAllInfos.get("collegeCode"));
 		baseInfoMap.put("followId", followId);
 		baseInfoMap.put("college", majorAllInfos.get("college"));
@@ -313,15 +319,21 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	/*
 	 * add
 	 */
-	public String getMajorRank(int majorId) throws Exception {
+	public String getMajorRank(String majorIdStr) throws Exception {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
-		
+		System.out.println("full name:"+majorIdStr);
+		int majorId = majorInfoDao.getMajorIdByFullname(majorIdStr);
+		System.out.println("majorId:"+majorId);
+		if(!(majorId > 0)){
+			throw DatabaseException.getInstance();
+		}
 		// get major main info, base info, college logo and rank info
 		List<HashMap<String, Object>> majorAllInfos = majorInfoDao
 				.findMajorAllRankInfoByMajorId(majorId);
-		if (majorAllInfos == null)
+		if (majorAllInfos == null){
 			throw DatabaseException.getInstance();
+		}
 		// get subject name
 		String subjectName = (String) majorAllInfos.get(1).get("subjectName");
 		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
@@ -331,10 +343,11 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 			if (i == (Integer) majorAllInfos.get(j).get("rank")) {
 				HashMap<String, Object> resultItem = new HashMap<String, Object>();
 				resultItem.put("college", majorAllInfos.get(j).get("college"));
-				resultItem.put(
-						"collegeId",
-						EnDeCode.encodePara((Integer) majorAllInfos.get(j).get(
-								"collegeId")));
+//				resultItem.put(
+//						"collegeId",
+//						EnDeCode.encodePara((Integer) majorAllInfos.get(j).get(
+//								"collegeId")));
+				resultItem.put("collegeId", majorAllInfos.get(j).get("college"));
 				resultItem.put("logo", majorAllInfos.get(j).get("logo"));
 				resultItem.put("rank", majorAllInfos.get(j).get("rank"));
 				resultItem.put("school", majorAllInfos.get(j).get("school"));

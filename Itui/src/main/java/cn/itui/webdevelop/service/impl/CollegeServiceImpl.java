@@ -68,7 +68,8 @@ public class CollegeServiceImpl implements CollegeService {
 		List<HashMap<String, Object>> searchResult = collegeDao.searchCollegesByName(condition,area, is211,is34,is985, from, limit);
 		int total = collegeDao.getTotal(condition,area, is211,is34,is985);
 		for(HashMap<String, Object> curList : searchResult) {
-			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
+//			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
+			curList.put("id", curList.get("name"));
 		}
 		System.out.println(searchResult.size());
 		String json = buildJson(searchResult, total);
@@ -119,10 +120,14 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @author warrior
 	 * @throws DatabaseException 
 	 */
-	public String findSchoolsById(String code, int collegeId) throws DatabaseException {
+	public String findSchoolsById(String code, String collegeName) throws DatabaseException {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
+		int collegeId = collegeDao.getCollegeIdByName(collegeName);
+		if (!(collegeId > 0)){
+			throw DatabaseException.getInstance();
+		}
 		HashMap<String, Object> result = collegeDao.getCollegeInfo(collegeId);
 		List<String> schools=null;
 		try {
@@ -143,13 +148,15 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @param school
 	 * @author warrior
 	 */
-	public String findMajorsBySchool(int collegeId, String school) {
+	public String findMajorsBySchool(String collegeName, String school) {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
+		int collegeId = collegeDao.getCollegeIdByName(collegeName);
 		List<HashMap<String, Object>> majors = collegeDao.findMajorsBySchool(collegeId,school);
 		for(HashMap<String, Object> curList : majors) {
-			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
+//			curList.put("id", EnDeCode.encodePara((Integer)curList.get("id")));
+			curList.put("id", curList.get("fullname"));
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("major", majors);
@@ -176,7 +183,7 @@ public class CollegeServiceImpl implements CollegeService {
 	 * add
 	 * */
 
-	public String getCollegeRank(int collegeId) throws Exception {
+	public String getCollegeRank(String collegeName) throws Exception {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
@@ -188,7 +195,8 @@ public class CollegeServiceImpl implements CollegeService {
 		while(i<(collegesInfos.size())){
 			HashMap<String, Object> resultItem = new HashMap<String, Object>();
 			resultItem.put("college", collegesInfos.get(i).get("college"));
-			resultItem.put("collegeId", EnDeCode.encodePara((Integer)collegesInfos.get(i).get("collegeId")));
+//			resultItem.put("collegeId", EnDeCode.encodePara((Integer)collegesInfos.get(i).get("collegeId")));
+			resultItem.put("collegeId", collegesInfos.get(i).get("college"));
 			resultItem.put("logo", collegesInfos.get(i).get("logo"));
 			resultItem.put("rank", College.getRankValue((Integer)collegesInfos.get(i).get("rank")));
 			resultItem.put("city", collegesInfos.get(i).get("city"));
@@ -212,10 +220,11 @@ public class CollegeServiceImpl implements CollegeService {
 		return jsonStr;
 	}
 
-	public String getCollegeLocalRank(int collegeId) throws Exception {
+	public String getCollegeLocalRank(String collegeName) throws Exception {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
 		
+		int collegeId = collegeDao.getCollegeIdByName(collegeName);
 		List<HashMap<String, Object>> collegesInfos = collegeDao.getCollegeLocalRankInfos(collegeId);
 		if (collegesInfos == null)
 			throw DatabaseException.getInstance();
@@ -225,7 +234,8 @@ public class CollegeServiceImpl implements CollegeService {
 		while(i<collegesInfos.size()){
 			HashMap<String, Object> resultItem = new HashMap<String, Object>();
 			resultItem.put("college", collegesInfos.get(i).get("college"));
-			resultItem.put("collegeId", EnDeCode.encodePara((Integer)collegesInfos.get(i).get("collegeId")));
+//			resultItem.put("collegeId", EnDeCode.encodePara((Integer)collegesInfos.get(i).get("collegeId")));
+			resultItem.put("collegeId", collegesInfos.get(i).get("college"));
 			resultItem.put("logo", collegesInfos.get(i).get("logo"));
 			resultItem.put("rank", College.getRankValue((Integer)collegesInfos.get(i).get("localRank")));
 			resultItem.put("city", collegesInfos.get(i).get("city"));

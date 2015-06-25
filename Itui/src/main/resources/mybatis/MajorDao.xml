@@ -20,6 +20,7 @@
 			major.name as name, 
 			major.school as school, 
 			major.code as code, 
+			major.unique_fullname as fullname,
 			major_info.rate as rate
 		FROM major, major_info
 		WHERE major.code LIKE #{code} AND major.id=major_info.major_id AND major.college_id=#{collegeId}
@@ -31,13 +32,19 @@
 			major.name as name, 
 			major.school as school, 
 			major.code as code, 
+			major.unique_fullname as fullname,
 			major_info.rate as rate
 		FROM major, major_info
 		WHERE major.id=major_info.major_id AND major.college_id=#{collegeId}
 	</select>
 	
 	<select id="findAreaSameCodeMajorByCollegeIdAndMajorCode" parameterType="map" resultType="java.util.HashMap">
-		SELECT major.id as majorId, major.name as name, major.school as school, college.name as college, major_info.degree as degree
+		SELECT major.id as majorId, 
+		       major.name as name, 
+		       major.school as school, 
+		       major.unique_fullname as fullname,
+		       college.name as college, 
+		       major_info.degree as degree
 		FROM major,major_info,college
 		WHERE major.id = major_info.major_id
 		      AND major.college_id = college.id
@@ -71,6 +78,7 @@
 		SELECT
 			major.id as id,
 			major.name as name,
+			major.unique_fullname as fullname,
 			school,
 			s.logo as logo,
 			s.name as college,			

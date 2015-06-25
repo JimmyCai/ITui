@@ -27,4 +27,6 @@ public interface CollegeDao {
 
 	public List<HashMap<String, Object>> getCollegeRankInfos();
 	public List<HashMap<String, Object>> getCollegeLocalRankInfos(int collegeId);
+
+	public int getCollegeIdByName(String collegeName);
 }

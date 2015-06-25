@@ -119,7 +119,8 @@
 	<select id="findMajorsBySchool" parameterType="map" resultType="java.util.HashMap">
 		SELECT
 			major.id as id,
-			major.name as name
+			major.name as name,
+			major.unique_fullname as fullname
 		FROM
 			college join major on major.college_id = college.id
 		WHERE
@@ -185,5 +186,14 @@
              WHERE area.id=(SELECT city.area_id FROM city WHERE city.id=
              (SELECT college.city_id FROM college WHERE college.id=#{collegeId}))
        ORDER BY local_rank
+	</select>
+	
+	<select id="getCollegeIdByName" parameterType="string" resultType="int">
+	    SELECT
+	         id
+	    FROM
+	         college
+	    WHERE
+	         name=#{collegeName}
 	</select>
 </mapper>
