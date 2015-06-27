@@ -101,6 +101,10 @@ public class CollegeDaoImpl implements CollegeDao{
 		return sqlSession.selectList("cn.itui.webdevelop.dao.CollegeDao.getCollegeLocalRankInfos",collegeId);
 	}
 
+	public int getCollegeIdByName(String collegeName) {
+		return sqlSession.selectOne("cn.itui.webdevelop.dao.CollegeDao.getCollegeIdByName",collegeName);
+	}
+
 	
 	
 }

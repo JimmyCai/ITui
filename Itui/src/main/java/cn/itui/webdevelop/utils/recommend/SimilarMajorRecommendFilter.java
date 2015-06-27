@@ -105,7 +105,8 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		if(retMajors == null || toAdd == null)
 			return;
 		HashMap<String, Object> majorCurInfo = new HashMap<String, Object>();
-		majorCurInfo.put("majorId", EnDeCode.encodePara((Integer)toAdd.get("id")));
+//		majorCurInfo.put("majorId", EnDeCode.encodePara((Integer)toAdd.get("id")));
+		majorCurInfo.put("majorId", toAdd.get("fullname"));
 		majorCurInfo.put("majorName", toAdd.get("name"));
 		majorCurInfo.put("schoolName", toAdd.get("school"));
 		majorCurInfo.put("color", color);
@@ -180,7 +181,8 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 		double curAADegree = (Double)tmpMap.get(DEGREE);	
 		int majorId = (Integer)tmpMap.get(MAJORID);
 		tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
-		tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
+//		tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
+		tmpMap.put(MAJORID, tmpMap.get("fullname"));
 		resultMaps.add(tmpMap);
 		for(int length = 1; resultMaps.size() < candidates.size(); length++) {
 			if(index - length >= 0) {
@@ -188,7 +190,8 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 				curAADegree = (Double)tmpMap.get(DEGREE);	
 				majorId = (Integer)tmpMap.get(MAJORID);
 				tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
-				tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
+//				tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
+				tmpMap.put(MAJORID, tmpMap.get("fullname"));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
 					return resultMaps;
@@ -198,7 +201,8 @@ public class SimilarMajorRecommendFilter implements MajorRecommendFilter{
 				curAADegree = (Double)tmpMap.get(DEGREE);	
 				majorId = (Integer)tmpMap.get(MAJORID);
 				tmpMap.put(DEGREE, MajorInfo.formatDegree(curAADegree));
-				tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
+//				tmpMap.put(MAJORID, EnDeCode.encodePara(majorId));
+				tmpMap.put(MAJORID, tmpMap.get("fullname"));
 				resultMaps.add(tmpMap);
 				if(resultMaps.size() >= SAMEMAJOR_MAJORCOUNT)
 					return resultMaps;

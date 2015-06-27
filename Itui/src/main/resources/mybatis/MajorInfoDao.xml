@@ -76,7 +76,8 @@
 			major.code as majorCode,
 			major.school as school,
 			major.subject_id as subjectId,
-			major.type as type
+			major.type as type,
+			major.unique_fullname as fullname
 		FROM major_info, major, college
 		WHERE major.id=#{majorId} AND college.id=major.college_id AND major_info.major_id = major.id
 	</select>
@@ -103,6 +104,7 @@
              major.school AS school,
              major.degree AS degree,
              major.subject_id AS subjectId,
+             major.unique_fullname AS fullname,
              college.name AS college,
              college.id AS collegeId,
              college.logo AS logo,
@@ -117,5 +119,14 @@
         WHERE 
              major.major_rank &lt;1000 AND major.subject_id = (SELECT major.subject_id FROM major WHERE major.id=#{majorId})
         ORDER BY major.major_rank
+	</select>
+	
+	<select id="getMajorIdByFullname" parameterType="string" resultType="int">
+	    SELECT
+	         id
+	    FROM
+	         major
+	    WHERE
+	         unique_fullname=#{majorIdStr}
 	</select>
 </mapper>

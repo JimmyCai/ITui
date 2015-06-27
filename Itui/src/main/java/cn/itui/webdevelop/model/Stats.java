@@ -62,8 +62,7 @@ public class Stats implements java.io.Serializable{
         bbMap.put("\\[i\\](.+?)\\[/i\\]", "$1");
         bbMap.put("\\[\\*\\](.+?)\\[/\\*\\]", "$1");
         bbMap.put("\\[code\\](.+?)\\[/code\\]", "$1");
-        bbMap.put("\\[attach\\]", "");
-        bbMap.put("\\[/attach\\]","");
+        bbMap.put("\\[attach\\]([0-9]+)\\[/attach\\]", "");
         bbMap.put("\\[list\\]", "");
         bbMap.put("\\[/list\\]", "");
         bbMap.put("\\[quote\\]", "");

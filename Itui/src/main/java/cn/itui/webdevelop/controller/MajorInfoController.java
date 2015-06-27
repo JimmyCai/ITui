@@ -1,5 +1,7 @@
 package cn.itui.webdevelop.controller;
 
+import java.net.URLDecoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,8 +38,9 @@ public class MajorInfoController {
 		String majorIdStr = request.getParameter(MAJORID);
 		if(majorIdStr == null)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		int majorId = EnDeCode.decodePara(majorIdStr);
-		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
+//		int majorId = EnDeCode.decodePara(majorIdStr);
+		System.out.println(majorIdStr);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorIdStr;
 		rRLogger.info(requestStr);
 		String code ="";
 		
@@ -46,7 +49,7 @@ public class MajorInfoController {
 //		if(code == null)
 //			throw NotLoginException.getInstance();
 		
-		String retJson = majorInfoService.getMajorInfo(code, majorId);
+		String retJson = majorInfoService.getMajorInfo(code, majorIdStr);
 		return retJson;
 	}
 	
@@ -123,13 +126,16 @@ public class MajorInfoController {
 	@RequestMapping(value=URLConstants.API_RANK_MAJOR)
 	public String getMajorRank(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String majorIdStr = request.getParameter(MAJORID);
+		System.out.println("first str:"+majorIdStr);
 		if(majorIdStr == null)
 			throw ParameterErrorException.getInstance(ParameterErrorException.ABSENCE_MESSAGE);
-		int majorId = EnDeCode.decodePara(majorIdStr);
-		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + majorId;
+//		String fullname = new String(majorIdStr.getBytes("iso-8859-1"), "utf-8");
+		String fullname = URLDecoder.decode(majorIdStr,"utf-8");
+		System.out.println("after decode:"+fullname);
+//		int majorId = EnDeCode.decodePara(majorIdStr);
+		String requestStr = RequestUtil.getUserBaseInfo(request) + MAJORID + ":" + fullname;
 		rRLogger.info(requestStr);
-
-		return majorInfoService.getMajorRank(majorId);
+		return majorInfoService.getMajorRank(fullname);
 	}
 
 }

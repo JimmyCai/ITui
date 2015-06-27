@@ -13,5 +13,6 @@ public interface MajorInfoDao {
 	 * add
 	 */
 	public List<HashMap<String, Object>> findMajorAllRankInfoByMajorId(int majorId);
+	public int getMajorIdByFullname(String majorIdStr);
 
 }

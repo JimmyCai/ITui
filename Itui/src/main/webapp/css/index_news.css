@@ -126,7 +126,7 @@ li {
   padding-top: 2%;
   width: 100%;
   min-height: 500px;
-  background: url(../images/newtop10.png);
+  background: url(../images/newtop8.png);
   background-position: center;
   background-attachment: scroll;
 }
@@ -371,7 +371,7 @@ li {
   padding-left:4px;
 overflow:hidden;
   margin-bottom:0px;
-  max-height:27px;
+  max-height:26px;
   font-weight:700;
 }
 .news-ul .news_li .news_body .news_intr {

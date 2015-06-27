@@ -17,7 +17,11 @@
         <to type="permanent-redirect" last="true">http://www.itui.cn/$1</to>
 
     </rule>-->
-
+		<!-- ^/([a-zA-Z]+)/([a-zA-Z]+)/([0-9]+).html$ -->
+	<!-- <rule>
+	    <from>^/([a-zA-Z]+)/([a-zA-Z]+)/([0-9]+).html$</from>
+	    <to type="redirect">/Itui/info.html?major=$3</to>
+	</rule>-->
     <rule>
         <note>
             The rule means that requests to /test/status/ will be redirected to /rewrite-status
@@ -26,7 +30,6 @@
         <from>/test/status/</from>
         <to type="redirect">%{context-path}/rewrite-status</to>
     </rule>
-
 
     <outbound-rule>
         <note>

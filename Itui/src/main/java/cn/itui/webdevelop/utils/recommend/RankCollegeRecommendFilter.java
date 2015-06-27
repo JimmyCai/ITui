@@ -50,7 +50,8 @@ public class RankCollegeRecommendFilter implements CollegeRecommendFilter{
 		if(resultMaps == null || curCollege == null)
 			return;
 		HashMap<String, Object> tmpMap = new HashMap<String, Object>();
-		tmpMap.put("collegeId", EnDeCode.encodePara(curCollege.getId()));
+//		tmpMap.put("collegeId", EnDeCode.encodePara(curCollege.getId()));
+		tmpMap.put("collegeId", curCollege.getName());
 		tmpMap.put("name", curCollege.getName());
 		tmpMap.put("rank", curCollege.getRank());
 		String type = curCollege.getTypeString();
