@@ -68,10 +68,15 @@
 	          a.title AS title,
 	          a.add_time AS unixTime,
 	          a.message AS message,
-	          MAX(b.file_location) AS newsPhoto
+	          b.file_location AS newsPhoto
 	    FROM
 	          aws_itui_article a
-	    JOIN  aws_itui_attach b ON a.id = b.item_id
+	    JOIN  (SELECT 
+	                 aws_itui_attach.file_location,
+	                 aws_itui_attach.item_id
+	           FROM 
+	                 aws_itui_attach 
+	           ORDER BY id DESC) AS b ON a.id = b.item_id
      	WHERE a.is_recommend=2 
   	    GROUP BY b.item_id
 	    ORDER BY a.add_time DESC    
