@@ -278,12 +278,13 @@ margin-top: 8px;
 
 .image3{
 	
-	background: url(../images/icon01.png) 0px -127px no-repeat;
+/*	background: url(../images/icon01.png) 0px -127px no-repeat;*/
+    background: url(../images/goto.png) no-repeat;
 
 }
 .image4{
 	background: url(../images/icon01.png) -75px -65px no-repeat;
-	display: none;
+/*	display: none; */
 }
 
 
@@ -416,7 +417,7 @@ height:8px;
 background:white;
 font-size:1px;
 line-height:0;
-z-index:1
+z-index:1;
 }
 .pb-text
 {
@@ -2641,3 +2642,102 @@ margin-right:auto;
 .li_trip p{font-size:16px;color:#fff;line-height:30px;text-align:center;}
 .schcode,.majorcode{margin-left:12px;font-size:14px;color:#777;}
 .schcode,.majorcode span{font-size:14px;color:#777;}
+
+/*专业对比栏*/
+.compare{
+	width: 100%;
+	height: 160px;
+	bottom:0px;
+	position: fixed;
+	z-index:99;
+}
+.db{
+	width:835px;
+	height:155px;
+	margin:0 auto;
+	bottom:2px;
+	text-align:center;
+	border:1px solid #ffaf67;
+	font-family:arial;
+	background:white;
+	
+}
+.db1{
+	width:825px;
+	height:20px;
+}
+.db11{
+	width:750px;
+	float:left;
+	font-size:16px;
+}
+.db12{
+	float:left;
+	font-size:14px;
+}
+.db13{
+	float:left;
+	margin-left:8px;
+	font-size:14px;
+}
+dl{
+	width:810px;
+	padding:10px;
+}
+.titles{
+	float:left;
+	width:115px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	font-size:14px;
+/*	background:#ccc;*/
+}
+.majortitles{
+	float:left;
+	width:195px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	font-size:14px;
+/*  background:#ccc; */
+}
+.deltitle{
+	float:left;
+	width:40px;
+	height:30px;
+}
+.comparemajor{
+	float:left;
+	width:115px;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	border-top:1px dashed #ffaf67;
+}
+.comparemajorname{
+	float:left;
+	width:195px;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	overflow:hidden;
+	border-top:1px dashed #ffaf67;
+}
+.delcomparemajor{
+	float:left;
+	width:40px;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+}
+.btn-empty{
+	width:40px;
+	cursor:pointer;
+	font-size:14px;
+	border-radius:6px;
+	background-color:#f5f5f5;
+}
+.db3{
+	width:790px;
+}

@@ -2,17 +2,17 @@
 
 $(function() {
 	// 专业学校转换
-//	$('.d_down').click(function(event) {
-//		$('.dropdown-menu').css('display', 'block');
-//	});
-//
-//	$('.zhuanye  a ').click(function(event) {
-//		$('.dropdown-menu').css('display', 'none');
-//		var neirong = $(this).html();
-//		var neirong2 = $('.nr_js').html();
-//		$('.nr_js').html(neirong);
-//		$('.zhuanye  a ').html(neirong2);
-//	});
+	// $('.d_down').click(function(event) {
+	// $('.dropdown-menu').css('display', 'block');
+	// });
+	//
+	// $('.zhuanye a ').click(function(event) {
+	// $('.dropdown-menu').css('display', 'none');
+	// var neirong = $(this).html();
+	// var neirong2 = $('.nr_js').html();
+	// $('.nr_js').html(neirong);
+	// $('.zhuanye a ').html(neirong2);
+	// });
 	// 鼠标移出下拉框1秒后下拉框消失
 	$('.dropdown-menu').mouseout(function(event) {
 		setTimeout("$('.dropdown-menu').css('display', 'none')", 1000);
@@ -20,31 +20,38 @@ $(function() {
 
 	// 柱状图横坐标全称显示
 	$('.course_full').hide();
-	$('.course').stop().mouseenter(
-			function(event) {
-				var len_course = $(this).find('a').text().length;
-				var text_course = $(this).find('a').text();
-				if (len_course >5) {
-					if(len_course==6)
-					{
-						$(this).siblings('.course_full').css('bottom','-30px');
-						//$(this).siblings('.course_full').find('a')css('text-align','right');
-					}else
-					{
-						$(this).siblings('.course_full').css('bottom','-50px');
-					}
-					$(this).siblings('.course_full').show().find('a').text(
-							text_course);
-					$(this).parent('.baowei0').find('.course').animate({display:'none'},1);
-					
+	$('.course').stop()
+			.mouseenter(
+					function(event) {
+						var len_course = $(this).find('a').text().length;
+						var text_course = $(this).find('a').text();
+						if (len_course > 5) {
+							if (len_course == 6) {
+								$(this).siblings('.course_full').css('bottom',
+										'-30px');
+								// $(this).siblings('.course_full').find('a')css('text-align','right');
+							} else {
+								$(this).siblings('.course_full').css('bottom',
+										'-50px');
+							}
+							$(this).siblings('.course_full').show().find('a')
+									.text(text_course);
+							$(this).parent('.baowei0').find('.course').animate(
+									{
+										display : 'none'
+									}, 1);
 
-				} else {
-					$('.course_full').animate({display:'none'},1);
-				}
-			});
+						} else {
+							$('.course_full').animate({
+								display : 'none'
+							}, 1);
+						}
+					});
 	$('.course_full').stop().mouseleave(function(event) {
 		$(this).hide();
-		$(this).parent('.baowei0').find('.course').animate({display:'block'},1);
+		$(this).parent('.baowei0').find('.course').animate({
+			display : 'block'
+		}, 1);
 	});
 
 	// 所属专业和院校部分全称展示
@@ -209,15 +216,12 @@ $(function() {
 			path : "/"
 		});
 
-		
-	});	
-	
+	});
+
 });
 // 页面加载函数结束
 
-
-
-//最低分最高分全局变量
+// 最低分最高分全局变量
 var score_min = '';
 var score_max = '';
 
@@ -241,48 +245,58 @@ function getPar(par) {
 }
 var thisid = getPar('major');
 var followid = -1;
-var cid=null;
-var cid_name=null;
-//点击专业排名，跳转
-$('.Ranking li').eq(0).click(function(event){
-	if($('.Ranking li').eq(0).find('.rank_p').text()!='不参与排名'){
+var cid = null;
+var cid_name = null;
+// parameters below are for comparing majors
+var major_rank = null;
+var college_rank = null;
+var degree_description = '';
+var apply_admit_rate = null;
+
+// 点击专业排名，跳转
+$('.Ranking li').eq(0).click(function(event) {
+	if ($('.Ranking li').eq(0).find('.rank_p').text() != '不参与排名') {
 		window.open("majorrank.html?major=" + thisid, "_blank");
 	}
-	
-	
+
 });
-//点击院校全国排名跳转
-$('.Ranking li').eq(1).click(function(event){
-	if($('.Ranking li').eq(1).find('.rank_p').text()!='不参与排名'){
-		window.open("collegerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
-	}
-	
-});
-//点击院校省内排名跳转
-$('.Ranking li').eq(2).click(function(event){
-	if($('.Ranking li').eq(2).find('.rank_p').text()!='不参与排名'){
-		window.open("provincerank.html?cid=" + cid+"&c_name="+cid_name, "_blank");
-		
-	}
-	
-});
-//设置全局的404错误跳转页面
+// 点击院校全国排名跳转
+$('.Ranking li').eq(1).click(
+		function(event) {
+			if ($('.Ranking li').eq(1).find('.rank_p').text() != '不参与排名') {
+				window.open("collegerank.html?cid=" + cid + "&c_name="
+						+ cid_name, "_blank");
+			}
+
+		});
+// 点击院校省内排名跳转
+$('.Ranking li').eq(2).click(
+		function(event) {
+			if ($('.Ranking li').eq(2).find('.rank_p').text() != '不参与排名') {
+				window.open("provincerank.html?cid=" + cid + "&c_name="
+						+ cid_name, "_blank");
+
+			}
+
+		});
+// 设置全局的404错误跳转页面
 $.ajaxSetup({
-    statusCode: {
-        404: function () {
-        	var err_msg = data.errMessage;
+	statusCode : {
+		404 : function() {
+			var err_msg = data.errMessage;
 			$.cookie("err_msg", err_msg, {
 				path : "/"
 			});
 			location.href = "error.html";
-        }
-    }
+		}
+	}
 });
 
 // 接收数据
 function major_ajax() {
-	
-	$.ajax({
+
+	$
+			.ajax({
 				url : 'getmajorinfo.html',
 				type : 'get',
 				dataType : 'html',
@@ -292,27 +306,46 @@ function major_ajax() {
 				},
 				success : function(msg) {
 					var data = eval('msg=' + msg);
-					if (data.status == 0) 
-					{
-						
+					if (data.status == 0) {
+
 						data = data.normalReturn;
-					
-						//学校编码
+
+						// 学校编码
 						$('.sch_code').text(data.baseInfo.collegeCode);
 						$('.major_code').text(data.baseInfo.majorCode);
 						var baseInfo = data.baseInfo;
 						$('.coll_1').append(data.baseInfo.college + '/');
-						cid_name=data.baseInfo.college;
+						cid_name = data.baseInfo.college;
 						// 获得followid
 						followid = baseInfo.followId;
-						
+
 						Attention();
-						//改变title标签
-						$('title').text(baseInfo.majorName+'-'+baseInfo.school+'-'+data.baseInfo.college+'-爱推网-考研大数据');
-						//关键字
-						$('meta[name="Keywords"]').attr('content', '['+baseInfo.majorName+']'+'专业排名：'+data.rankInfo.majorRank+' ['+data.baseInfo.college+']'+'学校排名：'+data.rankInfo.collegeLocalRank+'   --'+data.baseInfo.college+'近年分数线平均分：'+data.scoreInfo.scoreAvg+'  --'+data.baseInfo.college+'报录比');
-						//描述标签
-						$('meta[name="Description"]').attr('content',data.baseInfo.college+'的'+baseInfo.majorName+'专业2016年考研信息，'+'提供'+data.baseInfo.college+'最新大学排名、'+baseInfo.majorName+'最新专业排名、近四年'+data.baseInfo.college+'考研分数线、'+baseInfo.majorName+'考研调剂，独家推出考研竞争分析指数直观反应市场报录情况。');
+						// 改变title标签
+						$('title').text(
+								baseInfo.majorName + '-' + baseInfo.school
+										+ '-' + data.baseInfo.college
+										+ '-爱推网-考研大数据');
+						// 关键字
+						$('meta[name="Keywords"]').attr(
+								'content',
+								'[' + baseInfo.majorName + ']' + '专业排名：'
+										+ data.rankInfo.majorRank + ' ['
+										+ data.baseInfo.college + ']' + '学校排名：'
+										+ data.rankInfo.collegeLocalRank
+										+ '   --' + data.baseInfo.college
+										+ '近年分数线平均分：' + data.scoreInfo.scoreAvg
+										+ '  --' + data.baseInfo.college
+										+ '报录比');
+						// 描述标签
+						$('meta[name="Description"]').attr(
+								'content',
+								data.baseInfo.college + '的'
+										+ baseInfo.majorName + '专业2016年考研信息，'
+										+ '提供' + data.baseInfo.college
+										+ '最新大学排名、' + baseInfo.majorName
+										+ '最新专业排名、近四年' + data.baseInfo.college
+										+ '考研分数线、' + baseInfo.majorName
+										+ '考研调剂，独家推出考研竞争分析指数直观反应市场报录情况。');
 						// 提取学校的三个类型
 						var str_type = baseInfo.typeInfo;
 						var arr_type = new Array();
@@ -326,7 +359,7 @@ function major_ajax() {
 						base_info(baseInfo.logo, baseInfo.majorName,
 								baseInfo.school, arr_type[0], arr_type[1],
 								arr_type[2], baseInfo.collegeId);
-						cid=baseInfo.collegeId;
+						cid = baseInfo.collegeId;
 
 						// 插入学校综合评级
 						grade_charuA(data);
@@ -336,13 +369,14 @@ function major_ajax() {
 						four_Grade(data.gradeInfo.collegeGrade, tag03);
 						four_Grade(data.gradeInfo.cityGrade, tag04);
 						// 插入三个排名标签
-						
+
 						ranking_charu(data.rankInfo.majorRank, rank_tag1,
 								rank_item1);
-						
+						major_rank = data.rankInfo.majorRank;
 
 						ranking_charu(data.rankInfo.collegeRank, rank_tag2,
 								rank_item2);
+						college_rank = data.rankInfo.collegeRank;
 						ranking_charu(data.rankInfo.collegeLocalRank,
 								rank_tag3, rank_item3);
 						// 折线图变量
@@ -368,6 +402,7 @@ function major_ajax() {
 						collegeDegree = data.competitionInfo.collegeDegree;
 						cityDegree = data.competitionInfo.cityDegree;
 						var degreeDescription = data.competitionInfo.degreeDescription;
+						degree_description = degreeDescription;
 						compet(rateDegree, a5_tag, dengji_tag1);
 						compet(scoreDegree, b5_tag, dengji_tag2);
 						compet(collegeDegree, c5_tag, dengji_tag3);
@@ -377,6 +412,10 @@ function major_ajax() {
 						// 近三年报录比均值
 						var ratae_value = parseInt(data.applyAdmitInfo.rate,
 								data.applyAdmitInfo.rateDescription);
+						apply_admit_rate = data.applyAdmitInfo.rate;
+						if(ratae_value == -1){
+							$('div.Interpretation p').text("数据不足，请参考相似专业！");
+						}
 
 						if (ratae_value >= 100) {
 							$('.exceed').css('display', 'block');
@@ -444,27 +483,27 @@ function major_ajax() {
 									maininfo_collage[i].collegeId);
 						}
 
-						
-					}else
-					{
-//						404错误页面
-						var err_msg=data.errMessage;
-						if(err_msg!=='请先登录！')
-						{
-						$.cookie("err_msg",err_msg, {path : "/"});
-						location.href="error.html";
-						}else{console.log(err_msg);}
+					} else {
+						// 404错误页面
+						var err_msg = data.errMessage;
+						if (err_msg !== '请先登录！') {
+							$.cookie("err_msg", err_msg, {
+								path : "/"
+							});
+							location.href = "error.html";
+						} else {
+							console.log(err_msg);
+						}
 					}
 				}
 			});
 }
 major_ajax();
 
-
 // nav01页面头信息
 function base_info(img_logo, majorname, schoolname, type_211, type_985,
 		type_34, collageid) {
-	
+
 	$('.sch_name').find('img').attr('src',
 			'http://www.itui.cn/itui/images/' + img_logo);
 	$('.sch_info').find('h3').text(majorname);
@@ -522,7 +561,7 @@ function grade_charuA(data) {
 	charu_A();
 	for (i = 0; i < arr_grade.length; i++) {
 		if (arr_grade[i] == A_A) {
-			
+
 			$('.grade').eq(i).find('span').css('color', '#FFAF68');
 		}
 	}
@@ -565,9 +604,9 @@ var rank_item1 = '专业排名';
 var rank_item2 = '院校全国排名';
 var rank_item3 = '院校省内排名';
 function ranking_charu(rank_value, rank_tag, rank_item) {
-	if(rank_value==-1){
-		$('.rank_tp1 .rank_p').css('font-size','30px');
-		rank_value='不参与排名';
+	if (rank_value == -1) {
+		$('.rank_tp1 .rank_p').css('font-size', '30px');
+		rank_value = '不参与排名';
 	}
 	var ranking = '<p class="rank_p">' + rank_value + '</p><p class="pai">'
 			+ rank_item + '</p>';
@@ -575,7 +614,7 @@ function ranking_charu(rank_value, rank_tag, rank_item) {
 	var length0 = rank_tag.find('.rank_p').text().length;
 	if (length0 > 4) {
 		rank_tag.find('.rank_p').css('font-size', '30px');
-	} else{
+	} else {
 		rank_tag.find('.rank_p').css('font-size', '70px');
 	}
 }
@@ -833,7 +872,6 @@ function cookie_click(bar_index, majorname, schoolname) {
 	// var href_id=$.cookie("href_id");
 	// var href_majnam=$.cookie("majorname");
 	// var href_schnam=$.cookie("schoolname");
-	
 
 }
 
@@ -889,27 +927,33 @@ function inster_collage(collage_index, collage_name, collage_leve,
 function atten() {
 	$('.image2').css('display', 'block');
 	$('.image4').css('display', 'none');
-	$('.gz_sch1').text('关注该专业');
+	// $('.gz_sch1').text('关注该专业');
+	$('.gz_sch1').text('加入对比');
 }
 // 取消关注
 function cancel_atten() {
 	$('.image4').css('display', 'block');
 	$('.image2').css('display', 'none');
-	$('.gz_sch1').text('取消关注');
+	// $('.gz_sch1').text('取消关注');
+	$('.gz_sch1').text('取消对比');
 }
 // 判断用户是否关注了当前院校
 function Attention() {
 	if (followid == -1) {
 		atten();
-		
+
 	} else {
 		cancel_atten();
 	}
-	$('.image2').click(function(event) {
-		attention_ajax();
-	});
+	$('.image2').click(
+			function(event) {
+				// attention_ajax();
+				addCompareMajor(thisid, A_A, major_rank, college_rank, score_0,
+						apply_admit_rate,degree_description);
+			});
 	$('.image4').click(function(event) {
-		cancelattention_ajax(followid);
+		// cancelattention_ajax(followid);
+		delCompareMajor(thisid);
 	});
 }
 
@@ -930,13 +974,16 @@ function attention_ajax() {
 			if (data.status == 0) {
 				cancel_atten();
 			} else {
-//				404错误页面
-				var err_msg=data.errMessage;
-				if(err_msg!=='请先登录！')
-				{
-				$.cookie("err_msg",err_msg, {path : "/"});
-				location.href="error.html";
-				}else{console.log(err_msg);}
+				// 404错误页面
+				var err_msg = data.errMessage;
+				if (err_msg !== '请先登录！') {
+					$.cookie("err_msg", err_msg, {
+						path : "/"
+					});
+					location.href = "error.html";
+				} else {
+					console.log(err_msg);
+				}
 			}
 		}
 	});
@@ -957,13 +1004,16 @@ function cancelattention_ajax() {
 			if (data.status == 0) {
 				atten();
 			} else {
-//				404错误页面
-				var err_msg=data.errMessage;
-				if(err_msg!=='请先登录！')
-				{
-				$.cookie("err_msg",err_msg, {path : "/"});
-				location.href="error.html";
-				}else{console.log(err_msg);}
+				// 404错误页面
+				var err_msg = data.errMessage;
+				if (err_msg !== '请先登录！') {
+					$.cookie("err_msg", err_msg, {
+						path : "/"
+					});
+					location.href = "error.html";
+				} else {
+					console.log(err_msg);
+				}
 			}
 		}
 	});
@@ -1001,15 +1051,346 @@ $('.bar0').mouseenter(function(event) {
 }).mouseleave(function(event) {
 	var index = $(this).index();
 	$('.tip_p0' + index).css('display', 'none');
-	
+
 });
 
-//2015/03/30编辑
-//$('.li_trip').css('display','none');
-$('.Ranking li').mouseenter(function(){
-	$(this).children('.li_trip').css('display','block');
-	$(this).siblings('li').children('.li_trip').css('display','none');
-	
-}).mouseleave(function(){
-	$(this).children('.li_trip').css('display','none');
+// 015/03/30编辑
+// $('.li_trip').css('display','none');
+$('.Ranking li').mouseenter(function() {
+	$(this).children('.li_trip').css('display', 'block');
+	$(this).siblings('li').children('.li_trip').css('display', 'none');
+
+}).mouseleave(function() {
+	$(this).children('.li_trip').css('display', 'none');
 });
+
+/**
+ * 以下皆为专业对比相关
+ */
+
+// $(document).ready(function(){
+// $(window).scroll(function (){
+// var offsetTop = 30+ $(window).scrollTop() +"px";
+// $("#compare").animate({top : offsetTop },{ duration:600 , queue:false });
+// });
+// });
+// unicode 编码程序
+function basketEncodeCookie(inputString) {
+	/*
+	 * var strRtn=""; for (var i=InputString.length-1;i>=0;i--) {
+	 * strRtn+=InputString.charCodeAt(i); if (i) strRtn+="a"; // 用 a 作分隔符 }
+	 * return strRtn;
+	 */
+	return inputString;
+}
+
+// unicode 解码程序
+function basketDecodeCookie(inputString) {
+	/*
+	 * var strArr; var strRtn="";
+	 * 
+	 * strArr=InputString.split("a");
+	 * 
+	 * for (var i=strArr.length-1;i>=0;i--)
+	 * strRtn+=String.fromCharCode(eval(strArr[i]));
+	 * 
+	 * return strRtn;
+	 */
+	return inputString;
+}
+
+// 读 Cookie
+function basketGetCookie(name) {
+	var strArg = name + "=";
+	var nArgLen = strArg.length;
+	var nCookieLen = document.cookie.length;
+	var nEnd;
+	var i = 0;
+	var j;
+
+	while (i < nCookieLen) {
+		j = i + nArgLen;
+		if (document.cookie.substring(i, j) == strArg) {
+			nEnd = document.cookie.indexOf(";", j);
+			if (nEnd == -1)
+				nEnd = document.cookie.length;
+			return basketDecodeCookie(unescape(document.cookie.substring(j,
+					nEnd)));
+		}
+		i = document.cookie.indexOf(" ", i) + 1;
+		if (i == 0)
+			break;
+	}
+	return null;
+}
+
+// 写 Cookie
+function basketSetCookie(name, value, expires) {
+	var exp = new Date();
+	exp.setTime(exp.getTime() + expires * 60 * 60 * 1000);
+	document.cookie = name + "=" + escape(basketEncodeCookie(value))
+			+ ";expires=" + exp.toGMTString() + ";path=/";
+}
+
+// 判断 Cookie 是否存在并写产品对比 Cookie
+function basketCheckSetCookieValue(name, value, expires) {
+	var nameCookieValue = basketGetCookie(name);
+	if ((nameCookieValue == "") || (nameCookieValue == null)) {
+		var exp = new Date();
+		exp.setTime(exp.getTime() + expires * 60 * 60 * 1000);
+		document.cookie = name + "=" + escape(basketEncodeCookie(value))
+				+ ";expires=" + exp.toGMTString() + ";path=/";
+	} else {
+		if (nameCookieValue.indexOf(value) == -1) {
+			var arrCookies = nameCookieValue.split("∈");
+			var ValueNum = arrCookies.length;
+			if (ValueNum > 9) {
+				nameCookieValue = "";
+				for (loop = 0; loop < 9; loop++) {
+					nameCookieValue += arrCookies[loop] + "∈";
+				}
+				nameCookieValue = nameCookieValue.substring(0,
+						nameCookieValue.length - 1);
+			}
+
+			var exp = new Date();
+			exp.setTime(exp.getTime() + expires * 60 * 60 * 1000);
+			document.cookie = name + "="
+					+ escape(basketEncodeCookie(value + "∈" + nameCookieValue))
+					+ ";expires=" + exp.toGMTString() + ";path=/";
+		}
+	}
+}
+
+function compareHide() {
+	obj = document.getElementById("compare");
+	obj.style.display = 'none';
+}
+
+function compareShow() {
+	obj = document.getElementById("compare");
+	obj.style.display = 'block';
+}
+
+function empty() {
+	basketSetCookie("POP_SubCategory", "", 4);
+	basketSetCookie("POP_CompareMajors", "", 4);
+	redraw();
+	compareHide();
+	atten();
+}
+
+function addCompareMajor(majorId, majorLevel, major_rank, college_rank,
+		difficulty, apply_admit_rate,degree_description) {
+	var compareMajors = basketGetCookie("POP_CompareMajors");
+	if ((compareMajors != "") && (compareMajors != null)) {
+		var arrCookies = compareMajors.split("∈");
+		if (arrCookies.length < 3) {
+			if (compareMajors.indexOf(majorId) != -1) {
+				alert("（" + majorId + "）已经被选择了！");
+			} else {
+				basketCheckSetCookieValue("POP_CompareMajors", majorId + "∑"
+						+ majorLevel + "∑" + major_rank + "∑" + college_rank
+						+ "∑" + difficulty + "∑" + apply_admit_rate+ "∑" +degree_description, 4);
+			}
+		} else {
+			var YESORNO = confirm("对不起，您只能选择三个专业进行对比，是否清除所有已选专业？");
+			if (YESORNO) {
+				empty();
+			}
+		}
+	} else {
+		basketCheckSetCookieValue("POP_CompareMajors", majorId + "∑"
+				+ majorLevel + "∑" + major_rank + "∑" + college_rank + "∑"
+				+ difficulty + "∑" + apply_admit_rate+ "∑" +degree_description, 4);
+	}
+	redraw();
+	showLayer();
+	cancel_atten();
+}
+
+function delCompareMajor(majorId) {
+	var nameCookieValue = basketGetCookie("POP_CompareMajors");
+	if ((nameCookieValue != null) && (nameCookieValue != "")) {
+		if (nameCookieValue.indexOf(majorId) > -1) {
+			var arrCookies = nameCookieValue.split("∈");
+			var valueNum = arrCookies.length;
+			nameCookieValue = "";
+			for (i = 0; i < valueNum; i++) {
+				if (arrCookies[i].indexOf(majorId) == -1) {
+					nameCookieValue += arrCookies[i] + "∈";
+				}
+			}
+			nameCookieValue = nameCookieValue.substring(0,
+					nameCookieValue.length - 1);
+			basketSetCookie("POP_CompareMajors", nameCookieValue, 4);
+		}
+		redraw();
+		atten();
+	}
+}
+
+function redraw() {
+	// FixPosition();
+	var compareMajors = basketGetCookie("POP_CompareMajors");
+	if (compareMajors == null) {
+		compareMajors = "";
+	}
+	var arrCookies = compareMajors.split("∈");
+	var mylength = 0;
+	if (arrCookies.length > 0 && (arrCookies[0] != null)
+			&& (arrCookies[0] != "")) {
+		mylength = arrCookies.length;
+	}
+	var compareTable = "";
+	compareTable = "<div class=db>"
+			+ "<div class=db1>"
+			+ "<div class=db11>["
+			+ mylength
+			+ "/3]专业对比栏</div>"
+			+ "<div class=db12><a onClick='empty()' style='color:blue;cursor:pointer'>清空</a></div>"
+			+ "<div class=db13><a onClick='hideLayer()' style='color:blue;cursor:pointer'>隐藏</a></div></div>"
+			+ "<div class=db2><dl><dt class=majortitles>专业名称</dt><dd class=titles>专业评级</dd>"
+			+ "<dd class=titles>专业排名</dd><dd class=titles>院校全国排名</dd>"
+			+ "<dd class=titles>报考难度</dd><dd class=titles>近三年录取率均值</dd><dd class=deltitle></dd>";
+	for (i = mylength - 1; i >= 0; i--) {
+		if ((arrCookies[i] != "") && (arrCookies[i] != null)) {
+			var majorInfo = arrCookies[i].split("∑");
+			if (majorInfo.length == 7) {
+				var majorId = majorInfo[0];
+				var majorLevel = majorInfo[1];
+				var majorRank = majorInfo[2];
+				if (majorRank == -1) {
+					majorRank = "不参与排名";
+				}
+				console.log(majorInfo[2] + "...");
+				var collegeRank = majorInfo[3];
+				if (collegeRank == -1) {
+					college = "不参与排名";
+				}
+				var difficulty = majorInfo[4];
+				var applyAdmitRate = majorInfo[5];
+				if (applyAdmitRate == -1) {
+					applyAdmitRate = "暂无数据";
+				} else {
+					applyAdmitRate = applyAdmitRate + "%";
+				}
+				var degree_description = majorInfo[6];
+				var majorURL = "http://www.itui.cn/info.html?major=" + majorId;
+				compareTable += "<dt class=comparemajorname><a target=_blank href='"
+						+ majorURL
+						+ "'title='"
+						+ majorId
+						+ "'>"
+						+ cutStr(majorId,32)
+						+ "</a></dt><dd class=comparemajor>"
+						+ majorLevel
+						+ "</dd><dd class=comparemajor>"
+						+ majorRank
+						+ "</dd><dd class=comparemajor>"
+						+ collegeRank
+						+ "</dd><dd class=comparemajor>"
+						+ difficulty+"/"+degree_description
+						+ "</dd><dd class=comparemajor>"
+						+ applyAdmitRate
+						+ "</dd><dd class=delcomparemajor><a style='color:blue;cursor:pointer' onClick=\"delCompareMajor('"
+				+ majorId + "')\">删除</a></dd>";
+			}
+		}
+	}
+//	compareTable += "</dl><div class=db4><input type=button value=进行对比 onClick=window.open('http://www.163css.com') /></div><div class=db5><a   style='color:blue;cursor:pointer' onClick='empty()'>清空对比栏</a></div></div>";
+//	compareTable += "</dl><div class=db3><input type=button class=btn-empty style='font-size:14px' value=清空对比栏 onClick='empty()'></div>";
+//	compareTable += "</dl><div class=db3><button type=button class=btn-empty onClick='empty()'>清空对比栏</button></div>";
+	compareTable += "</dl></div>"
+	jQuery('#compare').html(compareTable);
+//	$(".db .db2").mouseover(function() {
+//		this.className = 'db2r';
+//		$(this).children().children('.db33').compareShow();
+//	});
+//	$(".db .db2").mouseout(function() {
+//		this.className = 'db2';
+//		$(this).children().children('.db33').compareHide();
+//	});
+}
+
+function isNumber(inputVal) {
+	var inputStr = inputVal.toString();
+	var i = 0;
+	for (i = 0; i < inputStr.length; i++) {
+		var oneChar = inputStr.charAt(i)
+		if (oneChar < "0" || oneChar > "9") {
+			return false;
+		}
+	}
+	return true;
+}
+
+function compareCheck() {
+	var URL = "/";
+	var compareProductsValue = basketGetCookie("POP_CompareMajors");
+	var b = "00283";
+	if ((compareProductsValue != "") && (compareProductsValue != null)) {
+		var arrValues = compareProductsValue.split("∈");
+		var valuesNum = arrValues.length;
+		if (valuesNum < 2) {
+			alert('请至少选择两款同类别产品进行对比！');
+			return;
+		} else {
+			var isTwo = false;
+			// if (ValuesNum == 2)//2款产品比较跳转至PK页{//isTwo = true;}
+			var subCategorySN = basketGetCookie("POP_SubCategory");
+			if ((subCategorySN != "") && (subCategorySN != null)) {
+				if (isNumber(subCategorySN)) {
+					var queryString = "";
+					if (isTwo) {
+						queryString = "";
+					}
+					for (i = 0; i < valuesNum; i++) {
+						var majorInfo = arrValues[valuesNum - 1 - i].split("Σ");
+						if (isNumber(majorInfo[0])) {
+							queryString += majorInfo[0] + "_";
+
+						}
+						if (i == valuesNum - 1) {
+							if (arrValues[i].split("Σ")[3] != "undefined")
+								b = arrValues[i].split("Σ")[3];
+						}
+					}
+					queryString = queryString.substring(0,
+							queryString.length - 1);
+					window.open(URL + queryString.replace("{brandsn}", b)
+							+ "/Detail.html");
+
+				}
+			}
+		}
+	}
+	empty();
+}
+
+redraw();
+
+function hideLayer() {
+	basketSetCookie("POP_HiddenCompare", "Hide", 4);
+	compareHide();
+}
+
+function showLayer() {
+	basketSetCookie("POP_HiddenCompare", "Show", 4);
+	compareShow();
+}
+
+if ((basketGetCookie("POP_HiddenCompare") == "Hide")
+		|| (basketGetCookie("POP_CompareMajors") == "")
+		|| (basketGetCookie("POP_CompareMajors") == null)) {
+	hideLayer();
+} else {
+	showLayer();
+}
+
+function cutStr(str, length) {
+	var a = str.replace(/([\u0391-\uffe5])/ig, '$1a');
+	var b = a.substring(0, length);
+	var c = b.replace(/([\u0391-\uffe5])a/ig, '$1');
+	return c;
+}

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.googlecode.ehcache.annotations.Cacheable;
+import com.googlecode.ehcache.annotations.TriggersRemove;
+
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.MajorDao;
 import cn.itui.webdevelop.dao.MajorInfoDao;
@@ -24,6 +27,8 @@ public class MajorServiceImpl implements MajorService {
 	/**
 	 * 根据条件和分类要求来搜索对应的专业
 	 */
+	@Cacheable(cacheName = "ituiCache")
+	@TriggersRemove(cacheName = "ituiCache",removeAll = true)
 	public String searchMajorsList(String condition, String category,
 			String subject, String major_type, String college_type, String area, int from) {
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量

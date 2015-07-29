@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import com.googlecode.ehcache.annotations.Cacheable;
+import com.googlecode.ehcache.annotations.TriggersRemove;
+
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.FollowMajorDao;
 import cn.itui.webdevelop.dao.MajorDao;
@@ -38,6 +41,8 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	private CollegeRecommendFilter collegeRecommendFilter;// 对数据库查询得到的college数据进行过滤
 
 
+	@Cacheable(cacheName = "ituiCache")
+	@TriggersRemove(cacheName = "ituiCache",removeAll = true)
 	public String getMajorInfo(String userCode, String majorIdStr) throws Exception {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
@@ -319,6 +324,8 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 	/*
 	 * add
 	 */
+	@Cacheable(cacheName = "ituiCache")
+	@TriggersRemove(cacheName = "ituiCache",removeAll = true)
 	public String getMajorRank(String majorIdStr) throws Exception {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
