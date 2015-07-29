@@ -61,7 +61,8 @@ $(function() {
 
 });
 //信息业跳转到dada社区
-$('.dh li').eq(1).hide();
+//$('.dh li').eq(1).hide();
+$('.dh li').eq(1).css('cursor','pointer');
 $('.dh li').eq(2).css('cursor','pointer');
 $('.dh li').eq(2).click(function(event){
 	window.open("http://dada.itui.cn/", "_blank");

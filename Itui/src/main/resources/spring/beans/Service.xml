@@ -113,4 +113,9 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="saveFile" class="cn.itui.webdevelop.utils.SaveFile">
 	    <property name="TEACHER_LOGO_PATH" value="${teacher_logo_path}"></property>
 	</bean>
+	
+	<!-- 缓存配置 -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+        <property name="configLocation"  value="/WEB-INF/ehcache.xml"/>  
+    </bean>  
 </beans>

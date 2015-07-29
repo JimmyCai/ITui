@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.googlecode.ehcache.annotations.Cacheable;
+import com.googlecode.ehcache.annotations.TriggersRemove;
+
 import cn.itui.webdevelop.dao.CollegeDao;
 import cn.itui.webdevelop.dao.FollowCollegeDao;
 import cn.itui.webdevelop.dao.StatsDao;
@@ -33,6 +36,9 @@ public class CollegeServiceImpl implements CollegeService {
 	 * @param condition 用户输入字符串
 	 * @return 搜索结果的json
 	 */
+	
+	@Cacheable(cacheName = "ituiCache")
+	@TriggersRemove(cacheName = "ituiCache",removeAll = true)
 	public String searchCollegeList(String condition, String area, String collegeType, int from) {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
@@ -183,6 +189,8 @@ public class CollegeServiceImpl implements CollegeService {
 	 * add
 	 * */
 
+	@Cacheable(cacheName = "ituiCache")
+	@TriggersRemove(cacheName = "ituiCache",removeAll = true)
 	public String getCollegeRank(String collegeName) throws Exception {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
@@ -220,6 +228,8 @@ public class CollegeServiceImpl implements CollegeService {
 		return jsonStr;
 	}
 
+	@Cacheable(cacheName = "ituiCache")
+	@TriggersRemove(cacheName = "ituiCache",removeAll = true)
 	public String getCollegeLocalRank(String collegeName) throws Exception {
 		
 		statsDao.refreshStats(Stats.getDate(), (int)((Math.random()*5)+1));//实际增加一次浏览量，生成（1-5）的随机浏览量
