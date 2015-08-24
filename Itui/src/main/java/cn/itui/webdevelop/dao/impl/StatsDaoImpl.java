@@ -70,4 +70,8 @@ public class StatsDaoImpl implements StatsDao {
 		return sqlSession.selectList("cn.itui.webdevelop.dao.StatsDao.getPersonEduInfo", personIdMap);
 	}
 
+	public List<HashMap<String, Object>> getHeadlineInfo() {
+		return sqlSession.selectList("cn.itui.webdevelop.dao.StatsDao.getHeadlineInfo");
+	}
+
 }

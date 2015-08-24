@@ -77,10 +77,10 @@
 	           FROM 
 	                 aws_itui_attach 
 	           ORDER BY id DESC) AS b ON a.id = b.item_id
-     	WHERE a.is_recommend=2 
+     	WHERE a.is_recommend=2 AND a.is_headline=0
   	    GROUP BY b.item_id
 	    ORDER BY a.add_time DESC    
-	    LIMIT 6      
+	    LIMIT 5      
 	</select>
 	
 	<select id="getTopicInfo" resultType="java.util.HashMap">
@@ -115,5 +115,26 @@
 	    WHERE a.uid IN(#{userId0},#{userId1},#{userId2},#{userId3},#{userId4},#{userId5})
 	    GROUP BY a.uid
 	    ORDER BY a.education_years DESC
+	</select>
+	
+	<select id="getHeadlineInfo" resultType="map">
+	    SELECT
+	          a.id AS hId,
+	          a.title AS hTitle,
+	          a.add_time AS hUnixTime,
+	          a.message AS hMessage,
+	          b.file_location AS hPhoto
+	    FROM
+	          aws_itui_article a
+	    JOIN  (SELECT 
+	                 aws_itui_attach.file_location,
+	                 aws_itui_attach.item_id
+	           FROM 
+	                 aws_itui_attach 
+	           ORDER BY id DESC) AS b ON a.id = b.item_id
+     	WHERE a.is_headline=1
+  	    GROUP BY b.item_id
+	    ORDER BY a.add_time DESC    
+	    LIMIT 1 
 	</select>
 </mapper>

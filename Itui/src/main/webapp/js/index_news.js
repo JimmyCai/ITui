@@ -107,7 +107,7 @@ $('.itui-news-nav-login').removeClass('hide');
 $('.itui-news-nav-regs').removeClass('hide');
 //12个话题
 var topic_li=0,topic_href="www.baidu.com",topic_content="话题1";
-var topic_list=new Array(),person_list=new Array(),news_list=new Array();
+var topic_list=new Array(),person_list=new Array(),news_list=new Array(),headline_list=new Array();
 
 function topic(topic_li,topic_href,topic_content){
 var topic_html='<li role="presentation" class="topic0'+topic_li+'">\
@@ -181,27 +181,51 @@ $('.dropdown-menu-news').append(topic_html);
 					news_list[i]=data.normalReturn.indexInfo[2][i];
 				}
 				for(i=0;i<news_list.length;i++){
+					j=i+1;
 					if(news_list[i].newsPhoto==undefined){
 						news_list[i].newsPhoto='';
 					}
-					$('.news_img0'+i).attr('src', news_list[i].newsPhoto);
+					$('.news_img0'+j).attr('src', news_list[i].newsPhoto);
 					
 					if(news_list[i].summary==undefined){
 						news_list[i].summary='';
 					}
-					$('.news_intr0'+i).text(news_list[i].summary);
+					$('.news_intr0'+j).text(news_list[i].summary);
 					
 					if(news_list[i].title==undefined){
 						news_list[i].title='';
 					}
-					$('.news_item0'+i).text(news_list[i].title);
+					$('.news_item0'+j).text(news_list[i].title);
 					
 					if(news_list[i].newsPage==undefined){
 						news_list[i].newsPage='';
 					}
-					$('.news_a0'+i).attr('href', news_list[i].newsPage);
+					$('.news_a0'+j).attr('href', news_list[i].newsPage);					
+				}
+				
+				for(i=0;i<data.normalReturn.indexInfo[3].length;i++){
+					headline_list[i]=data.normalReturn.indexInfo[3][i];
+				}
+				for(i=0;i<headline_list.length;i++){
+					if(headline_list[i].hPhoto==undefined){
+						headline_list[i].hPhoto='';
+					}
+					$('.news_img0'+i).attr('src', headline_list[i].hPhoto);
 					
+					if(headline_list[i].hSummary==undefined){
+						headline_list[i].hSummary='';
+					}
+					$('.news_intr0'+i).text(headline_list[i].hSummary);
 					
+					if(headline_list[i].hTitle==undefined){
+						headline_list[i].hTitle='';
+					}
+					$('.news_item0'+i).text(headline_list[i].hTitle);
+					
+					if(headline_list[i].hPage==undefined){
+						headline_list[i].hPage='';
+					}
+					$('.news_a0'+i).attr('href', headline_list[i].hPage);
 				}
 				
 			} else {

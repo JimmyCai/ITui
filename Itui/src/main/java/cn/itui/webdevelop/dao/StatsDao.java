@@ -17,4 +17,5 @@ public interface StatsDao {
 			String password);
 	public List<HashMap<String, Object>> getPersonEduInfo(
 			HashMap<String, Object> personIdMap);
+	public List<HashMap<String, Object>> getHeadlineInfo();
 }

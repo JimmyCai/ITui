@@ -114,7 +114,8 @@ public class StatsServiceImpl implements StatsService {
 		List<HashMap<String, Object>> topicInfo = statsDao.getTopicInfo();
 		List<HashMap<String, Object>> personInfo = statsDao.getPersonInfo();
 		List<HashMap<String, Object>> newsInfo = statsDao.getNewsInfo();
-		if (topicInfo == null || personInfo == null || newsInfo == null) {
+		List<HashMap<String, Object>> headlineInfo = statsDao.getHeadlineInfo();
+		if (topicInfo == null || personInfo == null || newsInfo == null || headlineInfo == null) {
 			throw DatabaseException.getInstance();
 		}
 		List<ArrayList<HashMap<String, Object>>> resultItem = new ArrayList<ArrayList<HashMap<String, Object>>>();
@@ -209,6 +210,28 @@ public class StatsServiceImpl implements StatsService {
 			j++;
 		}
 		resultItem.add(newsResultList);
+		
+		ArrayList<HashMap<String, Object>> hResultList = new ArrayList<HashMap<String,Object>>();
+		int n = 0;
+		while (n < headlineInfo.size()){
+			HashMap<String, Object> hItem = new HashMap<String, Object>();
+			hItem.put("hId", (headlineInfo.get(n)).get("hId"));
+			hItem.put("hTitle", headlineInfo.get(n).get("hTitle"));
+			hItem.put("hPhoto", tOPIC_IMAGE_URL
+					+ Stats.unixTimeStamp2Date(String
+							.valueOf((Integer) (headlineInfo.get(n)
+									.get("hUnixTime")) - 28800),
+							"yyyyMMdd/")
+					+ headlineInfo.get(n).get("hPhoto"));
+			String hMessage = Stats.bbcode2Text((String) headlineInfo.get(n).get("hMessage"));
+			hItem.put("hSummary", hMessage.substring(0, 75) + "…");
+			hItem.put("hPage", NEWS_SQUARE_URL + headlineInfo.get(n).get("hId"));
+			
+			hResultList.add(n, hItem);
+			n++;
+		}
+		resultItem.add(hResultList);
+		
 		String jsonResult = buildIndexInfoJson(resultItem);
 //		 long end = System.nanoTime();
 //		 System.out.println(end);
