@@ -45,6 +45,11 @@ public class MajorInfoDaoImpl implements MajorInfoDao {
 		return sqlSession.selectOne("cn.itui.webdevelop.dao.MajorInfoDao.getMajorIdByFullname", majorIdStr);
 	}
 
+	public List<HashMap<String, Object>> getHotQuestions(int day) {
+		long time = (System.currentTimeMillis()/1000) - (day*86400);
+		return sqlSession.selectList("cn.itui.webdevelop.dao.MajorInfoDao.getHotQuestions",time);
+	}
+
 	
 
 }

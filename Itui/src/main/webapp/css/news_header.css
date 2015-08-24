@@ -178,23 +178,38 @@ background-color:#fff;
     padding-left:0px;
     padding-right:0px;
   }
+  .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown{
+	    margin-left:3px;
+	}
 }
 @media (max-width: 768px){
 	  .aw-top-menu-wrap .container {
     float: left;
     width: 100%;
   }
+  .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown{
+	    margin-left:3px;
+	}
 }
 @media (max-width: 600px) {
 	.aw-top-menu-wrap .container .itui-news-navbar-nav-ul{max-width:50%;}
 	 .aw-top-menu-wrap .container{float:none;margin:0 auto;}
+	 .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown{
+	    margin-left:15px;
+	}
 }
 @media (max-width: 500px){
+	.aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown{
+	    margin-left:15px;
+	}
 	.aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news{
 		min-width: 340px;
 	}
 }
 @media (max-width: 400px) {
+	.aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown{
+	    margin-left:15px;
+	}
   .aw-top-menu-wrap .container .itui-news-navbar-nav-ul .itui-topic-li .dropdown .dropdown-menu-news {
     min-width: 260px;
   }

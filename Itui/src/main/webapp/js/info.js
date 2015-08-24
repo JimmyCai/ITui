@@ -163,6 +163,16 @@ $(function() {
 		$('.ann').eq(5).find('.yuan').css('background-color', '#a8a5a6');
 	});
 
+	$('.an_7').mouseenter(function(event) {
+
+		$('.ann').eq(6).find('.an_mao1').css('color', '#e66b1a');
+		$('.ann').eq(6).find('.yuan').css('background-color', '#e66b1a');
+	}).mouseleave(function(event) {
+
+		$('.ann').eq(6).find('.an_mao1').css('color', '#a8a5a6');
+		$('.ann').eq(6).find('.yuan').css('background-color', '#a8a5a6');
+	});
+
 	$('.an_1').click(function(event) {
 		$body.animate({
 			scrollTop : $('#nav02').offset().top
@@ -201,6 +211,13 @@ $(function() {
 	$('.an_6').click(function(event) {
 		$body.animate({
 			scrollTop : $('#nav08').offset().top
+		}, 500);
+		return false;
+	});
+
+	$('.an_7').click(function(event) {
+		$body.animate({
+			scrollTop : $('#nav09').offset().top
 		}, 500);
 		return false;
 	});
@@ -413,7 +430,7 @@ function major_ajax() {
 						var ratae_value = parseInt(data.applyAdmitInfo.rate,
 								data.applyAdmitInfo.rateDescription);
 						apply_admit_rate = data.applyAdmitInfo.rate;
-						if(ratae_value == -1){
+						if (ratae_value == -1) {
 							$('div.Interpretation p').text("数据不足，请参考相似专业！");
 						}
 
@@ -469,18 +486,24 @@ function major_ajax() {
 						// 感兴趣的专业
 						var maininfo_major = data.interestedMajorInfo.mainInfo;
 						for (i = 0; i < maininfo_major.length; i++) {
-							inster_major(i, maininfo_major[i].name,
+							insert_major(i, maininfo_major[i].name,
 									maininfo_major[i].school,
 									maininfo_major[i].degree,
 									maininfo_major[i].majorId);
 						}
 
-						var maininfo_collage = data.interestedCollegeInfo.mainInfo;
-						for (i = 0; i < maininfo_collage.length; i++) {
-							inster_collage(i, maininfo_collage[i].name,
-									maininfo_collage[i].level,
-									maininfo_collage[i].rank,
-									maininfo_collage[i].collegeId);
+						var maininfo_college = data.interestedCollegeInfo.mainInfo;
+						for (i = 0; i < maininfo_college.length; i++) {
+							insert_college(i, maininfo_college[i].name,
+									maininfo_college[i].level,
+									maininfo_college[i].rank,
+									maininfo_college[i].collegeId);
+						}
+
+						var questionInfo = data.questionInfo;
+						for (i = 0; i < questionInfo.length; i++) {
+							insert_question(i, questionInfo[i].questionId,
+									questionInfo[i].question);
 						}
 
 					} else {
@@ -877,7 +900,7 @@ function cookie_click(bar_index, majorname, schoolname) {
 
 // 感兴趣的专业
 
-function inster_major(major_index, major_name, collage_name, exam_degree,
+function insert_major(major_index, major_name, collage_name, exam_degree,
 		maior_id) {
 	$('.major0 li').eq(major_index).find('.zy_name' + (major_index + 1)).text(
 			major_name);
@@ -893,31 +916,43 @@ function inster_major(major_index, major_name, collage_name, exam_degree,
 	});
 }
 // 感兴趣的学校
-var collagename = '';
-var collageleve = '';
-var collagerank = '';
-function inster_collage(collage_index, collage_name, collage_leve,
-		collage_rank, collage_id) {
-	$('.collage0 li').eq(collage_index).find('.xx_name' + (collage_index + 1))
-			.text(collage_name);
-	if (collage_leve == 'null') {
-		$('.collage0 li').eq(collage_index).find('.cci_' + (collage_index + 1))
+var collegename = '';
+var collegeleve = '';
+var collegerank = '';
+function insert_college(college_index, college_name, college_leve,
+		college_rank, college_id) {
+	$('.college0 li').eq(college_index).find('.xx_name' + (college_index + 1))
+			.text(college_name);
+	if (college_leve == 'null') {
+		$('.college0 li').eq(college_index).find('.cci_' + (college_index + 1))
 				.text('普通');
 	} else {
-		$('.collage0 li').eq(collage_index).find('.cci_' + (collage_index + 1))
-				.text(collage_leve);
+		$('.college0 li').eq(college_index).find('.cci_' + (college_index + 1))
+				.text(college_leve);
 	}
 
-	$('.collage0 li').eq(collage_index).find('.pai_' + (collage_index + 1))
-			.text(collage_rank);
+	$('.college0 li').eq(college_index).find('.pai_' + (college_index + 1))
+			.text(college_rank);
 	// 点击学校跳转
-	$('.collage0 li').eq(collage_index).click(function(event) {
-		thiscid = collage_id;
-		collagename = collage_name;
-		collageleve = collage_leve;
-		collagerank = collage_rank;
+	$('.college0 li').eq(college_index).click(function(event) {
+		thiscid = college_id;
+		collegename = college_name;
+		collegeleve = college_leve;
+		collegerank = college_rank;
 		window.open("school.html?name=" + thiscid, "_blank");
 
+	});
+}
+
+//热门问答
+function insert_question(question_index, question_id, question_content){
+	$('.question li').eq(question_index).find('.question' + (question_index + 1)).text(
+			question_content);
+	// 点击专业跳转
+	$('.question li').eq(question_index).click(function(event) {
+		thisId = question_id;
+		// $.cookie("thisid", thisid,{path:"/"});
+		window.open("http://dada.itui.cn/?/question/" + thisId, "_blank");
 	});
 }
 
@@ -949,7 +984,7 @@ function Attention() {
 			function(event) {
 				// attention_ajax();
 				addCompareMajor(thisid, A_A, major_rank, college_rank, score_0,
-						apply_admit_rate,degree_description);
+						apply_admit_rate, degree_description);
 			});
 	$('.image4').click(function(event) {
 		// cancelattention_ajax(followid);
@@ -1181,7 +1216,7 @@ function empty() {
 }
 
 function addCompareMajor(majorId, majorLevel, major_rank, college_rank,
-		difficulty, apply_admit_rate,degree_description) {
+		difficulty, apply_admit_rate, degree_description) {
 	var compareMajors = basketGetCookie("POP_CompareMajors");
 	if ((compareMajors != "") && (compareMajors != null)) {
 		var arrCookies = compareMajors.split("∈");
@@ -1191,7 +1226,8 @@ function addCompareMajor(majorId, majorLevel, major_rank, college_rank,
 			} else {
 				basketCheckSetCookieValue("POP_CompareMajors", majorId + "∑"
 						+ majorLevel + "∑" + major_rank + "∑" + college_rank
-						+ "∑" + difficulty + "∑" + apply_admit_rate+ "∑" +degree_description, 4);
+						+ "∑" + difficulty + "∑" + apply_admit_rate + "∑"
+						+ degree_description, 4);
 			}
 		} else {
 			var YESORNO = confirm("对不起，您只能选择三个专业进行对比，是否清除所有已选专业？");
@@ -1202,7 +1238,8 @@ function addCompareMajor(majorId, majorLevel, major_rank, college_rank,
 	} else {
 		basketCheckSetCookieValue("POP_CompareMajors", majorId + "∑"
 				+ majorLevel + "∑" + major_rank + "∑" + college_rank + "∑"
-				+ difficulty + "∑" + apply_admit_rate+ "∑" +degree_description, 4);
+				+ difficulty + "∑" + apply_admit_rate + "∑"
+				+ degree_description, 4);
 	}
 	redraw();
 	showLayer();
@@ -1282,7 +1319,7 @@ function redraw() {
 						+ "'title='"
 						+ majorId
 						+ "'>"
-						+ cutStr(majorId,32)
+						+ cutStr(majorId, 32)
 						+ "</a></dt><dd class=comparemajor>"
 						+ majorLevel
 						+ "</dd><dd class=comparemajor>"
@@ -1290,27 +1327,34 @@ function redraw() {
 						+ "</dd><dd class=comparemajor>"
 						+ collegeRank
 						+ "</dd><dd class=comparemajor>"
-						+ difficulty+"/"+degree_description
+						+ difficulty
+						+ "/"
+						+ degree_description
 						+ "</dd><dd class=comparemajor>"
 						+ applyAdmitRate
 						+ "</dd><dd class=delcomparemajor><a style='color:blue;cursor:pointer' onClick=\"delCompareMajor('"
-				+ majorId + "')\">删除</a></dd>";
+						+ majorId + "')\">删除</a></dd>";
 			}
 		}
 	}
-//	compareTable += "</dl><div class=db4><input type=button value=进行对比 onClick=window.open('http://www.163css.com') /></div><div class=db5><a   style='color:blue;cursor:pointer' onClick='empty()'>清空对比栏</a></div></div>";
-//	compareTable += "</dl><div class=db3><input type=button class=btn-empty style='font-size:14px' value=清空对比栏 onClick='empty()'></div>";
-//	compareTable += "</dl><div class=db3><button type=button class=btn-empty onClick='empty()'>清空对比栏</button></div>";
+	// compareTable += "</dl><div class=db4><input type=button value=进行对比
+	// onClick=window.open('http://www.163css.com') /></div><div class=db5><a
+	// style='color:blue;cursor:pointer'
+	// onClick='empty()'>清空对比栏</a></div></div>";
+	// compareTable += "</dl><div class=db3><input type=button class=btn-empty
+	// style='font-size:14px' value=清空对比栏 onClick='empty()'></div>";
+	// compareTable += "</dl><div class=db3><button type=button class=btn-empty
+	// onClick='empty()'>清空对比栏</button></div>";
 	compareTable += "</dl></div>"
 	jQuery('#compare').html(compareTable);
-//	$(".db .db2").mouseover(function() {
-//		this.className = 'db2r';
-//		$(this).children().children('.db33').compareShow();
-//	});
-//	$(".db .db2").mouseout(function() {
-//		this.className = 'db2';
-//		$(this).children().children('.db33').compareHide();
-//	});
+	// $(".db .db2").mouseover(function() {
+	// this.className = 'db2r';
+	// $(this).children().children('.db33').compareShow();
+	// });
+	// $(".db .db2").mouseout(function() {
+	// this.className = 'db2';
+	// $(this).children().children('.db33').compareHide();
+	// });
 }
 
 function isNumber(inputVal) {

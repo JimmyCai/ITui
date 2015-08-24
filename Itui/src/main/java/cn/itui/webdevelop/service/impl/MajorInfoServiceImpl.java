@@ -87,10 +87,15 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 				collegeRank, collegeId);
 		List<HashMap<String, Object>> recommendColleges = collegeRecommendFilter
 				.recommendCollege(candidateColleges, collegeRank);
+		
+		// hot questions
+		int day = 30;
+		List<HashMap<String, Object>> questionMap =  majorInfoDao.getHotQuestions(day);
+		
 		// build json string
 		String jsonResult = buildMajorInfoJson(majorAllInfos, followId,
 				yearScores, recommendMajors, recommendColleges,
-				diffCollRecommendMajors);
+				diffCollRecommendMajors, questionMap);
 		return jsonResult;
 	}
 
@@ -134,7 +139,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 			int followId, List<HashMap<String, Object>> yearScores,
 			MajorRecommendResult recommendMajors,
 			List<HashMap<String, Object>> recommendColleges,
-			List<HashMap<String, Object>> diffCollRecommendMajors)
+			List<HashMap<String, Object>> diffCollRecommendMajors, List<HashMap<String, Object>> questionMap)
 			throws Exception {
 		LinkedHashMap<String, Object> jsonMap = new LinkedHashMap<String, Object>();
 		// base info
@@ -231,7 +236,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 		// different college same major recommend info
 		LinkedHashMap<String, Object> diffCollMajorRecommendMap = new LinkedHashMap<String, Object>();
 		diffCollMajorRecommendMap.put("mainInfo", diffCollRecommendMajors);
-
+		
 		jsonMap.put("baseInfo", baseInfoMap);
 		jsonMap.put("gradeInfo", gradeInfoMap);
 		jsonMap.put("rankInfo", rankInfoMap);
@@ -241,6 +246,7 @@ public class MajorInfoServiceImpl implements MajorInfoService {
 		jsonMap.put("majorRecommendInfo", majorRecommendMap);
 		jsonMap.put("interestedMajorInfo", diffCollMajorRecommendMap);
 		jsonMap.put("interestedCollegeInfo", collegeRecommendMap);
+		jsonMap.put("questionInfo", questionMap);
 
 		String jsonStr = ResponseUtil.wrapNormalReturn(jsonMap);
 		;

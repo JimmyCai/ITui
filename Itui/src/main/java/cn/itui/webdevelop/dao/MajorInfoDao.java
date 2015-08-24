@@ -14,5 +14,6 @@ public interface MajorInfoDao {
 	 */
 	public List<HashMap<String, Object>> findMajorAllRankInfoByMajorId(int majorId);
 	public int getMajorIdByFullname(String majorIdStr);
+	public List<HashMap<String, Object>> getHotQuestions(int day);
 
 }

@@ -129,4 +129,20 @@
 	    WHERE
 	         unique_fullname=#{majorIdStr}
 	</select>
+	
+	<!-- 随机取出30天内发表的10条热门问答 -->
+	<select id="getHotQuestions" parameterType="long" resultType="map">	    
+	    SELECT 
+	        question_id AS questionId,
+	        question_content AS question
+        FROM 
+            aws_itui_question AS t1 
+        JOIN 
+            (SELECT ROUND(RAND() * ((SELECT MAX(question_id) FROM `aws_itui_question`)-(SELECT MIN(question_id) FROM `aws_itui_question`))+(SELECT MIN(question_id) FROM `aws_itui_question`)) AS id) AS t2
+        WHERE 
+            t1.question_id >= t2.id AND t1.add_time &gt;#{time}
+        ORDER BY 
+            t1.popular_value DESC 
+        LIMIT 10;
+	</select>
 </mapper>

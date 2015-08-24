@@ -5,3 +5,5 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 .metadata
+Itui/src/main/resources/properties/database.properties
+Itui/src/main/resources/properties/email.properties

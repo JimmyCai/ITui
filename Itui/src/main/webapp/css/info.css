@@ -251,6 +251,7 @@ ul,ol,li{list-style:none}
 	height: 154px;
 	float: left;
 	border-left:1px solid #cbcbcb;
+	font-weight:bold;
 }
 .dh li div {
 font-size: 14px;
@@ -1717,6 +1718,54 @@ margin-left: 4px;
 	left: 200px;
 }
 
+/*第九部分 热门问答*/
+#nav09{
+	width: 1024px;
+	height: 290px;
+	margin: 0 auto;
+	margin-top: 30px;
+	background-color: #fff;
+	box-shadow: 0px 0px 5px #333;
+	position: relative;
+}
+.more_question{
+	margin-top:16px;
+	margin-right:20px;
+	float:right;
+}
+.more_question a{
+	color:#00f;
+}
+.question{
+	margin:10px;
+}
+.question li{
+	margin:0px;
+	width:900px;
+	height:23px;
+	overflow:hidden;
+
+}
+.order2{
+	width: 16px;
+	height: 16px;
+	background-color: #ffa964;
+	color: #fff;
+	line-height: 16px;
+	text-align: center;
+	margin-left: 5px;
+	_margin-left: 2px;
+	float: left;
+}
+.question_detail{
+	margin-left:30px;
+	overflow:hidden;
+}
+.question li p{
+	font-size:14px;
+	color:#555;
+    cursor:pointer;
+}
 /*柱状图横坐标显示全称*/
 .course_full{
 	width: 78px;
@@ -2445,6 +2494,10 @@ border-top: 4px solid #f4b802;
 .an_6{
 	left: -8px;
 	top: 215px;
+}
+.an_7{
+	left:-8px;
+	top:255px;
 }
 .ann div{
 	float: left;

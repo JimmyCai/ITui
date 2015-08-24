@@ -25,5 +25,4 @@ public interface MajorDao {
 
 	public int count(String condition, String category, String subject,
 			String is985, String is211, String is34, String type, String area);
-	
 }
